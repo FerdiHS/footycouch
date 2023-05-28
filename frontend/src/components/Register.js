@@ -40,7 +40,7 @@ export default function Register({handlenowPage}) {
         } else if (errorusername == "") {
             seterrorConfirmpw("");
             seterrorPassword("");
-            axios.post("http://footycouch-backend.vercel.app/signup", {username, password, confirmPassword})
+            axios.post("https://footycouch-backend.vercel.app/signup", {username, password, confirmPassword})
             // axios.post("http://localhost:5000/signup", {username, password, confirmPassword})
             .then(res => window.alert("Signup Successful!"))
             .then(res => navigate("/login"))

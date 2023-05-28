@@ -21,8 +21,6 @@ export default function Register({handlenowPage}) {
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // axios.post("http://localhost:" + process.env.DB_PORT + "/signup", credentials)
-        // axios.post("http://localhost:5000/signup", credentials)
         if (username.length == 0) {
             seterrorusername("Username must be filled")
         } else if (!isValidUsername(username)) {
@@ -42,7 +40,7 @@ export default function Register({handlenowPage}) {
         } else if (errorusername == "") {
             seterrorConfirmpw("");
             seterrorPassword("");
-            axios.post("http://localhost:5000/signup", {username, password, confirmPassword})
+            axios.post("https://footycouch-backend.vercel.app/signup", {username, password, confirmPassword})
             .then(res => window.alert("Signup Successful!"))
             .then(res => navigate("/login"))
             .catch(err => {

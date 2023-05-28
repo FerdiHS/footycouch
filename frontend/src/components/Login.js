@@ -33,7 +33,7 @@ export default function Login() {
             // const smth = window.alert("Incorrect Username or Password");
         }
         */
-        axios.post("http://localhost:5000/login", {username, password})
+        axios.post("https://footycouch-backend.vercel.app/login", {username, password})
         .then(res => {
             seterror(false);
             navigate("/home");

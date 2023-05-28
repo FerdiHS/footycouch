@@ -47,16 +47,6 @@ container {
 }
 .button:hover {
   background-color: #00a2ff;
-  border: none;
-  color: white;
-  padding: 13px 16px;
-  text-align: center;
-  text-decoration: none;
-  align-items: center;
-  display: inline-block;
-  font-size: 20px;
-  margin: 2px 1px;
-  cursor: pointer;
 }
 .bench {
   width: 84%;

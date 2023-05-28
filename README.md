@@ -13,7 +13,7 @@
 <h3>Team Member: Angky Akdi Frandy Putrakelana & Ferdinand Halim Santoso</h3>
 <h3>Proposed Level of Achievement: Apollo 11 </h3>
 <h3>Website Name: Footy Couch </h3>
-<h3>Poster: </h3>
+<h3>Poster: <a href="https://drive.google.com/file/d/1pIYCrQmmzSWMAksDJMudWo5JUo5DdDGJ/view?usp=share_link">Click Here</a> </h3>
 <h3>Video: <a href="https://docs.google.com/document/d/1FS3BmUL0JiJpI5zdzQNuMKPjNf5VyrZxhjy-TJHDItw/edit?usp=sharing">Click Here</a></h3>
 <h3>Web App: <a href="https://footycouch.vercel.app/">Click Here</a></h3>
 

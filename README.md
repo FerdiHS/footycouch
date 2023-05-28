@@ -44,22 +44,22 @@ As football fans, we want to compete against each other in a fun and engaging wa
 As football fans and people in general, we want to have something to have fun with in the middle of our hectic activities.
 
 <h2>Proposed Core Feature</h2>
-1. Allow users to create an account and log in.
-2. Allow users to customize their username, profile picture, and bio.
-3. Notify the users about football match schedule
-4. Allow users to pick their players and create their teams.
-5. Allow users to create leagues.
-6. Allow users to see each other’s lineup.
-7. Allow users to look through their accumulated points.
-8. Allow users to look through the standings based on their accumulated points.
-9. Allow users to follow each other.
-10. Allow users to select a captain and vice-captain for the lineup.
-11. Allow auto-substitution when the player is not playing for the given game.
-12. Allow users to post football-related content.
-13. Allow users to like and comment on other posts.
-14. Allow users to see their post history.
-15. Allow users to see their players’ statistics.
-16. Allow users to get achievements after accomplishing some tasks.
+<p>1. Allow users to create an account and log in.</p>
+<p>2. Allow users to customize their username, profile picture, and bio.</p>
+<p>3. Notify the users about football match schedule</p>
+<p>4. Allow users to pick their players and create their teams.</p>
+<p>5. Allow users to create leagues.</p>
+<p>6. Allow users to see each other’s lineup.</p>
+<p>7. Allow users to look through their accumulated points.</p>
+<p>8. Allow users to look through the standings based on their accumulated points.</p>
+<p>9. Allow users to follow each other.</p>
+<p>10. Allow users to select a captain and vice-captain for the lineup.</p>
+<p>11. Allow auto-substitution when the player is not playing for the given game.</p>
+<p>12. Allow users to post football-related content.</p>
+<p>13. Allow users to like and comment on other posts.</p>
+<p>14. Allow users to see their post history.</p>
+<p>15. Allow users to see their players’ statistics.</p>
+<p>16. Allow users to get achievements after accomplishing some tasks.</p>
 
 
 

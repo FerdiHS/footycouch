@@ -1,4 +1,4 @@
-Footy Couch
+<h1 align="center">Footy Couch</h1>
 
 
 
@@ -9,15 +9,15 @@ Footy Couch
 
 
 
-Team Name: San Tokyo
-Team Member: Angky Akdi Frandy Putrakelana & Ferdinand Halim Santoso
-Proposed Level of Achievement: Apollo 11
-Website Name: Footy Couch
-Poster:
-Video:
+<h3>Team Name: San Tokyo </h3>
+<h3>Team Member: Angky Akdi Frandy Putrakelana & Ferdinand Halim Santoso</h3>
+<h3>Proposed Level of Achievement: Apollo 11 </h3>
+<h3>Website Name: Footy Couch </h3>
+<h3>Poster: </h3>
+<h3>Video: </h3>
 
 
-Motivation 
+<h2>Motivation</h2> 
 
 Football has become one of the most popular sports in the world over the last century. 
 It is played by millions of people in almost every country and is loved by fans of all ages, 
@@ -30,21 +30,20 @@ the footballers’ performance in real matches. Moreover, one of us has been ins
 and mentioned it in the ASEAN interview before joining NUS.
 
 
-Aim 
+<h2>Aim </h2>
 
 We aim to create a website game for football lovers so that they could enjoy the simulation of 
 becoming a manager of a team and, based on personal experience, get more excited about watching football matches.
 
 
-User Stories
+<h2>User Stories</h2>
 
 As football fans, we want to be able to fill the period between football game weeks, where there are no football matches, 
 with something related to football.
 As football fans, we want to compete against each other in a fun and engaging way.
 As football fans and people in general, we want to have something to have fun with in the middle of our hectic activities.
 
-Proposed Core Feature
-Feature
+<h2>Proposed Core Feature</h2>
 1. Allow users to create an account and log in.
 2. Allow users to customize their username, profile picture, and bio.
 3. Notify the users about football match schedule

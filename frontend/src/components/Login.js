@@ -12,6 +12,7 @@ export default function Login() {
     const [tickrememberme, settickRememberMe] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, seterror] = useState(false);
     // const [success, setSuccess] = useState(1);
     const handleRemember = () => {
         settickRememberMe(!tickrememberme);
@@ -22,6 +23,7 @@ export default function Login() {
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     }
+
     const handleSubmit = () => {
         /*
         if (username === "santokyo" && password === "santokyo123") {
@@ -32,9 +34,15 @@ export default function Login() {
         }
         */
         axios.post("http://localhost:5000/login", {username, password})
-        .then(res => navigate("/home"))
+        .then(res => {
+            seterror(false);
+            navigate("/home");
+        })
         .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .catch(err => {
+            seterror(true);
+            console.log(err)
+        });
     }
     return (
             <div class="container">
@@ -48,7 +56,11 @@ export default function Login() {
                         <label>Password<input type="password" placeholder="Password" onChange={handlePasswordChange} value={password}/></label>
                     </form>
                     <div class="spacing"></div>
+                    {
+                        error ? (<div class="error">Invalid username or password</div>) : (<></>)
+                    }
                     <button class="button" onClick={handleSubmit}>Login</button>
+                    
                     <div class="spacing"></div>
                     <div class="rememberme">
                         <label>

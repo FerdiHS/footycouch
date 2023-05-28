@@ -62,5 +62,7 @@ As football fans and people in general, we want to have something to have fun wi
 <p>15. Allow users to see their players’ statistics.</p>
 <p>16. Allow users to get achievements after accomplishing some tasks.</p>
 
+<h2>Report</h2>
+<h3>MileStone1 Report: <a href="https://docs.google.com/document/d/1FS3BmUL0JiJpI5zdzQNuMKPjNf5VyrZxhjy-TJHDItw/edit?usp=sharing">Click Here</a></h3>
 
 

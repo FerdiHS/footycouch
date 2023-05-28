@@ -45,7 +45,10 @@ export default function Register({handlenowPage}) {
             axios.post("http://localhost:5000/signup", {username, password, confirmPassword})
             .then(res => window.alert("Signup Successful!"))
             .then(res => navigate("/login"))
-            .catch(err => console.log(err));
+            .catch(err => {
+                seterrorusername("Username already been used");
+                console.log(err);
+            });
         }
     };
     const handleUsernameChange = (event) => {

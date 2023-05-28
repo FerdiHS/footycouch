@@ -33,7 +33,7 @@ export default function Register({handlenowPage}) {
         if (password.length < 8) {
             seterrorPassword("Password must contain at least 8 character");
             seterrorConfirmpw("")
-        } else if (isValidPassword(password)) {
+        } else if (!isValidPassword(password)) {
             seterrorPassword("Password must contain at least one: Uppercase letters: A-Z. Lowercase letters: a-z. Numbers: 0-9");
             seterrorConfirmpw("");
         } else if (password !== confirmPassword) {

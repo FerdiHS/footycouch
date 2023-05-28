@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
 import HomePage from "./pages/HomePage.js";
 import TeamManagementPage from "./pages/TeamManagementPage";
+
 export default function App() {
   return (
     <Router>

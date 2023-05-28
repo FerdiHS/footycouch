@@ -24,7 +24,7 @@ export default function Register({handlenowPage}) {
         // axios.post("http://localhost:" + process.env.DB_PORT + "/signup", credentials)
         // axios.post("http://localhost:5000/signup", credentials)
         if (username.length == 0) {
-            seterrorusername("Username must be Filled")
+            seterrorusername("Username must be filled")
         } else if (!isValidUsername(username)) {
             seterrorusername("Username must only contain alphanumeric character");
         } else {

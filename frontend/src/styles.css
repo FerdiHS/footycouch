@@ -8,7 +8,6 @@ autoRight {
 }
 .box {
   width: 40%;
-  height: 80%;
   align-items: center;
   text-align: center;
   border: 1px solid blue;
@@ -48,16 +47,6 @@ container {
 }
 .button:hover {
   background-color: #00a2ff;
-  border: none;
-  color: white;
-  padding: 13px 16px;
-  text-align: center;
-  text-decoration: none;
-  align-items: center;
-  display: inline-block;
-  font-size: 20px;
-  margin: 2px 1px;
-  cursor: pointer;
 }
 .bench {
   width: 84%;
@@ -257,6 +246,7 @@ nav2 > h2 {
   width: 50%;
   margin-top: 5%;
   margin-left: 10%;
+  margin-bottom: 30px;
   font-size: 15px;
   text-align: start;
 }

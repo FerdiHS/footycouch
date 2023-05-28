@@ -45,6 +45,7 @@ container {
   font-size: 20px;
   margin: 2px 1px;
   cursor: pointer;
+  
 }
 .button:hover {
   background-color: #00a2ff;

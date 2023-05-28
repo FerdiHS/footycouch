@@ -25,7 +25,6 @@ container {
 }
 .box2 {
   width: 40%;
-  height: 80%;
   align-items: center;
   text-align: center;
   border: 1px solid blue;
@@ -69,6 +68,7 @@ container {
   box-sizing: border-box;
   left: 8%;
   position:relative;
+  overflow-x: auto;
 }
 .button1 {
   background-color: #1E90FF;
@@ -162,8 +162,8 @@ container {
 .button4:hover {
   background-color: #7e7e7e;
 }
-.buttonClick {
-  background-color: #fc5151;
+.button5 {
+  background-color: #ff0000;
   border: none;
   color: white;
   padding: 12px;
@@ -173,11 +173,39 @@ container {
   font-size: 16px;
   cursor: pointer;
   border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
+  margin-left: 60px;
+  margin-right: 60px;
   margin-top:4%;
   margin-bottom:1%;
   position:relative;
+  
+}
+.button5:hover {
+  background-color: #fc5151;
+}
+.buttonClick {
+  background-color: #ffa7a7;
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.bench > h2 {
+  position: sticky;
+  left: 0px;
+}
+.buttonClick:hover {
+  background-color: #982525;
 }
 Center {
   align-items: center;
@@ -190,6 +218,20 @@ Center {
   width: 100%;
   height: 600px;
   position: relative;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: left;
+  margin-left: 10%;
+  margin-right: 5%;
+}
+.fixedwrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
 }
 input[type="checkbox"] {
   cursor: pointer;
@@ -286,7 +328,7 @@ nav2 > h2 {
   position: relative;
 }
 .field {
-  background: url(./assets/field.png);
+  background: url(./Images/Field.png);
   width:950px;
   height: 700px;
   background-repeat: no-repeat;

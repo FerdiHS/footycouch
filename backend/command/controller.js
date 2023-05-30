@@ -9,7 +9,7 @@ require("dotenv").config();
 module.exports = {
     signup: (req, res) => {
         const body = req.body;
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         if(body.password !== body.confirmPassword) {
             return res.status(403).json({
                 message: "Password and Confirm Passowrd is different"
@@ -30,7 +30,7 @@ module.exports = {
     },
 
     getUsers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         getUsers((err, results) => {
             if(err) {
                 console.log(err);
@@ -43,7 +43,7 @@ module.exports = {
     },
 
     getUserByName: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
         getUserByName(username, (err, results) => {
             if(err) {
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     login: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app/');
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const body = req.body;
         getUserByName(body.username, (err, results) => {
             if(err) {

@@ -48,17 +48,6 @@ container {
 .button:hover {
   background-color: #00a2ff;
 }
-.bench {
-  width: 84%;
-  background-color: rgba(0, 253, 0, .5);
-  height: 180px;
-  align-items: center;
-  text-align: center;
-  border: 3px dashed blue;
-  box-sizing: border-box;
-  left: 8%;
-  position:relative;
-}
 .button1 {
   background-color: #1E90FF;
   border: none;
@@ -108,21 +97,6 @@ container {
   border-radius: 100%;
   margin-left: auto;
   margin-right:auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
-}
-.trans {
-  background-color: transparent;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right: auto;
   margin-top:4%;
   margin-bottom:1%;
   position:relative;
@@ -214,21 +188,6 @@ nav {
   text-align: center;
   margin: 0%;
 }
-.line {
-  display: flex;
-  align-items: center;
-}
-.line > label {
-  display:grid;
-  margin-top: 0%;
-  white-space: pre-line;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top: 60 px;
-  position:relative;
-}
 nav2 {
   display: flex;
   align-items: center;
@@ -250,6 +209,7 @@ nav2 > h2 {
   font-size: 15px;
   text-align: start;
 }
+/* Spacing */
 .spacing {
   width: 1px;
   height: 1px;
@@ -269,7 +229,7 @@ nav2 > h2 {
 }
 .spacing3 {
   height: 0px;
-  margin-bottom: 85px;
+  margin-bottom: 40px;
   position: relative;
 }
 .spacing4 {
@@ -277,6 +237,18 @@ nav2 > h2 {
   margin-bottom: 50px;
   position: relative;
 }
+.spacing5 {
+  height: 0px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.spacing6 {
+  height: 0px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+/* Team_management style */
 .container2 {
   font-family: arial;
   font-size: 24px;
@@ -286,8 +258,8 @@ nav2 > h2 {
 }
 .field {
   background: url(./assets/field.png);
-  width:950px;
-  height: 700px;
+  width:1350px;
+  height: 1060px;
   background-repeat: no-repeat;
   background-size: cover;
   background-origin:content-box;
@@ -303,6 +275,163 @@ nav2 > h2 {
   text-align: center;
   left: 12%;
   position:relative;
+}
+.point {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #1E90FF;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+.point2 {
+  width: 200px;
+  height: 220px;
+  border: 2px solid #1E90FF;
+  text-align: center;
+  align-items: center;
+  position: relative;
+  font-family:sans-serif;
+}
+.point2 > img {
+  width: 150px;
+  height: 150px;
+}
+.point2 > p {
+  font-size: 12px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.bench::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.bench::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.bench::-webkit-scrollbar-thumb {
+  background: #1E90FF; 
+}
+
+.bench::-webkit-scrollbar-thumb:hover {
+  background: blue; 
+}
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 2px solid #1E90FF;;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position:relative;
+}
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: #1E90FF;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}
+select,
+.select:after {
+  grid-area: select;
+}
+select:focus + .focus {
+  position: absolute;
+  top: 1000px;
+  left: 1000px;
+  right: 0px;
+  bottom: 0px;
+  border: 2px solid blue;
+  border-radius: inherit;
+}
+.line {
+  display: flex;
+  align-items: center;
+  top: 20px;
+  position:relative;
+  font-size: 20px;
+  justify-content: center;
+  width:100%;
+}
+.line > label {
+  display:grid;
+  margin-top: 0%;
+  white-space: pre-line;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 60 px;
+  position:relative;
+  font-size: 16px;
+  text-decoration: solid blue;
+}
+.line2 {
+  display: flex;
+  align-items: center;
+  top: 20px;
+  position:relative;
+  font-size: 20px;
+  justify-content: space-between;
+}
+.line2 > label {
+  display:grid;
+  margin-top: 0%;
+  white-space: pre-line;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 60 px;
+  position:relative;
+  font-size: 16px;
+  text-decoration: solid blue;
+}
+.bench > h5 {
+  position: sticky;
+  left: 0px;
+}
+.bench {
+  width: 84%;
+  background-color: rgba(0, 253, 0, .5);
+  height: 320px;
+  align-items: center;
+  text-align: center;
+  border: 3px dashed blue;
+  box-sizing: border-box;
+  left: 8%;
+  position:relative;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 /* Jersey */
 .trans {

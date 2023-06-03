@@ -85,62 +85,23 @@ container {
   background-color: #00a2ff;
 }
 .button3 {
-  background-color: #ff0000;
+  background-color: #1E90FF;
   border: none;
   color: white;
-  padding: 12px;
+  size: 20px 100px;
+  width: 200px;
+  height: 80px;
+  border-radius: 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 35px;
   cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
+  margin-top: 40px;
+  margin-bottom: 0px;
 }
 .button3:hover {
-  background-color: #fc5151;
-}
-.button4 {
-  background-color: #434343;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: auto;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top: 60 px;
-  margin-bottom:60 px;
-  position:relative;
-}
-.button4:hover {
-  background-color: #7e7e7e;
-}
-.buttonClick {
-  background-color: #fc5151;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
+  background-color: #00a2ff;
 }
 Center {
   align-items: center;

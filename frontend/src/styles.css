@@ -217,6 +217,9 @@ nav2 > h2 {
   height: 100%;
   position: relative;
 }
+.container3 {
+  display: block;
+}
 .field {
   background: url(./assets/field.png);
   width:1350px;

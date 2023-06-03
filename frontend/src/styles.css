@@ -1,4 +1,3 @@
-
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -8,6 +7,7 @@ autoRight {
 }
 .box {
   width: 40%;
+  height: 80%;
   align-items: center;
   text-align: center;
   border: 1px solid blue;
@@ -43,22 +43,21 @@ container {
   font-size: 20px;
   margin: 2px 1px;
   cursor: pointer;
-  margin-bottom: 20px;
 }
 .button:hover {
   background-color: #00a2ff;
-}
-.bench {
-  width: 84%;
-  background-color: rgba(0, 253, 0, .5);
-  height: 180px;
-  align-items: center;
+  border: none;
+  color: white;
+  padding: 13px 16px;
   text-align: center;
-  border: 3px dashed blue;
-  box-sizing: border-box;
-  left: 8%;
-  position:relative;
+  text-decoration: none;
+  align-items: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 2px 1px;
+  cursor: pointer;
 }
+
 .button1 {
   background-color: #1E90FF;
   border: none;
@@ -96,77 +95,23 @@ container {
   background-color: #00a2ff;
 }
 .button3 {
-  background-color: #ff0000;
+  background-color: #1E90FF;
   border: none;
   color: white;
-  padding: 12px;
+  size: 20px 100px;
+  width: 200px;
+  height: 80px;
+  border-radius: 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 35px;
   cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
-}
-.trans {
-  background-color: transparent;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
+  margin-top: 40px;
+  margin-bottom: 0px;
 }
 .button3:hover {
-  background-color: #fc5151;
-}
-.button4 {
-  background-color: #434343;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: auto;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top: 60 px;
-  margin-bottom:60 px;
-  position:relative;
-}
-.button4:hover {
-  background-color: #7e7e7e;
-}
-.buttonClick {
-  background-color: #fc5151;
-  border: none;
-  color: white;
-  padding: 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top:4%;
-  margin-bottom:1%;
-  position:relative;
+  background-color: #00a2ff;
 }
 Center {
   align-items: center;
@@ -180,6 +125,15 @@ Center {
   height: 600px;
   position: relative;
 }
+.container2 {
+  left:50px;
+  position:relative;
+  display: flex;
+  font-size: 12px;
+}
+.container3 {
+  display: block;
+}
 .error {
   color: red;
   font-size: 12px;
@@ -188,6 +142,11 @@ Center {
   text-align: left;
   margin-left: 10%;
   margin-right: 5%;
+}
+.fixedwrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
 }
 input[type="checkbox"] {
   cursor: pointer;
@@ -213,21 +172,7 @@ nav {
   height: 60px;
   text-align: center;
   margin: 0%;
-}
-.line {
-  display: flex;
-  align-items: center;
-}
-.line > label {
-  display:grid;
-  margin-top: 0%;
-  white-space: pre-line;
-  cursor: pointer;
-  border-radius: 100%;
-  margin-left: auto;
-  margin-right:auto;
-  margin-top: 60 px;
-  position:relative;
+  width:100%;
 }
 nav2 {
   display: flex;
@@ -235,6 +180,7 @@ nav2 {
   background-color: 	#1E90FF;
   padding: 25px 25px;
   height: 70px;
+  width:100%;
   text-align: center;
   margin: 0%;
 }
@@ -246,10 +192,10 @@ nav2 > h2 {
   width: 50%;
   margin-top: 5%;
   margin-left: 10%;
-  margin-bottom: 30px;
   font-size: 15px;
   text-align: start;
 }
+/* Spacing */
 .spacing {
   width: 1px;
   height: 1px;
@@ -269,7 +215,7 @@ nav2 > h2 {
 }
 .spacing3 {
   height: 0px;
-  margin-bottom: 85px;
+  margin-bottom: 40px;
   position: relative;
 }
 .spacing4 {
@@ -277,6 +223,18 @@ nav2 > h2 {
   margin-bottom: 50px;
   position: relative;
 }
+.spacing5 {
+  height: 0px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.spacing6 {
+  height: 0px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+/* Team_management style */
 .container2 {
   font-family: arial;
   font-size: 24px;
@@ -285,9 +243,9 @@ nav2 > h2 {
   position: relative;
 }
 .field {
-  background: url(./assets/field.png);
-  width:950px;
-  height: 700px;
+  background: url(./assets/Field.png);
+  width:1350px;
+  height: 1060px;
   background-repeat: no-repeat;
   background-size: cover;
   background-origin:content-box;
@@ -303,6 +261,163 @@ nav2 > h2 {
   text-align: center;
   left: 12%;
   position:relative;
+}
+.point {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #1E90FF;
+  text-align: center;
+  align-items: center;
+  position: relative;
+}
+.point2 {
+  width: 200px;
+  height: 220px;
+  border: 2px solid #1E90FF;
+  text-align: center;
+  align-items: center;
+  position: relative;
+  font-family:sans-serif;
+}
+.point2 > img {
+  width: 150px;
+  height: 150px;
+}
+.point2 > p {
+  font-size: 12px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.bench::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.bench::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.bench::-webkit-scrollbar-thumb {
+  background: #1E90FF; 
+}
+
+.bench::-webkit-scrollbar-thumb:hover {
+  background: blue; 
+}
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 2px solid #1E90FF;;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position:relative;
+}
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: #1E90FF;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  justify-self: end;
+}
+select,
+.select:after {
+  grid-area: select;
+}
+select:focus + .focus {
+  position: absolute;
+  top: 1000px;
+  left: 1000px;
+  right: 0px;
+  bottom: 0px;
+  border: 2px solid blue;
+  border-radius: inherit;
+}
+.line {
+  display: flex;
+  align-items: center;
+  top: 20px;
+  position:relative;
+  font-size: 20px;
+  justify-content: center;
+  width:100%;
+}
+.line > label {
+  display:grid;
+  margin-top: 0%;
+  white-space: pre-line;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 60 px;
+  position:relative;
+  font-size: 16px;
+  text-decoration: solid blue;
+}
+.line2 {
+  display: flex;
+  align-items: center;
+  top: 20px;
+  position:relative;
+  font-size: 20px;
+  justify-content: space-between;
+}
+.line2 > label {
+  display:grid;
+  margin-top: 0%;
+  white-space: pre-line;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 60 px;
+  position:relative;
+  font-size: 16px;
+  text-decoration: solid blue;
+}
+.bench > h5 {
+  position: sticky;
+  left: 0px;
+}
+.bench {
+  width: 84%;
+  background-color: rgba(0, 253, 0, .5);
+  height: 320px;
+  align-items: center;
+  text-align: center;
+  border: 3px dashed blue;
+  box-sizing: border-box;
+  left: 8%;
+  position:relative;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 /* Jersey */
 .trans {
@@ -325,6 +440,2826 @@ nav2 > h2 {
   background-position: 0%;
   background-size: cover;
   background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: auto;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 60 px;
+  margin-bottom:60 px;
+  position:relative;
+}
+.Player:hover {
+  opacity: 50%;
+}
+.ARSGK {
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.ARSGK:hover {
+  opacity: 50%;
+}
+.ARSPlayer {
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.ARSPlayer:hover {
+  opacity: 50%;
+}
+.ARSBench {
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.ARSBench:hover {
+  opacity:50%;
+}
+.ARSGKBench {
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.ARSGKBench:hover {
+  opacity: 50%;
+}
+.ARSBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.ARSBenchClick:hover {
+  opacity:25%;
+}
+.ARSGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.ARSGKBenchClick:hover {
+  opacity: 25%;
+}
+.AVLGK {
+  background-image: url(./assets/Jersey/Aston\ Villa\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.AVLGK:hover {
+  opacity: 50%;
+}
+.AVLPlayer {
+  background-image: url(./assets/Jersey/Aston\ Villa\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.AVLPlayer:hover {
+  opacity: 50%;
+}
+.AVLBench {
+  background-image: url(./assets/Jersey/Aston\ Villa\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.AVLBench:hover {
+  opacity:50%;
+}
+.AVLGKBench {
+  background-image: url(./assets/Jersey/Aston\ Villa\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.AVLGKBench:hover {
+  opacity:50%;
+}
+.AVLBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Aston\ Villa\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.AVLBenchClick:hover {
+  opacity:25%;
+}
+.AVLGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Aston\ Villa\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.AVLGKBenchClick:hover {
+  opacity:25%;
+}
+.BREGK {
+  background-image: url(./assets/Jersey/Brentford\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BREGK:hover {
+  opacity: 50%;
+}
+.BREPlayer {
+  background-image: url(./assets/Jersey/Brentford\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BREPlayer:hover {
+  opacity: 50%;
+}
+.BREBench {
+  background-image: url(./assets/Jersey/Brentford\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BREBench:hover {
+  opacity:50%;
+}
+.BREGKBench {
+  background-image: url(./assets/Jersey/Brentford\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BREGKBench:hover {
+  opacity:50%;
+}
+.BREBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Brentford\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BREBenchClick:hover {
+  opacity:25%;
+}
+.BREGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Brentford\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BREGKBenchClick:hover {
+  opacity:25%;
+}
+.BOUGK {
+  background-image: url(./assets/Jersey/Bournemouth\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BOUGK:hover {
+  opacity: 50%;
+}
+.BOUPlayer {
+  background-image: url(./assets/Jersey/Bournemouth\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BOUPlayer:hover {
+  opacity: 50%;
+}
+.BOUBench {
+  background-image: url(./assets/Jersey/Bournemouth\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BOUBench:hover {
+  opacity:50%;
+}
+.BOUGKBench {
+  background-image: url(./assets/Jersey/Bournemouth\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BOUGKBench:hover {
+  opacity:50%;
+}
+.BOUBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Bournemouth\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BOUBenchClick:hover {
+  opacity:25%;
+}
+.BOUGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Bournemouth\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BOUGKBenchClick:hover {
+  opacity:25%;
+}
+.BRIGK {
+  background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BRIGK:hover {
+  opacity: 50%;
+}
+.BRIPlayer {
+  background-image: url(./assets/Jersey/Brighton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.BRIPlayer:hover {
+  opacity: 50%;
+}
+.BRIBench {
+  background-image: url(./assets/Jersey/Brighton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BRIBench:hover {
+  opacity:50%;
+}
+.BRIGKBench {
+  background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BRIGKBench:hover {
+  opacity:50%;
+}
+.BRIBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Brighton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BRIBenchClick:hover {
+  opacity:25%;
+}
+.BRIGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.BRIGKBenchClick:hover {
+  opacity:25%;
+}
+.SOUGK {
+  background-image: url(./assets/Jersey/Southampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.SOUGK:hover {
+  opacity: 50%;
+}
+.SOUPlayer {
+  background-image: url(./assets/Jersey/Southampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.SOUPlayer:hover {
+  opacity: 50%;
+}
+.SOUBench {
+  background-image: url(./assets/Jersey/Southampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.SOUBench:hover {
+  opacity:50%;
+}
+.SOUGKBench {
+  background-image: url(./assets/Jersey/Southampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.SOUGKBench:hover {
+  opacity:50%;
+}
+.SOUBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Southampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.SOUBenchClick:hover {
+  opacity:25%;
+}
+.SOUGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Southampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.SOUGKBenchClick:hover {
+  opacity:25%;
+}
+.CHEGK {
+  background-image: url(./assets/Jersey/Chelsea\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.CHEGK:hover {
+  opacity: 50%;
+}
+.CHEPlayer {
+  background-image: url(./assets/Jersey/Chelsea\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.CHEPlayer:hover {
+  opacity: 50%;
+}
+.CHEBench {
+  background-image: url(./assets/Jersey/Chelsea\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CHEBench:hover {
+  opacity:50%;
+}
+.CHEGKBench {
+  background-image: url(./assets/Jersey/Chelsea\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CHEGKBench:hover {
+  opacity:50%;
+}
+.CHEBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Chelsea\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CHEBenchClick:hover {
+  opacity:25%;
+}
+.CHEGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Chelsea\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CHEGKBenchClick:hover {
+  opacity:25%;
+}
+.CRYGK {
+  background-image: url(./assets/Jersey/Crystal\ Palace\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.CRYGK:hover {
+  opacity: 50%;
+}
+.CRYPlayer {
+  background-image: url(./assets/Jersey/Crystal\ Palace\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.CRYPlayer:hover {
+  opacity: 50%;
+}
+.CRYBench {
+  background-image: url(./assets/Jersey/Crystal\ Palace\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CRYBench:hover {
+  opacity:50%;
+}
+.CRYGKBench {
+  background-image: url(./assets/Jersey/Crystal\ Palace\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CRYGKBench:hover {
+  opacity:50%;
+}
+.CRYBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Crystal\ Palace\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CRYBenchClick:hover {
+  opacity:25%;
+}
+.CRYGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Crystal\ Palace\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.CRYGKBenchClick:hover {
+  opacity:25%;
+}
+.FULGK {
+  background-image: url(./assets/Jersey/Fulham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.FULGK:hover {
+  opacity: 50%;
+}
+.FULPlayer {
+  background-image: url(./assets/Jersey/Fulham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.FULPlayer:hover {
+  opacity: 50%;
+}
+.FULBench {
+  background-image: url(./assets/Jersey/Fulham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.FULBench:hover {
+  opacity:50%;
+}
+.FULGKBench {
+  background-image: url(./assets/Jersey/Fulham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.FULGKBench:hover {
+  opacity: 50%;
+}
+.FULBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Fulham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.FULBenchClick:hover {
+  opacity:25%;
+}
+.FULGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Fulham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.FULGKBenchClick:hover {
+  opacity: 25%;
+}
+.EVEGK {
+  background-image: url(./assets/Jersey/Everton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.EVEGK:hover {
+  opacity: 50%;
+}
+.EVEPlayer {
+  background-image: url(./assets/Jersey/Everton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.EVEPlayer:hover {
+  opacity: 50%;
+}
+.EVEBench {
+  background-image: url(./assets/Jersey/Everton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.EVEBench:hover {
+  opacity:50%;
+}
+.EVEGKBench {
+  background-image: url(./assets/Jersey/Everton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.EVEGKBench:hover {
+  opacity: 50%;
+}
+.EVEBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Everton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.EVEBenchClick:hover {
+  opacity:25%;
+}
+.EVEGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Everton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.EVEGKBenchClick:hover {
+  opacity: 25%;
+}
+.LEEGK {
+  background-image: url(./assets/Jersey/Leeds\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LEEGK:hover {
+  opacity: 50%;
+}
+.LEEPlayer {
+  background-image: url(./assets/Jersey/Leeds\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LEEPlayer:hover {
+  opacity: 50%;
+}
+.LEEBench {
+  background-image: url(./assets/Jersey/Leeds\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEEBench:hover {
+  opacity:50%;
+}
+.LEEGKBench {
+  background-image: url(./assets/Jersey/Leeds\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEEGKBench:hover {
+  opacity: 50%;
+}
+.LEEBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Leeds\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEEBenchClick:hover {
+  opacity:25%;
+}
+.LEEGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Leeds\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEEGKBenchClick:hover {
+  opacity: 25%;
+}
+.LEIGK {
+  background-image: url(./assets/Jersey/Leichester\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LEIGK:hover {
+  opacity: 50%;
+}
+.LEIPlayer {
+  background-image: url(./assets/Jersey/Leichester\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LEIPlayer:hover {
+  opacity: 50%;
+}
+.LEIBench {
+  background-image: url(./assets/Jersey/Leichester\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEIBench:hover {
+  opacity:50%;
+}
+.LEIGKBench {
+  background-image: url(./assets/Jersey/Leichester\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEIGKBench:hover {
+  opacity: 50%;
+}
+.LEIBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Leichester\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEIBenchClick:hover {
+  opacity:25%;
+}
+.LEIGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Leichester\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LEIGKBenchClick:hover {
+  opacity: 25%;
+}
+.LIVGK {
+  background-image: url(./assets/Jersey/Liverpool\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LIVGK:hover {
+  opacity: 50%;
+}
+.LIVPlayer {
+  background-image: url(./assets/Jersey/Liverpool\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.LIVPlayer:hover {
+  opacity: 50%;
+}
+.LIVBench {
+  background-image: url(./assets/Jersey/Liverpool\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LIVBench:hover {
+  opacity:50%;
+}
+.LIVGKBench {
+  background-image: url(./assets/Jersey/Liverpool\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LIVGKBench:hover {
+  opacity: 50%;
+}
+.LIVBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Liverpool\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LIVBenchClick:hover {
+  opacity:25%;
+}
+.LIVGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Liverpool\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.LIVGKBenchClick:hover {
+  opacity: 25%;
+}
+.MCIGK {
+  background-image: url(./assets/Jersey/Manchester\ City\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.MCIGK:hover {
+  opacity: 50%;
+}
+.MCIPlayer {
+  background-image: url(./assets/Jersey/Manchester\ City\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.MCIPlayer:hover {
+  opacity: 50%;
+}
+.MCIBench {
+  background-image: url(./assets/Jersey/Manchester\ City\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MCIBench:hover {
+  opacity:50%;
+}
+.MCIGKBench {
+  background-image: url(./assets/Jersey/Manchester\ City\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MCIGKBench:hover {
+  opacity: 50%;
+}
+.MCIBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Manchester\ City\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MCIBenchClick:hover {
+  opacity:25%;
+}
+.MCIGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Manchester\ City\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MCIGKBenchClick:hover {
+  opacity: 25%;
+}
+.MUNGK {
+  background-image: url(./assets/Jersey/Manchester\ United\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.MUNGK:hover {
+  opacity: 50%;
+}
+.MUNPlayer {
+  background-image: url(./assets/Jersey/Manchester\ United\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.MUNPlayer:hover {
+  opacity: 50%;
+}
+.MUNBench {
+  background-image: url(./assets/Jersey/Manchester\ United\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MUNBench:hover {
+  opacity:50%;
+}
+.MUNGKBench {
+  background-image: url(./assets/Jersey/Manchester\ United\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MUNGKBench:hover {
+  opacity:50%;
+}
+.MUNBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Manchester\ United\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MUNBenchClick:hover {
+  opacity:25%;
+}
+.MUNGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Manchester\ United\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.MUNGKBenchClick:hover {
+  opacity:25%;
+}
+.NEWGK {
+  background-image: url(./assets/Jersey/NewCastle\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.NEWGK:hover {
+  opacity: 50%;
+}
+.NEWPlayer {
+  background-image: url(./assets/Jersey/NewCastle\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.NEWPlayer:hover {
+  opacity: 50%;
+}
+.NEWBench {
+  background-image: url(./assets/Jersey/NewCastle\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NEWBench:hover {
+  opacity:50%;
+}
+.NEWGKBench {
+  background-image: url(./assets/Jersey/NewCastle\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NEWGKBench:hover {
+  opacity: 50%;
+}
+.NEWBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/NewCastle\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NEWBenchClick:hover {
+  opacity:25%;
+}
+.NEWGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/NewCastle\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NEWGKBenchClick:hover {
+  opacity: 25%;
+}
+.TOTGK {
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.TOTGK:hover {
+  opacity: 50%;
+}
+.TOTPlayer {
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.TOTPlayer:hover {
+  opacity: 50%;
+}
+.TOTBench {
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.TOTBench:hover {
+  opacity:50%;
+}
+.TOTGKBench {
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.TOTGKBench:hover {
+  opacity: 50%;
+}
+.TOTBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.TOTBenchClick:hover {
+  opacity:25%;
+}
+.TOTGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Tottenham\ Hotspur\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.TOTGKBenchClick:hover {
+  opacity: 25%;
+}
+.WHUGK {
+  background-image: url(./assets/Jersey/Westham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.WHUGK:hover {
+  opacity: 50%;
+}
+.WHUPlayer {
+  background-image: url(./assets/Jersey/Westham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.WHUPlayer:hover {
+  opacity: 50%;
+}
+.WHUBench {
+  background-image: url(./assets/Jersey/Westham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WHUBench:hover {
+  opacity:50%;
+}
+.WHUGKBench {
+  background-image: url(./assets/Jersey/Westham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WHUGKBench:hover {
+  opacity: 50%;
+}
+.WHUBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Westham\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WHUBenchClick:hover {
+  opacity:25%;
+}
+.WHUGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Westham\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WHUGKBenchClick:hover {
+  opacity: 25%;
+}
+.WOLGK {
+  background-image: url(./assets/Jersey/Wolferhampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.WOLGK:hover {
+  opacity: 50%;
+}
+.WOLPlayer {
+  background-image: url(./assets/Jersey/Wolferhampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.WOLPlayer:hover {
+  opacity: 50%;
+}
+.WOLBench {
+  background-image: url(./assets/Jersey/Wolferhampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WOLBench:hover {
+  opacity:50%;
+}
+.WOLGKBench {
+  background-image: url(./assets/Jersey/Wolferhampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WOLGKBench:hover {
+  opacity: 50%;
+}
+.WOLBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Wolferhampton\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WOLBenchClick:hover {
+  opacity:25%;
+}
+.WOLGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Wolferhampton\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.WOLGKBenchClick:hover {
+  opacity: 25%;
+}
+.NFOGK {
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.NFOGK:hover {
+  opacity: 50%;
+}
+.NFOPlayer {
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin:auto;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right:auto;
+  margin-bottom: 0px;
+  position:relative;
+}
+.NFOPlayer:hover {
+  opacity: 50%;
+}
+.NFOBench {
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NFOBench:hover {
+  opacity:50%;
+}
+.NFOGKBench {
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NFOGKBench:hover {
+  opacity: 50%;
+}
+.NFOBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Arsenal\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NFOBenchClick:hover {
+  opacity:25%;
+}
+.NFOGKBenchClick {
+  opacity:50%;
+  background-image: url(./assets/Jersey/Arsenal\ GK\ Jersey.png);
+  background-position: 0%;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 65px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top:4%;
+  margin-bottom:1%;
+  position:relative;
+}
+.NFOGKBenchClick:hover {
+  opacity: 25%;
+}
+
   border: none;
   color: white;
   padding: 65px;

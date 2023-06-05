@@ -220,8 +220,8 @@ nav2 > h2 {
 }
 .field {
   background: url(./assets/field.png);
-  width:1350px;
-  height: 1060px;
+  width:1150px;
+  height: 910px;
   background-repeat: no-repeat;
   background-size: cover;
   background-origin:content-box;

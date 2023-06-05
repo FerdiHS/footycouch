@@ -265,22 +265,6 @@ nav2 > h2 {
   cursor: pointer;
   text-decoration: underline;
 }
-.bench::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.bench::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-
-.bench::-webkit-scrollbar-thumb {
-  background: #1E90FF; 
-}
-
-.bench::-webkit-scrollbar-thumb:hover {
-  background: blue; 
-}
 select {
   appearance: none;
   background-color: transparent;
@@ -385,15 +369,13 @@ select:focus + .focus {
 .bench {
   width: 84%;
   background-color: rgba(0, 253, 0, .5);
-  height: 320px;
+  height: 280px;
   align-items: center;
   text-align: center;
   border: 3px dashed blue;
   box-sizing: border-box;
   left: 8%;
   position:relative;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 /* Jersey */
 .trans {

@@ -1,9 +1,12 @@
 const {
     createUser,
     getUsers,
-    getUserByName
+    getUserByName,
+    // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
+const fs = require('fs');
+const path = require('path');
 
 require("dotenv").config();
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
@@ -91,6 +94,49 @@ module.exports = {
                  message: "Invalid password"
              });
             }
+        });
+    },
+
+    uploadImageUsers: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const base64Image = req.body.image;
+        const username = req.body.username;
+        const imageBuffer = Buffer.from(base64Image, "base64");
+        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
+
+        // Write the image buffer to the file system
+        fs.writeFile(imagePath, imageBuffer, (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({
+                    message: "Error saving the image."
+                });
+            } else {
+                res.status(200).json({
+                    message: "Image saved successfully."
+                });
+            }
+        });
+    },
+    
+    getImageUsers: (req, res) => {
+        const username = req.body.username;
+        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
+        // Read the image file
+        fs.readFile(imagePath, (err, data) => {
+          if (err) {
+            console.error(err);
+            res.status(500).json({
+                message: 'Error retrieving the image.'
+            });
+          } else {
+            // Convert the image data to base64
+            const base64Image = Buffer.from(data).toString('base64');
+            res.status(200).json({
+                message: "Image retrieved successfully",
+                image: base64Image
+            });
+          }
         });
     },
 

@@ -1,11 +1,26 @@
 import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
 export default function TeamManagement({login, nowPage, handlenowPage}) {
+    const [formation, setformation] = useState("4-3-3");
+    const [allformation, setallformation] = useState([
+        "4-4-2",
+        "4-3-3",
+        "4-5-1",
+        "3-5-2",
+        "3-4-3",
+        "5-4-1",
+        "5-3-3"
+    ]);
     const [now, setnow] = useState(-1);
     const [score, setscore] = useState(0);
     const [player, setplayer] = useState([
         {
-            name: "David de Gea",
+            name: "D. de Gea",
+            position: "GK",
+            team: "MUN"
+        },
+        {
+            name: "J. Butland",
             position: "GK",
             team: "MUN"
         },
@@ -30,6 +45,11 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
             team: "MUN"
         },
         {
+            name: "V. Lindelof",
+            position: "CB",
+            team: "MUN"
+        },
+        {
             name: "Casemiro",
             position: "MF",
             team: "MUN"
@@ -43,6 +63,16 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
             name: "B. Fernandes",
             position: "MF",
             team: "MUN"
+        },
+        {
+            name: "Fred",
+            position: "MF",
+            team: "MUN"
+        },
+        {
+            name: "K. De Bruyne",
+            position: "MF",
+            team: "MCI"
         },
         {
             name: "J. Sancho",
@@ -59,32 +89,14 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
             position: "FW",
             team: "MUN"
         },
-        {
-            name: "J. Butland",
-            position: "GK",
-            team: "MUN"
-        },
-        {
-            name: "V. Lindelof",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "Fred",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "W. Weghorst",
-            position: "FW",
-            team: "MUN"
-        },
     ])
     const [gk, setgk] = useState(player[0]);
-    const [defender, setdefender] = useState([...player.slice(1,5)]);
-    const [midfield, setmidfield] = useState([...player.slice(5,8)]);
-    const [forward, setforward] = useState([...player.slice(8,11)]);
-    const [bench, setbench] = useState([...player.slice(11)]);
+    const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+    const [midfield, setmidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+    const [forward, setforward] = useState([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+    const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+                                    ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
+                                    ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     const handleSub = (a) => () => {
         if (a === now) {
             setnow(-1);
@@ -189,40 +201,18 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         }
         setnow(-1);
     }
-    const [formation, setformation] = useState("4-3-3");
-    const [allformation, setallformation] = useState([
-        "4-4-2",
-        "4-3-3",
-        "4-5-1",
-        "3-5-2",
-        "3-4-3",
-        "5-4-1",
-        "5-3-3"
-    ]);
     const handleFormChange = (event) => {
         const value = event.target.value;
-        if (value != formation) {
+        if (value !== formation) {
             setformation(value);
-            setbench([...player]);
-            setgk({name: "", position: ""});
-            const def = parseInt(value.charAt(0));
-            const mid = parseInt(value.charAt(2));
-            const fwr = parseInt(value.charAt(4));
-            let df = [];
-            for (let i = 0; i < def; i++) {
-                df[i] = {name: "", position: "", team: ""};
-            }
-            let mf = [];
-            for (let i = 0; i < mid; i++) {
-                mf[i] = {name: "", position: "", team: ""};
-            }
-            let fw = [];
-            for (let i = 0; i < fwr; i++) {
-                fw[i] = {name: "", position: "", team: ""};
-            }
-            setdefender(df);
-            setmidfield(mf);
-            setforward(fw);
+            const formation = value;
+            setgk(player[0]);
+            setdefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+            setmidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+            setforward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setbench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+                        ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
+                        ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         }
     }
     return (

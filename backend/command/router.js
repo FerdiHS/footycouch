@@ -10,6 +10,8 @@ const {
     getTeamByShortName,
     uploadImageUsers,
     getImageUsers,
+    follow,
+    unfollow,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -20,6 +22,8 @@ router.get("/users", getUsers);
 router.get("/users/:name", getUserByName);
 router.post("/users/:username/image", uploadImageUsers);
 router.get("/users/:username/image", getImageUsers);
+router.post("/users/follow", follow);
+router.post("/users/unfollow", unfollow);
 router.get("/players", getPlayers);
 router.get("/players/:id", getPlayersById);
 router.get("/teams", getTeams);

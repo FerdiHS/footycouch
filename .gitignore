@@ -8,6 +8,7 @@
 .env
 /backend/.env
 /frontend/.env
+.vscode
 /.pnp
 .pnp.js
 

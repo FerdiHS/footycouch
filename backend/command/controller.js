@@ -2,6 +2,9 @@ const {
     createUser,
     getUsers,
     getUserByName,
+    createFollow,
+    removeFollow,
+    checkFollow,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -53,7 +56,7 @@ module.exports = {
 
     getUserByName: (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.params.username;
+        const username = req.body.username;
         getUserByName(username, (err, results) => {
             if(err) {
                 console.log(err);
@@ -138,6 +141,70 @@ module.exports = {
             });
           }
         });
+    },
+
+    follow: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const follower = req.body.follower;
+        const followed = req.body.followed;
+        checkFollow(follower, followed, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            if(results.length > 0) {
+                return res.status(409).json({
+                    message: "Following already exists"
+                })
+            }
+            createFollow(follower, followed, (err, results) => {
+                if(err) {
+                    console.log(err);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    data: results
+                });
+            })
+        });
+    },
+
+    unfollow: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const follower = req.body.follower;
+        const followed = req.body.followed;
+        removeFollow(follower, followed, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        })
+    },
+
+    checkFollow: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const follower = req.body.follower;
+        const followed = req.body.followed;
+        checkFollow(follower, followed, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        })
     },
 
     getPlayers: (req, res) => {

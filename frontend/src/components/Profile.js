@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
-import logo from "../Images/MUN Logo.png";
+import logo from "../assets/MUN Logo.png";
 export default function Profile() {
     const [backgroundPicture, setbackgroundPicture] = useState(test);
     const [profilePicture, setprofilePicture] = useState(Avatar2);

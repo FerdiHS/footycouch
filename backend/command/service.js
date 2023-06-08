@@ -46,7 +46,7 @@ module.exports = {
     getUserById: (id, callBack) => {
         pool.query(
             "SELECT * FROM users WHERE id = ?;",
-            [username],
+            [id],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -54,6 +54,32 @@ module.exports = {
                 return callBack(null, results[0]);
             }
         );
+    },
+
+    updateUserProfileById: (id, bio, callBack) => {
+        pool.query(
+            "UPDATE users set bio=? WHERE id=?;",
+            [bio, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
+    },
+
+    updateUserProfileByUsername: (username, bio, callBack) => {
+        pool.query(
+            "UPDATE users set bio=? WHERE username=?;",
+            [bio, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
     },
 
     checkFollow: (follower, followed, callBack) => {

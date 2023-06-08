@@ -21,6 +21,8 @@ const {
     addTeamById,
     setTeamById,
     setTeamByUsername,
+    updateUserProfileById,
+    updateUserProfileByUsername,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -34,6 +36,8 @@ router.get("/users/:username/image", getImageUsers);
 router.post("/users/follow", follow);
 router.post("/users/unfollow", unfollow);
 router.get("/users/following/:id", getUserFollowing);
+router.post("/users/update/id/:id", updateUserProfileById);
+router.post("/users/update/:username", updateUserProfileByUsername);
 router.post("/teams/add/id/:id", addTeamById);
 router.post("/teams/add/:username", addTeamByUsername);
 router.post("/teams/set/id/:id", setTeamById);

@@ -10,6 +10,8 @@ const {
     setTeamByUsername,
     addTeamById,
     addTeamByUsername,
+    updateUserProfileById,
+    updateUserProfileByUsername,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -95,6 +97,7 @@ module.exports = {
                 return res.status(200).json({
                     success: 1,
                     message: "Login successfully",
+                    data: results
                 });
             } else {
               return res.status(401).json({
@@ -444,7 +447,41 @@ module.exports = {
                 console.log(err);
                 return res.status(403).json({
                     message: "Database connection error"
-                    });
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        });
+    },
+
+    updateUserProfileById: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.body.id;
+        const bio = req.body.bio;
+        updateUserProfileById(id, bio, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        });
+    },
+
+    updateUserProfileByUsername: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.body.username;
+        const bio = req.body.bio;
+        updateUserProfileByUsername(username, bio, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
             }
             return res.status(200).json({
                 data: results

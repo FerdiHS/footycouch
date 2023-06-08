@@ -3523,8 +3523,8 @@ input[type="file"].camerabutton:hover {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./assets/field.png);
-  width:654px;
+  background: url(./assets/Field.png);
+  width:484px;
   height: 533.7734px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -3534,7 +3534,6 @@ input[type="file"].camerabutton:hover {
   margin-top: 0%;
   margin-bottom: 0%;
   position: relative;
-  left:-60px;
 }
 .trans2 {
   width:10px;
@@ -3552,7 +3551,7 @@ input[type="file"].camerabutton:hover {
 }
 label.playername {
   font-size: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 label.playername > img {
   width:70px;

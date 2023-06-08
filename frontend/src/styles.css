@@ -3347,7 +3347,7 @@ input[type="file"].camerabutton {
   color:transparent;
   background-color: #dbdbdb;
   padding: 14px;
-  background-image:url(./Images/camera\ icon.png);
+  background-image:url(./assets/camera\ icon.png);
   background-size: 75%;
   background-repeat: no-repeat;
   background-position: center;
@@ -3392,7 +3392,7 @@ input[type="file"].camerabutton:hover {
 .editbackground {
   display: flex;
   font-size: 14px;
-  background-image: url(./Images/edit\ icon.png);
+  background-image: url(./assets/edit\ icon.png);
   filter: brightness(0) invert(1);
   background-size: 10%;
   background-repeat: no-repeat;
@@ -3417,7 +3417,7 @@ input[type="file"].camerabutton:hover {
 .editProfile {
   display: flex;
   font-size: 14px;
-  background-image: url(./Images/edit\ icon.png);
+  background-image: url(./assets/edit\ icon.png);
   background-color: #dbdbdb;
   background-size: 17%;
   background-repeat: no-repeat;
@@ -3523,7 +3523,7 @@ input[type="file"].camerabutton:hover {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./Images/Field.png);
+  background: url(./assets/field.png);
   width:654px;
   height: 533.7734px;
   background-repeat: no-repeat;

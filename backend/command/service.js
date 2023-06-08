@@ -66,7 +66,7 @@ module.exports = {
                 }
                 return callBack(null, results);
             }
-        )
+        );
     },
 
     createFollow: (follower, followed, callBack) => {
@@ -93,5 +93,82 @@ module.exports = {
                 return callBack(null, results);
             }
         );
-    }
+    },
+
+    getUserFollowing: (id, callBack) => {
+        pool.query(
+            "SELECT * FROM follows WHERE follower_id = ?",
+            [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    addTeamById: (id, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+            mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+        pool.query(
+            "UPDATE users SET balance=?, formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
+            "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
+            "WHERE id = ?",
+            [balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    addTeamByUsername: (username, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+            mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+        pool.query(
+            "UPDATE users SET balance=?, formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
+            "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
+            "WHERE username = ?",
+            [balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    setTeamById: (id, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+            mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+        pool.query(
+            "UPDATE users SET formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
+            "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
+            "WHERE id = ?",
+            [formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    setTeamByUsername: (username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+        mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+    pool.query(
+        "UPDATE users SET formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
+        "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
+        "WHERE username = ?",
+        [formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, username],
+        (error, results) => {
+            if(error) {
+                return callBack(error);
+            }
+            return callBack(null, results);
+        }
+    );
+},
 };

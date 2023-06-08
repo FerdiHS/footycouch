@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 09:08 AM
+-- Generation Time: Jun 08, 2023 at 12:37 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -28,10 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `follows` (
+  `id` int(11) NOT NULL,
   `follower_id` int(11) DEFAULT NULL,
   `followed_id` int(11) DEFAULT NULL,
   `timestamp` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `follows`
+--
 
 --
 -- Indexes for dumped tables
@@ -41,8 +46,19 @@ CREATE TABLE `follows` (
 -- Indexes for table `follows`
 --
 ALTER TABLE `follows`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `follower_id` (`follower_id`),
   ADD KEY `followed_id` (`followed_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `follows`
+--
+ALTER TABLE `follows`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables

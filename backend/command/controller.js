@@ -5,6 +5,11 @@ const {
     createFollow,
     removeFollow,
     checkFollow,
+    getUserFollowing,
+    setTeamById,
+    setTeamByUsername,
+    addTeamById,
+    addTeamByUsername,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -207,6 +212,22 @@ module.exports = {
         })
     },
 
+    getUserFollowing: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.body.id;
+        getUserFollowing(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        })
+    },
+
     getPlayers: (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
@@ -258,6 +279,176 @@ module.exports = {
                 return res.status(404).json({ error: 'Team not found' });
             }
             res.status(200).json(team);
+        });
+    },
+
+    getGoalkeepers: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        fplapi.then(response => {
+            const players = response.data.elements;
+            const goalkeepers = players.filter((p) => p.element_type === 1);
+            res.status(200).json(goalkeepers);
+        });
+    },
+
+    getDefenders: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        fplapi.then(response => {
+            const players = response.data.elements;
+            const defenders = players.filter((p) => p.element_type === 2);
+            res.status(200).json(defenders);
+        });
+    },
+
+    getMidfielders: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        fplapi.then(response => {
+            const players = response.data.elements;
+            const midfielders = players.filter((p) => p.element_type === 3);
+            res.status(200).json(midfielders);
+        });
+    },
+
+    getFowards: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        fplapi.then(response => {
+            const players = response.data.elements;
+            const fowards = players.filter((p) => p.element_type === 4);
+            res.status(200).json(fowards);
+        });
+    },
+
+    addTeamById: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.body.id;
+        const balance = req.body.balance;
+        const formation = req.body.formation;
+        const gk_1 = req.body.gk_1;
+        const gk_2 = req.body.gk_2;
+        const def_1 = req.body.def_1;
+        const def_2 = req.body.def_2;
+        const def_3 = req.body.def_3;
+        const def_4 = req.body.def_4;
+        const def_5 = req.body.def_5;
+        const mid_1 = req.body.mid_1;
+        const mid_2 = req.body.mid_2;
+        const mid_3 = req.body.mid_3;
+        const mid_4 = req.body.mid_4;
+        const mid_5 = req.body.mid_5;
+        const fow_1 = req.body.fow_1;
+        const fow_2 = req.body.fow_2;
+        const fow_3 = req.body.fow_3;
+        addTeamById(id, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+                mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                    });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        });
+    },
+
+    addTeamByUsername: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.body.id;
+        const username = req.body.username;
+        const formation = req.body.formation;
+        const gk_1 = req.body.gk_1;
+        const gk_2 = req.body.gk_2;
+        const def_1 = req.body.def_1;
+        const def_2 = req.body.def_2;
+        const def_3 = req.body.def_3;
+        const def_4 = req.body.def_4;
+        const def_5 = req.body.def_5;
+        const mid_1 = req.body.mid_1;
+        const mid_2 = req.body.mid_2;
+        const mid_3 = req.body.mid_3;
+        const mid_4 = req.body.mid_4;
+        const mid_5 = req.body.mid_5;
+        const fow_1 = req.body.fow_1;
+        const fow_2 = req.body.fow_2;
+        const fow_3 = req.body.fow_3;
+        addTeamByUsername(id, username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+                mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                    });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        });
+    },
+
+    setTeamById: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.body.id;
+        const formation = req.body.formation;
+        const gk_1 = req.body.gk_1;
+        const gk_2 = req.body.gk_2;
+        const def_1 = req.body.def_1;
+        const def_2 = req.body.def_2;
+        const def_3 = req.body.def_3;
+        const def_4 = req.body.def_4;
+        const def_5 = req.body.def_5;
+        const mid_1 = req.body.mid_1;
+        const mid_2 = req.body.mid_2;
+        const mid_3 = req.body.mid_3;
+        const mid_4 = req.body.mid_4;
+        const mid_5 = req.body.mid_5;
+        const fow_1 = req.body.fow_1;
+        const fow_2 = req.body.fow_2;
+        const fow_3 = req.body.fow_3;
+        setTeamById(id, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+                mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                    });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        });
+    },
+
+    setTeamByUsername: (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.body.username;
+        const formation = req.body.formation;
+        const gk_1 = req.body.gk_1;
+        const gk_2 = req.body.gk_2;
+        const def_1 = req.body.def_1;
+        const def_2 = req.body.def_2;
+        const def_3 = req.body.def_3;
+        const def_4 = req.body.def_4;
+        const def_5 = req.body.def_5;
+        const mid_1 = req.body.mid_1;
+        const mid_2 = req.body.mid_2;
+        const mid_3 = req.body.mid_3;
+        const mid_4 = req.body.mid_4;
+        const mid_5 = req.body.mid_5;
+        const fow_1 = req.body.fow_1;
+        const fow_2 = req.body.fow_2;
+        const fow_3 = req.body.fow_3;
+        setTeamByUsername(username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+                mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                    });
+            }
+            return res.status(200).json({
+                data: results
+            });
         });
     }
 }

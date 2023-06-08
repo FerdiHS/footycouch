@@ -5,8 +5,8 @@ import Default from "./pages/Default.js";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
 import HomePage from "./pages/HomePage.js";
-import TeamManagementPage from "./pages/TeamManagementPage";
-
+import TeamManagementPage from "./pages/TeamManagementPage.js";
+import ProfilePage from "./pages/ProfilePage.js";
 export default function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/team_management" element={<TeamManagementPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   );

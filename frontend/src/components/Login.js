@@ -7,7 +7,7 @@ const initialState = {
     password: "",
 };
 */
-export default function Login() {
+export default function Login({setToken}) {
     const navigate = useNavigate();
     const [tickrememberme, settickRememberMe] = useState(false);
     const [username, setUsername] = useState("");
@@ -38,6 +38,7 @@ export default function Login() {
         // axios.post("http://localhost:5000/login", {username, password})
         .then(res => {
             seterror(false);
+            setToken(username);
             navigate("/home");
         })
         .then(res => console.log(res))

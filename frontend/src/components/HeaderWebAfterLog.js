@@ -2,10 +2,11 @@ import * as React from "react";
 import logo from "../assets/logo.png";
 import mascot from "../assets/mascot.png";
 import { useNavigate } from "react-router-dom";
-export default function HeaderWebAfterLog() {
+export default function HeaderWebAfterLog({setToken}) {
     const navigate = useNavigate();
     const handleLogOut = () => {
         if(window.confirm("Are you sure to log out?")) {
+            setToken(null);
             navigate("/login");
         }
     }

@@ -15,7 +15,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Default />} />
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/login" element={<LoginPage setToken={setToken}/>} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/*" element={<Navigate to="/login"/>}/>
       </Routes>
@@ -24,9 +24,9 @@ export default function App() {
     return (
       <Router>
         <Routes>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/team_management" element={<TeamManagementPage />} />
-          <Route path="/profile" element={<ProfilePage/>} />
+          <Route path="/home" element={<HomePage setToken={setToken}/>} />
+          <Route path="/team_management" element={<TeamManagementPage setToken={setToken}/>} />
+          <Route path="/profile" element={<ProfilePage setToken={setToken}/>} />
           <Route path="/*" element={<Navigate to="/home"/>}/>
         </Routes>
       </Router>

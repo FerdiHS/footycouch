@@ -1,6 +1,6 @@
 import "./styles.css";
 import * as React from "react";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import Default from "./pages/Default.js";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";

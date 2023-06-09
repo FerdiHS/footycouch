@@ -7,7 +7,7 @@ import SignUpPage from "./pages/SignUpPage.js";
 import HomePage from "./pages/HomePage.js";
 import TeamManagementPage from "./pages/TeamManagementPage";
 import ProfilePage from "./pages/ProfilePage";
-import useToken from "./component/Token";
+import useToken from "./components/Token";
 export default function App() {
   const {token, setToken} = useToken();
   if(!token) {

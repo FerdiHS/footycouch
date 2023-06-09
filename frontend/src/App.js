@@ -15,7 +15,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Default />} />
-        <Route path="/login" element={<LoginPage setToken={setToken}/>} />
+        <Route path="/login" element={<LoginPage/>} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/*" element={<Navigate to="/login"/>}/>
       </Routes>

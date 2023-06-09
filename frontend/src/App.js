@@ -11,7 +11,6 @@ import useToken from "./component/Token";
 export default function App() {
   const {token, setToken} = useToken();
   if(!token) {
-    console.log(token);
     return (
     <Router>
       <Routes>

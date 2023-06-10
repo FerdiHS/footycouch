@@ -105,7 +105,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         }
     };
     const handleChangePlayer = (a, b) => () => {
-        if (now != -1) {
+        if (now !== -1) {
             if (a === 0) {
                 if (bench[now].position === "GK") {
                     const temp = gk;
@@ -335,7 +335,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                 <div class="spacing4"></div>
                 <div class="point2">
                     Your Team
-                    <img src={logo}/>
+                    <img src={logo} alt=""/>
                     <p>Change Team</p>
                 </div>
                 <div class="spacing4"></div>

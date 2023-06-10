@@ -21,7 +21,7 @@ export default function Register({handlenowPage}) {
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (username.length == 0) {
+        if (username.length === 0) {
             seterrorusername("Username must be filled")
         } else if (!isValidUsername(username)) {
             seterrorusername("Username must only contain alphanumeric character");
@@ -37,7 +37,7 @@ export default function Register({handlenowPage}) {
         } else if (password !== confirmPassword) {
             seterrorConfirmpw("Password didn't match");
             seterrorPassword("");
-        } else if (errorusername == "") {
+        } else if (errorusername === "") {
             seterrorConfirmpw("");
             seterrorPassword("");
             axios.post("https://footycouch-production.up.railway.app/signup", {username, password, confirmPassword})

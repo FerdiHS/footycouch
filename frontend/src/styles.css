@@ -3523,7 +3523,7 @@ input[type="file"].camerabutton:hover {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./assets/Field.png);
+  background: url(./src/assets/field.png);
   width:524px;
   height: 533.7734px;
   background-repeat: no-repeat;

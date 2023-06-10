@@ -150,15 +150,15 @@ export default function Profile() {
     return (
     <div class="container4">
             <div class="backgroundProfileBlur">
-                <img src={backgroundPicture} />
+                <img src={backgroundPicture} alt=""/>
             </div>
         <div class = "profile">
             <div class="backgroundProfile">
-                <img src={backgroundPicture} />
+                <img src={backgroundPicture} alt=""/>
             </div>
             <div class = "status">
                 <div class="profilePicture"> 
-                    <img src={profilePicture}></img>
+                    <img src={profilePicture} alt=""/>
                 </div>
                 <input type= "file" class = "camerabutton" onChange={ppUpload}/>
                 <div class="name">
@@ -199,7 +199,7 @@ export default function Profile() {
                         <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo}></img>
+                            <img src={logo} alt=""/>
                         </div>
                     </div>
                     <div class="lineup">
@@ -209,7 +209,7 @@ export default function Profile() {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
+                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} alt=""/>
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -217,7 +217,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
                                             {player.name}
                                         </label>) 
                                     })          
@@ -228,7 +228,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
                                         {player.name}
                                     </label>) 
                                     })          
@@ -239,7 +239,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
                                         {player.name}
                                     </label>) 
                                     })          

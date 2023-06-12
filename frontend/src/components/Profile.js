@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useToken from "./Token.js";
 import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 export default function Profile() {
+    const [username] = useToken();
     const [backgroundPicture, setbackgroundPicture] = useState(test);
     const [profilePicture, setprofilePicture] = useState(Avatar2);
-    const [username, setusername] = useState("San Tokyo");
-    const [bio, setbio] = useState("SIUUUUUUU");
-    const [posts, setposts] = useState([]);
-    const [followers, setfollowers] = useState([]);
-    const [following, setfollowing] = useState([]);
+    const [bio, setBio] = useState("SIUUUUUUU");
+    const [posts, setPosts] = useState([]);
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
     const [points, setPoints] = useState(0);
     const highestPoints = 0;
-    const [rank, setrank] = useState(1);
+    const [rank, setRank] = useState(1);
     const highestRank = 1;
-    const [player, setplayer] = useState([
+    const [player, setPlayer] = useState([
         {
             name: "D. de Gea",
             position: "GK",
@@ -114,12 +115,12 @@ export default function Profile() {
         "WOL": "Wolverhampton",
         "NFO": "Nottingham Forest"
     }
-    const [formation, setformation] = useState("4-3-3");
-    const [gk, setgk] = useState(player[0]);
-    const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
-    const [midfield, setmidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
-    const [forward, setforward] = useState([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
-    const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+    const [formation, setFormation] = useState("4-3-3");
+    const [gk, setGk] = useState(player[0]);
+    const [defender, setDefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+    const [midfield, setMidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+    const [forward, setForward] = useState([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+    const [bench, setBench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                     ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     
@@ -147,6 +148,18 @@ export default function Profile() {
         }
         reader.readAsDataURL(file);
     }
+
+    axios.get("https://footycouch-production.up.railway.app/users" + username, {username})
+    .then(res => {
+        setBio(res.data.bio);
+        setPoints(res.data.points);
+        setFormation(res.data.formation);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
     return (
     <div class="container4">
             <div class="backgroundProfileBlur">

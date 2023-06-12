@@ -24,7 +24,7 @@ const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 module.exports = {
     signup: (req, res) => {
         const body = req.body;
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         if(body.password !== body.confirmPassword) {
             return res.status(403).json({
                 message: "Password and Confirm Passowrd is different"
@@ -49,7 +49,7 @@ module.exports = {
     },
 
     getUsers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         getUsers((err, results) => {
             if(err) {
                 console.log(err);
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     getUserByName: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.body.username;
         getUserByName(username, (err, results) => {
             if(err) {
@@ -81,7 +81,7 @@ module.exports = {
     },
 
     login: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const body = req.body;
         getUserByName(body.username, (err, results) => {
             if(err) {
@@ -109,7 +109,7 @@ module.exports = {
     },
 
     uploadImageUsers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const base64Image = req.body.image;
         const username = req.body.username;
         const imageBuffer = Buffer.from(base64Image, "base64");
@@ -131,6 +131,7 @@ module.exports = {
     },
     
     getImageUsers: (req, res) => {
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.body.username;
         const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
         // Read the image file
@@ -152,7 +153,7 @@ module.exports = {
     },
 
     follow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         checkFollow(follower, followed, (err, results) => {
@@ -182,7 +183,7 @@ module.exports = {
     },
 
     unfollow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         removeFollow(follower, followed, (err, results) => {
@@ -199,7 +200,7 @@ module.exports = {
     },
 
     checkFollow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         checkFollow(follower, followed, (err, results) => {
@@ -216,7 +217,7 @@ module.exports = {
     },
 
     getUserFollowing: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const id = req.body.id;
         getUserFollowing(id, (err, results) => {
             if(err) {
@@ -232,7 +233,7 @@ module.exports = {
     },
 
     getPlayers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        //. res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             res.status(200).json({players: response.data.elements});
         });
@@ -252,14 +253,14 @@ module.exports = {
     },
 
     getTeams: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             res.status(200).json({teams: response.data.teams});
         });
     },
 
      getTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const id = req.body.id;
             const teams = response.data.teams;
@@ -272,7 +273,7 @@ module.exports = {
     },
 
     getTeamByShortName: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const shortName = req.body.shortName;
             console.log(shortName);
@@ -286,7 +287,7 @@ module.exports = {
     },
 
     getGoalkeepers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const goalkeepers = players.filter((p) => p.element_type === 1);
@@ -295,7 +296,7 @@ module.exports = {
     },
 
     getDefenders: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const defenders = players.filter((p) => p.element_type === 2);
@@ -304,7 +305,7 @@ module.exports = {
     },
 
     getMidfielders: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const midfielders = players.filter((p) => p.element_type === 3);
@@ -313,7 +314,7 @@ module.exports = {
     },
 
     getFowards: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const fowards = players.filter((p) => p.element_type === 4);
@@ -322,7 +323,7 @@ module.exports = {
     },
 
     addTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const id = req.body.id;
         const balance = req.body.balance;
         const formation = req.body.formation;
@@ -356,7 +357,7 @@ module.exports = {
     },
 
     addTeamByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const id = req.body.id;
         const username = req.body.username;
         const formation = req.body.formation;
@@ -390,7 +391,7 @@ module.exports = {
     },
 
     setTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const id = req.body.id;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
@@ -423,7 +424,7 @@ module.exports = {
     },
 
     setTeamByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.body.username;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
@@ -456,7 +457,7 @@ module.exports = {
     },
 
     updateUserProfileById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const id = req.body.id;
         const bio = req.body.bio;
         updateUserProfileById(id, bio, (err, results) => {
@@ -473,7 +474,7 @@ module.exports = {
     },
 
     updateUserProfileByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.body.username;
         const bio = req.body.bio;
         updateUserProfileByUsername(username, bio, (err, results) => {

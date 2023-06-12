@@ -240,7 +240,7 @@ module.exports = {
     },
 
      getPlayersById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const id = req.body.id;
             const players = response.data.elements;

@@ -6,9 +6,9 @@ import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 export default function Profile() {
-    const [username] = useToken();
-    const [backgroundPicture, setbackgroundPicture] = useState(test);
-    const [profilePicture, setprofilePicture] = useState(Avatar2);
+    const username = useToken().token;
+    const [backgroundPicture, setBackgroundPicture] = useState(test);
+    const [profilePicture, setProfilePicture] = useState(Avatar2);
     const [bio, setBio] = useState("SIUUUUUUU");
     const [posts, setPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
@@ -132,7 +132,7 @@ export default function Profile() {
             return;
         }
         reader.onloadend = () => {
-          setprofilePicture(reader.result);
+          setProfilePicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
@@ -144,34 +144,33 @@ export default function Profile() {
             return;
         }
         reader.onloadend = () => {
-          setbackgroundPicture(reader.result);
+          setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
 
-    axios.get("https://footycouch-production.up.railway.app/users" + username, {username})
+    axios.get("https://footycouch-production.up.railway.app/users/" + username, {username})
     .then(res => {
         setBio(res.data.bio);
-        setPoints(res.data.points);
         setFormation(res.data.formation);
+        setPoints(res.data.points);
     })
     .catch(err => {
         console.log(err);
     });
 
-
     return (
     <div class="container4">
             <div class="backgroundProfileBlur">
-                <img src={backgroundPicture} alt=""/>
+                <img src={backgroundPicture} alt ="" />
             </div>
         <div class = "profile">
             <div class="backgroundProfile">
-                <img src={backgroundPicture} alt=""/>
+                <img src={backgroundPicture} alt="" />
             </div>
             <div class = "status">
                 <div class="profilePicture"> 
-                    <img src={profilePicture} alt=""/>
+                    <img src={profilePicture} alt="" />
                 </div>
                 <input type= "file" class = "camerabutton" onChange={ppUpload}/>
                 <div class="name">
@@ -212,7 +211,7 @@ export default function Profile() {
                         <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo} alt=""/>
+                            <img src={logo} alt = ""/>
                         </div>
                     </div>
                     <div class="lineup">
@@ -241,7 +240,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt="" />
                                         {player.name}
                                     </label>) 
                                     })          
@@ -252,7 +251,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt="" />
                                         {player.name}
                                     </label>) 
                                     })          

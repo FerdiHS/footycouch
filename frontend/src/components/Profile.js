@@ -149,8 +149,9 @@ export default function Profile() {
         reader.readAsDataURL(file);
     }
 
-    axios.get("https://footycouch-production.up.railway.app/users/" + username, {username})
+    axios.get("https://footycouch-production.up.railway.app/users/" + username)
     .then(res => {
+        console.log(res);
         setBio(res.data.bio);
         setFormation(res.data.formation);
         setPoints(res.data.points);

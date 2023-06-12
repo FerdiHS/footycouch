@@ -63,7 +63,7 @@ module.exports = {
 
     getUserByName: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        const username = req.params.username;
         getUserByName(username, (err, results) => {
             if(err) {
                 console.log(err);
@@ -111,7 +111,7 @@ module.exports = {
     uploadImageUsers: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const base64Image = req.body.image;
-        const username = req.body.username;
+        const username = req.params.username;
         const imageBuffer = Buffer.from(base64Image, "base64");
         const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
 
@@ -132,7 +132,7 @@ module.exports = {
     
     getImageUsers: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        const username = req.params.username;
         const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
         // Read the image file
         fs.readFile(imagePath, (err, data) => {
@@ -218,7 +218,7 @@ module.exports = {
 
     getUserFollowing: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        const id = req.params.id;
         getUserFollowing(id, (err, results) => {
             if(err) {
                 console.log(err);
@@ -242,7 +242,7 @@ module.exports = {
      getPlayersById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const id = req.body.id;
+            const id = req.params.id;
             const players = response.data.elements;
             const player = players.find((p) => p.id === parseInt(id));
             if (!player) {
@@ -262,7 +262,7 @@ module.exports = {
      getTeamById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const id = req.body.id;
+            const id = req.params.id;
             const teams = response.data.teams;
             const team = teams.find((t) => t.id === parseInt(id));
             if (!team) {
@@ -275,7 +275,7 @@ module.exports = {
     getTeamByShortName: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const shortName = req.body.shortName;
+            const shortName = req.params.shortName;
             console.log(shortName);
             const teams = response.data.teams;
             const team = teams.find((t) => t.short_name === shortName);
@@ -324,7 +324,7 @@ module.exports = {
 
     addTeamById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        const id = req.params.id;
         const balance = req.body.balance;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
@@ -358,8 +358,7 @@ module.exports = {
 
     addTeamByUsername: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
-        const username = req.body.username;
+        const username = req.params.username;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -376,7 +375,7 @@ module.exports = {
         const fow_1 = req.body.fow_1;
         const fow_2 = req.body.fow_2;
         const fow_3 = req.body.fow_3;
-        addTeamByUsername(id, username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+        addTeamByUsername(username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
@@ -392,7 +391,7 @@ module.exports = {
 
     setTeamById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        const id = req.params.id;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -425,7 +424,7 @@ module.exports = {
 
     setTeamByUsername: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        const username = req.params.username;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -458,7 +457,7 @@ module.exports = {
 
     updateUserProfileById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        const id = req.params.id;
         const bio = req.body.bio;
         updateUserProfileById(id, bio, (err, results) => {
             if(err) {
@@ -475,7 +474,7 @@ module.exports = {
 
     updateUserProfileByUsername: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        const username = req.params.username;
         const bio = req.body.bio;
         updateUserProfileByUsername(username, bio, (err, results) => {
             if(err) {

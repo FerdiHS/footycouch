@@ -30,7 +30,7 @@ const router = require("express").Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.get("/users", getUsers);
-router.get("/users/:name", getUserByName);
+router.get("/users/:username", getUserByName);
 router.post("/users/:username/image", uploadImageUsers);
 router.get("/users/:username/image", getImageUsers);
 router.post("/users/follow", follow);

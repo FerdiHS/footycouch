@@ -7,6 +7,7 @@ import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 export default function Profile() {
     const username = useToken().token;
+    const [id, setId] = useState(0);
     const [backgroundPicture, setBackgroundPicture] = useState(test);
     const [profilePicture, setProfilePicture] = useState(Avatar2);
     const [bio, setBio] = useState("SIUUUUUUU");
@@ -152,13 +153,37 @@ export default function Profile() {
     axios.get("https://footycouch-production.up.railway.app/users/" + username)
     .then(res => {
         console.log(res);
-        setBio(res.data.bio);
-        setFormation(res.data.formation);
-        setPoints(res.data.points);
+        setId(res.data.data.id);
+        setBio(res.data.data.bio);
+        setFormation(res.data.data.formation);
+        setPoints(res.data.data.points);
     })
     .catch(err => {
         console.log(err);
     });
+
+    /*
+    axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
+    .then(res => {
+        if (res.status !== 500) {
+            // Create a buffer from the base64 image string
+            const imageBuffer = Buffer.from(res.image, 'base64');
+            setProfilePicture(imageBuffer);
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
+    */
+
+    axios.get("https://footycouch-production.up.railway.app/users/following/" + id)
+    .then(res => {
+        setFollowing(res.data);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
 
     return (
     <div class="container4">

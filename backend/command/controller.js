@@ -113,7 +113,7 @@ module.exports = {
         const base64Image = req.body.image;
         const username = req.params.username;
         const imageBuffer = Buffer.from(base64Image, "base64");
-        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
+        const imagePath = path.join(__dirname, "..", "assets", "profile", username + ".jpg");
 
         // Write the image buffer to the file system
         fs.writeFile(imagePath, imageBuffer, (err) => {
@@ -133,7 +133,7 @@ module.exports = {
     getImageUsers: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
-        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
+        const imagePath = path.join(__dirname, "..", "assets", "profile", username + ".jpg");
         // Read the image file
         fs.readFile(imagePath, (err, data) => {
           if (err) {

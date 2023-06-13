@@ -134,6 +134,19 @@ module.exports = {
         );
     },
 
+    getUserFollower: (id, callBack) => {
+        pool.query(
+            "SELECT * FROM follows WHERE followed_id = ?",
+            [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     addTeamById: (id, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
             mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
         pool.query(

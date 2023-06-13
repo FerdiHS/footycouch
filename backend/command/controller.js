@@ -12,6 +12,7 @@ const {
     addTeamByUsername,
     updateUserProfileById,
     updateUserProfileByUsername,
+    getUserFollower,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -232,6 +233,22 @@ module.exports = {
         })
     },
 
+    getUserFollower: (req, res) => {
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
+        getUserFollower(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        })
+    },
+
     getPlayers: (req, res) => {
         //. res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
@@ -239,7 +256,7 @@ module.exports = {
         });
     },
 
-     getPlayersById: (req, res) => {
+    getPlayersById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const id = req.params.id;

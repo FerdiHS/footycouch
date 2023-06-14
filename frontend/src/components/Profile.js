@@ -5,6 +5,7 @@ import useToken from "./Token.js";
 import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
+import TextInputPost from "./TextInputPost";
 export default function Profile() {
     const username = useToken().token;
     const [id, setId] = useState(0);
@@ -188,17 +189,18 @@ export default function Profile() {
     return (
     <div class="container4">
             <div class="backgroundProfileBlur">
-                <img src={backgroundPicture} alt ="" />
+                <img src={backgroundPicture} />
             </div>
         <div class = "profile">
             <div class="backgroundProfile">
-                <img src={backgroundPicture} alt="" />
+                <img src={backgroundPicture} />
             </div>
             <div class = "status">
                 <div class="profilePicture"> 
-                    <img src={profilePicture} alt="" />
+                    <img src={profilePicture}></img>
                 </div>
-                <input type= "file" class = "camerabutton" onChange={ppUpload}/>
+                <label htmlFor="upload-profilepicture" class="camerabutton" />
+                <input type= "file" id="upload-profilepicture" onChange={ppUpload}/>
                 <div class="name">
                     <h1>{username}</h1>
                     <p>{bio}</p>
@@ -217,8 +219,8 @@ export default function Profile() {
                     <h4>Following</h4>
                 </div>
                 <div class="wrapback">
-                    <div class="editbackground"><h4>Edit cover photo</h4></div>
-                    <input type="file" onChange={bpUpload}/>
+                    <label htmlFor="upload-backgroundPicture" class = "editbackground"><h4>Edit Cover Photo</h4></label>
+                    <input type= "file" id="upload-backgroundPicture" onChange={bpUpload}/>
                 </div>
             </div>
         </div>
@@ -237,7 +239,7 @@ export default function Profile() {
                         <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo} alt = ""/>
+                            <img src={logo}></img>
                         </div>
                     </div>
                     <div class="lineup">
@@ -247,7 +249,7 @@ export default function Profile() {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} alt=""/>
+                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -255,7 +257,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt=""/>
+                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                             {player.name}
                                         </label>) 
                                     })          
@@ -266,7 +268,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt="" />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          
@@ -277,7 +279,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} alt="" />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          
@@ -287,6 +289,9 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="post">
+                    <TextInputPost profilePicture={profilePicture} username={username}/>
                 </div>
             </div>
         </div>

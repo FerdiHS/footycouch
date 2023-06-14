@@ -1,3 +1,4 @@
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -113,6 +114,28 @@ container {
 .button3:hover {
   background-color: #00a2ff;
 }
+.button4 {
+  background-color: #1E90FF;
+  border: none;
+  color: white;
+  size: 20px 100px;
+  width: 200px;
+  height: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 35px;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-bottom: 0px;
+  position: relative;
+  left:850px;
+  top:30px;
+  margin:-150px;
+}
+.button4:hover {
+  background-color: #00a2ff;
+}
 Center {
   align-items: center;
   margin-left: auto;
@@ -126,10 +149,11 @@ Center {
   position: relative;
 }
 .container2 {
-  left:50px;
+  left:250px;
   position:relative;
   display: flex;
   font-size: 12px;
+  text-align: left;
 }
 .container3 {
   display: block;
@@ -238,7 +262,9 @@ nav > img {
   margin-bottom: 25px;
   position: relative;
 }
-
+.spacing7 {
+  margin-bottom: 130px;
+}
 /* Team_management style */
 .container2 {
   font-family: arial;
@@ -248,8 +274,8 @@ nav > img {
   position: relative;
 }
 .field {
-  background: url(./assets/field.png);
-  width:1150px;
+  background: url(./assets/Field.png);
+  width:900px;
   height: 910px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -412,14 +438,14 @@ select:focus + .focus {
   left: 0px;
 }
 .bench {
-  width: 84%;
+  width: 94%;
   background-color: rgba(0, 253, 0, .5);
   height: 280px;
   align-items: center;
   text-align: center;
   border: 3px dashed blue;
   box-sizing: border-box;
-  left: 8%;
+  left: 3%;
   position:relative;
   contain:content;
 }
@@ -428,7 +454,7 @@ select:focus + .focus {
   background-color: transparent;
   border: none;
   color: white;
-  padding: 45px;
+  padding: 0px;
   text-align: center;
   text-decoration: none;
   font-size: 12px;
@@ -3263,6 +3289,7 @@ select:focus + .focus {
 .NFOGKBenchClick:hover {
   opacity: 25%;
 }
+
 /*Profile*/
 .container4 {
   width:100%;
@@ -3348,7 +3375,7 @@ select:focus + .focus {
 .status {
   display:flex;
 }
-input[type="file"].camerabutton {
+.camerabutton {
   color:transparent;
   background-color: #dbdbdb;
   padding: 14px;
@@ -3365,14 +3392,18 @@ input[type="file"].camerabutton {
   border:none;
   cursor: pointer;
 }
-input[type="file"].camerabutton:hover {
+.camerabutton:hover {
   background-color: #c5c5c5;
 }
 .name {
   position:relative;
-  left:100px;
+  left:-154px;
   margin-right: auto;
   text-align: start;
+}
+input[type="file"] {
+  content: none;
+  visibility: hidden;
 }
 .wrapback {
   width: 160px;
@@ -3460,7 +3491,7 @@ input[type="file"].camerabutton:hover {
 }
 .bodycon {
   margin-top: 15px;
-  width: 1400px;
+  width: 1300px;
   display: flex;
   margin-right: auto;
   margin-left: auto;
@@ -3528,7 +3559,7 @@ input[type="file"].camerabutton:hover {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./assets/field.png);
+  background: url(./assets/Field.png);
   width:524px;
   height: 533.7734px;
   background-repeat: no-repeat;
@@ -3564,4 +3595,357 @@ label.playername > img {
   position: relative;
   margin-right: auto;
   margin-left: auto;
+}
+.post {
+  width: 711px;
+  display: block;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.inputPost {
+  margin-left: 15px;
+  background-color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.profilePicture2 {
+  position: relative;
+  top: 10px;
+  margin-left:10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow:hidden;
+  background-color:white;
+  border: 4px solid white;
+}
+.profilePicture2 > img {
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  margin-top: 0;
+  position:relative;
+  min-width: 100%;
+  min-height: 100%;
+  position:relative;
+}
+.inputText {
+  margin-left:10px;
+  margin-right:20px;
+  background-color: #d1d1d1;
+  border-radius: 20px;
+  position: relative;
+  top:-34px;
+  width:540px;
+  padding:10px;
+  padding-right: 50px;
+  left:50px;
+  height:10px;
+  border-color: transparent;
+  font-size: 15px;
+  outline: none;
+  display: block;
+  resize: none;
+  overflow: hidden;
+  height:auto;
+  font-family:Arial;
+}
+.topInput {
+  border-bottom: 1px solid #d1d1d1;
+  width:90%;
+  position:relative;
+  left: 5%;
+  top: -15px;
+}
+
+.imgUpload {
+  cursor:pointer;
+  background-image: url(./assets/image.png);
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: 100px 5px;
+  size: 100px;
+  margin-left: 0%;
+  padding-left: 20%;
+  padding-right:20%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom:105px;
+  position:relative;
+  font-size: 18px;
+  text-align: left;
+  height:100%;
+  margin-bottom: 20px;
+  border-right: 1px solid #d1d1d1;
+}
+.imgUpload:hover {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  border: 1px solid black;
+}.schedulePost {
+  cursor:pointer;
+  background-image: url(./assets/calendar.png);
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: 100px 5px;
+  size: 100px;
+  margin-left: 0%;
+  padding-left: 20%;
+  padding-right:20%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom:105px;
+  position:relative;
+  font-size: 18px;
+  text-align: left;
+  height:100%;
+  margin-bottom: 20px;
+  border-left: 1px solid #d1d1d1
+}
+.schedulePost:hover {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.enter {
+  background-image: url(./assets/Submit.png);
+  border-radius: 5px;
+  padding:5px;
+  width:20px;
+  height:20px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  cursor:pointer;
+  position:relative;
+  left:290px;
+  top: -63px;
+}
+.remove > img {
+  border-radius: 50%;
+  width:12px;
+  height:10px;
+  background-color: #d1d1d1;
+  background-size: cover;
+  position:relative;
+  left:99px;
+  top:-47px;
+  cursor:pointer;
+  margin:0;
+  padding:3px;
+  z-index: 1;
+  object-fit: cover;
+}
+.imgContainer {
+  display:flex;
+}
+
+.imgContainer > img {
+  width:50px;
+  height:50px;
+  position:relative;
+  left:40px;
+  top: -40px;
+  border:1px solid black;
+  object-fit: fill;
+}
+.enter:hover {
+  filter:brightness(90%);
+  background-color: #d4d2d2;
+}
+.submitInput {
+  display: flex;
+}
+.posts {
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+.posts > h5 {
+  position:relative;
+  top:-50px;
+  left:-255px;
+}
+.posts >h5:hover {
+  text-decoration: underline 1.5px solid black;
+  cursor:pointer;
+}
+/* Transfer */
+.field3 {
+  background: url(./assets/Field.png);
+  width:900px;
+  height: 830px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-origin:content-box;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 0%;
+  margin-bottom: 0%;
+}
+.playerTeam > img {
+  width:100px;
+  height:130px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.playerTeam > img:hover {
+  opacity:50%;
+}
+.removePlayer {
+  background-image: url(./assets/cancel.png);
+  border-radius: 50%;
+  border:none;
+  width:20px;
+  height:20px;
+  background-color: white;
+  background-size: cover;
+  position:relative;
+  top:-67px;
+  left:8px;
+  cursor:pointer;
+  margin:0;
+  padding:3px;
+  z-index: 1;
+  object-fit: cover;
+}
+.removePlayer2 {
+  background-image: url(./assets/cancel.png);
+  border-radius: 50%;
+  border:none;
+  width:20px;
+  height:20px;
+  background-color: white;
+  background-size: cover;
+  position:relative;
+  top:-67px;
+  left:60px;
+  cursor:pointer;
+  margin:0;
+  padding:3px;
+  z-index: 1;
+  object-fit: cover;
+}
+.removePlayer3 {
+  background-image: url(./assets/cancel.png);
+  border-radius: 50%;
+  border:none;
+  width:20px;
+  height:20px;
+  background-color: white;
+  background-size: cover;
+  position:relative;
+  top:-67px;
+  left:35px;
+  cursor:pointer;
+  margin:0;
+  padding:3px;
+  z-index: 1;
+  object-fit: cover;
+}
+.transfermarket {
+  position:relative;
+  left:40px;
+  top:168px;
+  border: 2px solid #1E90FF;
+  padding: 20px;
+  height:770px;
+  overflow:hidden;
+}
+.transfermarket > h3 {
+  margin-bottom: 20px;
+}
+.searchPlayer {
+  padding:5px;
+  width:200px;
+  height:30px;
+  padding-left: 10px;
+  padding-right: 40px;
+}
+.searchButton {
+  position:relative;
+  background-image: url(./assets/search.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width:25px;
+  height:25px;
+  background-color: transparent;
+  border: none;
+  left:-35px;
+  top:8px;
+  margin-right: 0;
+}
+.transferPlayerCon {
+  display:block;
+  margin-top: 0;
+  overflow-y: auto;
+  height: 70%;
+}
+.transferPlayer {
+  border: 1.5px solid #1E90FF;
+  font-size: 15px;
+  text-align: center;
+}
+.transferPlayer > img {
+  height:50px;
+  position: relative;
+  left:-70px;
+  margin-bottom: 0;
+  top:20px;
+}
+.transferPlayer > h5 {
+  margin:0;
+  position: relative;
+  left:70px;
+  top:-33px;
+  text-align: left;
+}
+.transferPlayer > p {
+  font-size: 12px;
+  position:relative;
+  top:-20px;
+  left:70px;
+  margin:0;
+  word-spacing: 40px;
+  padding:0;
+  text-align: left;
+}
+
+.positionTransfer {
+  margin-top: 40px;
+  background-color: rgb(0, 170, 255);
+  text-align: center;
+  color: #000000;
+  font-weight: 100;
+  font-size: 20px;
+}
+.addTransfer {
+  background-color: rgb(37, 182, 255);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width:100%;
+  cursor:pointer;
+}
+.addTransfer:hover {
+  opacity: 70%;
+}
+.addTransferClicked {
+  background-color: rgb(37, 182, 255);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  opacity: 50%;
+  width:100%;
+  pointer-events: none;
+}
+.addTransfer > h3 {
+  margin:0;
+}
+.addTransferClicked > h3 {
+  margin:0;
 }

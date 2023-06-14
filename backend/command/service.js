@@ -168,7 +168,7 @@ module.exports = {
         pool.query(
             "UPDATE users SET balance=?, formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
             "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
-            "WHERE username = ?",
+            "WHERE username = ?;",
             [balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, username],
             (error, results) => {
                 if(error) {
@@ -196,18 +196,44 @@ module.exports = {
     },
 
     setTeamByUsername: (username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
-        mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
-    pool.query(
-        "UPDATE users SET formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
-        "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
-        "WHERE username = ?",
-        [formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, username],
-        (error, results) => {
-            if(error) {
-                return callBack(error);
+            mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+        pool.query(
+            "UPDATE users SET formation=?, gk_1=?, gk_2=?, def_1=?, def_2=?, def_3=?, def_4=?, def_5=?, " +
+            "mid_1=?, mid_2=?, mid_3=?, mid_4=?, mid_5=?, fow_1=?, fow_2=?, fow_3=? " +
+            "WHERE username = ?",
+            [formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
             }
-            return callBack(null, results);
-        }
-    );
-},
+        );
+    },
+
+    createTransfer: (id, position, player_in, player_out, callBack) => {
+        pool.query(
+            "INSERT INTO transfers(user, position, player_in, player_out) values (?, ?, ?, ?);",
+            [id, position, player_in, player_out],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    changeCertainPlayer: (id, balance, points, position, player, callBack) => {
+        pool.query(
+            "UPDATE users SET balance=?, points=?, " + position + "=? WHERE id=?;",
+            [balance, points, player, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    }
 };

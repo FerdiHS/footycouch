@@ -24,6 +24,7 @@ const {
     updateUserProfileById,
     updateUserProfileByUsername,
     getUserFollower,
+    transfer,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -40,8 +41,8 @@ router.get("/users/following/:id", getUserFollowing); // Get the user's followin
 router.get("/users/follower/:id", getUserFollower); // Get the user's follower list
 router.post("/users/update/id/:id", updateUserProfileById); // Update the user's profile, require "bio"
 router.post("/users/update/:username", updateUserProfileByUsername); // Update the user's profile, require "bio"
-router.post("/teams/add/id/:id", addTeamById); // Add user's team when the user has not created any team, require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
-router.post("/teams/add/:username", addTeamByUsername); // Add user's team when the user has not created any team, require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
+router.post("/teams/add/id/:id", addTeamById); // Add user's team when the user has not created any team, require "balance", "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
+router.post("/teams/add/:username", addTeamByUsername); // Add user's team when the user has not created any team, require "balance", "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
 router.post("/teams/set/id/:id", setTeamById); // Set user's team (change current team to a new one without any transfer), require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
 router.post("/teams/set/:username", setTeamByUsername); // Set user's team (change current team to a new one without any transfer), require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
 router.get("/players", getPlayers); // Get all the players
@@ -53,5 +54,6 @@ router.get("/players/foward", getFowards); // Get all fowards
 router.get("/teams", getTeams); // Get all teams
 router.get("/teams/id/:id", getTeamById); // Get team by id
 router.get("/teams/:shortName", getTeamByShortName); // Get team by short name
+router.post("/users/id/:id/transfer", transfer); // Make transfer, require "balance", "points", "position", "player_in", and "player_out"
 
 module.exports = router;

@@ -13,6 +13,8 @@ const {
     updateUserProfileById,
     updateUserProfileByUsername,
     getUserFollower,
+    createTransfer,
+    changeCertainPlayer,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -276,7 +278,7 @@ module.exports = {
         });
     },
 
-     getTeamById: (req, res) => {
+    getTeamById: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const id = req.params.id;
@@ -376,6 +378,7 @@ module.exports = {
     addTeamByUsername: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
+        const balance = req.params.balance;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -392,7 +395,7 @@ module.exports = {
         const fow_1 = req.body.fow_1;
         const fow_2 = req.body.fow_2;
         const fow_3 = req.body.fow_3;
-        addTeamByUsername(username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+        addTeamByUsername(username, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
@@ -503,6 +506,32 @@ module.exports = {
             return res.status(200).json({
                 data: results
             });
+        });
+    },
+
+    transfer: (req, res) => {
+        const id = parseInt(req.params.id);
+        const balance = req.body.balance;
+        const points = req.body.points;
+        const position = req.body.position;
+        const player_in = req.body.player_in;
+        const player_out = req.body.player_out;
+        createTransfer(id, position, player_in, player_out, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+        });
+        changeCertainPlayer(id, balance, points, position, player_in, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
         });
     }
 }

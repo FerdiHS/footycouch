@@ -1,5 +1,5 @@
 import { useState } from "react";
-import close from "../Images/close.png";
+import close from "../assets/close.png";
 export default function TextInputPost({profilePicture, username}) {
     function autosize(){
         var el = this;

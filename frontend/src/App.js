@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/home" element={<HomePage setToken={setToken}/>} />
           <Route path="/team_management" element={<TeamManagementPage setToken={setToken}/>} />
           <Route path="/profile" element={<ProfilePage setToken={setToken}/>} />
-          <Route path="/transfer" element={<TransferPage />} />
+          <Route path="/transfer" element={<TransferPage setToken={setToken}/>} />
           <Route path="/*" element={<Navigate to="/home"/>}/>
         </Routes>
       </Router>

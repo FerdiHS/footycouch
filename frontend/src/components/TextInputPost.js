@@ -1,6 +1,5 @@
 import { useState } from "react";
 import close from "../Images/close.png";
-import Post from "./Post";
 export default function TextInputPost({profilePicture, username}) {
     function autosize(){
         var el = this;
@@ -63,7 +62,6 @@ export default function TextInputPost({profilePicture, username}) {
                     <div class="schedulePost" htmlFor="matchSchedule">Events</div> 
                 </div>
             </div>
-            <Post username={username} profilePicture={profilePicture}/>
         </>
     );
 }

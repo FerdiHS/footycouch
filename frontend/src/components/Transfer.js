@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Select from "react-select";
-import logo from "../Images/MUN Logo.png";
-export default function Transfer({login, nowPage, handlenowPage}) {
+export default function Transfer() {
     const [money, setmoney] = useState(1000);
     const [transfer, setTransfer] = useState({
         "Forward": [
@@ -616,7 +614,7 @@ export default function Transfer({login, nowPage, handlenowPage}) {
                                                 : (<button class="removePlayer2" onClick={handleRemove(setgk, gk, i, 0)}></button>)
                                         }
                                         <label class="playerTeam">
-                                            <img src={require("../Images/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} />
+                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} />
                                             {player.name === ""
                                                 ? "Add GKP"
                                                 : player.name}
@@ -638,7 +636,7 @@ export default function Transfer({login, nowPage, handlenowPage}) {
                                     }
                                     
                                     <label class="playerTeam">
-                                        <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name === ""
                                                 ? "Add DEF"
                                                 : player.name}
@@ -660,7 +658,7 @@ export default function Transfer({login, nowPage, handlenowPage}) {
                                     }
                                     
                                     <label class="playerTeam">
-                                        <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name === ""
                                                 ? "Add MID"
                                                 : player.name}
@@ -682,7 +680,7 @@ export default function Transfer({login, nowPage, handlenowPage}) {
                                     }
                                     
                                     <label class="playerTeam">
-                                        <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name === ""
                                                 ? "Add FWD"
                                                 : player.name}
@@ -722,7 +720,7 @@ export default function Transfer({login, nowPage, handlenowPage}) {
                                 const check = player.position !== "GKP" ? "" : " GK";
                                 return (<tr class="transferPlayer">
                                             <td class="transferPlayer">
-                                                <img src={require("../Images/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} />
+                                                <img src={require("../assets/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} />
                                                 <h5>{player.name}</h5>
                                                 <p>{player.position} {player.team}</p>
                                             </td>

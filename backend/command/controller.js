@@ -15,6 +15,8 @@ const {
     getUserFollower,
     createTransfer,
     changeCertainPlayer,
+    createPost,
+    getUserPost,
     // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
@@ -510,7 +512,7 @@ module.exports = {
     },
 
     transfer: (req, res) => {
-        const id = parseInt(req.params.id);
+        const id = req.params.id;
         const balance = req.body.balance;
         const points = req.body.points;
         const position = req.body.position;
@@ -525,6 +527,34 @@ module.exports = {
             }
         });
         changeCertainPlayer(id, balance, points, position, player_in, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        });
+    },
+
+    addPost: (req, res) => {
+       const id = req.params.id;
+       const content = req.body.content;
+       const image = req.body.image; 
+       createPost(id, content, image, (err, results) => {
+        if(err) {
+            console.log(err);
+            return res.status(403).json({
+                message: "Database connection error"
+            });
+        }
+        return res.status(200).json({results});
+       });
+    },
+
+    getUserPost: (req, res) => {
+        const id = req.params.id;
+        getUserPost(id, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({

@@ -25,6 +25,8 @@ const {
     updateUserProfileByUsername,
     getUserFollower,
     transfer,
+    addPost,
+    getUserPost,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -55,5 +57,7 @@ router.get("/teams", getTeams); // Get all teams
 router.get("/teams/id/:id", getTeamById); // Get team by id
 router.get("/teams/:shortName", getTeamByShortName); // Get team by short name
 router.post("/users/id/:id/transfer", transfer); // Make transfer, require "balance", "points", "position", "player_in", and "player_out"
+router.post("/users/id/:id/post", addPost); // Add new post, require "content" and "image" (base64)
+router.get("/users/id/:id/post", getUserPost); // Get user's post
 
 module.exports = router;

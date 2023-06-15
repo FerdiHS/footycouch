@@ -235,5 +235,31 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+
+    createPost: (id, content, image, callBack) => {
+        pool.query(
+            "INSERT INTO posts(user, content, image) values(?,?,?);",
+            [id, content, image],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getUserPost: (id, callBack) => {
+        pool.query(
+            "SELECT * FROM posts WHERE user = ?",
+            [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
 };

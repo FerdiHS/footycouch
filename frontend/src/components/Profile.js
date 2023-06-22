@@ -258,7 +258,7 @@ export default function Profile({passID, passBio, passFormation, passPoints, pas
                     </div>
                 </div>
                 <div class="post">
-                    <TextInputPost profilePicture={profilePicture} username={username}/>
+                    <TextInputPost profilePicture={profilePicture} username={username} posts={[]}/>
                 </div>
             </div>
         </div>

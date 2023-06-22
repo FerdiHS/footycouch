@@ -17,7 +17,6 @@ const {
     changeCertainPlayer,
     createPost,
     getUserPost,
-    // uploadImageUser
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const fs = require('fs');

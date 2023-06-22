@@ -1,21 +1,91 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 import axios from "axios";
 import useToken from "./Token.js";
 import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
-export default function Profile({passID, passBio, passFormation, passPoints, passFollowing}) {
+export default function Profile() {
     const username = useToken().token;
-    const [id, setId] = useState(passID);
+    const [id, setId] = useState(0);
+    const [bio, setBio] = useState("SIUUUU");
+    const [formation, setFormation] = useState("4-3-3");
+    const [points, setPoints] = useState(0);
+    const [followings, setFollowings] = useState([]);
+    const [followers, setFollowers] = useState([]);
     const [backgroundPicture, setBackgroundPicture] = useState(test);
     const [profilePicture, setProfilePicture] = useState(Avatar2);
-    const [bio, setBio] = useState(passBio);
-    const [posts, setPosts] = useState([]);
-    const [followers, setFollowers] = useState([]);
-    const [following, setFollowing] = useState(passFollowing);
-    const [points, setPoints] = useState(passPoints);
+
+    useEffect(() => {
+       loadUser();
+    }, [id]);
+
+    const loadUser = async () => {
+        try {
+            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            setId(users.id);
+            setBio(users.bio);
+            setFormation(users.formation);
+            setPoints(users.points);
+            console.log("formation: " + formation);
+
+            const image =  await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
+
+            setFollowings((await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data);
+            console.log("following: " + followings.length);
+
+            setFollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
+            console.log("follower: " + followers.length);
+
+            const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
+            if(imageResp.status !== 500) {
+                const imageBuffer = Buffer.from(imageResp.data.image, 'base64');
+                setProfilePicture(imageBuffer);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        /*
+        await axios.get("https://footycouch-production.up.railway.app/users/" + username)
+        .then(res => {
+            // console.log(res.data.data);
+            setId(res.data.data.id);
+            setBio(res.data.data.bio);
+            setFormation(res.data.data.formation);
+            setPoints(res.data.data.points);
+
+            return axios.get("https://footycouch-production.up.railway.app/users/following/" + id);
+        })
+        .then(res => {
+            setFollowings(res.data.data);
+            console.log("followings: " + followings.length);
+            return axios.get("https://footycouch-production.up.railway.app/users/follower/" + id);
+        })
+        .then(res => {
+            setFollowers(res.data.data);
+            console.log("followers: " + followers.length);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        */
+        /*
+        await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
+        .then(res => {
+            if (res.status !== 500) {
+                // Create a buffer from the base64 image string
+                const imageBuffer = Buffer.from(res.image, 'base64');
+                setProfilePicture(image buffer);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        */
+    };
+
     const highestPoints = 0;
     const [rank, setRank] = useState(1);
     const highestRank = 1;
@@ -118,7 +188,6 @@ export default function Profile({passID, passBio, passFormation, passPoints, pas
         "WOL": "Wolverhampton",
         "NFO": "Nottingham Forest"
     }
-    const [formation, setFormation] = useState(passFormation);
     const [gk, setGk] = useState(player[0]);
     const [defender, setDefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
     const [midfield, setMidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
@@ -178,11 +247,11 @@ export default function Profile({passID, passBio, passFormation, passPoints, pas
                     <h4>Posts</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followers.length}</h3>
                     <h4>Followers</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followings.length}</h3>
                     <h4>Following</h4>
                 </div>
                 <div class="wrapback">

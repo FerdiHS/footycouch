@@ -97,7 +97,7 @@ export default function Profile({passID, passBio, passFormation, passPoints, pas
         },
     ]);
     const clubCode = {
-        "": ""
+        "": "",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",

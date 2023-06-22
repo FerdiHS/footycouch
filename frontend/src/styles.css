@@ -3297,7 +3297,11 @@ select:focus + .focus {
 }
 .container5 {
   width:100%;
-  height:100%;
+  min-height:100vh;
+  background-color: #ecebeb;
+}
+.container6 {
+  min-height: 100vh;
   background-color: #ecebeb;
 }
 .profile {
@@ -3602,6 +3606,13 @@ label.playername > img {
   margin-top: 20px;
   margin-left: 15px;
 }
+.post2 {
+  width: 711px;
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
 #upload-photo {
   opacity: 0;
   position: absolute;
@@ -3688,6 +3699,9 @@ label.playername > img {
   background-color: #f1f1f1;
   border-radius: 5px;
   border: 1px solid black;
+  padding-top:9px;
+  padding-bottom:9px;
+
 }.schedulePost {
   cursor:pointer;
   background-image: url(./assets/calendar.png);
@@ -3712,6 +3726,8 @@ label.playername > img {
   background-color: #f1f1f1;
   border-radius: 5px;
   border: 1px solid black;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 .enter {
   background-image: url(./assets/Submit.png);
@@ -3766,15 +3782,107 @@ label.playername > img {
   background-color: white;
   border-radius: 5px;
   margin-left: 15px;
+  text-align: left;
+  margin-bottom: 15px;
 }
-.posts > h5 {
+.unamePost {
   position:relative;
-  top:-50px;
-  left:-255px;
+  top:-31px;
+  left: 60px;
+  width:100%;
+  font-size: small;
+  font-weight: bold;
 }
-.posts >h5:hover {
+.unamePost:hover {
   text-decoration: underline 1.5px solid black;
   cursor:pointer;
+}
+.posts > img {
+  width:100%;
+  max-height: 750px;
+  object-fit: cover;
+  margin-top: 0px;
+  line-break: auto;
+}
+.caption {
+  margin-right:15px;
+  margin-left:15px;
+  overflow-wrap: break-word;
+  margin-top:0px;
+  margin-bottom: 15px;
+}
+.likebutton {
+  height: 20px;
+  width: 20px;
+  background: transparent;
+  position: relative;
+  left:25px;
+  border-bottom: 2.5px solid black;
+  border-right: 2.5px solid black;
+  transform: rotate(45deg);
+  cursor: pointer;
+  margin-bottom:15px;
+}
+.likebutton:before,
+.likebutton:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background: transparent;
+  border: 2.5px solid transparent;
+  transform: rotate(-45deg);
+  z-index: -2;
+}
+.likebutton:before {
+  top: -2.5px;
+  left: calc(-50% - 2.5px);
+  border-top-color: black;
+  border-left-color: black;
+}
+.likebutton:after {
+  top: calc(-50% - 2.5px);
+  left: -2.5px;
+  border-top-color: black;
+  border-right-color: black;
+}
+.likebutton:hover {
+  opacity: 55%;
+}
+.liked {
+  border-color: tomato;
+  background: tomato;
+}
+.liked:before {
+  border-top-color: tomato;
+  border-left-color: tomato;
+  background: tomato;
+}
+.liked:after {
+  border-top-color: tomato;
+  border-right-color: tomato;
+  background: tomato;
+}
+.posts > h5 {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.time {
+  font-size: 10px;
+  margin-left: 15px;
+  padding-bottom: 15px;
 }
 /* Transfer */
 .field3 {

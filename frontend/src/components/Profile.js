@@ -6,16 +6,16 @@ import test from "../assets/Avatar2.png";
 import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
-export default function Profile() {
+export default function Profile({passID, passBio, passFormation, passPoints, passFollowing}) {
     const username = useToken().token;
-    const [id, setId] = useState(0);
+    const [id, setId] = useState(passID);
     const [backgroundPicture, setBackgroundPicture] = useState(test);
     const [profilePicture, setProfilePicture] = useState(Avatar2);
-    const [bio, setBio] = useState("SIUUUUUUU");
+    const [bio, setBio] = useState(passBio);
     const [posts, setPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
-    const [following, setFollowing] = useState([]);
-    const [points, setPoints] = useState(0);
+    const [following, setFollowing] = useState(passFollowing);
+    const [points, setPoints] = useState(passPoints);
     const highestPoints = 0;
     const [rank, setRank] = useState(1);
     const highestRank = 1;
@@ -97,6 +97,7 @@ export default function Profile() {
         },
     ]);
     const clubCode = {
+        "": "",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",
@@ -117,7 +118,7 @@ export default function Profile() {
         "WOL": "Wolverhampton",
         "NFO": "Nottingham Forest"
     }
-    const [formation, setFormation] = useState("4-3-3");
+    const [formation, setFormation] = useState(passFormation);
     const [gk, setGk] = useState(player[0]);
     const [defender, setDefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
     const [midfield, setMidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
@@ -150,40 +151,6 @@ export default function Profile() {
         }
         reader.readAsDataURL(file);
     }
-
-    axios.get("https://footycouch-production.up.railway.app/users/" + username)
-    .then(res => {
-        console.log(res);
-        setId(res.data.data.id);
-        setBio(res.data.data.bio);
-        setFormation(res.data.data.formation);
-        setPoints(res.data.data.points);
-    })
-    .catch(err => {
-        console.log(err);
-    });
-
-    /*
-    axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
-    .then(res => {
-        if (res.status !== 500) {
-            // Create a buffer from the base64 image string
-            const imageBuffer = Buffer.from(res.image, 'base64');
-            setProfilePicture(imageBuffer);
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    })
-    */
-
-    axios.get("https://footycouch-production.up.railway.app/users/following/" + id)
-    .then(res => {
-        setFollowing(res.data);
-    })
-    .catch(err => {
-        console.log(err);
-    })
 
 
     return (

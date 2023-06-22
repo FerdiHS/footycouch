@@ -34,7 +34,7 @@ export default function ProfilePage({setToken}) {
         console.log(err);
     })
     */
-    axios.get("https://footycouch-production.up.railway.app/users/following/" + id)
+    axios.get("https://footycouch-production.up.railway.app/users/following/" + Id)
     .then(res => {
         setFollowing(res.data);
     })

@@ -179,10 +179,10 @@ export default function Profile() {
             ]);
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + (p.id === undefined ? 1 : p.id))).data;
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     p.name = playerResp.web_name;
                     p.teamId = playerResp.team;
-                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + (p.teamId === undefined ? 1 : p.teamId))).data;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
                     p.team = teamResp.short_name;
                     return p;
                 })
@@ -324,7 +324,7 @@ export default function Profile() {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ (clubCode[gk.team] === undefined ? "Manchester United" : clubCode[gk.team]) +" GK Jersey.png")} />
+                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -332,7 +332,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
+                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                             {player.name}
                                         </label>) 
                                     })          
@@ -343,7 +343,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          
@@ -354,7 +354,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          

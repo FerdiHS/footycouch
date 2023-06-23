@@ -2,6 +2,28 @@ import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
 export default function TeamManagement({login, nowPage, handlenowPage}) {
     const [formation, setformation] = useState("4-3-3");
+    const clubCode = {
+        "": "No",
+        "ARS": "Arsenal",
+        "AVL": "Aston Villa",
+        "BRE": "Brentford",
+        "BOU": "Bournemouth",
+        "BHA": "Brighton",
+        "SOU": "Southampton",
+        "CHE": "Chelsea",
+        "FUL": "Fulham",
+        "EVE": "Everton",
+        "LEE": "Leeds",
+        "LEI": "Leichester City",
+        "LIV": "Liverpool",
+        "MCI": "Manchester City",
+        "MUN": "Manchester United",
+        "NEW": "Newcastle",
+        "TOT": "Tottenham Hotspur",
+        "WHU": "Westham",
+        "WOL": "Wolverhampton",
+        "NFO": "Nottingham Forest"
+    }
     const [allformation, setallformation] = useState([
         "4-4-2",
         "4-3-3",

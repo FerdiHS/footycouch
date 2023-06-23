@@ -212,7 +212,7 @@ export default function Profile() {
         }
     };
     const clubCode = {
-        "": "",
+        "": "No",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",

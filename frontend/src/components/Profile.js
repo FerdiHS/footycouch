@@ -17,75 +17,6 @@ export default function Profile() {
     const [followers, setFollowers] = useState([]);
     const [backgroundPicture, setBackgroundPicture] = useState(test);
     const [profilePicture, setProfilePicture] = useState(Avatar2);
-
-    useEffect(() => {
-       loadUser();
-    }, [id]);
-
-    const loadUser = async () => {
-        try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
-            setId(users.id);
-            setBio(users.bio);
-            setFormation(users.formation);
-            setPoints(users.points);
-            console.log("formation: " + formation);
-
-            const image =  await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
-
-            setFollowings((await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data);
-            console.log("following: " + followings.length);
-
-            setFollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
-            console.log("follower: " + followers.length);
-
-            const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
-            if(imageResp.status !== 500) {
-                const imageBuffer = Buffer.from(imageResp.data.image, 'base64');
-                setProfilePicture(imageBuffer);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-        /*
-        await axios.get("https://footycouch-production.up.railway.app/users/" + username)
-        .then(res => {
-            // console.log(res.data.data);
-            setId(res.data.data.id);
-            setBio(res.data.data.bio);
-            setFormation(res.data.data.formation);
-            setPoints(res.data.data.points);
-
-            return axios.get("https://footycouch-production.up.railway.app/users/following/" + id);
-        })
-        .then(res => {
-            setFollowings(res.data.data);
-            console.log("followings: " + followings.length);
-            return axios.get("https://footycouch-production.up.railway.app/users/follower/" + id);
-        })
-        .then(res => {
-            setFollowers(res.data.data);
-            console.log("followers: " + followers.length);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-        */
-        /*
-        await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
-        .then(res => {
-            if (res.status !== 500) {
-                // Create a buffer from the base64 image string
-                const imageBuffer = Buffer.from(res.image, 'base64');
-                setProfilePicture(image buffer);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        */
-    };
-
     const highestPoints = 0;
     const [rank, setRank] = useState(1);
     const highestRank = 1;
@@ -166,13 +97,128 @@ export default function Profile() {
             team: "MUN"
         },
     ]);
+    const [gk, setGk] = useState(player[0]);
+    const [defender, setDefender] = useState([]);
+    const [midfield, setMidfield] = useState([]);
+    const [forward, setForward] = useState([]);
+    const [bench, setBench] = useState([]);
+
+    useEffect(() => {
+       loadUser();
+       console.log(player);
+    }, [id, player]);
+
+    const loadUser = async () => {
+        try {
+            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            await setId(users.id);
+            setBio(users.bio);
+            await setFormation(users.formation);
+            setPoints(users.points);
+            const players = ([
+                {
+                    position: "gk_1",
+                    id: users.gk_1,
+                },
+                {
+                    position: "gk_2",
+                    id: users.gk_2
+                },
+                {
+                    position: "def_1",
+                    id: users.def_1
+                },
+                {
+                    position: "def_2",
+                    id: users.def_2
+                },
+                {
+                    position: "def_3",
+                    id: users.def_3
+                },
+                {
+                    position: "def_4",
+                    id: users.def_4
+                },
+                {
+                    position: "def_5",
+                    id: users.def_5
+                },
+                {
+                    position: "mid_1",
+                    id: users.mid_1
+                },
+                {
+                    position: "mid_2",
+                    id: users.mid_2
+                },
+                {
+                    position: "mid_3",
+                    id: users.mid_3
+                },
+                {
+                    position: "mid_4",
+                    id: users.mid_4
+                },
+                {
+                    position: "mid_5",
+                    id: users.mid_5
+                },
+                {
+                    position: "fow_1",
+                    id: users.fow_1
+                },
+                {
+                    position: "fow_2",
+                    id: users.fow_2
+                },
+                {
+                    position: "fow_3",
+                    id: users.fow_3
+                },
+            ]);
+            const updatedPlayers = await Promise.all(
+                players.map(async p => {
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + (p.id === undefined ? 1 : p.id))).data;
+                    p.name = playerResp.web_name;
+                    p.teamId = playerResp.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + (p.teamId === undefined ? 1 : p.teamId))).data;
+                    p.team = teamResp.short_name;
+                    return p;
+                })
+            );
+            setPlayer(updatedPlayers);
+            setGk(player[0]);
+            setDefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+            setMidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+            setForward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setBench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+                                            ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
+                                            ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
+
+            const image =  await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
+
+            setFollowings((await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data);
+
+            setFollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
+
+            const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
+            if(imageResp.status !== 500) {
+                const imageBuffer = Buffer.from(imageResp.data.image, 'base64');
+                setProfilePicture(imageBuffer);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const clubCode = {
         "": "",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",
         "BOU": "Bournemouth",
-        "BRI": "Brighton",
+        "BHA": "Brighton",
+        "CRY": "Crystal Palace",
         "SOU": "Southampton",
         "CHE": "Chelsea",
         "FUL": "Fulham",
@@ -187,14 +233,7 @@ export default function Profile() {
         "WHU": "Westham",
         "WOL": "Wolverhampton",
         "NFO": "Nottingham Forest"
-    }
-    const [gk, setGk] = useState(player[0]);
-    const [defender, setDefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
-    const [midfield, setMidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
-    const [forward, setForward] = useState([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
-    const [bench, setBench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
-                                    ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
-                                    ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
+    };
     
     const ppUpload = e => {
         e.preventDefault();
@@ -285,7 +324,7 @@ export default function Profile() {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
+                                    <img src= {require("../assets/Jersey/"+ (clubCode[gk.team] === undefined ? "Manchester United" : clubCode[gk.team]) +" GK Jersey.png")} />
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -293,7 +332,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                            <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
                                             {player.name}
                                         </label>) 
                                     })          
@@ -304,7 +343,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          
@@ -315,7 +354,7 @@ export default function Profile() {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={require("../assets/Jersey/"+ (clubCode[player.team] === undefined ? "Manchester United" : clubCode[player.team]) +" Jersey.png")} />
                                         {player.name}
                                     </label>) 
                                     })          

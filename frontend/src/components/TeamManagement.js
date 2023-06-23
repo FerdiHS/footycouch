@@ -6,6 +6,7 @@ import useToken from "./Token";
 export default function TeamManagement({login, nowPage, handlenowPage}) {
     const username = useToken().token;
     const navigate = useNavigate();
+    const [id, setId] = useState(0);
     const [formation, setformation] = useState("4-3-3");
     const clubCode = {
         "": "No",
@@ -250,6 +251,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            await setId(users.id);
             const players = ([
                 {
                     position: "gk_1",

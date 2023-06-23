@@ -225,7 +225,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                     <div class="line">
                         <div class="trans"></div>
                         <label class="playerTeam">
-                            <img src={require("../Images/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
                             {gk.name}
                         </label>
                         <div class="trans"></div>
@@ -235,7 +235,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <div class="trans"></div>
                         {   defender.map((player, i) => {
                             return  <label class="playerTeam">
-                                        <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(1,i)}/>
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(1,i)}/>
                                         {player.name}
                                     </label>   
                         })          
@@ -247,7 +247,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <div class="trans"></div>
                         {   midfield.map((player, i) => {
                             return  <label class="playerTeam">
-                                        <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(2,i)}/>
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(2,i)}/>
                                         {player.name}
                                     </label>   
                         })          
@@ -259,7 +259,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <div class="trans"></div>
                         {   forward.map((player, i) => {
                         return  <label class="playerTeam">
-                                    <img src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(3,i)}/>
+                                    <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(3,i)}/>
                                     {player.name}
                                 </label>
                         })          
@@ -274,12 +274,12 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                                 return player.position === "GK"
                                     ?   (<label class="playerTeam">
                                             {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../Images/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
                                             {player.name}
                                         </label>)
                                     :   (<label class="playerTeam">
                                             {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../Images/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleSub(i)}/>
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleSub(i)}/>
                                             {player.name}
                                         </label>)
                             })          

@@ -325,12 +325,12 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                     return p;
                 })
             );
-            setPlayer(updatedPlayers);
-            setGk(player[0]);
-            setDefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
-            setMidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
-            setForward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
-            setBench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+            setplayer(updatedPlayers);
+            setgk(player[0]);
+            setdefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+            setmidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+            setforward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setbench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                             ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                             ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         } catch (err) {

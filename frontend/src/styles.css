@@ -1049,7 +1049,7 @@ select:focus + .focus {
 .BOUGKBenchClick:hover {
   opacity:25%;
 }
-.BRIGK {
+.BHAGK {
   background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
   background-position: 0%;
   background-size: cover;
@@ -1069,10 +1069,10 @@ select:focus + .focus {
   margin-bottom: 0px;
   position:relative;
 }
-.BRIGK:hover {
+.BHAGK:hover {
   opacity: 50%;
 }
-.BRIPlayer {
+.BHAPlayer {
   background-image: url(./assets/Jersey/Brighton\ Jersey.png);
   background-position: 0%;
   background-size: cover;
@@ -1092,10 +1092,10 @@ select:focus + .focus {
   margin-bottom: 0px;
   position:relative;
 }
-.BRIPlayer:hover {
+.BHAPlayer:hover {
   opacity: 50%;
 }
-.BRIBench {
+.BHABench {
   background-image: url(./assets/Jersey/Brighton\ Jersey.png);
   background-position: 0%;
   background-size: cover;
@@ -1115,10 +1115,10 @@ select:focus + .focus {
   margin-bottom:1%;
   position:relative;
 }
-.BRIBench:hover {
+.BHABench:hover {
   opacity:50%;
 }
-.BRIGKBench {
+.BHAGKBench {
   background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
   background-position: 0%;
   background-size: cover;
@@ -1138,10 +1138,10 @@ select:focus + .focus {
   margin-bottom:1%;
   position:relative;
 }
-.BRIGKBench:hover {
+.BHAGKBench:hover {
   opacity:50%;
 }
-.BRIBenchClick {
+.BHABenchClick {
   opacity:50%;
   background-image: url(./assets/Jersey/Brighton\ Jersey.png);
   background-position: 0%;
@@ -1162,10 +1162,10 @@ select:focus + .focus {
   margin-bottom:1%;
   position:relative;
 }
-.BRIBenchClick:hover {
+.BHABenchClick:hover {
   opacity:25%;
 }
-.BRIGKBenchClick {
+.BHAGKBenchClick {
   opacity:50%;
   background-image: url(./assets/Jersey/Brighton\ GK\ Jersey.png);
   background-position: 0%;
@@ -1186,7 +1186,7 @@ select:focus + .focus {
   margin-bottom:1%;
   position:relative;
 }
-.BRIGKBenchClick:hover {
+.BHAGKBenchClick:hover {
   opacity:25%;
 }
 .SOUGK {

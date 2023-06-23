@@ -17,7 +17,7 @@ export default function HeaderWebAfterLog({setToken}) {
             <button class="button" onClick={() => navigate("/team_management")}>Team Management</button>
             <button class="button">Match Schedule</button>
             <button class="button" onClick={handleLogOut}>Log Out</button>
-            <img src={mascot} width = "60" height = "60" className="top-0 end-0" alt="maskot"/>
+            <img src={mascot} width = "60" height = "60" className="top-0 end-0" alt="maskot" onClick={() => navigate("/profile")}/>
         </nav>
     );
 }

@@ -179,6 +179,11 @@ export default function Profile() {
             ]);
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
+                    if (p.id === null) {
+                        p.name = "";
+                        p.team = "";
+                        return p;
+                    }
                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     p.name = playerResp.web_name;
                     p.teamId = playerResp.team;
@@ -212,7 +217,7 @@ export default function Profile() {
         }
     };
     const clubCode = {
-        "": "",
+        "": "No",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",

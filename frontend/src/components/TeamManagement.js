@@ -2,6 +2,28 @@ import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
 export default function TeamManagement({login, nowPage, handlenowPage}) {
     const [formation, setformation] = useState("4-3-3");
+    const clubCode = {
+        "": "No",
+        "ARS": "Arsenal",
+        "AVL": "Aston Villa",
+        "BRE": "Brentford",
+        "BOU": "Bournemouth",
+        "BHA": "Brighton",
+        "SOU": "Southampton",
+        "CHE": "Chelsea",
+        "FUL": "Fulham",
+        "EVE": "Everton",
+        "LEE": "Leeds",
+        "LEI": "Leichester City",
+        "LIV": "Liverpool",
+        "MCI": "Manchester City",
+        "MUN": "Manchester United",
+        "NEW": "Newcastle",
+        "TOT": "Tottenham Hotspur",
+        "WHU": "Westham",
+        "WOL": "Wolverhampton",
+        "NFO": "Nottingham Forest"
+    }
     const [allformation, setallformation] = useState([
         "4-4-2",
         "4-3-3",
@@ -224,67 +246,44 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                 <div class="fieldcon">
                     <div class="line">
                         <div class="trans"></div>
-                        {   gk.name === ""
-                                ? ( <label>
-                                    <button class = "Player" onClick={handleChangePlayer(0,0)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {gk.team + "GK"} onClick={handleChangePlayer(0,0)}></button>{gk.name}</label>)           
-                        }
+                        <label class="playerTeam">
+                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            {gk.name}
+                        </label>
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   defender.map((player, i) => {
-                            return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(1,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(1,i)}></button>
-                                    {player.name}
-                                    </label>)   
+                            return  <label class="playerTeam">
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(1,i)}/>
+                                        {player.name}
+                                    </label>   
                         })          
                         }
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   midfield.map((player, i) => {
-                            return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(2,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(2,i)}></button>
-                                    {player.name}
-                                    </label>)   
+                            return  <label class="playerTeam">
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(2,i)}/>
+                                        {player.name}
+                                    </label>   
                         })          
                         }
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   forward.map((player, i) => {
-                        return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(3,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(3,i)}></button>
+                        return  <label class="playerTeam">
+                                    <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(3,i)}/>
                                     {player.name}
-                                    </label>)   
+                                </label>
                         })          
                         }
                         <div class="trans"></div>
@@ -294,15 +293,17 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <h5>Bench</h5>
                         <div class="line2">
                             {   bench.map((player, i) => {
-                                return (player.position === "GK"
-                                    ? (<label>{player.position}
-                                        <button class ={i === now ? (player.team + "GKBenchClick") : (player.team + "GKBench")} onClick ={handleSub(i)}></button>
-                                        {player.name}
+                                return player.position === "GK"
+                                    ?   (<label class="playerTeam">
+                                            {player.position}
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
+                                            {player.name}
                                         </label>)
-                                    : (<label>{player.position}
-                                        <button class ={i === now ? (player.team + "BenchClick") : (player.team + "Bench")} onClick ={handleSub(i)}></button>
-                                        {player.name}
-                                        </label>))   
+                                    :   (<label class="playerTeam">
+                                            {player.position}
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleSub(i)}/>
+                                            {player.name}
+                                        </label>)
                             })          
                             }
 

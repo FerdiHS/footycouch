@@ -44,77 +44,77 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
     const [player, setplayer] = useState([
         {
             name: "D. de Gea",
-            position: "GK",
+            position: "GKP",
             team: "MUN"
         },
         {
             name: "J. Butland",
-            position: "GK",
+            position: "GKP",
             team: "MUN"
         },
         {
             name: "A. Wan Bissaka",
-            position: "CB",
+            position: "DEF",
             team: "MUN"
         },
         {
             name: "H. Maguire",
-            position: "CB",
+            position: "DEF",
             team: "MUN"
         },
         {
             name: "R.Varane",
-            position: "CB",
+            position: "DEF",
             team: "MUN"
         },
         {
             name: "L. Shaw",
-            position: "CB",
+            position: "DEF",
             team: "MUN"
         },
         {
             name: "V. Lindelof",
-            position: "CB",
+            position: "DEF",
             team: "MUN"
         },
         {
             name: "Casemiro",
-            position: "MF",
+            position: "MID",
             team: "MUN"
         },
         {
             name: "C. Eriksen",
-            position: "MF",
+            position: "MID",
             team: "MUN"
         },
         {
             name: "B. Fernandes",
-            position: "MF",
+            position: "MID",
             team: "MUN"
         },
         {
             name: "Fred",
-            position: "MF",
+            position: "MID",
             team: "MUN"
         },
         {
             name: "K. De Bruyne",
-            position: "MF",
+            position: "MID",
             team: "MCI"
         },
         {
             name: "J. Sancho",
-            position: "FW",
+            position: "FWD",
             team: "MUN"
         },
         {
             name: "A. Martial",
-            position: "FW",
+            position: "FWD",
             team: "MUN"
         },
         {
             name: "M. Rashford",
-            position: "FW",
+            position: "FWD",
             team: "MUN"
         },
     ])
@@ -135,7 +135,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
     const handleChangePlayer = (a, b) => () => {
         if (now !== -1) {
             if (a === 0) {
-                if (bench[now].position === "GK") {
+                if (bench[now].position === "GKP") {
                     const temp = gk;
                     setgk(bench[now])
                     if (temp.name !== "") {
@@ -151,11 +151,11 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ]);
                     }
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "GK");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "GKP");
                 }
             }
             if (a === 1) {
-                if (bench[now].position === "CB") {
+                if (bench[now].position === "DEF") {
                     const temp = defender[b];
                     setdefender([
                         ...defender.slice(0, b),
@@ -175,11 +175,11 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ]);
                     }
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "CB");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "DEF");
                 }
             }
             if (a === 2) {
-                if (bench[now].position === "MF") {
+                if (bench[now].position === "MID") {
                     const temp = midfield[b];
                     setmidfield([
                         ...midfield.slice(0, b),
@@ -199,11 +199,11 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ]);
                     }
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "MF");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "MID");
                 }
             }
             if (a === 3) {
-                if (bench[now].position === "FW") {
+                if (bench[now].position === "FWD") {
                     const temp = forward[b];
                     setforward([
                         ...forward.slice(0, b),
@@ -223,7 +223,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ]);
                     }
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "FW");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "FWD");
                 }
             }
         }
@@ -254,63 +254,63 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
             await setId(users.id);
             const players = ([
                 {
-                    position: "gk_1",
+                    position: "GKP",
                     id: users.gk_1,
                 },
                 {
-                    position: "gk_2",
+                    position: "GKP",
                     id: users.gk_2
                 },
                 {
-                    position: "def_1",
+                    position: "DEF",
                     id: users.def_1
                 },
                 {
-                    position: "def_2",
+                    position: "DEF",
                     id: users.def_2
                 },
                 {
-                    position: "def_3",
+                    position: "DEF",
                     id: users.def_3
                 },
                 {
-                    position: "def_4",
+                    position: "DEF",
                     id: users.def_4
                 },
                 {
-                    position: "def_5",
+                    position: "DEF",
                     id: users.def_5
                 },
                 {
-                    position: "mid_1",
+                    position: "MID",
                     id: users.mid_1
                 },
                 {
-                    position: "mid_2",
+                    position: "MID",
                     id: users.mid_2
                 },
                 {
-                    position: "mid_3",
+                    position: "MID",
                     id: users.mid_3
                 },
                 {
-                    position: "mid_4",
+                    position: "MID",
                     id: users.mid_4
                 },
                 {
-                    position: "mid_5",
+                    position: "MID",
                     id: users.mid_5
                 },
                 {
-                    position: "fow_1",
+                    position: "FWD",
                     id: users.fow_1
                 },
                 {
-                    position: "fow_2",
+                    position: "FWD",
                     id: users.fow_2
                 },
                 {
-                    position: "fow_3",
+                    position: "FWD",
                     id: users.fow_3
                 },
             ]);
@@ -349,7 +349,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                     <div class="line">
                         <div class="trans"></div>
                         <label class="playerTeam">
-                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GKP Jersey.png")} onClick={handleChangePlayer(0,0)}/>
                             {gk.name}
                         </label>
                         <div class="trans"></div>
@@ -395,10 +395,10 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <h5>Bench</h5>
                         <div class="line2">
                             {   bench.map((player, i) => {
-                                return player.position === "GK"
+                                return player.position === "GKP"
                                     ?   (<label class="playerTeam">
                                             {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GKP Jersey.png")} onClick={handleSub(i)}/>
                                             {player.name}
                                         </label>)
                                     :   (<label class="playerTeam">

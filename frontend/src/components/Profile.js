@@ -179,12 +179,12 @@ export default function Profile() {
             ]);
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
-                    if (playerResp === null) {
+                    if (p.id === null) {
                         p.name = "";
                         p.team = "";
                         return p;
                     }
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     p.name = playerResp.web_name;
                     p.teamId = playerResp.team;
                     const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;

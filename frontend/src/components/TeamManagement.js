@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/MUN Logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -252,6 +252,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             await setId(users.id);
+            await setformation(users.formation);
             const players = ([
                 {
                     position: "GKP",

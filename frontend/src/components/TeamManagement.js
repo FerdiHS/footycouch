@@ -1,6 +1,11 @@
 import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useToken from "./Token";
 export default function TeamManagement({login, nowPage, handlenowPage}) {
+    const username = useToken().token;
+    const navigate = useNavigate();
     const [formation, setformation] = useState("4-3-3");
     const clubCode = {
         "": "No",
@@ -237,6 +242,101 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         }
     }
+    useEffect(() => {
+       loadUser();
+       console.log(player);
+    }, [id, player]);
+
+    const loadUser = async () => {
+        try {
+            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            const players = ([
+                {
+                    position: "gk_1",
+                    id: users.gk_1,
+                },
+                {
+                    position: "gk_2",
+                    id: users.gk_2
+                },
+                {
+                    position: "def_1",
+                    id: users.def_1
+                },
+                {
+                    position: "def_2",
+                    id: users.def_2
+                },
+                {
+                    position: "def_3",
+                    id: users.def_3
+                },
+                {
+                    position: "def_4",
+                    id: users.def_4
+                },
+                {
+                    position: "def_5",
+                    id: users.def_5
+                },
+                {
+                    position: "mid_1",
+                    id: users.mid_1
+                },
+                {
+                    position: "mid_2",
+                    id: users.mid_2
+                },
+                {
+                    position: "mid_3",
+                    id: users.mid_3
+                },
+                {
+                    position: "mid_4",
+                    id: users.mid_4
+                },
+                {
+                    position: "mid_5",
+                    id: users.mid_5
+                },
+                {
+                    position: "fow_1",
+                    id: users.fow_1
+                },
+                {
+                    position: "fow_2",
+                    id: users.fow_2
+                },
+                {
+                    position: "fow_3",
+                    id: users.fow_3
+                },
+            ]);
+            const updatedPlayers = await Promise.all(
+                players.map(async p => {
+                    if (p.id === null) {
+                        navigate("/transfer");
+                    }
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
+                    p.name = playerResp.web_name;
+                    p.teamId = playerResp.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    return p;
+                })
+            );
+            setPlayer(updatedPlayers);
+            setGk(player[0]);
+            setDefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
+            setMidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
+            setForward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setBench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
+                                            ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
+                                            ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     return (
         <div class ="container2">
             <div>
@@ -340,7 +440,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                     <p>Change Team</p>
                 </div>
                 <div class="spacing4"></div>
-                <button class="button3">Transfer</button>
+                <button class="button3" onClick={() => navigate("/transfer")}>Transfer</button>
                 <div class="spacing4"></div>
                 <button class="button3">Save</button>
             </div>

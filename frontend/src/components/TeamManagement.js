@@ -350,7 +350,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                     <div class="line">
                         <div class="trans"></div>
                         <label class="playerTeam">
-                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GKP Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
                             {gk.name}
                         </label>
                         <div class="trans"></div>
@@ -399,7 +399,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                                 return player.position === "GKP"
                                     ?   (<label class="playerTeam">
                                             {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GKP Jersey.png")} onClick={handleSub(i)}/>
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
                                             {player.name}
                                         </label>)
                                     :   (<label class="playerTeam">

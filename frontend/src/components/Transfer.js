@@ -1,146 +1,151 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Buffer } from "buffer";
+import axios from "axios";
+import useToken from "./Token";
 export default function Transfer() {
+    const username = useToken().token;
     const [money, setmoney] = useState(1000);
+    const [id, setId] = useState(0);
     const [transfer, setTransfer] = useState({
         "Forward": [
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
         {
             name: "H. Kane",
             position: "FWD",
             team: "TOT",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "E. Haaland",
             position: "FWD",
             team: "MCI",
-            price: 20,
+            now_cost: 20,
             clicked: ""
         },
     ],
@@ -149,84 +154,84 @@ export default function Transfer() {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "K. De Bruyne",
             position: "MID",
             team: "MCI",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "A. Mac Allister",
             position: "MID",
             team: "LIV",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
     ],
@@ -235,112 +240,112 @@ export default function Transfer() {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "V. van Dijk",
             position: "DEF",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "W. Saliba",
             position: "DEF",
             team: "ARS",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
     ],
@@ -349,147 +354,162 @@ export default function Transfer() {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
         {
             name: "Alisson",
             position: "GKP",
             team: "LIV",
-            price: 15,
+            now_cost: 15,
             clicked: ""
         },
         {
             name: "Ederson",
             position: "GKP",
             team: "MCI",
-            price: 10,
+            now_cost: 10,
             clicked: ""
         },
     ]})
     const [player, setplayer] = useState([
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
         {
             name: "",
-            team: ""
+            team: "",
+            now_cost: 0
         },
     ])
     const clubCode = {
@@ -535,7 +555,7 @@ export default function Transfer() {
         if(plyr.clicked !== "") {
             return;
         }
-        if (money < plyr.price) {
+        if (money < plyr.now_cost) {
             window.alert("Unsufficient amount of money");
             return;
         }
@@ -545,7 +565,7 @@ export default function Transfer() {
                     plyr.clicked = "Clicked";
                     setforward([...forward.slice(0, i), plyr, ...forward.slice(i + 1)]);
                     setplayer([...player.slice(12, 12 + i), plyr, ...player.slice(12 + i + 1)])
-                    setmoney(money - plyr.price);
+                    setmoney(money - plyr.now_cost);
                     return;
                 }
             }
@@ -556,8 +576,8 @@ export default function Transfer() {
                 if (midfield[i].name === "") {
                     plyr.clicked = "Clicked";
                     setmidfield([...midfield.slice(0, i), plyr, ...midfield.slice(i + 1)]);
-                    setplayer([...player.slice(7, 7 + i), plyr, ...player.slice(7 + i + 1)])
-                    setmoney(money - plyr.price);
+                    setplayer([...player.slice(7, 7 + i), plyr, ...player.slice(7 + i + 1)]);
+                    setmoney(money - plyr.now_cost);
                     return;
                 }
             }
@@ -569,7 +589,7 @@ export default function Transfer() {
                     plyr.clicked = "Clicked";
                     setdefender([...defender.slice(0, i), plyr, ...defender.slice(i + 1)]);
                     setplayer([...player.slice(2, 2 + i), plyr, ...player.slice(2 + i + 1)])
-                    setmoney(money - plyr.price);
+                    setmoney(money - plyr.now_cost);
                     return;
                 }
             }
@@ -581,7 +601,7 @@ export default function Transfer() {
                     plyr.clicked = "Clicked";
                     setgk([...gk.slice(0, i), plyr, ...gk.slice(i + 1)]);
                     setplayer([...player.slice(0, i), plyr, ...player.slice(i + 1)])
-                    setmoney(money - plyr.price);
+                    setmoney(money - plyr.now_cost);
                     return;
                 }
             }
@@ -592,10 +612,174 @@ export default function Transfer() {
     const handleRemove = (setposition, position, index, firstindex) => () => {
         position[index].clicked = "";
         setTransfer(transfer);
-        setmoney(money + position[index].price);
+        setmoney(money + position[index].now_cost);
         setposition([...position.slice(0, index), {name: "", position: "", team: ""}, ...position.slice(index + 1)])
         setplayer([...player.slice(0, firstindex + index), {name: "", position: "", team: ""}, ...player.slice(firstindex + index + 1)]);
     }
+    useEffect(() => {
+       loadUser();
+       console.log(player);
+    }, [id, player]);
+
+    const loadUser = async () => {
+        try {
+            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            await setId(users.id);
+            const players = ([
+                {
+                    position: "GKP",
+                    id: users.gk_1,
+                },
+                {
+                    position: "GKP",
+                    id: users.gk_2
+                },
+                {
+                    position: "DEF",
+                    id: users.def_1
+                },
+                {
+                    position: "DEF",
+                    id: users.def_2
+                },
+                {
+                    position: "DEF",
+                    id: users.def_3
+                },
+                {
+                    position: "DEF",
+                    id: users.def_4
+                },
+                {
+                    position: "DEF",
+                    id: users.def_5
+                },
+                {
+                    position: "MID",
+                    id: users.mid_1
+                },
+                {
+                    position: "MID",
+                    id: users.mid_2
+                },
+                {
+                    position: "MID",
+                    id: users.mid_3
+                },
+                {
+                    position: "MID",
+                    id: users.mid_4
+                },
+                {
+                    position: "MID",
+                    id: users.mid_5
+                },
+                {
+                    position: "FWD",
+                    id: users.fow_1
+                },
+                {
+                    position: "FWD",
+                    id: users.fow_2
+                },
+                {
+                    position: "FWD",
+                    id: users.fow_3
+                },
+            ]);
+            let usedMoney = 0;
+            const updatedPlayers = await Promise.all(
+                players.map(async p => {
+                    if (p.id === null) {
+                        p.name = "";
+                        p.team = "";
+                        p.now_cost = 0;
+                        p.clicked = "";
+                        return p;
+                    }
+                    usedMoney = usedMoney + p.now_cost;
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
+                    p.name = playerResp.web_name;
+                    p.teamId = playerResp.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    p.clicked = "clicked";
+                    return p;
+                })
+            );
+            const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/forward)).data;
+            const updatedForwardTransfer = await Promise.all(
+                forwardTransfer.map(async p => {
+                    p.name = p.web_name;
+                    p.teamId = p.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    if (p.name === updatedPlayers[12].name || p.name === updatedPlayers[13].name || p.name === updatedPlayers[14].name) {
+                        p.clicked = "clicked";
+                    } else {
+                        p.clicked = "";
+                    }
+                    return p;
+                }
+            );
+            const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder)).data;
+            const updatedMidfieldTransfer = await Promise.all(
+                midfieldTransfer.map(async p => {
+                    p.name = p.web_name;
+                    p.teamId = p.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    if (p.name === updatedPlayers[7].name || p.name === updatedPlayers[8].name || p.name === updatedPlayers[9].name ||
+                       p.name === updatedPlayers[10].name || p.name === updatedPlayers[11].name) {
+                        p.clicked = "clicked";
+                    } else {
+                        p.clicked = "";
+                    }
+                    return p;
+                }
+            );
+            const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender)).data;
+            const updatedDefenderTransfer = await Promise.all(
+                defenderTransfer.map(async p => {
+                    p.name = p.web_name;
+                    p.teamId = p.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    if (p.name === updatedPlayers[2].name || p.name === updatedPlayers[3].name || p.name === updatedPlayers[4].name ||
+                       p.name === updatedPlayers[5].name || p.name === updatedPlayers[6].name) {
+                        p.clicked = "clicked";
+                    } else {
+                        p.clicked = "";
+                    }
+                    return p;
+                }
+            );
+            const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper)).data;
+            const updatedGoalkeeperTransfer = await Promise.all(
+                goalkeeperTransfer.map(async p => {
+                    p.name = p.web_name;
+                    p.teamId = p.team;
+                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
+                    p.team = teamResp.short_name;
+                    if (p.name === updatedPlayers[0].name || p.name === updatedPlayers[1].name) {
+                        p.clicked = "clicked";
+                    } else {
+                        p.clicked = "";
+                    }
+                    return p;
+                }
+            );
+            setmoney(money - usedMoney);
+            setplayer(updatedPlayers);
+            setgk([...player.slice(0, 2)]);
+            setdefender([...player.slice(2, 7)]);
+            setmidfield([...player.slice(7, 12)]);
+            setforward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setTransfer({"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer})
+        } catch (err) {
+            console.log(err);
+        }
+    };
     return (
         <div class ="container2">
             <div>
@@ -724,7 +908,7 @@ export default function Transfer() {
                                                 <h5>{player.name}</h5>
                                                 <p>{player.position} {player.team}</p>
                                             </td>
-                                            <td class="transferPlayer" style={{height: 50, textAlign:"center", width: 50}}>{player.price}</td>
+                                            <td class="transferPlayer" style={{height: 50, textAlign:"center", width: 50}}>{player.now_cost}</td>
                                             <td class="transferPlayer"><button class={"addTransfer" + player.clicked} onClick={handleAddPlayer(player)}><h3>+</h3></button></td>
                                         </tr>)
                             })

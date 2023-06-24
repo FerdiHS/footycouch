@@ -3,7 +3,6 @@ import logo from "../assets/MUN Logo.png";
 import { useNavigate } from "react-router-dom";
 export default function TeamManagement({passPlayer, passFormation, passPoint}) {
     const navigate = useNavigate();
-    const [id, setId] = useState(0);
     const [formation, setformation] = useState(passFormation);
     const clubCode = {
         "": "No",

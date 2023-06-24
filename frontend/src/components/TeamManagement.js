@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import useToken from "./Token";
-export default function TeamManagement({login, nowPage, handlenowPage}) {
-    const username = useToken().token;
+export default function TeamManagement({passPlayer, passFormation, passPoint}) {
     const navigate = useNavigate();
-    const [id, setId] = useState(0);
-    const [formation, setformation] = useState("4-3-3");
+    const [formation, setformation] = useState(passFormation);
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
@@ -21,7 +17,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         "FUL": "Fulham",
         "EVE": "Everton",
         "LEE": "Leeds",
-        "LEI": "Leichester City",
+        "LEI": "Leichester",
         "LIV": "Liverpool",
         "MCI": "Manchester City",
         "MUN": "Manchester United",
@@ -41,84 +37,8 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         "5-3-3"
     ]);
     const [now, setnow] = useState(-1);
-    const [score, setscore] = useState(0);
-    const [player, setplayer] = useState([
-        {
-            name: "D. de Gea",
-            position: "GKP",
-            team: "MUN"
-        },
-        {
-            name: "J. Butland",
-            position: "GKP",
-            team: "MUN"
-        },
-        {
-            name: "A. Wan Bissaka",
-            position: "DEF",
-            team: "MUN"
-        },
-        {
-            name: "H. Maguire",
-            position: "DEF",
-            team: "MUN"
-        },
-        {
-            name: "R.Varane",
-            position: "DEF",
-            team: "MUN"
-        },
-        {
-            name: "L. Shaw",
-            position: "DEF",
-            team: "MUN"
-        },
-        {
-            name: "V. Lindelof",
-            position: "DEF",
-            team: "MUN"
-        },
-        {
-            name: "Casemiro",
-            position: "MID",
-            team: "MUN"
-        },
-        {
-            name: "C. Eriksen",
-            position: "MID",
-            team: "MUN"
-        },
-        {
-            name: "B. Fernandes",
-            position: "MID",
-            team: "MUN"
-        },
-        {
-            name: "Fred",
-            position: "MID",
-            team: "MUN"
-        },
-        {
-            name: "K. De Bruyne",
-            position: "MID",
-            team: "MCI"
-        },
-        {
-            name: "J. Sancho",
-            position: "FWD",
-            team: "MUN"
-        },
-        {
-            name: "A. Martial",
-            position: "FWD",
-            team: "MUN"
-        },
-        {
-            name: "M. Rashford",
-            position: "FWD",
-            team: "MUN"
-        },
-    ])
+    const [points, setpoints] = useState(passPoint);
+    const [player, setplayer] = useState(passPlayer);
     const [gk, setgk] = useState(player[0]);
     const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
     const [midfield, setmidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
@@ -244,103 +164,6 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         }
     }
-    useEffect(() => {
-       loadUser();
-       console.log(player);
-    }, [id, player]);
-
-    const loadUser = async () => {
-        try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
-            await setId(users.id);
-            await setformation(users.formation);
-            const players = ([
-                {
-                    position: "GKP",
-                    id: users.gk_1,
-                },
-                {
-                    position: "GKP",
-                    id: users.gk_2
-                },
-                {
-                    position: "DEF",
-                    id: users.def_1
-                },
-                {
-                    position: "DEF",
-                    id: users.def_2
-                },
-                {
-                    position: "DEF",
-                    id: users.def_3
-                },
-                {
-                    position: "DEF",
-                    id: users.def_4
-                },
-                {
-                    position: "DEF",
-                    id: users.def_5
-                },
-                {
-                    position: "MID",
-                    id: users.mid_1
-                },
-                {
-                    position: "MID",
-                    id: users.mid_2
-                },
-                {
-                    position: "MID",
-                    id: users.mid_3
-                },
-                {
-                    position: "MID",
-                    id: users.mid_4
-                },
-                {
-                    position: "MID",
-                    id: users.mid_5
-                },
-                {
-                    position: "FWD",
-                    id: users.fow_1
-                },
-                {
-                    position: "FWD",
-                    id: users.fow_2
-                },
-                {
-                    position: "FWD",
-                    id: users.fow_3
-                },
-            ]);
-            const updatedPlayers = await Promise.all(
-                players.map(async p => {
-                    if (p.id === null) {
-                        navigate("/transfer");
-                    }
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
-                    p.name = playerResp.web_name;
-                    p.teamId = playerResp.team;
-                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
-                    p.team = teamResp.short_name;
-                    return p;
-                })
-            );
-            setplayer(updatedPlayers);
-            setgk(player[0]);
-            setdefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
-            setmidfield([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
-            setforward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
-            setbench([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
-                                            ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
-                                            ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
-        } catch (err) {
-            console.log(err);
-        }
-    };
     return (
         <div class ="container2">
             <div>
@@ -434,7 +257,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                 </label>
                 <div class="spacing4"></div>
                 <div class= "point">
-                    <h1>{score}</h1>
+                    <h1>{points}</h1>
                     <>Points</>
                 </div>
                 <div class="spacing4"></div>

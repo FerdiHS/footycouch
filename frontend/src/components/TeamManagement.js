@@ -17,6 +17,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         "BHA": "Brighton",
         "SOU": "Southampton",
         "CHE": "Chelsea",
+        "CRY": "Crystal Palace",
         "FUL": "Fulham",
         "EVE": "Everton",
         "LEE": "Leeds",

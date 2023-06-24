@@ -54,16 +54,20 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
             like: [],
             time: dateTime
         }
-        console.log(postComponent);
         axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/post", {
             content: postComponent.text,
-            image: postComponent.image
+            image: postComponent.image.length === 0 ? "" : postComponent.image
         })
-        setpost([postComponent, ...post]);
-        setText("");
-        setpostImage([]);
-        settextarea(document.querySelector('textarea'));
-        textarea.addEventListener('keydown', autosize); 
+        .then(res => {
+            setpost([postComponent, ...post]);
+            setText("");
+            setpostImage([]);
+            settextarea(document.querySelector('textarea'));
+            textarea.addEventListener('keydown', autosize); 
+        })
+        .catch(err => {
+            window.alert("Cannot post with a high quality image, please try with a lower quality image")
+        })
     }
     return (
         <>

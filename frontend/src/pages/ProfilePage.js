@@ -121,7 +121,7 @@ export default function ProfilePage({setToken}) {
                     return post;
                 })
             );
-            Posts = updatedPosts;
+            Posts = updatedPosts.reverse();
             setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, Posts: Posts})
         } catch (err) {
             console.log(err);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../assets/Field.png";
+import test from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
@@ -12,7 +12,7 @@ export default function Profile({passData}) {
     const username = useToken().token;
     const [bio, setbio] = useState(passData.bio);
     const [followers, setfollowers] = useState(passData.Followers);
-    const [following, setfollowing] = useState(passData.Followings);
+    const [followings, setfollowing] = useState(passData.Followings);
     const [points, setPoints] = useState(passData.points);
     const highestPoints = 0;
     const [rank, setrank] = useState(1);
@@ -96,15 +96,15 @@ export default function Profile({passData}) {
                     <button class = "editProfile"><h4>Edit profile</h4></button>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{posts.length}</h3>
                     <h4>Posts</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followers.length}</h3>
                     <h4>Followers</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followings.length}</h3>
                     <h4>Following</h4>
                 </div>
                 <div class="wrapback">

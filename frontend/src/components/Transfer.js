@@ -22,7 +22,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
         "LIV": "Liverpool",
         "MCI": "Manchester City",
         "MUN": "Manchester United",
-        "NEW": "NewCastle",
+        "NEW": "Newcastle",
         "TOT": "Tottenham Hotspur",
         "WHU": "Westham",
         "WOL": "Wolferhampton",

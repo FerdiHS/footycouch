@@ -11,7 +11,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
         "BRE": "Brentford",
         "BOU": "Bournemouth",
         "BHA": "Brighton",
-        "SOU": "Southampton",Im
+        "SOU": "Southampton",
         "CHE": "Chelsea",
         "CRY": "Crystal Palace",
         "FUL": "Fulham",

@@ -2,7 +2,7 @@ import HeaderWebAfterLog from "../components/HeaderWebAfterLog.js";
 import TeamManagement from "../components/TeamManagement.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useToken from "./Token";
+import useToken from "../components/Token";
 export default function TeamManagementPage({setToken}) {
     var players = [];
     var formation = "0-0-0";

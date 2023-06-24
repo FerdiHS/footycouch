@@ -11,7 +11,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
         "BRE": "Brentford",
         "BOU": "Bournemouth",
         "BHA": "Brighton",
-        "SOU": "Southampton",
+        "SOU": "Southampton",Im
         "CHE": "Chelsea",
         "CRY": "Crystal Palace",
         "FUL": "Fulham",
@@ -24,7 +24,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
         "NEW": "Newcastle",
         "TOT": "Tottenham Hotspur",
         "WHU": "Westham",
-        "WOL": "Wolverhampton",
+        "WOL": "Wolferhampton",
         "NFO": "Nottingham Forest"
     }
     const [allformation, setallformation] = useState([

@@ -1,9 +1,11 @@
 import HeaderWebAfterLog from "../components/HeaderWebAfterLog.js";
 import TeamManagement from "../components/TeamManagement.js";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useToken from "../components/Token";
 export default function TeamManagementPage({setToken}) {
+    const navigate = useNavigate();
     var players = [];
     var formation = "0-0-0";
     var points = 0;

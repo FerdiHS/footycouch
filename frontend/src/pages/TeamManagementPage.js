@@ -1,15 +1,16 @@
 import HeaderWebAfterLog from "../components/HeaderWebAfterLog.js";
 import TeamManagement from "../components/TeamManagement.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useToken from "../components/Token";
 export default function TeamManagementPage({setToken}) {
     const navigate = useNavigate();
-    var players = [];
-    var formation = "0-0-0";
-    var points = 0;
-    const username = useToken().token;
+    const [data, setdata] = useState({});
+    var players = data.players
+    var formation = data.formation;
+    var points = data.points;
+    const username = "test";
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
@@ -90,16 +91,23 @@ export default function TeamManagementPage({setToken}) {
                 })
             );
             players = updatedPlayers;
-            points = users.points;
+            setdata({players: players, points: points, formation: formation});
         } catch (err) {
             console.log(err);
         }
     };
-    loadUser();
-    return (
-        <div>
-            <HeaderWebAfterLog setToken={setToken}/>
-            <TeamManagement passPlayer = {players} passFormation = {formation} passPoint = {points}/>
-        </div>
-    );
+    if (players === undefined) {
+        loadUser();
+        return <><HeaderWebAfterLog setToken={setToken}/></>;
+    } else {
+        for (let i = 0; i < 15; i++) {
+            console.log(players[i].team);
+        }
+        return (
+                <div>
+                    <HeaderWebAfterLog setToken={setToken}/>
+                    <TeamManagement passPlayer = {players} passFormation = {formation} passPoint = {points}/>
+                </div>
+            );
+    }
 }

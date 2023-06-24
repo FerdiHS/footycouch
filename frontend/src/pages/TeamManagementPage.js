@@ -10,7 +10,7 @@ export default function TeamManagementPage({setToken}) {
     var players = data.players
     var formation = data.formation;
     var points = data.points;
-    const username = "test";
+    const username = useToken().token;
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;

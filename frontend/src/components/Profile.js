@@ -51,6 +51,17 @@ export default function Profile({passData}) {
     const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                     ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
+    const [changeBio, setchangeBio] = useState(false);
+    const [bioInput, setbioInput] = useState(bio);
+    const bioChange = e => {
+        setbioInput(e.target.value);
+    }
+    const bioSave = () => {
+        setbio(bioInput);
+        setchangeBio(false);
+        axios.post("https://footycouch-production.up.railway.app/users/update/" + username, {bio})
+        .catch(err => console.log(err));
+    }
     const ppUpload = e => {
         e.preventDefault();
         const reader = new FileReader();
@@ -94,8 +105,11 @@ export default function Profile({passData}) {
                 <input type= "file" id="upload-profilepicture" onChange={ppUpload}/>
                 <div class="name">
                     <h1>{username}</h1>
-                    <p>{bio}</p>
-                    <button class = "editProfile"><h4>Edit profile</h4></button>
+                    { changeBio
+                        ? <><input type="text" value={bioInput} onChange={bioChange}/><button onClick={bioSave}>Save</button></>
+                        : <p>{bio}</p>
+                    }
+                    <button class = "editProfile" onClick = {() => setchangeBio(true)}><h4>Edit profile</h4></button>
                 </div>
                 <div class="followers">
                     <h3>{posts.length}</h3>

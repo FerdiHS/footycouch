@@ -1,4 +1,3 @@
-
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -274,7 +273,7 @@ nav > img {
   position: relative;
 }
 .field {
-  background: url(./assets/field.png);
+  background: url(./assets/Field.png);
   width:900px;
   height: 955px;
   background-repeat: no-repeat;
@@ -574,6 +573,16 @@ select:focus + .focus {
   margin-right: auto;
   text-align: start;
 }
+.name > input {
+  width:400px;
+}
+.name > input:focus::placeholder {
+  color: red;
+} 
+.name > input::placeholder {
+  color: red;
+  text-align: right;
+} 
 input[type="file"] {
   content: none;
   visibility: hidden;
@@ -675,7 +684,7 @@ input[type="file"] {
   position:sticky;
 }
 .stats {
-  height:315px;
+  height:335px;
   border-radius: 5px;
   background-color: white;
   text-align: start;
@@ -732,7 +741,7 @@ input[type="file"] {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./assets/field.png);
+  background: url(./assets/Field.png);
   width:524px;
   height: 533.7734px;
   background-repeat: no-repeat;
@@ -909,8 +918,8 @@ label.playername > img {
   border: none;
   cursor:pointer;
   position:relative;
-  left:290px;
-  top: -63px;
+  left:630px;
+  top: -66px;
 }
 .remove > img {
   border-radius: 50%;
@@ -1055,7 +1064,7 @@ label.playername > img {
 }
 /* Transfer */
 .field3 {
-  background: url(./assets/field.png);
+  background: url(./assets/Field.png);
   width:900px;
   height: 830px;
   background-repeat: no-repeat;

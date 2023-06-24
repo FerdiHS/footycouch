@@ -137,6 +137,11 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
         setposition([...position.slice(0, index), {name: "", position: "", team: ""}, ...position.slice(index + 1)])
         setplayer([...player.slice(0, firstindex + index), {name: "", position: "", team: ""}, ...player.slice(firstindex + index + 1)]);
     }
+    function titleCase(str) {
+        return str.toLowerCase().split(' ').map(function(word) {
+          return (word.charAt(0).toUpperCase() + word.slice(1));
+        }).join(' ');
+    }
     return (
         <div class ="container2">
             <div>

@@ -290,7 +290,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                 <div class="spacing4"></div>
                 <button class="button3" onClick={() => navigate("/transfer")}>Transfer</button>
                 <div class="spacing4"></div>
-                <button class="button3">Save</button>
+                <button class="button3" onClick={handleSave}>Save</button>
             </div>
         </div>
     );

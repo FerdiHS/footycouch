@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import useToken from "./Token";
 export default function Transfer({passTransfer, passPlayers, passMoney}) {
     const username = useToken().token;
+    const [filteredPlayer, setfilteredPlayer] = useState("");
     const [money, setmoney] = useState(passMoney);
     const [transfer, setTransfer] = useState(passTransfer)
     const [player, setplayer] = useState(passPlayers);
@@ -37,13 +39,39 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
     const handlePosition = e => {
         setPosition(e.target.value);
     }
-    const handlesafe = () => {
+    const handleFilterPlayer = e => {
+        setfilteredPlayer(e.target.value);
+    }
+    const handleSave = () => {
         for (let i = 0; i < player.length; i++) {
             if(player[i].name === "") {
                 window.alert("You need to fill all of the player");
                 return;
             }
         }
+        let playerId = [];
+        for (let i = 0; i < 15; i++) {
+            playerId[i] = player[i].id;
+        }
+        let formation = "4-4-2";
+        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {"balance":money, formation,
+        "gk_1":playerId[0], 
+        "gk_2":playerId[1],
+        "def_1":playerId[2],
+        "def_2":playerId[3],
+        "def_3":playerId[4],
+        "def_4":playerId[5],
+        "def_5":playerId[6],
+        "mid_1":playerId[7],
+        "mid_2":playerId[8],
+        "mid_3":playerId[9],
+        "mid_4":playerId[10],
+        "mid_5":playerId[11],
+        "fow_1":playerId[12],
+        "fow_2":playerId[13],
+        "fow_3":playerId[14]})
+        .catch(err => console.log(err));
+        window.alert("Successfully Saved");
     }
     const handleAddPlayer = plyr => () => {
         if(plyr.clicked !== "") {
@@ -58,7 +86,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
                 if (forward[i].name === "") {
                     plyr.clicked = "Clicked";
                     setforward([...forward.slice(0, i), plyr, ...forward.slice(i + 1)]);
-                    setplayer([...player.slice(12, 12 + i), plyr, ...player.slice(12 + i + 1)])
+                    setplayer([...player.slice(0, 12 + i), plyr, ...player.slice(12 + i + 1)])
                     setmoney(money - plyr.now_cost);
                     return;
                 }
@@ -70,7 +98,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
                 if (midfield[i].name === "") {
                     plyr.clicked = "Clicked";
                     setmidfield([...midfield.slice(0, i), plyr, ...midfield.slice(i + 1)]);
-                    setplayer([...player.slice(7, 7 + i), plyr, ...player.slice(7 + i + 1)]);
+                    setplayer([...player.slice(0, 7 + i), plyr, ...player.slice(7 + i + 1)]);
                     setmoney(money - plyr.now_cost);
                     return;
                 }
@@ -82,7 +110,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
                 if (defender[i].name === "") {
                     plyr.clicked = "Clicked";
                     setdefender([...defender.slice(0, i), plyr, ...defender.slice(i + 1)]);
-                    setplayer([...player.slice(2, 2 + i), plyr, ...player.slice(2 + i + 1)])
+                    setplayer([...player.slice(0, 2 + i), plyr, ...player.slice(2 + i + 1)])
                     setmoney(money - plyr.now_cost);
                     return;
                 }
@@ -101,7 +129,6 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
             }
             window.alert("You already picked 2 Goalkeeper");
         }
-        
     }
     const handleRemove = (setposition, position, index, firstindex) => () => {
         position[index].clicked = "";
@@ -110,13 +137,18 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
         setposition([...position.slice(0, index), {name: "", position: "", team: ""}, ...position.slice(index + 1)])
         setplayer([...player.slice(0, firstindex + index), {name: "", position: "", team: ""}, ...player.slice(firstindex + index + 1)]);
     }
+    function titleCase(str) {
+        return str.toLowerCase().split(' ').map(function(word) {
+          return (word.charAt(0).toUpperCase() + word.slice(1));
+        }).join(' ');
+    }
     return (
         <div class ="container2">
             <div>
             <div class="spacing2"></div>
             <h2>Squad Selection</h2>
             <div class="field3">
-            <button class="button4" onClick={handlesafe}>Save</button>
+            <button class="button4" onClick={handleSave}>Save</button>
                 <div class="fieldcon">
                     <div class="line">
                         <div class="trans"></div>
@@ -210,7 +242,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
             <div class = "transfermarket">
                 <h3>Money Remaining: {money}</h3>
                 <h3>Search Player</h3>
-                <input type="text" class="searchPlayer" placeholder="Search for player..."/>
+                <input type="text" class="searchPlayer" value={filteredPlayer} placeholder="Search for player..." onChange={handleFilterPlayer}/>
                 <button class="searchButton" />
                 <select class = "positionTransfer" onChange={handlePosition}>
                     (<option value={position}>{position}</option>)
@@ -230,7 +262,7 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
                             <th class="transferPlayer" style={{width: 70}}>+</th>
                         </tr>
                         {
-                            transfer[position].map((player, index) => {
+                            transfer[position].filter(x => x.name.includes(filteredPlayer) || x.name.includes(titleCase(filteredPlayer)) || x.name.includes(filteredPlayer.toLowerCase())).map((player, index) => {
                                 const check = player.position !== "GKP" ? "" : " GK";
                                 return (<tr class="transferPlayer">
                                             <td class="transferPlayer">

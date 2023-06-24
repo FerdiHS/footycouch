@@ -525,7 +525,7 @@ export default function Transfer() {
         "FUL": "Fulham",
         "EVE": "Everton",
         "LEE": "Leeds",
-        "LEI": "Leichester City",
+        "LEI": "Leichester",
         "LIV": "Liverpool",
         "MCI": "Manchester City",
         "MUN": "Manchester United",

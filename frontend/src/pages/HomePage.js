@@ -1,12 +1,12 @@
-import BottomWeb from "../component/BottomWeb.js";
-import HeaderWebAfterLog from "../component/HeaderWebAfterLog.js"
-import Home from "../component/Home.js";
+import BottomWeb from "../components/BottomWeb.js";
+import HeaderWebAfterLog from "../components/HeaderWebAfterLog.js"
+import Home from "../components/Home.js";
 import axios from "axios";
 import { useState } from "react";
-import useToken from "../component/Token.js";
+import useToken from "../components/Token.js";
 export default function HomePage({setToken}) {
     const [data, setdata] = useState({});
-    const username = "test";
+    const username = useToken().token;
     var id = data.id;
     var Posts = data.Posts;
     var ProfilePicture = data.ProfilePicture;

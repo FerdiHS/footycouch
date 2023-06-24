@@ -98,7 +98,7 @@ export default function TeamManagementPage({setToken}) {
     };
     if (players === undefined) {
         loadUser();
-        return <><HeaderWebAfterLog setToken={setToken}/></>;
+        return <><HeaderWebAfterLog /></>;
     } else {
         for (let i = 0; i < 15; i++) {
             console.log(players[i].team);

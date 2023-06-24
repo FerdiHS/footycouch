@@ -520,6 +520,7 @@ export default function Transfer() {
         "BOU": "Bournemouth",
         "BRI": "Brighton",
         "SOU": "Southampton",
+        "CRY": "Crystal Palace",
         "CHE": "Chelsea",
         "FUL": "Fulham",
         "EVE": "Everton",

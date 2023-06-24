@@ -687,7 +687,6 @@ export default function Transfer() {
                     id: users.fow_3
                 },
             ]);
-            let usedMoney = 0;
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
@@ -697,7 +696,6 @@ export default function Transfer() {
                         p.clicked = "";
                         return p;
                     }
-                    usedMoney = usedMoney + p.now_cost;
                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     p.name = playerResp.web_name;
                     p.teamId = playerResp.team;
@@ -707,7 +705,7 @@ export default function Transfer() {
                     return p;
                 })
             );
-            const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/forward)).data;
+            const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/forward")).data;
             const updatedForwardTransfer = await Promise.all(
                 forwardTransfer.map(async p => {
                     p.name = p.web_name;
@@ -720,9 +718,9 @@ export default function Transfer() {
                         p.clicked = "";
                     }
                     return p;
-                }
+                })
             );
-            const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder)).data;
+            const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder")).data;
             const updatedMidfieldTransfer = await Promise.all(
                 midfieldTransfer.map(async p => {
                     p.name = p.web_name;
@@ -736,9 +734,9 @@ export default function Transfer() {
                         p.clicked = "";
                     }
                     return p;
-                }
+                })
             );
-            const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender)).data;
+            const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender")).data;
             const updatedDefenderTransfer = await Promise.all(
                 defenderTransfer.map(async p => {
                     p.name = p.web_name;
@@ -752,9 +750,9 @@ export default function Transfer() {
                         p.clicked = "";
                     }
                     return p;
-                }
+                })
             );
-            const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper)).data;
+            const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).data;
             const updatedGoalkeeperTransfer = await Promise.all(
                 goalkeeperTransfer.map(async p => {
                     p.name = p.web_name;
@@ -767,9 +765,8 @@ export default function Transfer() {
                         p.clicked = "";
                     }
                     return p;
-                }
+                })
             );
-            setmoney(money - usedMoney);
             setplayer(updatedPlayers);
             setgk([...player.slice(0, 2)]);
             setdefender([...player.slice(2, 7)]);

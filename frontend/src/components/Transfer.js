@@ -771,7 +771,7 @@ export default function Transfer() {
             setgk([...player.slice(0, 2)]);
             setdefender([...player.slice(2, 7)]);
             setmidfield([...player.slice(7, 12)]);
-            setforward([...player.slice(12, 12 + parseInt(formation.charAt(4)))]);
+            setforward([...player.slice(12, 15)]);
             setTransfer({"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer})
         } catch (err) {
             console.log(err);

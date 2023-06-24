@@ -6,12 +6,13 @@ import useToken from "./Token";
 export default function TeamManagementPage({setToken}) {
     var players = [];
     var formation = "0-0-0";
+    var points = 0;
     const username = useToken().token;
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             formation = users.formation;
-            const players = ([
+            players = ([
                 {
                     position: "GKP",
                     id: users.gk_1,
@@ -87,7 +88,7 @@ export default function TeamManagementPage({setToken}) {
                 })
             );
             players = updatedPlayers;
-            
+            points = users.points;
         } catch (err) {
             console.log(err);
         }
@@ -96,7 +97,7 @@ export default function TeamManagementPage({setToken}) {
     return (
         <div>
             <HeaderWebAfterLog setToken={setToken}/>
-            <TeamManagement passPlayer = {players} passFormation = {formation}/>
+            <TeamManagement passPlayer = {players} passFormation = {formation} passPoints = {points}/>
         </div>
     );
 }

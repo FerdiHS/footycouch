@@ -1,9 +1,12 @@
 import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
 import { useNavigate } from "react-router-dom";
+import useToken from "./Token";
+import axios from "axios";
 export default function TeamManagement({passPlayer, passFormation, passPoint}) {
     const navigate = useNavigate();
     const [formation, setformation] = useState(passFormation);
+    const username = useToken().token;
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
@@ -58,19 +61,13 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
             if (a === 0) {
                 if (bench[now].position === "GKP") {
                     const temp = gk;
-                    setgk(bench[now])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setgk(bench[now]);
+                    setplayer([bench[now], temp, ...player.slice(2)]);
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
                     window.alert("You cannot assign " + bench[now].position + " to " + "GKP");
                 }
@@ -83,18 +80,18 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         bench[now],
                         ...defender.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 2 + b),
+                        bench[now],
+                        ...player.slice(2 + b + 1, 2 + now + parseInt(formation.charAt(0)) - 1),
+                        temp,
+                        ...player.slice(2 + now + parseInt(formation.charAt(0)))
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
                     window.alert("You cannot assign " + bench[now].position + " to " + "DEF");
                 }
@@ -107,18 +104,18 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         bench[now],
                         ...midfield.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 7 + b),
+                        bench[now],
+                        ...player.slice(7 + b + 1, 7 + now - (1 + 5 - parseInt(formation.charAt(0))) + parseInt(formation.charAt(2))),
+                        temp,
+                        ...player.slice(7 + now - (5 - parseInt(formation.charAt(0))) + parseInt(formation.charAt(2)))
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
                     window.alert("You cannot assign " + bench[now].position + " to " + "MID");
                 }
@@ -131,18 +128,18 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         bench[now],
                         ...forward.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 12 + b),
+                        bench[now],
+                        ...player.slice(12 + b + 1, 12 + now - (1 + parseInt(formation.charAt(4))) + parseInt(formation.charAt(4))),
+                        temp,
+                        ...player.slice(12 + now)
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
                     window.alert("You cannot assign " + bench[now].position + " to " + "FWD");
                 }
@@ -163,6 +160,30 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                         ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         }
+    }
+    const handleSave = () => {
+        let playerId = [];
+        for (let i = 0; i < 15; i++) {
+            playerId[i] = player[i].id;
+        }
+        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {formation,
+        "gk_1":playerId[0], 
+        "gk_2":playerId[1],
+        "def_1":playerId[2],
+        "def_2":playerId[3],
+        "def_3":playerId[4],
+        "def_4":playerId[5],
+        "def_5":playerId[6],
+        "mid_1":playerId[7],
+        "mid_2":playerId[8],
+        "mid_3":playerId[9],
+        "mid_4":playerId[10],
+        "mid_5":playerId[11],
+        "fow_1":playerId[12],
+        "fow_2":playerId[13],
+        "fow_3":playerId[14]})
+        .catch(err => console.log(err));
+        window.alert("Successfully Saved");
     }
     return (
         <div class ="container2">

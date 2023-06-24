@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../assets/Avatar.png";
-import Avatar2 from "../assets/test.jpg";
+import test from "../assets/Field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
 import useToken from "./Token";

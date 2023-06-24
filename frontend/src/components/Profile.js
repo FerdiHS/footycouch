@@ -102,11 +102,17 @@ export default function Profile() {
     const [midfield, setMidfield] = useState([]);
     const [forward, setForward] = useState([]);
     const [bench, setBench] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
-       loadUser();
-       console.log(player);
-    }, [id, player]);
+        if(counter < 5) {
+            setCounter(counter + 1);
+            loadUser();
+        }
+        console.log(posts);
+        console.log("counter: " + counter);
+    }, [id, player, posts]);
 
     const loadUser = async () => {
         try {
@@ -212,6 +218,17 @@ export default function Profile() {
                 const imageBuffer = Buffer.from(imageResp.data.image, 'base64');
                 setProfilePicture(imageBuffer);
             }
+            const postsResp = (await axios.get("https://footycouch-production.up.railway.app//users/id/" + id + "/post")).data.results;
+            const updatedPosts = await Promise.all(
+                postsResp.map(post => {
+                    post.like = [];
+                    post.text = post.content;
+                    post.time = post.created_at;
+                    post.image = null;
+                    return {postComponent: post};
+                })
+            );
+            await setPosts(updatedPosts);
         } catch (err) {
             console.log(err);
         }
@@ -287,7 +304,7 @@ export default function Profile() {
                     <button class = "editProfile"><h4>Edit profile</h4></button>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{posts.length}</h3>
                     <h4>Posts</h4>
                 </div>
                 <div class="followers">
@@ -371,7 +388,7 @@ export default function Profile() {
                     </div>
                 </div>
                 <div class="post">
-                    <TextInputPost profilePicture={profilePicture} username={username} posts={[]}/>
+                    <TextInputPost profilePicture={profilePicture} username={username} posts={posts}/>
                 </div>
             </div>
         </div>

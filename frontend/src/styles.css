@@ -274,7 +274,7 @@ nav > img {
   position: relative;
 }
 .field {
-  background: url(./assets/Field.png);
+  background: url(./assets/field.png);
   width:900px;
   height: 955px;
   background-repeat: no-repeat;
@@ -732,7 +732,7 @@ input[type="file"] {
   margin-bottom: 30px;
 }
 .field2 {
-  background: url(./assets/Field.png);
+  background: url(./assets/field.png);
   width:524px;
   height: 533.7734px;
   background-repeat: no-repeat;
@@ -1055,7 +1055,7 @@ label.playername > img {
 }
 /* Transfer */
 .field3 {
-  background: url(./assets/Field.png);
+  background: url(./assets/field.png);
   width:900px;
   height: 830px;
   background-repeat: no-repeat;

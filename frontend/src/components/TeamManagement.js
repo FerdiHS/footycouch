@@ -21,7 +21,7 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         "FUL": "Fulham",
         "EVE": "Everton",
         "LEE": "Leeds",
-        "LEI": "Leichester City",
+        "LEI": "Leichester",
         "LIV": "Liverpool",
         "MCI": "Manchester City",
         "MUN": "Manchester United",

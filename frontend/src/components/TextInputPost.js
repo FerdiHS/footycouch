@@ -1,7 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
 import close from "../assets/close.png";
 import Post from "./Post";
-export default function TextInputPost({profilePicture, username, posts}) {
+export default function TextInputPost({profilePicture, username, id, posts}) {
     function autosize(){
         var el = this;
         setTimeout(function(){
@@ -53,6 +54,11 @@ export default function TextInputPost({profilePicture, username, posts}) {
             like: [],
             time: dateTime
         }
+        console.log(postComponent);
+        axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/post", {
+            content: postComponent.text,
+            image: postComponent.image
+        })
         setpost([postComponent, ...post]);
         setText("");
         setpostImage([]);

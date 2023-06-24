@@ -110,18 +110,19 @@ export default function ProfilePage({setToken}) {
             if(imageResp.status !== 500) {
                 ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
             }
-            const postsResp = (await axios.get("https://footycouch-production.up.railway.app//users/id/" + id + "/post")).data.results;
+            const postsResp = (await axios.get("https://footycouch-production.up.railway.app/users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {
                     post.like = [];
                     post.text = post.content;
                     post.time = "";
-                    post.image = postsResp.image;
+                    post.image = post.image;
+                    console.log(post);
                     return post;
                 })
             );
             Posts = updatedPosts;
-            setdata({players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, Posts: Posts})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, Posts: Posts})
         } catch (err) {
             console.log(err);
         }

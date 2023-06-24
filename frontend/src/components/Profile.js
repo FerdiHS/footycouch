@@ -7,9 +7,10 @@ import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
 
 export default function Profile({passData}) {
-    const [backgroundPicture, setbackgroundPicture] = useState(test);
-    const [profilePicture, setprofilePicture] = useState(passData.ProfilePicture);
+    const [backgroundPicture, setBackgroundPicture] = useState(test);
+    const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = useToken().token;
+    const id = passData.id;
     const [bio, setbio] = useState(passData.bio);
     const [followers, setfollowers] = useState(passData.Followers);
     const [followings, setfollowing] = useState(passData.Followings);
@@ -42,7 +43,6 @@ export default function Profile({passData}) {
         "WOL": "Wolferhampton",
         "NFO": "Nottingham Forest"
     }
-    
     const [formation, setformation] = useState(passData.formation);
     const [gk, setgk] = useState(player[0]);
     const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
@@ -59,7 +59,9 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          setprofilePicture(reader.result);
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result.split(',')[1]});
+            console.log(reader.result);
+            setProfilePicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
@@ -71,7 +73,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          setbackgroundPicture(reader.result);
+          setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
@@ -180,7 +182,7 @@ export default function Profile({passData}) {
                     </div>
                 </div>
                 <div class="post">
-                    <TextInputPost profilePicture={profilePicture} username={username} posts={posts}/>
+                    <TextInputPost profilePicture={profilePicture} username={username} id={id} posts={posts}/>
                 </div>
             </div>
         </div>

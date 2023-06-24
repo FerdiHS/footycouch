@@ -1,4 +1,3 @@
-import BottomWeb from "../components/BottomWeb.js";
 import HeaderWebAfterLog from "../components/HeaderWebAfterLog.js"
 import Home from "../components/Home.js";
 import axios from "axios";

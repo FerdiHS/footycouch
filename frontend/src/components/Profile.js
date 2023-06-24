@@ -8,6 +8,14 @@ import Avatar2 from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
 export default function Profile() {
+    const postEx = [
+        {
+            text: "Test",
+            image: null,
+            like: [],
+            time: ""
+        }
+    ];
     const username = useToken().token;
     const [id, setId] = useState(0);
     const [bio, setBio] = useState("SIUUUU");
@@ -207,28 +215,25 @@ export default function Profile() {
                                             ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                             ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
 
-            const image =  await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image")
-
             setFollowings((await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data);
 
             setFollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
 
             const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
             if(imageResp.status !== 500) {
-                const imageBuffer = Buffer.from(imageResp.data.image, 'base64');
-                setProfilePicture(imageBuffer);
+                setProfilePicture(`data:image/jpeg;base64,${imageResp.data.image}`);
             }
             const postsResp = (await axios.get("https://footycouch-production.up.railway.app//users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {
                     post.like = [];
                     post.text = post.content;
-                    post.time = post.created_at;
-                    post.image = null;
-                    return {postComponent: post};
+                    post.time = "";
+                    post.image = postsResp.image;
+                    return post;
                 })
             );
-            await setPosts(updatedPosts);
+            setPosts(updatedPosts);
         } catch (err) {
             console.log(err);
         }
@@ -265,7 +270,8 @@ export default function Profile() {
             return;
         }
         reader.onloadend = () => {
-          setProfilePicture(reader.result);
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result.split(',')[1]});
+            setProfilePicture(reader.result);
         }
         reader.readAsDataURL(file);
     }

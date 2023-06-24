@@ -97,7 +97,7 @@ export default function TeamManagementPage({setToken}) {
     return (
         <div>
             <HeaderWebAfterLog setToken={setToken}/>
-            <TeamManagement passPlayer = {players} passFormation = {formation} passPoints = {points}/>
+            <TeamManagement passPlayer = {players} passFormation = {formation} passPoint = {points}/>
         </div>
     );
 }

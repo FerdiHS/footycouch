@@ -47,7 +47,7 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Account created"
             });
         });
     },
@@ -180,7 +180,7 @@ module.exports = {
                     });
                 }
                 return res.status(200).json({
-                    data: results
+                    message: "Following successful"
                 });
             })
         });
@@ -488,7 +488,7 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Profile updated successfully"
             });
         });
     },
@@ -505,7 +505,7 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Profile updated successfully"
             });
         });
     },
@@ -532,7 +532,9 @@ module.exports = {
                     message: "Database connection error"
                 });
             }
-            return res.status(200).json({results});
+            return res.status(200).json({
+                message: "Transfer successful"
+            });
         });
     },
 
@@ -547,7 +549,9 @@ module.exports = {
                 message: "Database connection error"
             });
         }
-        return res.status(200).json({results});
+        return res.status(200).json({
+            message: "Post added successfully"
+        });
        });
     },
 

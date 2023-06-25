@@ -37,8 +37,8 @@ router.get("/users", getUsers); // Get all users' data
 router.get("/users/:username", getUserByName); // Get a certain user with given username, require "username"
 router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image" (in base64)
 router.get("/users/:username/image", getImageUsers); // Get the user's profile picture in base64
-router.post("/users/follow", follow); // Make a user follow another user, require "follower_id" and "followed_id"
-router.post("/users/unfollow", unfollow); // Make a user unfollow another user, require "follower_id" and "followed_id"
+router.post("/users/follow", follow); // Make a user follow another user, require "follower" and "followed"
+router.post("/users/unfollow", unfollow); // Make a user unfollow another user, require "follower" and "followed"
 router.get("/users/following/:id", getUserFollowing); // Get the user's following list
 router.get("/users/follower/:id", getUserFollower); // Get the user's follower list
 router.post("/users/update/id/:id", updateUserProfileById); // Update the user's profile, require "bio"

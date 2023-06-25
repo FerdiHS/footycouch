@@ -136,7 +136,7 @@ export default function ProfilePage({setToken}) {
         return <><HeaderWebAfterLog /></>;
     } else {
         return (
-                <div>
+                <div class = "App">
                     <HeaderWebAfterLog setToken={setToken}/>
                     <Profile passData={data}/>
                 </div>

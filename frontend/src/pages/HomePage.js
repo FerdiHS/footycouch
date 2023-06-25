@@ -42,9 +42,9 @@ export default function HomePage({setToken}) {
         return <><HeaderWebAfterLog setToken={setToken}/></>;
     } else {
         return (
-                <div>
+                <div class = "App">
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Home passPosts={Posts} passProfilePicture={ProfilePicture}/>
+                    <Home passPosts={Posts} passProfilePicture={ProfilePicture} passId = {id}/>
                 </div>
             );
     }

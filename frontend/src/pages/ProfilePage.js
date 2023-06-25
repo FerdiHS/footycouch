@@ -103,12 +103,17 @@ export default function ProfilePage({setToken}) {
             );
             players = updatedPlayers;
             Followings = (await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data;
-
             Followers = (await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data;
-
-            const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
-            if(imageResp.status !== 500) {
-                ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
+            try {
+                const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
+                if(imageResp.status !== 500) {
+                    
+                    ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
+                } else {
+                    ProfilePicture = null;
+                }
+            } catch (err) {
+                ProfilePicture = null;
             }
             const postsResp = (await axios.get("https://footycouch-production.up.railway.app/users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
@@ -132,7 +137,7 @@ export default function ProfilePage({setToken}) {
         return <><HeaderWebAfterLog /></>;
     } else {
         return (
-                <div>
+                <div class = "App">
                     <HeaderWebAfterLog setToken={setToken}/>
                     <Profile passData={data}/>
                 </div>

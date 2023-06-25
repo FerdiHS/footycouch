@@ -1,4 +1,4 @@
-<h1 align="center">Footy Couch</h1>
+<h1 align="center">Footycouch</h1>
 
 
 
@@ -12,7 +12,7 @@
 <h3>Team Name: San Tokyo </h3>
 <h3>Team Member: Angky Akdi Frandy Putrakelana & Ferdinand Halim Santoso</h3>
 <h3>Proposed Level of Achievement: Apollo 11 </h3>
-<h3>Website Name: Footy Couch </h3>
+<h3>Website Name: Footycouch </h3>
 <h3>Poster: <a href="https://drive.google.com/file/d/1pIYCrQmmzSWMAksDJMudWo5JUo5DdDGJ/view?usp=share_link">Click Here</a> </h3>
 <h3>Video: <a href="https://docs.google.com/document/d/1FS3BmUL0JiJpI5zdzQNuMKPjNf5VyrZxhjy-TJHDItw/edit?usp=sharing">Click Here</a></h3>
 <h3>Web App: <a href="https://footycouch.vercel.app/">Click Here</a></h3>
@@ -45,24 +45,67 @@ As football fans, we want to compete against each other in a fun and engaging wa
 As football fans and people in general, we want to have something to have fun with in the middle of our hectic activities.
 
 <h2>Proposed Core Feature</h2>
-<p>1. Allow users to create an account and log in.</p>
-<p>2. Allow users to customize their username, profile picture, and bio.</p>
-<p>3. Notify the users about football match schedule</p>
-<p>4. Allow users to pick their players and create their teams.</p>
-<p>5. Allow users to create leagues.</p>
-<p>6. Allow users to see each other’s lineup.</p>
-<p>7. Allow users to look through their accumulated points.</p>
-<p>8. Allow users to look through the standings based on their accumulated points.</p>
-<p>9. Allow users to follow each other.</p>
-<p>10. Allow users to select a captain and vice-captain for the lineup.</p>
-<p>11. Allow auto-substitution when the player is not playing for the given game.</p>
-<p>12. Allow users to post football-related content.</p>
-<p>13. Allow users to like and comment on other posts.</p>
-<p>14. Allow users to see their post history.</p>
-<p>15. Allow users to see their players’ statistics.</p>
-<p>16. Allow users to get achievements after accomplishing some tasks.</p>
+<ol>
+  <li>Allow users to create an account and log in.</li>
+  <li>Allow users to create log out.</li>
+  <li>Allow users to customize their profile picture and bio.</li>
+  <li>Allow users to view their own profile.</li>
+  <li>Allow users to view each other's profiles.</li>
+  <li>Allow users to select their players and create their teams.</li>
+  <li>Allow users to transfer their players.</li>
+  <li>Allow users to view their transfer history.</li>
+  <li>Allow users to view each other's transfer history.</li>
+  <li>Allow users to select a captain and vice-captain for the lineup.</li>
+  <li>Allow users to view players' statistics.</li>
+  <li>Allow users to browse the match schedule.</li>
+  <li>Allow users to view each other's lineups.</li>
+  <li>Allow users to check their accumulated points.</li>
+  <li>Allow users to view the standings based on accumulated points.</li>
+  <li>Allow users to follow each other.</li>
+  <li>Allow users to view their followers and followings.</li>
+  <li>Allow users to view each other's followers and followings.</li>
+  <li>Allow users to post football-related content.</li>
+  <li>Allow users to view their post history.</li>
+  <li>Allow users to like and comment on other posts.</li>
+  <li>Allow users to view their own posts on the home page.</li>
+  <li>Allow users to view posts from the users they follow on the home page.</li>
+</ol>
+
+
+<h2> Finished Core Feature</h2>
+<ol>
+  <li>Allow users to create an account and log in.</li>
+  <li>Allow users to create log out.</li>
+  <li>Allow users to customize their profile picture and bio.</li>
+  <li>Allow users to view their own profile.</li>
+  <li>Allow users to select their players and create their teams.</li>
+  <li>Allow users to transfer their players.</li>
+  <li>Allow users to post football-related content.</li>
+  <li>Allow users to view their post history.</li>
+  <li>Allow users to view their own posts on the home page.</li>
+</ol>
+
+<h2> Unfinished Core Feature</h2>
+<ol>
+  <li>Allow users to view each other's profiles.</li>
+  <li>Allow users to view their transfer history.</li>
+  <li>Allow users to view each other's transfer history.</li>
+  <li>Allow users to select a captain and vice-captain for the lineup.</li>
+  <li>Allow users to view players' statistics.</li>
+  <li>Allow users to browse the match schedule.</li>
+  <li>Allow users to view each other's lineups.</li>
+  <li>Allow users to check their accumulated points.</li>
+  <li>Allow users to view the standings based on accumulated points.</li>
+  <li>Allow users to follow each other.</li>
+  <li>Allow users to view their followers and followings.</li>
+  <li>Allow users to view each other's followers and followings.</li>
+  <li>Allow users to like and comment on other posts.</li>
+  <li>Allow users to view posts from the users they follow on the home page.</li>
+</ol>
 
 <h2>Report</h2>
 <h3>Milestone 1 Report: <a href="https://docs.google.com/document/d/1FS3BmUL0JiJpI5zdzQNuMKPjNf5VyrZxhjy-TJHDItw/edit?usp=sharing">Click Here</a></h3>
-
-
+<h3>
+    Milestone 2 Report: <a
+                           href="https://docs.google.com/document/d/1pZ8DVxMFURBEiVcORr52ldsAvSXySRoMr-c8ZxeJin4/edit?usp=sharing">Click Here</a>
+</h3>

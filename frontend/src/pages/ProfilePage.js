@@ -105,8 +105,9 @@ export default function ProfilePage({setToken}) {
             Followings = (await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data;
             Followers = (await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data;
             try {
+                const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
                 if(imageResp.status !== 500) {
-                    const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
+                    
                     ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
                 } else {
                     ProfilePicture = null;

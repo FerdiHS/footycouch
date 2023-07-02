@@ -17,8 +17,11 @@ const {
     changeCertainPlayer,
     createPost,
     getUserPost,
+    updateUserProfilePictureByUsername,
+    getUserProfilePictureByUsername,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
+const {cloudinary} = require("../config/cloudinary.js");
 const fs = require('fs');
 const path = require('path');
 
@@ -113,46 +116,49 @@ module.exports = {
     },
 
     uploadImageUsers: (req, res) => {
-        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const base64Image = req.body.image;
         const username = req.params.username;
-        const imageBuffer = Buffer.from(base64Image, "base64");
-        const imagePath = path.join(__dirname, "..", "assets", "profile", username + ".jpg");
-
-        // Write the image buffer to the file system
-        fs.writeFile(imagePath, imageBuffer, (err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({
-                    message: "Error saving the image."
-                });
-            } else {
-                res.status(200).json({
-                    message: "Image saved successfully."
-                });
+        const image = req.body.image;
+        cloudinary.v2.uploader.upload(
+            image,
+            {
+                folder: "footycouch/profile picture",
+                public_id: username
+            },
+            (err, results) => {
+                if(err) {
+                    console.log(err);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return updateUserProfilePictureByUsername(username, results.secure_url, (error, result) => {
+                    if(error) {
+                        console.log(error);
+                        return res.status(403).json({
+                            message: "Database connection error"
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Image saved successfuly"
+                    });
+                })
             }
-        });
+        );
     },
     
     getImageUsers: (req, res) => {
-        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
-        const imagePath = path.join(__dirname, "..", "assets", "profile", username + ".jpg");
-        // Read the image file
-        fs.readFile(imagePath, (err, data) => {
-          if (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Error retrieving the image.'
-            });
-          } else {
-            // Convert the image data to base64
-            const base64Image = Buffer.from(data).toString('base64');
-            res.status(200).json({
+        getUserProfilePictureByUsername(username, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
                 message: "Image retrieved successfully",
-                image: base64Image
-            });
-          }
+                image: results.profile_picture
+            })
         });
     },
 
@@ -540,8 +546,33 @@ module.exports = {
 
     addPost: (req, res) => {
        const id = req.params.id;
-       const content = req.body.content;
-       const image = req.body.image; 
+       const {content, image} = req.body;
+       cloudinary.v2.uploader.upload(
+        image,
+        {
+            folder: "footycouch/post"
+        },
+        (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return createPost(id, content, results.secure_url, (error, result) => {
+                if(error) {
+                    console.log(error);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    message: "Post added successfully"
+                });
+            });
+        }
+       );
+       /*
        createPost(id, content, image, (err, results) => {
         if(err) {
             console.log(err);
@@ -553,6 +584,7 @@ module.exports = {
             message: "Post added successfully"
         });
        });
+       */
     },
 
     getUserPost: (req, res) => {

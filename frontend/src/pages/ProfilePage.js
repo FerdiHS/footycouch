@@ -24,6 +24,7 @@ export default function ProfilePage({setToken}) {
             bio = users.bio;
             formation = users.formation;
             points = users.points;
+            ProfilePicture = users.profile_picture;
             players = ([
                 {
                     position: "gk_1",
@@ -104,17 +105,6 @@ export default function ProfilePage({setToken}) {
             players = updatedPlayers;
             Followings = (await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data;
             Followers = (await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data;
-            try {
-                const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
-                if(imageResp.status !== 500) {
-                    
-                    ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
-                } else {
-                    ProfilePicture = null;
-                }
-            } catch (err) {
-                ProfilePicture = null;
-            }
             const postsResp = (await axios.get("https://footycouch-production.up.railway.app/users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {

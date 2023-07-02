@@ -79,7 +79,33 @@ module.exports = {
                 }
                 return callBack(null, results);
             }
-        )
+        );
+    },
+
+    updateUserProfilePictureByUsername: (username, url, callBack) => {
+        pool.query(
+            "UPDATE users set profile_picture=? WHERE username=?;",
+            [url, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getUserProfilePictureByUsername: (username, callBack) => {
+        pool.query(
+            "SELECT profile_picture FROM users WHERE username = ?;",
+            [username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results[0]);
+            }
+        );
     },
 
     checkFollow: (follower, followed, callBack) => {

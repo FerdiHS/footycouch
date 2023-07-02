@@ -34,6 +34,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `bio` text DEFAULT NULL,
+  'profile_picture' varchar(255) DEFAULT NULL,
   `balance` int(11) DEFAULT 1000,
   `points` int(11) DEFAULT 0,
   `formation` varchar(256) DEFAULT '4-3-3',

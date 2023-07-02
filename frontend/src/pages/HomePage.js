@@ -13,14 +13,7 @@ export default function HomePage({setToken}) {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             id = users.id;
-            try {
-                const imageResp = await axios.get("https://footycouch-production.up.railway.app/users/" + username + "/image");
-                if(imageResp.status !== 500) {
-                    ProfilePicture = `data:image/jpeg;base64,${imageResp.data.image}`;
-                }
-            } catch (err) {
-                ProfilePicture = null;
-            }
+            ProfilePicture = users.profile_picture;
             const postsResp = (await axios.get("https://footycouch-production.up.railway.app//users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {

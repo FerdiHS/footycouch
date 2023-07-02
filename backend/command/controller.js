@@ -19,6 +19,7 @@ const {
     getUserPost,
     updateUserProfilePictureByUsername,
     getUserProfilePictureByUsername,
+    updateUserBackgroundPictureByUsername,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -160,6 +161,37 @@ module.exports = {
                 image: results.profile_picture
             })
         });
+    },
+
+    uploadBackgroundImageUsers: (req, res) => {
+        const username = req.params.username;
+        const image = req.body.image;
+        cloudinary.v2.uploader.upload(
+            image,
+            {
+                folder: "footycouch/background picture",
+                public_id: username
+            },
+            (err, results) => {
+                if(err) {
+                    console.log(err);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return updateUserBackgroundPictureByUsername(username, results.secure_url, (error, result) => {
+                    if(error) {
+                        console.log(error);
+                        return res.status(403).json({
+                            message: "Database connection error"
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Image saved successfuly"
+                    });
+                })
+            }
+        );
     },
 
     follow: (req, res) => {

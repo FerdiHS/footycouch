@@ -27,6 +27,7 @@ const {
     transfer,
     addPost,
     getUserPost,
+    uploadBackgroundImageUsers,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -37,6 +38,7 @@ router.get("/users", getUsers); // Get all users' data
 router.get("/users/:username", getUserByName); // Get a certain user with given username, require "username"
 router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image" (in base64)
 router.get("/users/:username/image", getImageUsers); // Get the user's profile picture in base64
+router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image" (in base64)
 router.post("/users/follow", follow); // Make a user follow another user, require "follower" and "followed"
 router.delete("/users/follow", unfollow); // Make a user unfollow another user, require "follower" and "followed"
 router.get("/users/following/:id", getUserFollowing); // Get the user's following list

@@ -15,6 +15,7 @@ export default function ProfilePage({setToken}) {
     var Followings = data.Followings;
     var Followers = data.Followers;
     var ProfilePicture = data.ProfilePicture;
+    var backgroundPicture = data.backgroundPicture;
     var Posts = data.Posts;
     const username = useToken().token;
     const loadUser = async () => {
@@ -25,6 +26,7 @@ export default function ProfilePage({setToken}) {
             formation = users.formation;
             points = users.points;
             ProfilePicture = users.profile_picture;
+            backgroundPicture = users.background_picture;
             players = ([
                 {
                     position: "gk_1",
@@ -117,7 +119,7 @@ export default function ProfilePage({setToken}) {
                 })
             );
             Posts = updatedPosts.reverse();
-            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, Posts: Posts})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts})
         } catch (err) {
             console.log(err);
         }

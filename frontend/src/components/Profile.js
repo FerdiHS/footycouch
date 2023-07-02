@@ -7,7 +7,7 @@ import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
 
 export default function Profile({passData}) {
-    const [backgroundPicture, setBackgroundPicture] = useState(test);
+    const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
     const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = useToken().token;
     const id = passData.id;
@@ -84,6 +84,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
+          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result.split(',')[1]});
           setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);

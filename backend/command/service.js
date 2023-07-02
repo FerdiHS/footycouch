@@ -108,6 +108,19 @@ module.exports = {
         );
     },
 
+    updateUserBackgroundPictureByUsername: (username, url, callBack) => {
+        pool.query(
+            "UPDATE users set background_picture=? WHERE username=?;",
+            [url, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     checkFollow: (follower, followed, callBack) => {
         pool.query(
             "SELECT * FROM follows WHERE follower_id=? AND followed_id=?;",

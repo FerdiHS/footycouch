@@ -1,7 +1,35 @@
 import { useState } from "react";
 import logo from "../assets/MUN Logo.png";
-export default function TeamManagement({login, nowPage, handlenowPage}) {
-    const [formation, setformation] = useState("4-3-3");
+import { useNavigate } from "react-router-dom";
+import useToken from "./Token";
+import axios from "axios";
+export default function TeamManagement({passPlayer, passFormation, passPoint}) {
+    const navigate = useNavigate();
+    const [formation, setformation] = useState(passFormation);
+    const username = useToken().token;
+    const clubCode = {
+        "": "No",
+        "ARS": "Arsenal",
+        "AVL": "Aston Villa",
+        "BRE": "Brentford",
+        "BOU": "Bournemouth",
+        "BHA": "Brighton",
+        "SOU": "Southampton",
+        "CHE": "Chelsea",
+        "CRY": "Crystal Palace",
+        "FUL": "Fulham",
+        "EVE": "Everton",
+        "LEE": "Leeds",
+        "LEI": "Leichester",
+        "LIV": "Liverpool",
+        "MCI": "Manchester City",
+        "MUN": "Manchester United",
+        "NEW": "Newcastle",
+        "TOT": "Tottenham Hotspur",
+        "WHU": "Westham",
+        "WOL": "Wolferhampton",
+        "NFO": "Nottingham Forest"
+    }
     const [allformation, setallformation] = useState([
         "4-4-2",
         "4-3-3",
@@ -12,84 +40,8 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         "5-3-3"
     ]);
     const [now, setnow] = useState(-1);
-    const [score, setscore] = useState(0);
-    const [player, setplayer] = useState([
-        {
-            name: "D. de Gea",
-            position: "GK",
-            team: "MUN"
-        },
-        {
-            name: "J. Butland",
-            position: "GK",
-            team: "MUN"
-        },
-        {
-            name: "A. Wan Bissaka",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "H. Maguire",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "R.Varane",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "L. Shaw",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "V. Lindelof",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "Casemiro",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "C. Eriksen",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "B. Fernandes",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "Fred",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "K. De Bruyne",
-            position: "MF",
-            team: "MCI"
-        },
-        {
-            name: "J. Sancho",
-            position: "FW",
-            team: "MUN"
-        },
-        {
-            name: "A. Martial",
-            position: "FW",
-            team: "MUN"
-        },
-        {
-            name: "M. Rashford",
-            position: "FW",
-            team: "MUN"
-        },
-    ])
+    const [points, setpoints] = useState(passPoint);
+    const [player, setplayer] = useState(passPlayer);
     const [gk, setgk] = useState(player[0]);
     const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
     const [midfield, setmidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
@@ -105,97 +57,91 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
         }
     };
     const handleChangePlayer = (a, b) => () => {
-        if (now != -1) {
+        if (now !== -1) {
             if (a === 0) {
-                if (bench[now].position === "GK") {
+                if (bench[now].position === "GKP") {
                     const temp = gk;
-                    setgk(bench[now])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setgk(bench[now]);
+                    setplayer([bench[now], temp, ...player.slice(2)]);
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "GK");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "GKP");
                 }
             }
             if (a === 1) {
-                if (bench[now].position === "CB") {
+                if (bench[now].position === "DEF") {
                     const temp = defender[b];
                     setdefender([
                         ...defender.slice(0, b),
                         bench[now],
                         ...defender.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 2 + b),
+                        bench[now],
+                        ...player.slice(2 + b + 1, 2 + now + parseInt(formation.charAt(0)) - 1),
+                        temp,
+                        ...player.slice(2 + now + parseInt(formation.charAt(0)))
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "CB");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "DEF");
                 }
             }
             if (a === 2) {
-                if (bench[now].position === "MF") {
+                if (bench[now].position === "MID") {
                     const temp = midfield[b];
                     setmidfield([
                         ...midfield.slice(0, b),
                         bench[now],
                         ...midfield.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 7 + b),
+                        bench[now],
+                        ...player.slice(7 + b + 1, 7 + now - (1 + 5 - parseInt(formation.charAt(0))) + parseInt(formation.charAt(2))),
+                        temp,
+                        ...player.slice(7 + now - (5 - parseInt(formation.charAt(0))) + parseInt(formation.charAt(2)))
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "MF");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "MID");
                 }
             }
             if (a === 3) {
-                if (bench[now].position === "FW") {
+                if (bench[now].position === "FWD") {
                     const temp = forward[b];
                     setforward([
                         ...forward.slice(0, b),
                         bench[now],
                         ...forward.slice(b + 1)
                     ])
-                    if (temp.name !== "") {
-                        setbench([
-                            ...bench.slice(0, now),
-                            temp,
-                            ...bench.slice(now + 1)
-                        ]);
-                    } else {
-                        setbench([
-                            ...bench.slice(0, now),
-                            ...bench.slice(now + 1)
-                        ]);
-                    }
+                    setplayer([
+                        ...player.slice(0, 12 + b),
+                        bench[now],
+                        ...player.slice(12 + b + 1, 12 + now - (1 + parseInt(formation.charAt(4))) + parseInt(formation.charAt(4))),
+                        temp,
+                        ...player.slice(12 + now)
+                    ])
+                    setbench([
+                        ...bench.slice(0, now),
+                        temp,
+                        ...bench.slice(now + 1)
+                    ]);
                 } else {
-                    window.alert("You cannot assign " + bench[now].position + " to " + "FW");
+                    window.alert("You cannot assign " + bench[now].position + " to " + "FWD");
                 }
             }
         }
@@ -215,6 +161,30 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
         }
     }
+    const handleSave = () => {
+        let playerId = [];
+        for (let i = 0; i < 15; i++) {
+            playerId[i] = player[i].id;
+        }
+        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {formation,
+        "gk_1":playerId[0], 
+        "gk_2":playerId[1],
+        "def_1":playerId[2],
+        "def_2":playerId[3],
+        "def_3":playerId[4],
+        "def_4":playerId[5],
+        "def_5":playerId[6],
+        "mid_1":playerId[7],
+        "mid_2":playerId[8],
+        "mid_3":playerId[9],
+        "mid_4":playerId[10],
+        "mid_5":playerId[11],
+        "fow_1":playerId[12],
+        "fow_2":playerId[13],
+        "fow_3":playerId[14]})
+        .catch(err => console.log(err));
+        window.alert("Successfully Saved");
+    }
     return (
         <div class ="container2">
             <div>
@@ -224,67 +194,44 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                 <div class="fieldcon">
                     <div class="line">
                         <div class="trans"></div>
-                        {   gk.name === ""
-                                ? ( <label>
-                                    <button class = "Player" onClick={handleChangePlayer(0,0)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {gk.team + "GK"} onClick={handleChangePlayer(0,0)}></button>{gk.name}</label>)           
-                        }
+                        <label class="playerTeam">
+                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            {gk.name}
+                        </label>
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   defender.map((player, i) => {
-                            return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(1,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(1,i)}></button>
-                                    {player.name}
-                                    </label>)   
+                            return  <label class="playerTeam">
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(1,i)}/>
+                                        {player.name}
+                                    </label>   
                         })          
                         }
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   midfield.map((player, i) => {
-                            return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(2,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(2,i)}></button>
-                                    {player.name}
-                                    </label>)   
+                            return  <label class="playerTeam">
+                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(2,i)}/>
+                                        {player.name}
+                                    </label>   
                         })          
                         }
                         <div class="trans"></div>
                     </div>
-                    <div class="spacing3"></div>
+                    <div class="spacing6"></div>
                     <div class="line">
                         <div class="trans"></div>
                         {   forward.map((player, i) => {
-                        return player.name === ""
-                                ? ( <label key = {i}>
-                                    <button class ="Player" onClick={handleChangePlayer(3,i)}></button>
-                                    No Player
-                                    </label>
-                                    )
-                                : (<label>
-                                    <button class = {player.team + "Player"} onClick={handleChangePlayer(3,i)}></button>
+                        return  <label class="playerTeam">
+                                    <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(3,i)}/>
                                     {player.name}
-                                    </label>)   
+                                </label>
                         })          
                         }
                         <div class="trans"></div>
@@ -294,15 +241,17 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                         <h5>Bench</h5>
                         <div class="line2">
                             {   bench.map((player, i) => {
-                                return (player.position === "GK"
-                                    ? (<label>{player.position}
-                                        <button class ={i === now ? (player.team + "GKBenchClick") : (player.team + "GKBench")} onClick ={handleSub(i)}></button>
-                                        {player.name}
+                                return player.position === "GKP"
+                                    ?   (<label class="playerTeam">
+                                            {player.position}
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
+                                            {player.name}
                                         </label>)
-                                    : (<label>{player.position}
-                                        <button class ={i === now ? (player.team + "BenchClick") : (player.team + "Bench")} onClick ={handleSub(i)}></button>
-                                        {player.name}
-                                        </label>))   
+                                    :   (<label class="playerTeam">
+                                            {player.position}
+                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleSub(i)}/>
+                                            {player.name}
+                                        </label>)
                             })          
                             }
 
@@ -329,19 +278,19 @@ export default function TeamManagement({login, nowPage, handlenowPage}) {
                 </label>
                 <div class="spacing4"></div>
                 <div class= "point">
-                    <h1>{score}</h1>
+                    <h1>{points}</h1>
                     <>Points</>
                 </div>
                 <div class="spacing4"></div>
                 <div class="point2">
                     Your Team
-                    <img src={logo}/>
+                    <img src={logo} alt=""/>
                     <p>Change Team</p>
                 </div>
                 <div class="spacing4"></div>
-                <button class="button3">Transfer</button>
+                <button class="button3" onClick={() => navigate("/transfer")}>Transfer</button>
                 <div class="spacing4"></div>
-                <button class="button3">Save</button>
+                <button class="button3" onClick={handleSave}>Save</button>
             </div>
         </div>
     );

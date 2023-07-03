@@ -1,120 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../assets/Avatar2.png";
-import Avatar2 from "../assets/field.png";
+import test from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
-export default function Profile() {
-    const [backgroundPicture, setbackgroundPicture] = useState(test);
-    const [profilePicture, setprofilePicture] = useState(Avatar2);
-    const [username, setusername] = useState("San Tokyo");
-    const [bio, setbio] = useState("SIUUUUUUU");
-    const [posts, setposts] = useState([]);
-    const [followers, setfollowers] = useState([]);
-    const [following, setfollowing] = useState([]);
-    const [points, setPoints] = useState(0);
+import TextInputPost from "./TextInputPost";
+import useToken from "./Token";
+
+export default function Profile({passData}) {
+    const [backgroundPicture, setBackgroundPicture] = useState(test);
+    const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
+    const username = useToken().token;
+    const id = passData.id;
+    const [bio, setbio] = useState(passData.bio);
+    const [followers, setfollowers] = useState(passData.Followers);
+    const [followings, setfollowing] = useState(passData.Followings);
+    const [points, setPoints] = useState(passData.points);
     const highestPoints = 0;
     const [rank, setrank] = useState(1);
     const highestRank = 1;
-    const [player, setplayer] = useState([
-        {
-            name: "D. de Gea",
-            position: "GK",
-            team: "MUN"
-        },
-        {
-            name: "J. Butland",
-            position: "GK",
-            team: "MUN"
-        },
-        {
-            name: "A. Wan Bissaka",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "H. Maguire",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "R.Varane",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "L. Shaw",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "V. Lindelof",
-            position: "CB",
-            team: "MUN"
-        },
-        {
-            name: "Casemiro",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "C. Eriksen",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "B. Fernandes",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "Fred",
-            position: "MF",
-            team: "MUN"
-        },
-        {
-            name: "K. De Bruyne",
-            position: "MF",
-            team: "MCI"
-        },
-        {
-            name: "J. Sancho",
-            position: "FW",
-            team: "MUN"
-        },
-        {
-            name: "A. Martial",
-            position: "FW",
-            team: "MUN"
-        },
-        {
-            name: "M. Rashford",
-            position: "FW",
-            team: "MUN"
-        },
-    ]);
+    const [posts, setPosts] = useState(passData.Posts);
+    const [player, setplayer] = useState(passData.players);
     const clubCode = {
+        "": "No",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
         "BRE": "Brentford",
         "BOU": "Bournemouth",
-        "BRI": "Brighton",
+        "BHA": "Brighton",
         "SOU": "Southampton",
         "CHE": "Chelsea",
+        "CRY": "Crystal Palace",
         "FUL": "Fulham",
         "EVE": "Everton",
         "LEE": "Leeds",
-        "LEI": "Leichester City",
+        "LEI": "Leichester",
         "LIV": "Liverpool",
         "MCI": "Manchester City",
         "MUN": "Manchester United",
         "NEW": "Newcastle",
         "TOT": "Tottenham Hotspur",
         "WHU": "Westham",
-        "WOL": "Wolverhampton",
+        "WOL": "Wolferhampton",
         "NFO": "Nottingham Forest"
     }
-    const [formation, setformation] = useState("4-3-3");
+    const [formation, setformation] = useState(passData.formation);
     const [gk, setgk] = useState(player[0]);
     const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
     const [midfield, setmidfield] = useState([...player.slice(7,7 + parseInt(formation.charAt(2)))]);
@@ -122,7 +51,17 @@ export default function Profile() {
     const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                     ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
-    
+    const [changeBio, setchangeBio] = useState(false);
+    const [bioInput, setbioInput] = useState(bio);
+    const bioChange = e => {
+        setbioInput(e.target.value);
+    }
+    const bioSave = () => {
+        setbio(bioInput);
+        setchangeBio(false);
+        axios.post("https://footycouch-production.up.railway.app/users/update/" + username, {bio})
+        .catch(err => console.log(err));
+    }
     const ppUpload = e => {
         e.preventDefault();
         const reader = new FileReader();
@@ -131,7 +70,9 @@ export default function Profile() {
             return;
         }
         reader.onloadend = () => {
-          setprofilePicture(reader.result);
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result.split(',')[1]});
+            console.log(reader.result);
+            setProfilePicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
@@ -143,7 +84,7 @@ export default function Profile() {
             return;
         }
         reader.onloadend = () => {
-          setbackgroundPicture(reader.result);
+          setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
@@ -160,27 +101,31 @@ export default function Profile() {
                 <div class="profilePicture"> 
                     <img src={profilePicture}></img>
                 </div>
-                <input type= "file" class = "camerabutton" onChange={ppUpload}/>
+                <label htmlFor="upload-profilepicture" class="camerabutton" />
+                <input type= "file" id="upload-profilepicture" onChange={ppUpload}/>
                 <div class="name">
                     <h1>{username}</h1>
-                    <p>{bio}</p>
-                    <button class = "editProfile"><h4>Edit profile</h4></button>
+                    { changeBio
+                        ? <><input type="text" value={bioInput} onChange={bioChange}/><button onClick={bioSave}>Save</button></>
+                        : <p>{bio}</p>
+                    }
+                    <button class = "editProfile" onClick = {() => setchangeBio(true)}><h4>Edit profile</h4></button>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{posts.length}</h3>
                     <h4>Posts</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followers.length}</h3>
                     <h4>Followers</h4>
                 </div>
                 <div class="followers">
-                    <h3>0</h3>
+                    <h3>{followings.length}</h3>
                     <h4>Following</h4>
                 </div>
                 <div class="wrapback">
-                    <div class="editbackground"><h4>Edit cover photo</h4></div>
-                    <input type="file" onChange={bpUpload}/>
+                    <label htmlFor="upload-backgroundPicture" class = "editbackground"><h4>Edit Cover Photo</h4></label>
+                    <input type= "file" id="upload-backgroundPicture" onChange={bpUpload}/>
                 </div>
             </div>
         </div>
@@ -249,6 +194,9 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="post">
+                    <TextInputPost profilePicture={profilePicture} username={username} id={id} posts={posts}/>
                 </div>
             </div>
         </div>

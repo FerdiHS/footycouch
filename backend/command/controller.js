@@ -12,9 +12,16 @@ const {
     addTeamByUsername,
     updateUserProfileById,
     updateUserProfileByUsername,
-    // uploadImageUser
+    getUserFollower,
+    createTransfer,
+    changeCertainPlayer,
+    createPost,
+    getUserPost,
+    updateUserProfilePictureByUsername,
+    getUserProfilePictureByUsername,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
+const {cloudinary} = require("../config/cloudinary.js");
 const fs = require('fs');
 const path = require('path');
 
@@ -24,7 +31,7 @@ const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 module.exports = {
     signup: (req, res) => {
         const body = req.body;
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         if(body.password !== body.confirmPassword) {
             return res.status(403).json({
                 message: "Password and Confirm Passowrd is different"
@@ -43,13 +50,13 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Account created"
             });
         });
     },
 
     getUsers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         getUsers((err, results) => {
             if(err) {
                 console.log(err);
@@ -62,8 +69,8 @@ module.exports = {
     },
 
     getUserByName: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.params.username;
         getUserByName(username, (err, results) => {
             if(err) {
                 console.log(err);
@@ -81,7 +88,7 @@ module.exports = {
     },
 
     login: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const body = req.body;
         getUserByName(body.username, (err, results) => {
             if(err) {
@@ -109,50 +116,54 @@ module.exports = {
     },
 
     uploadImageUsers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const base64Image = req.body.image;
-        const username = req.body.username;
-        const imageBuffer = Buffer.from(base64Image, "base64");
-        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
-
-        // Write the image buffer to the file system
-        fs.writeFile(imagePath, imageBuffer, (err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).json({
-                    message: "Error saving the image."
-                });
-            } else {
-                res.status(200).json({
-                    message: "Image saved successfully."
-                });
+        const username = req.params.username;
+        const image = req.body.image;
+        cloudinary.v2.uploader.upload(
+            image,
+            {
+                folder: "footycouch/profile picture",
+                public_id: username
+            },
+            (err, results) => {
+                if(err) {
+                    console.log(err);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return updateUserProfilePictureByUsername(username, results.secure_url, (error, result) => {
+                    if(error) {
+                        console.log(error);
+                        return res.status(403).json({
+                            message: "Database connection error"
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Image saved successfuly"
+                    });
+                })
             }
-        });
+        );
     },
     
     getImageUsers: (req, res) => {
-        const username = req.body.username;
-        const imagePath = path.join(__dirname, "..", "assets", "profile picture", username + ".jpg");
-        // Read the image file
-        fs.readFile(imagePath, (err, data) => {
-          if (err) {
-            console.error(err);
-            res.status(500).json({
-                message: 'Error retrieving the image.'
-            });
-          } else {
-            // Convert the image data to base64
-            const base64Image = Buffer.from(data).toString('base64');
-            res.status(200).json({
+        const username = req.params.username;
+        getUserProfilePictureByUsername(username, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
                 message: "Image retrieved successfully",
-                image: base64Image
-            });
-          }
+                image: results.profile_picture
+            })
         });
     },
 
     follow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         checkFollow(follower, followed, (err, results) => {
@@ -175,14 +186,14 @@ module.exports = {
                     });
                 }
                 return res.status(200).json({
-                    data: results
+                    message: "Following successful"
                 });
             })
         });
     },
 
     unfollow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         removeFollow(follower, followed, (err, results) => {
@@ -199,7 +210,7 @@ module.exports = {
     },
 
     checkFollow: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const follower = req.body.follower;
         const followed = req.body.followed;
         checkFollow(follower, followed, (err, results) => {
@@ -216,8 +227,8 @@ module.exports = {
     },
 
     getUserFollowing: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
         getUserFollowing(id, (err, results) => {
             if(err) {
                 console.log(err);
@@ -231,17 +242,33 @@ module.exports = {
         })
     },
 
+    getUserFollower: (req, res) => {
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
+        getUserFollower(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                data: results
+            });
+        })
+    },
+
     getPlayers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        //. res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             res.status(200).json({players: response.data.elements});
         });
     },
 
-     getPlayersById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+    getPlayersById: (req, res) => {
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const id = req.body.id;
+            const id = req.params.id;
             const players = response.data.elements;
             const player = players.find((p) => p.id === parseInt(id));
             if (!player) {
@@ -252,16 +279,16 @@ module.exports = {
     },
 
     getTeams: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             res.status(200).json({teams: response.data.teams});
         });
     },
 
-     getTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+    getTeamById: (req, res) => {
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const id = req.body.id;
+            const id = req.params.id;
             const teams = response.data.teams;
             const team = teams.find((t) => t.id === parseInt(id));
             if (!team) {
@@ -272,9 +299,9 @@ module.exports = {
     },
 
     getTeamByShortName: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
-            const shortName = req.body.shortName;
+            const shortName = req.params.shortName;
             console.log(shortName);
             const teams = response.data.teams;
             const team = teams.find((t) => t.short_name === shortName);
@@ -286,7 +313,7 @@ module.exports = {
     },
 
     getGoalkeepers: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const goalkeepers = players.filter((p) => p.element_type === 1);
@@ -295,7 +322,7 @@ module.exports = {
     },
 
     getDefenders: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const defenders = players.filter((p) => p.element_type === 2);
@@ -304,7 +331,7 @@ module.exports = {
     },
 
     getMidfielders: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const midfielders = players.filter((p) => p.element_type === 3);
@@ -313,7 +340,7 @@ module.exports = {
     },
 
     getFowards: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         fplapi.then(response => {
             const players = response.data.elements;
             const fowards = players.filter((p) => p.element_type === 4);
@@ -322,8 +349,8 @@ module.exports = {
     },
 
     addTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
         const balance = req.body.balance;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
@@ -356,9 +383,9 @@ module.exports = {
     },
 
     addTeamByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
-        const username = req.body.username;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.params.username;
+        const balance = req.params.balance;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -375,7 +402,7 @@ module.exports = {
         const fow_1 = req.body.fow_1;
         const fow_2 = req.body.fow_2;
         const fow_3 = req.body.fow_3;
-        addTeamByUsername(id, username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
+        addTeamByUsername(username, balance, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, 
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
@@ -390,8 +417,8 @@ module.exports = {
     },
 
     setTeamById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -423,8 +450,8 @@ module.exports = {
     },
 
     setTeamByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.params.username;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;
@@ -456,8 +483,8 @@ module.exports = {
     },
 
     updateUserProfileById: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const id = req.body.id;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const id = req.params.id;
         const bio = req.body.bio;
         updateUserProfileById(id, bio, (err, results) => {
             if(err) {
@@ -467,14 +494,14 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Profile updated successfully"
             });
         });
     },
 
     updateUserProfileByUsername: (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const username = req.body.username;
+        // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
+        const username = req.params.username;
         const bio = req.body.bio;
         updateUserProfileByUsername(username, bio, (err, results) => {
             if(err) {
@@ -484,8 +511,92 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                data: results
+                message: "Profile updated successfully"
             });
+        });
+    },
+
+    transfer: (req, res) => {
+        const id = req.params.id;
+        const balance = req.body.balance;
+        const points = req.body.points;
+        const position = req.body.position;
+        const player_in = req.body.player_in;
+        const player_out = req.body.player_out;
+        createTransfer(id, position, player_in, player_out, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+        });
+        changeCertainPlayer(id, balance, points, position, player_in, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Transfer successful"
+            });
+        });
+    },
+
+    addPost: (req, res) => {
+       const id = req.params.id;
+       const {content, image} = req.body;
+       cloudinary.v2.uploader.upload(
+        image,
+        {
+            folder: "footycouch/post"
+        },
+        (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return createPost(id, content, results.secure_url, (error, result) => {
+                if(error) {
+                    console.log(error);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    message: "Post added successfully"
+                });
+            });
+        }
+       );
+       /*
+       createPost(id, content, image, (err, results) => {
+        if(err) {
+            console.log(err);
+            return res.status(403).json({
+                message: "Database connection error"
+            });
+        }
+        return res.status(200).json({
+            message: "Post added successfully"
+        });
+       });
+       */
+    },
+
+    getUserPost: (req, res) => {
+        const id = req.params.id;
+        getUserPost(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
         });
     }
 }

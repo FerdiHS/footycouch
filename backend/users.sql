@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 12:37 PM
+-- Generation Time: Jun 14, 2023 at 01:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,7 +34,8 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `bio` text DEFAULT NULL,
-  `balance` int(11) DEFAULT 100,
+  'profile_picture' varchar(255) DEFAULT NULL,
+  `balance` int(11) DEFAULT 1000,
   `points` int(11) DEFAULT 0,
   `formation` varchar(256) DEFAULT '4-3-3',
   `gk_1` int(11) DEFAULT NULL,

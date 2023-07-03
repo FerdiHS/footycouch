@@ -20,12 +20,12 @@ export default function HomePage({setToken}) {
                     post.like = [];
                     post.text = post.content;
                     post.time = "";
-                    post.image = postsResp.image;
+                    post.image = post.image;
                     return post;
                 })
             );
-            Posts = updatedPosts;
-            setdata({id: id, Posts: Posts, ProfilePicture: ProfilePicture});
+            Posts = updatedPosts.reverse();
+            setdata({id, Posts, ProfilePicture});
         } catch (err) {
             console.log(err);
         }

@@ -15,6 +15,7 @@ export default function TeamManagementPage({setToken}) {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             formation = users.formation;
+            points = users.points;
             players = ([
                 {
                     position: "GKP",

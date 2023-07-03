@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import useToken from "./Token";
-export default function Transfer({passTransfer, passPlayers, passMoney}) {
+export default function Transfer({id, passPoints, passTransfer, passPlayers, passMoney}) {
     const username = useToken().token;
+    const [points, setPoints] = useState(passPoints);
     const [filteredPlayer, setfilteredPlayer] = useState("");
     const [money, setmoney] = useState(passMoney);
     const [transfer, setTransfer] = useState(passTransfer)
@@ -49,12 +50,28 @@ export default function Transfer({passTransfer, passPlayers, passMoney}) {
                 return;
             }
         }
+        let initialPLayerId = [];
+        for (let i = 0; i < 15; i++) {
+            initialPLayerId[i] = passPlayers[i].id;
+        }
         let playerId = [];
         for (let i = 0; i < 15; i++) {
             playerId[i] = player[i].id;
         }
+        const positions = ["gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", "fow_3"]
+        const transfer_in = playerId.filter(x => !initialPLayerId.includes(x));
+        const transfer_out = initialPLayerId.filter(x => !playerId.includes(x));
+        transfer_out.forEach((player_out, i) => {
+            const index_out = initialPLayerId.indexOf(player_out);
+            const position = positions[index_out];
+            const player_in = transfer_in[i];
+            const index_in = playerId.indexOf(player_in);
+            // setmoney(money + passPlayers[index_out].now_cost - player[index_in].now_cost);
+            axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/transfer", {balance: money, points, position, player_in, player_out})
+            .catch(err => console.log(err));
+        });
         let formation = "4-4-2";
-        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {"balance":money, formation,
+        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {balance: money, formation,
         "gk_1":playerId[0], 
         "gk_2":playerId[1],
         "def_1":playerId[2],

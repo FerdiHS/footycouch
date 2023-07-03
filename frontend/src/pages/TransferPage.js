@@ -4,13 +4,16 @@ import { useState } from "react";
 import axios from "axios";
 import useToken from "../components/Token";
 export default function TransferPage({setToken}) {
-    const [data, setdata] = useState({});
+    const [data, setData] = useState({});
     var players = data.players;
     var transfer = data.transfer;
     const username = useToken().token;
      const loadUser = async () => {
          try {
              const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+             const id = users.id;
+             const points = users.points;
+             const balance = users.balance;
              players = ([
                  {
                      position: "GKP",
@@ -73,11 +76,11 @@ export default function TransferPage({setToken}) {
                      id: users.fow_3
                  },
              ]);
-             var usedmoney = 0;
              const updatedPlayers = await Promise.all(
                  players.map(async p => {
                      if (p.id === null) {
                          p.name = "";
+                         p.teamId = 0;
                          p.team = "";
                          p.now_cost = 0;
                          p.clicked = "";
@@ -88,8 +91,8 @@ export default function TransferPage({setToken}) {
                      p.teamId = playerResp.team;
                      const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
                      p.team = teamResp.short_name;
+                     p.now_cost = playerResp.now_cost;
                      p.clicked = "Clicked";
-                     usedmoney = usedmoney + p.now_cost;
                      return p;
                  })
              );
@@ -157,8 +160,7 @@ export default function TransferPage({setToken}) {
              );
              players = updatedPlayers;
              transfer = {"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer};
-             usedmoney = 1000 - usedmoney;
-             setdata({players: players, transfer: transfer, money: usedmoney});
+             setData({id, points, players, transfer, balance});
          } catch (err) {
              console.log(err);
          }
@@ -167,13 +169,10 @@ export default function TransferPage({setToken}) {
         loadUser();
         return <><HeaderWebAfterLog setToken={setToken}/></>;
     } else {
-        for (let i = 0; i < 15; i++) {
-            console.log(players[i].team);
-        }
         return (
                 <div>
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Transfer passTransfer = {transfer} passPlayers = {players} passMoney = {data.money}/>
+                    <Transfer id = {data.id} passPoints = {data.points} passTransfer = {transfer} passPlayers = {players} passMoney = {data.balance}/>
                 </div>
             );
     }

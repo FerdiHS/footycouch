@@ -3,17 +3,14 @@ import Transfer from "../components/Transfer.js";
 import { useState } from "react";
 import axios from "axios";
 import useToken from "../components/Token";
+import Loading from "../components/Loading.js";
 export default function TransferPage({setToken}) {
     const [data, setData] = useState({});
     var players = data.players;
     var transfer = data.transfer;
-    var shortTeamById = [];
-    var forwardTransfer = [];
-    var midfieldTransfer = [];
-    var defenderTransfer = [];
-    var goalkeeperTransfer = [];
     const username = useToken().token;
      const loadUser = async () => {
+         try {
              const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
              const id = users.id;
              const points = users.points;
@@ -80,12 +77,8 @@ export default function TransferPage({setToken}) {
                      id: users.fow_3
                  },
              ]);
-             shortTeamById[0] = "";
-             const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
-             teamResp.forEach(x => {
-                 shortTeamById[x.id] = x.short_name;
-             });
-             const updatedPlayers = await Promise.all(
+            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            var updatedPlayers = await Promise.all(
                  players.map(async p => {
                      if (p.id === null) {
                          p.name = "";
@@ -95,94 +88,103 @@ export default function TransferPage({setToken}) {
                          p.clicked = "";
                          return p;
                      }
-                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
-                     p.name = playerResp.web_name;
-                     p.team = shortTeamById[playerResp.team];
-                     p.now_cost = playerResp.now_cost;
-                     p.clicked = "Clicked";
                      return p;
                  })
              );
-             
-             forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/foward")).data;
-             const updatedForwardTransfer = [];
-             for(let i = 0; i < 10; i++) {
-                const p = forwardTransfer[i];
-                p.name = p.web_name;
-                p.team = shortTeamById[p.team];
-                if (p.name === updatedPlayers[12].name || p.name === updatedPlayers[13].name || p.name === updatedPlayers[14].name) {
-                    p.clicked = "Clicked";
+             const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/foward")).data;
+             const updatedForwardTransfer = await Promise.all(
+                 forwardTransfer.map(async p => {
+                     p.name = p.web_name;
+                     p.teamId = p.team;
+                     const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                     p.team = teamResp.short_name;
+                     p.position = "FWD";
+                     if (p.id === updatedPlayers[12].id || p.id === updatedPlayers[13].id || p.id === updatedPlayers[14].id) {
+                         p.clicked = "Clicked";
+                     } else {
+                         p.clicked = "";
+                     }
+                     return p;
+                 })
+             );
+             const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder")).data;
+             const updatedMidfieldTransfer = await Promise.all(
+                 midfieldTransfer.map(async p => {
+                     p.name = p.web_name;
+                     p.teamId = p.team;
+                     p.position = "MID"
+                     const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                     p.team = teamResp.short_name;
+                     if (p.id === updatedPlayers[7].id || p.id === updatedPlayers[8].id || p.id === updatedPlayers[9].id ||
+                        p.id === updatedPlayers[10].id || p.id === updatedPlayers[11].id) {
+                         p.clicked = "Clicked";
+                     } else {
+                         p.clicked = "";
+                     }
+                     return p;
+                 })
+             );
+             const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender")).data;
+             const updatedDefenderTransfer = await Promise.all(
+                 defenderTransfer.map(async p => {
+                     p.name = p.web_name;
+                     p.teamId = p.team;
+                     p.position = "DEF"
+                     const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                     p.team = teamResp.short_name;
+                     if (p.id === updatedPlayers[2].id || p.name === updatedPlayers[3].id || p.id === updatedPlayers[4].id ||
+                        p.id === updatedPlayers[5].id || p.name === updatedPlayers[6].id) {
+                         p.clicked = "Clicked";
+                     } else {
+                         p.clicked = "";
+                     }
+                     return p;
+                 })
+             );
+             const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).data;
+             const updatedGoalkeeperTransfer = await Promise.all(
+                 goalkeeperTransfer.map(async p => {
+                     p.name = p.web_name;
+                     p.teamId = p.team;
+                     p.position = "GKP";
+                     const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                     p.team = teamResp.short_name;
+                     if (p.name === updatedPlayers[0].name || p.name === updatedPlayers[1].name) {
+                         p.clicked = "Clicked";
+                     } else {
+                         p.clicked = "";
+                     }
+                     return p;
+                 })
+             );
+             updatedPlayers = updatedPlayers.map(p => {
+                if(p.name === "") {
+                    return p;
+                } else if (p.position === "FWD") {
+                    return updatedForwardTransfer.filter(x => x.id === p.id)[0];
+                } else if (p.position === "MID") {
+                    return updatedMidfieldTransfer.filter(x => x.id === p.id)[0];
+                } else if (p.position === "DEF") {
+                    return updatedDefenderTransfer.filter(x => x.id === p.id)[0];
                 } else {
-                    p.clicked = "";
+                    return updatedGoalkeeperTransfer.filter(x => x.id === p.id)[0];
                 }
-                updatedForwardTransfer.push(p);
-             }
-
-             midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder")).data;
-             const updatedMidfieldTransfer = [];
-             for(let i = 0; i < 10; i++) {
-                const p = midfieldTransfer[i];
-                p.name = p.web_name;
-                p.team = shortTeamById[p.team];
-                if (p.name === updatedPlayers[7].name || p.name === updatedPlayers[8].name || p.name === updatedPlayers[9].name ||
-                p.name === updatedPlayers[10].name || p.name === updatedPlayers[11].name) {
-                    p.clicked = "Clicked";
-                } else {
-                    p.clicked = "";
-                }
-                updatedMidfieldTransfer.push(p);
-             }
-             defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender")).data;
-             const updatedDefenderTransfer = [];
-             for(let i = 0; i < 10; i++) {
-                const p = defenderTransfer[i];
-                p.name = p.web_name;
-                p.team = shortTeamById[p.team];
-                if (p.name === updatedPlayers[2].name || p.name === updatedPlayers[3].name || p.name === updatedPlayers[4].name ||
-                p.name === updatedPlayers[5].name || p.name === updatedPlayers[6].name) {
-                    p.clicked = "Clicked";
-                } else {
-                    p.clicked = "";
-                }
-                updatedDefenderTransfer.push(p);
-             }
-             goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).data;
-             const updatedGoalkeeperTransfer = [];
-             for(let i = 0; i < 10; i++) {
-                const p = goalkeeperTransfer[i];
-                p.name = p.web_name;
-                p.team = shortTeamById[p.team];
-                if (p.name === updatedPlayers[0].name || p.name === updatedPlayers[1].name) {
-                    p.clicked = "Clicked";
-                } else {
-                    p.clicked = "";
-                }
-                updatedDefenderTransfer.push(p);
-             }
+             })
              players = updatedPlayers;
-             transfer = {
-                Forward: updatedForwardTransfer,
-                Midfield: updatedMidfieldTransfer,
-                Defender: updatedDefenderTransfer,
-                Goalkeeper: updatedGoalkeeperTransfer
-             }
-             // transfer = {"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer};
+             transfer = {"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer};
              setData({id, points, players, transfer, balance});
+         } catch (err) {
+             console.log(err);
+         }
      };
      if (players === undefined) {
         loadUser();
-        return <><HeaderWebAfterLog setToken={setToken}/></>;
+        return <><HeaderWebAfterLog setToken={setToken}/><Loading /></>;
     } else {
         return (
                 <div>
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Transfer 
-                        id = {data.id} 
-                        passPoints = {data.points} 
-                        passTransfer = {data.transfer} 
-                        passPlayers = {players} 
-                        passMoney = {data.balance}
-                    />
+                    <Transfer id = {data.id} passPoints = {data.points} passTransfer = {transfer} passPlayers = {players} passMoney = {data.balance}/>
                 </div>
             );
     }

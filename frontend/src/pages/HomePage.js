@@ -3,6 +3,7 @@ import Home from "../components/Home.js";
 import axios from "axios";
 import { useState } from "react";
 import useToken from "../components/Token.js";
+import Loading from "../components/Loading.js";
 export default function HomePage({setToken}) {
     const [data, setdata] = useState({});
     const username = useToken().token;
@@ -32,7 +33,7 @@ export default function HomePage({setToken}) {
     };
     if (id === undefined) {
         loadUser();
-        return <><HeaderWebAfterLog setToken={setToken}/></>;
+        return <><HeaderWebAfterLog setToken={setToken}/><Loading /></>;
     } else {
         return (
                 <div class = "App">

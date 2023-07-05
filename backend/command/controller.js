@@ -346,37 +346,37 @@ module.exports = {
 
     getGoalkeepers: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        return fplapi.then(response => {
+        fplapi.then(response => {
             const players = response.data.elements;
             const goalkeepers = players.filter((p) => p.element_type === 1);
-            return res.status(200).json(goalkeepers);
+            res.status(200).json(goalkeepers);
         });
     },
 
     getDefenders: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        return fplapi.then(response => {
+        fplapi.then(response => {
             const players = response.data.elements;
             const defenders = players.filter((p) => p.element_type === 2);
-            return res.status(200).json(defenders);
+            res.status(200).json(defenders);
         });
     },
 
     getMidfielders: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        return fplapi.then(response => {
+        fplapi.then(response => {
             const players = response.data.elements;
             const midfielders = players.filter((p) => p.element_type === 3);
-            return res.status(200).json(midfielders);
+            res.status(200).json(midfielders);
         });
     },
 
     getFowards: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        return fplapi.then(response => {
+        fplapi.then(response => {
             const players = response.data.elements;
             const fowards = players.filter((p) => p.element_type === 4);
-            return res.status(200).json(fowards);
+            res.status(200).json(fowards);
         });
     },
 

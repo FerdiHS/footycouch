@@ -78,6 +78,12 @@ export default function TeamManagementPage({setToken}) {
                     id: users.fow_3
                 },
             ]);
+            const shortTeamById = []
+            shortTeamById[0] = "";
+            const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            teamResp.forEach(x => {
+                shortTeamById[x.id] = x.short_name;
+            });
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
@@ -85,9 +91,7 @@ export default function TeamManagementPage({setToken}) {
                     }
                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     p.name = playerResp.web_name;
-                    p.teamId = playerResp.team;
-                    const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams/id/" + p.teamId)).data;
-                    p.team = teamResp.short_name;
+                    p.team = shortTeamById[playerResp.team];
                     return p;
                 })
             );
@@ -101,9 +105,6 @@ export default function TeamManagementPage({setToken}) {
         loadUser();
         return <><HeaderWebAfterLog /></>;
     } else {
-        for (let i = 0; i < 15; i++) {
-            console.log(players[i].team);
-        }
         return (
                 <div>
                     <HeaderWebAfterLog setToken={setToken}/>

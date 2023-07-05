@@ -8,6 +8,66 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
     const [money, setmoney] = useState(passMoney);
     const [transfer, setTransfer] = useState(passTransfer)
     const [player, setplayer] = useState(passPlayers);
+    
+    useEffect(() => {
+        fetchData();
+    }, [transfer]);
+    const fetchData = async () => {
+        const shortTeamById = []
+        shortTeamById[0] = "";
+        const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+        teamResp.forEach(x => {
+            shortTeamById[x.id] = x.short_name;
+        });
+        const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/foward")).data;
+        const updatedForwardTransfer = forwardTransfer.map(p => {
+                p.name = p.web_name;
+                p.team = shortTeamById[p.team];
+                if (p.name === passPlayers[12].name || p.name === passPlayers[13].name || p.name === passPlayers[14].name) {
+                    p.clicked = "Clicked";
+                } else {
+                    p.clicked = "";
+                }
+                return p;
+        });
+        const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder")).data;
+        const updatedMidfieldTransfer = midfieldTransfer.map(p => {
+            p.name = p.web_name;
+            p.team = shortTeamById[p.team];
+            if (p.name === passPlayers[7].name || p.name === passPlayers[8].name || p.name === passPlayers[9].name ||
+            p.name === passPlayers[10].name || p.name === passPlayers[11].name) {
+                p.clicked = "Clicked";
+            } else {
+                p.clicked = "";
+            }
+            return p;
+        });
+        const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender")).data;
+        const updatedDefenderTransfer = defenderTransfer.map(p => {
+            p.name = p.web_name;
+            p.team = shortTeamById[p.team];
+            if (p.name === passPlayers[2].name || p.name === passPlayers[3].name || p.name === passPlayers[4].name ||
+            p.name === passPlayers[5].name || p.name === passPlayers[6].name) {
+                p.clicked = "Clicked";
+            } else {
+                p.clicked = "";
+            }
+            return p;
+        });
+        const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).data;
+        const updatedGoalkeeperTransfer = goalkeeperTransfer.map(p => {
+            p.name = p.web_name;
+            p.team = shortTeamById[p.team];
+            if (p.name === passPlayers[0].name || p.name === passPlayers[1].name) {
+                p.clicked = "Clicked";
+            } else {
+                p.clicked = "";
+            }
+            return p;
+        });
+        setTransfer({"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer});
+    };
+    
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
@@ -280,7 +340,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                         </tr>
                         {
                             transfer[position].filter(x => x.name.includes(filteredPlayer) || x.name.includes(titleCase(filteredPlayer)) || x.name.includes(filteredPlayer.toLowerCase())).map((player, index) => {
-                                const check = player.position !== "GKP" ? "" : " GK";
+                                const check = position !== "GKP" ? "" : " GK";
                                 return (<tr class="transferPlayer">
                                             <td class="transferPlayer">
                                                 <img src={require("../assets/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} />

@@ -4,10 +4,10 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useToken from "../components/Token";
+import User from "../components/User.js";
 import Loading from "../components/Loading.js";
-export default function ProfilePage({setToken}) {
+export default function UsersPage({setToken}) {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
     const [data, setdata] = useState({});
     var id = data.id;
     var players = data.players
@@ -19,7 +19,11 @@ export default function ProfilePage({setToken}) {
     var ProfilePicture = data.ProfilePicture;
     var backgroundPicture = data.backgroundPicture;
     var Posts = data.Posts;
-    const username = useToken().token;
+    var userNotFound = data.userNotFound;
+    const username = window.location.pathname.slice(6);
+    if (username === useToken().token) {
+        navigate("/profile");
+    }
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
@@ -92,12 +96,7 @@ export default function ProfilePage({setToken}) {
                 },
             ]);
             const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
-            const shortTeamById = []
-            shortTeamById[0] = "";
-            const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
-            teamResp.forEach(x => {
-                shortTeamById[x.id] = x.short_name;
-            });
+            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
@@ -105,9 +104,11 @@ export default function ProfilePage({setToken}) {
                         p.team = "";
                         return p;
                     }
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
+                    const playerResp = allPlayer.filter(player => player.id === p.id)[0];
                     p.name = playerResp.web_name;
-                    p.team = shortTeamById[playerResp.team];
+                    p.teamId = playerResp.team;
+                    const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                    p.team = teamResp.short_name;
                     return p;
                 })
             );
@@ -121,23 +122,30 @@ export default function ProfilePage({setToken}) {
                     post.text = post.content;
                     post.time = "";
                     post.image = post.image;
+                    console.log(post);
                     return post;
                 })
             );
             Posts = updatedPosts.reverse();
-            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, username: username})
         } catch (err) {
+            setdata({userNotFound: true})
             console.log(err);
         }
     };
-    if (players === undefined) {
+    if (userNotFound) {
+        return  <div class = "App">
+                    <HeaderWebAfterLog setToken={setToken} />
+                    <h2>User Not Found</h2>
+                </div>
+    } else if (players === undefined) {
         loadUser();
         return <><HeaderWebAfterLog setToken={setToken}/><Loading /></>;
     } else {
         return (
                 <div class = "App">
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Profile passData={data}/>
+                    <User passData={data} />
                 </div>
             );
     }

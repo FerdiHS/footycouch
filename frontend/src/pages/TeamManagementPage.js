@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useToken from "../components/Token";
+import Loading from "../components/Loading.js";
 export default function TeamManagementPage({setToken}) {
     const navigate = useNavigate();
     const [data, setdata] = useState({});
@@ -103,7 +104,7 @@ export default function TeamManagementPage({setToken}) {
     };
     if (players === undefined) {
         loadUser();
-        return <><HeaderWebAfterLog /></>;
+        return <><HeaderWebAfterLog setToken={setToken}/><Loading /></>;
     } else {
         return (
                 <div>

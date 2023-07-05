@@ -195,6 +195,7 @@ nav {
   text-align: center;
   margin: 0%;
   width:100%;
+  position:sticky;
 }
 .button1 > img {
   position: relative;
@@ -208,6 +209,7 @@ nav2 {
   width:100%;
   text-align: center;
   margin: 0%;
+  position:sticky;
 }
 nav2 > h2 {
   margin-left: auto;
@@ -682,6 +684,8 @@ input[type="file"] {
   width: 554px;
   display: block;
   position:sticky;
+  top:0px;
+  bottom:0px;
 }
 .stats {
   height:335px;
@@ -689,6 +693,8 @@ input[type="file"] {
   background-color: white;
   text-align: start;
   margin-bottom: 15px;
+  position:sticky;
+  top:-15px;
 }
 .stats > h2 {
   position: relative;
@@ -733,6 +739,8 @@ input[type="file"] {
   background-color: white;
   text-align: start;
   margin-bottom: 15px;
+  position:sticky;
+  top:340px;
 }
 .lineup > h2 {
   position: relative;
@@ -1237,4 +1245,73 @@ label.playername > img {
 }
 .addTransferClicked > h3 {
   margin:0;
+}
+
+/*users */
+.name2 {
+  position:relative;
+  left:150px;
+  margin-right: auto;
+  text-align: start;
+}
+.followers2 {
+  display: flex;
+  position: relative;
+  left:-770px;
+  top:100px;
+  margin-right:10px;
+}
+.followers2 >h3 {
+  margin-right: 4px;
+}
+.Followed {
+  display: flex;
+  font-size: 14px;
+  background-color: #dbdbdb;
+  width: 100px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  left: 280px;
+  position: relative;
+}
+.Followed > h4 {
+  position: relative;
+  text-align: center;
+  left:17px;
+  top: -10px;
+}
+.Followed:hover {
+  background-color: #c5c5c5;
+}
+.Follow {
+  display: flex;
+  font-size: 14px;
+  background-color: rgb(37, 182, 255);
+  width: 100px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  color:white;
+  left:280px;
+}
+.Follow > h4 {
+  position: relative;
+  text-align: center;
+  left:20px;
+  top: -10px;
+  cursor:pointer;
+}
+.Follow:hover {
+  background-color: rgb(71, 194, 255);
+}
+.loading {
+  position: absolute;
+  left:50%;
+  top:50%;
 }

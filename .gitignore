@@ -7,7 +7,8 @@
 /backend/assets/profile/*
 .env
 /backend/.env
-/backend/fplapi
+/backend/fplapi.json
+/backend/newfplapi.json
 /frontend/.env
 .vscode
 /.pnp

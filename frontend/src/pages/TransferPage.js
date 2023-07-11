@@ -98,7 +98,9 @@ export default function TransferPage({setToken}) {
                      p.teamId = p.team;
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
+                     p.teamName = teamResp.name;
                      p.position = "FWD";
+                     p.type_ammount = forwardTransfer.length;
                      if (p.id === updatedPlayers[12].id || p.id === updatedPlayers[13].id || p.id === updatedPlayers[14].id) {
                          p.clicked = "Clicked";
                      } else {
@@ -115,6 +117,8 @@ export default function TransferPage({setToken}) {
                      p.position = "MID"
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
+                     p.teamName = teamResp.name;
+                     p.type_ammount = midfieldTransfer.length;
                      if (p.id === updatedPlayers[7].id || p.id === updatedPlayers[8].id || p.id === updatedPlayers[9].id ||
                         p.id === updatedPlayers[10].id || p.id === updatedPlayers[11].id) {
                          p.clicked = "Clicked";
@@ -132,6 +136,8 @@ export default function TransferPage({setToken}) {
                      p.position = "DEF"
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
+                     p.teamName = teamResp.name;
+                     p.type_ammount = defenderTransfer.length;
                      if (p.id === updatedPlayers[2].id || p.name === updatedPlayers[3].id || p.id === updatedPlayers[4].id ||
                         p.id === updatedPlayers[5].id || p.name === updatedPlayers[6].id) {
                          p.clicked = "Clicked";
@@ -149,6 +155,8 @@ export default function TransferPage({setToken}) {
                      p.position = "GKP";
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
+                     p.teamName = teamResp.name;
+                     p.type_ammount = goalkeeperTransfer.length;
                      if (p.name === updatedPlayers[0].name || p.name === updatedPlayers[1].name) {
                          p.clicked = "Clicked";
                      } else {

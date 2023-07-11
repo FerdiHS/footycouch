@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import axios from "axios";
 import useToken from "./Token";
+import Statistic from "./Statistic";
 export default function Transfer({id, passPoints, passTransfer, passPlayers, passMoney}) {
     const username = useToken().token;
     const [points, setPoints] = useState(passPoints);
@@ -8,28 +9,32 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
     const [money, setmoney] = useState(passMoney);
     const [transfer, setTransfer] = useState(passTransfer)
     const [player, setplayer] = useState(passPlayers);
+    const [stats, setStats] = useState(null);
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
         "AVL": "Aston Villa",
-        "BRE": "Brentford",
         "BOU": "Bournemouth",
+        "BRE": "Brentford",
         "BHA": "Brighton",
-        "SOU": "Southampton",
+        "BUR": "Burnley",
         "CHE": "Chelsea",
         "CRY": "Crystal Palace",
-        "FUL": "Fulham",
         "EVE": "Everton",
+        "FUL": "Fulham",
         "LEE": "Leeds",
-        "LEI": "Leichester",
+        "LEI": "Leicester",
         "LIV": "Liverpool",
-        "MCI": "Manchester City",
-        "MUN": "Manchester United",
+        "LUT": "Luton",
+        "MCI": "Man City",
+        "MUN": "Man Utd",
         "NEW": "Newcastle",
-        "TOT": "Tottenham Hotspur",
-        "WHU": "Westham",
-        "WOL": "Wolferhampton",
-        "NFO": "Nottingham Forest"
+        "NFO": "Nott'm Forest",
+        "SHU": "Sheffield Utd",
+        "SOU": "Southampton",
+        "TOT": "Spurs",
+        "WHU": "West Ham",
+        "WOL": "Wolves"
     }
     const [gk, setgk] = useState([...player.slice(0,2)]);
     const [defender, setdefender] = useState([...player.slice(2,7)]);
@@ -283,7 +288,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                                 const check = player.position !== "GKP" ? "" : " GK";
                                 return (<tr class="transferPlayer">
                                             <td class="transferPlayer">
-                                                <img src={require("../assets/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} />
+                                                <img src={require("../assets/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} onClick={() => setStats(player)}/>
                                                 <h5>{player.name}</h5>
                                                 <p>{player.position} {player.team}</p>
                                             </td>
@@ -295,6 +300,11 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                     </table>
                 </div>
             </div>
+            {
+                stats !== null 
+                    ? <Statistic player={stats}/>
+                    : <></>
+            }
         </div>
     );
 }

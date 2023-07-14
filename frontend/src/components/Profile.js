@@ -73,7 +73,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result.split(',')[1]});
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result});
             console.log(reader.result);
             setProfilePicture(reader.result);
         }
@@ -87,7 +87,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result.split(',')[1]});
+          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result});
           setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);

@@ -300,5 +300,70 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+
+    createReply: (id, type, replying_to, content, callBack) => {
+        pool.query(
+            "INSERT INTO replies(user, type, replying_to, content) values(?,?,?,?);",
+            [id, type, replying_to, content],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getReply: (type, replying_to, callBack) => {
+        pool.query(
+            'SELECT * FROM replies WHERE type = ? AND replying_to = ?',
+            [type, replying_to],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    createLike: (id, type, liked, callBack) => {
+        pool.query(
+            "INSERT INTO likes(user, type, liked) values(?,?,?);",
+            [id, type, liked],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    removeLike: (id, type, liked, callBack) => {
+        pool.query(
+            "DELETE FROM likes WHERE id=? AND type=? AND liked=?;",
+            [id, type, liked],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getLike: (liked, type, callBack) => {
+        pool.query(
+            'SELECT * FROM likes WHERE type = ? AND liked = ?',
+            [type, liked],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
     }
 };

@@ -28,6 +28,11 @@ const {
     addPost,
     getUserPost,
     uploadBackgroundImageUsers,
+    addReply,
+    getReplies,
+    like,
+    unlike,
+    getLikes,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -61,5 +66,10 @@ router.get("/teams/:shortName", getTeamByShortName); // Get team by short name
 router.post("/users/id/:id/transfer", transfer); // Make transfer, require "balance", "points", "position", "player_in", and "player_out"
 router.post("/users/id/:id/post", addPost); // Add new post, require "content" and "image" (base64)
 router.get("/users/id/:id/post", getUserPost); // Get user's post
+router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (user id), "type" (true for replying post, false for replying reply), and "content"
+router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, require "type" (true for replying post, false for replying reply)
+router.post("/like/:liked", like); // Add new like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
+router.delete("/like/:liked", unlike); // Remove like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
+router.get("/like/:liked", getLikes); // Get likes of a post or reply, require "type" (true for replying post, false for replying reply)
 
 module.exports = router;

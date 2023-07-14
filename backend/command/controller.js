@@ -20,6 +20,11 @@ const {
     updateUserProfilePictureByUsername,
     getUserProfilePictureByUsername,
     updateUserBackgroundPictureByUsername,
+    createReply,
+    createLike,
+    removeLike,
+    getReply,
+    getLike,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -630,5 +635,81 @@ module.exports = {
             }
             return res.status(200).json({results});
         });
-    }
+    },
+
+    addReply: (req, res) => {
+        const replying_to = req.params.replying_to;
+        const {id, type, content} = req.body;
+        return createReply(id, type, replying_to, content, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Reply created successfully"
+            });
+        });
+    },
+
+    getReplies: (req, res) => {
+        const replying_to = req.params.replying_to;
+        const {type} = req.body;
+        return getReply(type, replying_to, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        })
+    },
+
+    like: (req, res) => {
+        const liked = req.params.liked;
+        const {id, type} = req.body;
+        return createLike(id, type, liked, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Like created successfully"
+            });
+        });
+    },
+
+    unlike: (req, res) => {
+        const liked = req.params.liked;
+        const {id, type} = req.body;
+        return removeLike(id, type, liked, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Like deleted successfully"
+            });
+        });
+    },
+
+    getLikes: (req, res) => {
+        const liked = req.params.liked;
+        const {type} = req.body;
+        return getLike(liked, type, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        });
+    },
 }

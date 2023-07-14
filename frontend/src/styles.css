@@ -548,7 +548,6 @@ select:focus + .focus {
 }
 .status {
   display:flex;
-  overflow: auto;
 }
 .camerabutton {
   color:transparent;

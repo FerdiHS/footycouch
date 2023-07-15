@@ -25,6 +25,10 @@ const {
     removeLike,
     getReply,
     getLike,
+    updateReply,
+    removeReply,
+    updatePost,
+    getPostById,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -624,9 +628,38 @@ module.exports = {
        */
     },
 
+    editPost: (req, res) => {
+        const {id} = req.params;
+        const {content} = req.body;
+        return updatePost(id, content, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Post edited successfully"
+            });
+        });
+    },
+
     getUserPost: (req, res) => {
         const id = req.params.id;
         getUserPost(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        });
+    },
+
+    getPostById: (req, res) => {
+        const {id} = req.params;
+        return getPostById(id, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
@@ -664,7 +697,38 @@ module.exports = {
                 });
             }
             return res.status(200).json({results});
-        })
+        });
+    },
+
+    editReply: (req, res) => {
+        const {id} = req.params;
+        const {content} = req.body;
+        return updateReply(id, content, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Reply edited successfully"
+            });
+        });
+    },
+
+    deleteReply: (req, res) => {
+        const {id} = req.params;
+        return removeReply(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Reply deleted successfully"
+            });
+        });
     },
 
     like: (req, res) => {

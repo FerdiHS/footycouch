@@ -289,9 +289,35 @@ module.exports = {
         );
     },
 
+    updatePost: (id, content, callBack) => {
+        pool.query(
+            'UPDATE posts set content = ? WHERE id = ?;',
+            [content, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     getUserPost: (id, callBack) => {
         pool.query(
-            "SELECT * FROM posts WHERE user = ?",
+            'SELECT * FROM posts WHERE user = ?;',
+            [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getPostById: (id, callBack) => {
+        pool.query(
+            'SELECT * FROM posts WHERE id = ?;',
             [id],
             (error, results) => {
                 if(error) {
@@ -328,6 +354,32 @@ module.exports = {
         );
     },
 
+    updateReply: (id, content, callBack) => {
+        pool.query(
+            'UPDATE replies set content = ? WHERE id = ?;',
+            [content, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
+    },
+
+    removeReply: (id, callBack) => {
+        pool.query(
+            'DELETE FROM replies WHERE id=?;',
+            [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     createLike: (id, type, liked, callBack) => {
         pool.query(
             "INSERT INTO likes(user, type, liked) values(?,?,?);",
@@ -343,7 +395,7 @@ module.exports = {
 
     removeLike: (id, type, liked, callBack) => {
         pool.query(
-            "DELETE FROM likes WHERE id=? AND type=? AND liked=?;",
+            "DELETE FROM likes WHERE user=? AND type=? AND liked=?;",
             [id, type, liked],
             (error, results) => {
                 if(error) {

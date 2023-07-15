@@ -33,6 +33,10 @@ const {
     like,
     unlike,
     getLikes,
+    editReply,
+    deleteReply,
+    editPost,
+    getPostById,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -41,9 +45,9 @@ router.post("/signup", signup); // Signup for new user, require "username", "pas
 router.post("/login", login); // For user to login, require "username" and "password", returning the user data
 router.get("/users", getUsers); // Get all users' data
 router.get("/users/:username", getUserByName); // Get a certain user with given username, require "username"
-router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image" (in base64)
-router.get("/users/:username/image", getImageUsers); // Get the user's profile picture in base64
-router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image" (in base64)
+router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image"
+router.get("/users/:username/image", getImageUsers); // Get the user's profile picture
+router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image"
 router.post("/users/follow", follow); // Make a user follow another user, require "follower" and "followed"
 router.delete("/users/follow", unfollow); // Make a user unfollow another user, require "follower" and "followed"
 router.get("/users/following/:id", getUserFollowing); // Get the user's following list
@@ -64,10 +68,14 @@ router.get("/teams", getTeams); // Get all teams
 router.get("/teams/id/:id", getTeamById); // Get team by id
 router.get("/teams/:shortName", getTeamByShortName); // Get team by short name
 router.post("/users/id/:id/transfer", transfer); // Make transfer, require "balance", "points", "position", "player_in", and "player_out"
-router.post("/users/id/:id/post", addPost); // Add new post, require "content" and "image" (base64)
+router.post("/users/id/:id/post", addPost); // Add new post, require "content" and "image"
 router.get("/users/id/:id/post", getUserPost); // Get user's post
+router.put("/post/:id", editPost); // Edit post, require "content"
+router.get("/post/:id", getPostById); // Get certain post by its id
 router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (user id), "type" (true for replying post, false for replying reply), and "content"
 router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, require "type" (true for replying post, false for replying reply)
+router.put("/reply/:id", editReply); // Edit reply, require "content"
+router.delete("/reply/:id", deleteReply); // Remove reply
 router.post("/like/:liked", like); // Add new like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
 router.delete("/like/:liked", unlike); // Remove like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
 router.get("/like/:liked", getLikes); // Get likes of a post or reply, require "type" (true for replying post, false for replying reply)

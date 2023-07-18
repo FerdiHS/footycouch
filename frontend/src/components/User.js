@@ -59,11 +59,11 @@ export default function User({passData}) {
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     const follow = () => {
         setfollowed(true);
-        axios.post("https://footycouch-production.up.railway.app/users/follow", {follower: id, followed: users}).catch(err => console.log(err));
+        axios.post("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id}).catch(err => console.log(err));
     }
     const unfollow = () => {
         setfollowed(false);
-        axios.delete("https://footycouch-production.up.railway.app/users/follow", {follower: id, followed: users});
+        axios.delete("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id});
     }
     return (
     <div class="container4">

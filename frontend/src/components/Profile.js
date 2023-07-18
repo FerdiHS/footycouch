@@ -5,6 +5,8 @@ import test from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
+import Statistic from "./Statistic";
+import Loading from "./Loading";
 
 export default function Profile({passData}) {
     const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
@@ -60,12 +62,15 @@ export default function Profile({passData}) {
         setbioInput(e.target.value);
     }
     const bioSave = () => {
+        setisLoading(true);
         setbio(bioInput);
         setchangeBio(false);
-        axios.post("https://footycouch-production.up.railway.app/users/update/" + username, {bio})
+        axios.post("https://footycouch-production.up.railway.app/users/update/" + username, {bio: bioInput}).then(x => {setbio(bioInput);
+        setchangeBio(false);setisLoading(false)})
         .catch(err => console.log(err));
     }
     const ppUpload = e => {
+        setisLoading(true);
         e.preventDefault();
         const reader = new FileReader();
         const file = e.target.files[0];
@@ -80,6 +85,7 @@ export default function Profile({passData}) {
         reader.readAsDataURL(file);
     }
     const bpUpload = e => {
+        setisLoading(true);
         e.preventDefault();
         const reader = new FileReader();
         const file = e.target.files[0];
@@ -87,13 +93,26 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result});
+          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);
     }
+    const [stats, setstats] = useState(null);
+    const [isLoading, setisLoading] = useState(false);
+
     return (
     <div class="container4">
+        {
+            isLoading
+                ? <Loading />
+                : <></>
+        }
+        {
+            stats === null
+                ? <></>
+                : <Statistic player={stats} exitStats={() => setstats(null)} style = {{left: 250}}/> 
+        }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
             </div>
@@ -158,7 +177,7 @@ export default function Profile({passData}) {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
+                                    <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ gk.team_code+ "_1-220.webp"} onClick={() => setstats(gk)}/>
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -166,7 +185,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                            <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
                                             {player.name}
                                         </label>) 
                                     })          
@@ -177,7 +196,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
                                         {player.name}
                                     </label>) 
                                     })          
@@ -188,7 +207,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
                                         {player.name}
                                     </label>) 
                                     })          
@@ -204,5 +223,6 @@ export default function Profile({passData}) {
                 </div>
             </div>
         </div>
+        
     </div>);
 }

@@ -46,6 +46,7 @@ export default function Login({setToken}) {
         })
         .then(res => console.log(res))
         .catch(err => {
+            setisLoading(false);
             seterror(true);
             console.log(err);
         });

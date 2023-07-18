@@ -48,8 +48,8 @@ router.get("/users/:username", getUserByName); // Get a certain user with given 
 router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image"
 router.get("/users/:username/image", getImageUsers); // Get the user's profile picture
 router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image"
-router.post("/users/follow", follow); // Make a user follow another user, require "follower" and "followed"
-router.delete("/users/follow", unfollow); // Make a user unfollow another user, require "follower" and "followed"
+router.post("/users/:follower/follow/:followed", follow); // Make a user follow another user
+router.delete("/users/:follower/follow/:followed", unfollow); // Make a user unfollow another user
 router.get("/users/following/:id", getUserFollowing); // Get the user's following list
 router.get("/users/follower/:id", getUserFollower); // Get the user's follower list
 router.post("/users/update/id/:id", updateUserProfileById); // Update the user's profile, require "bio"
@@ -76,8 +76,8 @@ router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (us
 router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, require "type" (true for replying post, false for replying reply)
 router.put("/reply/:id", editReply); // Edit reply, require "content"
 router.delete("/reply/:id", deleteReply); // Remove reply
-router.post("/like/:liked", like); // Add new like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
-router.delete("/like/:liked", unlike); // Remove like to post or reply, require "id" (user id) and "type" (true for replying post, false for replying reply)
-router.get("/like/:liked", getLikes); // Get likes of a post or reply, require "type" (true for replying post, false for replying reply)
+router.post("/users/:id/like/:liked", like); // Add new like to post or reply
+router.delete("users/:id/like/:liked", unlike); // Remove like to post or reply
+router.get("/like/:liked", getLikes); // Get likes of a post or reply
 
 module.exports = router;

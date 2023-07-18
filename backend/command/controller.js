@@ -205,9 +205,8 @@ module.exports = {
 
     follow: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const follower = req.body.follower;
-        const followed = req.body.followed;
-        checkFollow(follower, followed, (err, results) => {
+        const {follower, followed} = req.params;
+        return checkFollow(follower, followed, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
@@ -219,7 +218,7 @@ module.exports = {
                     message: "Following already exists"
                 })
             }
-            createFollow(follower, followed, (err, results) => {
+            return createFollow(follower, followed, (err, results) => {
                 if(err) {
                     console.log(err);
                     return res.status(403).json({
@@ -229,15 +228,14 @@ module.exports = {
                 return res.status(200).json({
                     message: "Following successful"
                 });
-            })
+            });
         });
     },
 
     unfollow: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        const follower = req.body.follower;
-        const followed = req.body.followed;
-        removeFollow(follower, followed, (err, results) => {
+        const {follower, followed} = req.params;
+        return removeFollow(follower, followed, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
@@ -247,7 +245,7 @@ module.exports = {
             return res.status(200).json({
                 message: "Successfully unfollowed"
             });
-        })
+        });
     },
 
     checkFollow: (req, res) => {
@@ -745,9 +743,8 @@ module.exports = {
     },
 
     like: (req, res) => {
-        const liked = req.params.liked;
-        const {id, type} = req.body;
-        return createLike(id, type, liked, (err, results) => {
+        const {id, liked} = req.params;
+        return createLike(id, true, liked, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
@@ -761,9 +758,8 @@ module.exports = {
     },
 
     unlike: (req, res) => {
-        const liked = req.params.liked;
-        const {id, type} = req.body;
-        return removeLike(id, type, liked, (err, results) => {
+        const {id, liked} = req.params;
+        return removeLike(id, true, liked, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
@@ -777,9 +773,8 @@ module.exports = {
     },
 
     getLikes: (req, res) => {
-        const liked = req.params.liked;
-        const {type} = req.body;
-        return getLike(liked, type, (err, results) => {
+        const {liked} = req.params;
+        return getLike(liked, true, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({

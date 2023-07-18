@@ -19,7 +19,6 @@ export default function HeaderWebAfterLog({setToken}) {
     const loadPP = async () => {
         if(profilePicture === null) {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
-            console.log(users);
             setProfilePicture(users.profile_picture);
         }
     }

@@ -58,13 +58,15 @@ export default function User({passData}) {
     const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                     ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
-    const follow = () => {
+    const follow = async () => {
         setfollowed(true);
-        axios.post("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id}).catch(err => console.log(err));
+        await axios.post("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).catch(err => console.log(err));
+        setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
     }
-    const unfollow = () => {
+    const unfollow = async () => {
         setfollowed(false);
-        axios.delete("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id});
+        await axios.delete("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).catch(err => console.log(err));
+        setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
     }
     const [stats, setstats] = useState(null);
     return (

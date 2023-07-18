@@ -123,7 +123,7 @@ module.exports = {
 
     checkFollow: (follower, followed, callBack) => {
         pool.query(
-            "SELECT * FROM follows WHERE follower_id=? AND followed_id=?;",
+            'SELECT * FROM follows WHERE follower_id=? AND followed_id=?;',
             [follower, followed],
             (error, results) => {
                 if(error) {
@@ -136,7 +136,7 @@ module.exports = {
 
     createFollow: (follower, followed, callBack) => {
         pool.query(
-            "INSERT INTO follows(follower_id, followed_id) values (?, ?);",
+            'INSERT INTO follows(follower_id, followed_id) values (?, ?);',
             [follower, followed],
             (error, results) => {
                 if(error) {

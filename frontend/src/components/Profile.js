@@ -177,7 +177,7 @@ export default function Profile({passData}) {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ gk.team_code+ "_1-220.webp"} onClick={() => setstats(gk)}/>
+                                    <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ gk.team_code+ "_1-220.webp"} onClick={() => {if(gk.name !== "No Player") {setstats(gk)}}}/>
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -185,7 +185,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
+                                            <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                             {player.name}
                                         </label>) 
                                     })          
@@ -196,7 +196,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                         {player.name}
                                     </label>) 
                                     })          
@@ -207,7 +207,7 @@ export default function Profile({passData}) {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => setstats(player)}/>
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                         {player.name}
                                     </label>) 
                                     })          

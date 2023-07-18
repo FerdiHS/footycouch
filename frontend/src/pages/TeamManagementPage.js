@@ -83,7 +83,7 @@ export default function TeamManagementPage({setToken}) {
             shortTeamById[0] = "";
             const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
             teamResp.forEach(x => {
-                shortTeamById[x.id] = x.short_name;
+                shortTeamById[x.id] = x;
             });
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
@@ -91,9 +91,11 @@ export default function TeamManagementPage({setToken}) {
                         navigate("/transfer");
                     }
                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
-                    p.name = playerResp.web_name;
-                    p.team = shortTeamById[playerResp.team];
-                    return p;
+                    playerResp.name = playerResp.web_name;
+                    playerResp.teamName = shortTeamById[playerResp.team].name;
+                    playerResp.team = shortTeamById[playerResp.team].short_name;
+                    playerResp.position = p.position;
+                    return playerResp;
                 })
             );
             players = updatedPlayers;

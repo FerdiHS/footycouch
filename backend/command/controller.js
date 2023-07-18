@@ -588,7 +588,20 @@ module.exports = {
     addPost: (req, res) => {
        const id = req.params.id;
        const {content, image} = req.body;
-       cloudinary.v2.uploader.upload(
+       if(image === undefined) {
+        return createPost(id, content, null, (error, result) => {
+            if(error) {
+                console.log(error);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Post added successfully"
+            });
+        });
+       }
+       return cloudinary.v2.uploader.upload(
         image,
         {
             folder: "footycouch/post"

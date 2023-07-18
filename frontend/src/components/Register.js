@@ -49,6 +49,7 @@ export default function Register({handlenowPage}) {
             .then(res => {setisLoading(false); window.alert("Signup Successful!")})
             .then(res => navigate("/login"))
             .catch(err => {
+                setisLoading(false);
                 seterrorusername("Username already been used");
                 console.log(err);
             });

@@ -78,9 +78,10 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result});
-            console.log(reader.result);
-            setProfilePicture(reader.result);
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result}).then(x => {
+            setProfilePicture(reader.result)
+            setisLoading(false);
+            };
         }
         reader.readAsDataURL(file);
     }

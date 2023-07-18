@@ -3,6 +3,7 @@ import axios from "axios";
 import { isValidUsername } from "./Verification";
 import { isValidPassword } from "./Verification";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 /*
 const initialState = {
     username: "",
@@ -12,6 +13,7 @@ const initialState = {
 */
 export default function Register({handlenowPage}) {
     // const [credentials, setCredentials] = useState(initialState);
+    const [isLoading, setisLoading] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,6 +22,7 @@ export default function Register({handlenowPage}) {
     const [errorConfirmpw, seterrorConfirmpw] = useState("");
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
+        setisLoading(true);
         event.preventDefault();
         if (username.length === 0) {
             seterrorusername("Username must be filled")
@@ -43,7 +46,7 @@ export default function Register({handlenowPage}) {
             axios.post("https://footycouch-production.up.railway.app/signup", {username, password, confirmPassword})
             // axios.post("https://footycouch-backend.vercel.app/signup", {username, password, confirmPassword})
             // axios.post("http://localhost:5000/signup", {username, password, confirmPassword})
-            .then(res => window.alert("Signup Successful!"))
+            .then(res => {setisLoading(false); window.alert("Signup Successful!")})
             .then(res => navigate("/login"))
             .catch(err => {
                 seterrorusername("Username already been used");
@@ -66,6 +69,9 @@ export default function Register({handlenowPage}) {
 
     return (
         <>
+        {
+            isLoading ? <Loading /> : <></>
+        }
         <div class="container">
             <div class="box2">
                 <nav2>

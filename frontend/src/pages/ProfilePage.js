@@ -31,63 +31,63 @@ export default function ProfilePage({setToken}) {
             backgroundPicture = users.background_picture;
             players = ([
                 {
-                    position: "gk_1",
+                    position: "GKP",
                     id: users.gk_1,
                 },
                 {
-                    position: "gk_2",
+                    position: "GKP",
                     id: users.gk_2
                 },
                 {
-                    position: "def_1",
+                    position: "DEF",
                     id: users.def_1
                 },
                 {
-                    position: "def_2",
+                    position: "DEF",
                     id: users.def_2
                 },
                 {
-                    position: "def_3",
+                    position: "DEF",
                     id: users.def_3
                 },
                 {
-                    position: "def_4",
+                    position: "DEF",
                     id: users.def_4
                 },
                 {
-                    position: "def_5",
+                    position: "DEF",
                     id: users.def_5
                 },
                 {
-                    position: "mid_1",
+                    position: "MID",
                     id: users.mid_1
                 },
                 {
-                    position: "mid_2",
+                    position: "MID",
                     id: users.mid_2
                 },
                 {
-                    position: "mid_3",
+                    position: "MID",
                     id: users.mid_3
                 },
                 {
-                    position: "mid_4",
+                    position: "MID",
                     id: users.mid_4
                 },
                 {
-                    position: "mid_5",
+                    position: "MID",
                     id: users.mid_5
                 },
                 {
-                    position: "fow_1",
+                    position: "FWD",
                     id: users.fow_1
                 },
                 {
-                    position: "fow_2",
+                    position: "FWD",
                     id: users.fow_2
                 },
                 {
-                    position: "fow_3",
+                    position: "FWd",
                     id: users.fow_3
                 },
             ]);
@@ -96,19 +96,22 @@ export default function ProfilePage({setToken}) {
             shortTeamById[0] = "";
             const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
             teamResp.forEach(x => {
-                shortTeamById[x.id] = x.short_name;
+                shortTeamById[x.id] = x;
             });
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
                         p.name = "No Player";
                         p.team = "";
+                        p.team_code = 0;
                         return p;
                     }
                     const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
-                    p.name = playerResp.web_name;
-                    p.team = shortTeamById[playerResp.team];
-                    return p;
+                    playerResp.name = playerResp.web_name;
+                    playerResp.teamName = shortTeamById[playerResp.team].name;
+                    playerResp.team = shortTeamById[playerResp.team].short_name;
+                    playerResp.position = p.position;
+                    return playerResp;
                 })
             );
             players = updatedPlayers;

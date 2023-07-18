@@ -83,6 +83,7 @@ export default function TransferPage({setToken}) {
                      if (p.id === null) {
                          p.name = "";
                          p.teamId = 0;
+                         p.teamCode = 0;
                          p.team = "";
                          p.now_cost = 0;
                          p.clicked = "";
@@ -99,6 +100,7 @@ export default function TransferPage({setToken}) {
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
                      p.teamName = teamResp.name;
+                     p.teamCode = teamResp.code;
                      p.position = "FWD";
                      p.type_ammount = forwardTransfer.length;
                      if (p.id === updatedPlayers[12].id || p.id === updatedPlayers[13].id || p.id === updatedPlayers[14].id) {
@@ -118,6 +120,7 @@ export default function TransferPage({setToken}) {
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
                      p.teamName = teamResp.name;
+                     p.teamCode = teamResp.code;
                      p.type_ammount = midfieldTransfer.length;
                      if (p.id === updatedPlayers[7].id || p.id === updatedPlayers[8].id || p.id === updatedPlayers[9].id ||
                         p.id === updatedPlayers[10].id || p.id === updatedPlayers[11].id) {
@@ -137,6 +140,7 @@ export default function TransferPage({setToken}) {
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
                      p.teamName = teamResp.name;
+                     p.teamCode = teamResp.code;
                      p.type_ammount = defenderTransfer.length;
                      if (p.id === updatedPlayers[2].id || p.name === updatedPlayers[3].id || p.id === updatedPlayers[4].id ||
                         p.id === updatedPlayers[5].id || p.name === updatedPlayers[6].id) {
@@ -156,6 +160,7 @@ export default function TransferPage({setToken}) {
                      const teamResp = teams.filter(team => team.id === p.teamId)[0];
                      p.team = teamResp.short_name;
                      p.teamName = teamResp.name;
+                     p.teamCode = teamResp.code;
                      p.type_ammount = goalkeeperTransfer.length;
                      if (p.name === updatedPlayers[0].name || p.name === updatedPlayers[1].name) {
                          p.clicked = "Clicked";
@@ -166,7 +171,8 @@ export default function TransferPage({setToken}) {
                  })
              );
              updatedPlayers = updatedPlayers.map(p => {
-                if(p.name === "") {
+                console.log(p);
+                if(p.id === null) {
                     return p;
                 } else if (p.position === "FWD") {
                     return updatedForwardTransfer.filter(x => x.id === p.id)[0];
@@ -180,7 +186,7 @@ export default function TransferPage({setToken}) {
              })
              players = updatedPlayers;
              transfer = {"Forward": updatedForwardTransfer, "Midfield": updatedMidfieldTransfer, "Defender": updatedDefenderTransfer, "Goalkeeper": updatedGoalkeeperTransfer};
-             setData({id, points, players, transfer, balance});
+             setData({id, points, players, transfer, balance, teams});
          } catch (err) {
              console.log(err);
          }
@@ -192,7 +198,7 @@ export default function TransferPage({setToken}) {
         return (
                 <div>
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Transfer id = {data.id} passPoints = {data.points} passTransfer = {transfer} passPlayers = {players} passMoney = {data.balance}/>
+                    <Transfer id = {data.id} passPoints = {data.points} passTransfer = {transfer} passPlayers = {players} passMoney = {data.balance} passTeams={data.teams}/>
                 </div>
             );
     }

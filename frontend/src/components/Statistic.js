@@ -12,13 +12,13 @@ export default function Statistic({player, exitStats}) {
             return <Loading/>;
         } else if (player.position === "MID") {
             const midfieldPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/midfielder")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
-            return <></>;
+            return <Loading />;
         } else if (player.position === "DEF") {
             const defenderPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/defender")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
-            return <></>;
+            return <Loading />;
         } else {
             const goalkeeperPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
-            return <></>;
+            return <Loading />;
         }
     }
     function titleCase(str) {
@@ -29,6 +29,7 @@ export default function Statistic({player, exitStats}) {
     const changeWord = str => {
         return titleCase(str.replaceAll('_', " ").replace("now cost", "Price"));
     }
+    console.log(player);
     return (
         <div class="statistic">
             <div class="playerStats">
@@ -36,8 +37,9 @@ export default function Statistic({player, exitStats}) {
                 <div class="statsPos">{playerPosition[player.position]}</div>
                 <h3>{player.first_name + " " + player.second_name}</h3>
                 <p>{player.teamName}</p>
+                <button class="exitStats" onClick={exitStats}>X</button>
                 <div class="statsRank">
-                    <div class = "status">
+                    <div class = "statscon">
                         <div class="statsColumn">
                             <p>Price</p>
                             <h3>£{player.now_cost}m</h3>

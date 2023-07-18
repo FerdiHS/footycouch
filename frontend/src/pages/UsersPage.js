@@ -26,7 +26,7 @@ export default function UsersPage({setToken}) {
     }
     const loadUser = async () => {
         try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username).catch(err => setdata({userNotFound: true}))).data.data;
             id = users.id;
             bio = users.bio;
             formation = users.formation;
@@ -102,14 +102,16 @@ export default function UsersPage({setToken}) {
                     if (p.id === null) {
                         p.name = "No Player";
                         p.team = "";
+                        p.team_code = 0;
                         return p;
                     }
                     const playerResp = allPlayer.filter(player => player.id === p.id)[0];
-                    p.name = playerResp.web_name;
-                    p.teamId = playerResp.team;
-                    const teamResp = teams.filter(team => team.id === p.teamId)[0];
-                    p.team = teamResp.short_name;
-                    return p;
+                    playerResp.name = playerResp.web_name;
+                    playerResp.teamId = playerResp.team;
+                    const teamResp = teams.filter(team => team.id === playerResp.teamId)[0];
+                    playerResp.team = teamResp.short_name;
+                    playerResp.teamName = teamResp.name;
+                    return playerResp;
                 })
             );
             players = updatedPlayers;
@@ -129,7 +131,6 @@ export default function UsersPage({setToken}) {
             Posts = updatedPosts.reverse();
             setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, username: username})
         } catch (err) {
-            setdata({userNotFound: true})
             console.log(err);
         }
     };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading.js";
 import axios from "axios";
 /*
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
 */
 export default function Login({setToken}) {
     const navigate = useNavigate();
+    const [isLoading, setisLoading] = useState(false);
     const [tickrememberme, settickRememberMe] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -25,6 +27,7 @@ export default function Login({setToken}) {
     }
 
     const handleSubmit = () => {
+        setisLoading(true);
         /*
         if (username === "santokyo" && password === "santokyo123") {
             navigate("/home");
@@ -38,16 +41,20 @@ export default function Login({setToken}) {
         .then(res => {
             seterror(false);
             setToken(username);
+            setisLoading(false);
             navigate("/home");
         })
         .then(res => console.log(res))
         .catch(err => {
             seterror(true);
-            console.log(err)
+            console.log(err);
         });
     }
     return (
             <div class="container">
+                {
+                    isLoading ? <Loading /> : <></>
+                }
                 <div class="box">
                     <nav2>
                         <h2>Login</h2>
@@ -70,6 +77,7 @@ export default function Login({setToken}) {
                         </label>
                     </div>
                 </div>
+                
             </div>
     );
 }

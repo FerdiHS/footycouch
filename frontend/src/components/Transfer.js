@@ -2,8 +2,9 @@ import { useState, useEffect} from "react";
 import axios from "axios";
 import useToken from "./Token";
 import Statistic from "./Statistic";
-export default function Transfer({id, passPoints, passTransfer, passPlayers, passMoney}) {
+export default function Transfer({id, passPoints, passTransfer, passPlayers, passMoney, passTeams}) {
     const username = useToken().token;
+    const teams = passTeams;
     const [points, setPoints] = useState(passPoints);
     const [filteredPlayer, setfilteredPlayer] = useState("");
     const [money, setmoney] = useState(passMoney);
@@ -55,6 +56,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                 return;
             }
         }
+        
         let initialPLayerId = [];
         for (let i = 0; i < 15; i++) {
             initialPLayerId[i] = passPlayers[i].id;
@@ -63,18 +65,20 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
         for (let i = 0; i < 15; i++) {
             playerId[i] = player[i].id;
         }
-        const positions = ["gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", "fow_3"]
-        const transfer_in = playerId.filter(x => !initialPLayerId.includes(x));
-        const transfer_out = initialPLayerId.filter(x => !playerId.includes(x));
-        transfer_out.forEach((player_out, i) => {
-            const index_out = initialPLayerId.indexOf(player_out);
-            const position = positions[index_out];
-            const player_in = transfer_in[i];
-            const index_in = playerId.indexOf(player_in);
-            // setmoney(money + passPlayers[index_out].now_cost - player[index_in].now_cost);
-            axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/transfer", {balance: money, points, position, player_in, player_out})
-            .catch(err => console.log(err));
-        });
+        if(passPlayers[0].id !== null) {
+            const positions = ["gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", "fow_3"]
+            const transfer_in = playerId.filter(x => !initialPLayerId.includes(x));
+            const transfer_out = initialPLayerId.filter(x => !playerId.includes(x));
+            transfer_out.forEach((player_out, i) => {
+                const index_out = initialPLayerId.indexOf(player_out);
+                const position = positions[index_out];
+                const player_in = transfer_in[i];
+                const index_in = playerId.indexOf(player_in);
+                // setmoney(money + passPlayers[index_out].now_cost - player[index_in].now_cost);
+                axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/transfer", {balance: money, points, position, player_in, player_out})
+                .catch(err => console.log(err));
+            });
+        }
         let formation = "4-4-2";
         axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {balance: money, formation,
         "gk_1":playerId[0], 
@@ -156,14 +160,15 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
         position[index].clicked = "";
         setTransfer(transfer);
         setmoney(money + position[index].now_cost);
-        setposition([...position.slice(0, index), {name: "", position: "", team: ""}, ...position.slice(index + 1)])
-        setplayer([...player.slice(0, firstindex + index), {name: "", position: "", team: ""}, ...player.slice(firstindex + index + 1)]);
+        setposition([...position.slice(0, index), {name: "", position: "", team: "", teamCode: 0}, ...position.slice(index + 1)])
+        setplayer([...player.slice(0, firstindex + index), {name: "", position: "", team: "", teamCode: 0}, ...player.slice(firstindex + index + 1)]);
     }
     function titleCase(str) {
         return str.toLowerCase().split(' ').map(function(word) {
           return (word.charAt(0).toUpperCase() + word.slice(1));
         }).join(' ');
     }
+    const exitStats = () => setStats(null);
     return (
         <div class ="container2">
             <div>
@@ -182,7 +187,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                                                 : (<button class="removePlayer2" onClick={handleRemove(setgk, gk, i, 0)}></button>)
                                         }
                                         <label class="playerTeam">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} />
+                                            <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.teamCode + "_1-220.webp"} onClick={() => {if(player.teamCode === 0) {setPosition("Goalkeeper")} else {setStats(player)}}}/>
                                             {player.name === ""
                                                 ? "Add GKP"
                                                 : player.name}
@@ -204,7 +209,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                                     }
                                     
                                     <label class="playerTeam">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.teamCode + "-220.webp"} onClick={() => {if(player.teamCode === 0) {setPosition("Defender")} else {setStats(player)}}}/>
                                         {player.name === ""
                                                 ? "Add DEF"
                                                 : player.name}
@@ -224,9 +229,8 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                                             ? (<></>)
                                             : (<button class="removePlayer" onClick={handleRemove(setmidfield, midfield, i, 7)}></button>)
                                     }
-                                    {console.log(player.team + 1)}
                                     <label class="playerTeam">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.teamCode + "-220.webp"} onClick={() => {if(player.teamCode === 0) {setPosition("Midfield")} else {setStats(player)}}}/>
                                         {player.name === ""
                                                 ? "Add MID"
                                                 : player.name}
@@ -248,7 +252,7 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                                     }
                                     
                                     <label class="playerTeam">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.teamCode + "-220.webp"} onClick={() => {if(player.teamCode === 0) {setPosition("Forward")} else {setStats(player)}}}/>
                                         {player.name === ""
                                                 ? "Add FWD"
                                                 : player.name}
@@ -285,10 +289,10 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                         </tr>
                         {
                             transfer[position].filter(x => x.name.includes(filteredPlayer) || x.name.includes(titleCase(filteredPlayer)) || x.name.includes(filteredPlayer.toLowerCase())).map((player, index) => {
-                                const check = player.position !== "GKP" ? "" : " GK";
+                                const check = player.position !== "GKP" ? "" : "_1";
                                 return (<tr class="transferPlayer">
                                             <td class="transferPlayer">
-                                                <img src={require("../assets/Jersey/"+ clubCode[player.team] + check +" Jersey.png")} onClick={() => setStats(player)}/>
+                                                <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code + check + "-220.webp"} onClick={() => setStats(player)}/>
                                                 <h5>{player.name}</h5>
                                                 <p>{player.position} {player.team}</p>
                                             </td>
@@ -302,9 +306,10 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
             </div>
             {
                 stats !== null 
-                    ? <Statistic player={stats}/>
+                    ? <Statistic player={stats} exitStats={exitStats}/>
                     : <></>
             }
         </div>
     );
 }
+

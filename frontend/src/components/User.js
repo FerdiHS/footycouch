@@ -4,6 +4,7 @@ import axios from "axios";
 import test from "../assets/field.png";
 import logo from "../assets/MUN Logo.png";
 import Post from "./Post";
+import Statistic from "./Statistic";
 import useToken from "./Token";
 
 export default function User({passData}) {
@@ -59,14 +60,21 @@ export default function User({passData}) {
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     const follow = () => {
         setfollowed(true);
-        axios.post("https://footycouch-production.up.railway.app/users/follow", {follower: id, followed: users}).catch(err => console.log(err));
+        axios.post("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id}).catch(err => console.log(err));
     }
     const unfollow = () => {
         setfollowed(false);
-        axios.delete("https://footycouch-production.up.railway.app/users/follow", {follower: id, followed: users});
+        axios.delete("https://footycouch-production.up.railway.app/users/follow", {follower: users, followed: id});
     }
+    const [stats, setstats] = useState(null);
     return (
+        
     <div class="container4">
+        {
+            stats === null
+                ? <></>
+                : <Statistic player={stats} exitStats={() => setstats(null)} style = {{left: 250}}/> 
+        }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
             </div>
@@ -125,7 +133,7 @@ export default function User({passData}) {
                                 <div class="line">
                                     <div class="trans2"></div>
                                     <label class ="playername">
-                                    <img src= {require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} />
+                                    <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ gk.team_code+ "_1-220.webp"} onClick={() => {if(gk.name !== "No Player") {setstats(gk)}}}/>
                                     {gk.name}</label>
                                     <div class="trans2"></div>
                                 </div>
@@ -133,7 +141,7 @@ export default function User({passData}) {
                                     <div class="trans2"></div>
                                     {   defender.map((player, i) => {
                                         return (<label class="playername">
-                                            <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                             {player.name}
                                         </label>) 
                                     })          
@@ -144,7 +152,7 @@ export default function User({passData}) {
                                     <div class="trans2"></div>
                                     {   midfield.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                         {player.name}
                                     </label>) 
                                     })          
@@ -155,7 +163,7 @@ export default function User({passData}) {
                                     <div class="trans2"></div>
                                     {   forward.map((player, i) => {
                                         return (<label class="playername">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} />
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} onClick={() => {if(player.name !== "No Player") {setstats(player)}}}/>
                                         {player.name}
                                     </label>) 
                                     })          

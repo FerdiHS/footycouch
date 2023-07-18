@@ -3,6 +3,8 @@ import logo from "../assets/MUN Logo.png";
 import { useNavigate } from "react-router-dom";
 import useToken from "./Token";
 import axios from "axios";
+import Statistic from "./Statistic";
+import ChangeBench from "./ChangeBench";
 export default function TeamManagement({passPlayer, passFormation, passPoint}) {
     const navigate = useNavigate();
     const [formation, setformation] = useState(passFormation);
@@ -52,13 +54,18 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
     const [bench, setbench] = useState([player[1], ...player.slice(2 + parseInt(formation.charAt(0)), 7),
                                     ...player.slice(7 + parseInt(formation.charAt(2)), 12), 
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
+    const [benchSub, setbenchSub] = useState(false);
     const handleSub = (a) => () => {
         if (a === now) {
             setnow(-1);
         } else {
             setnow(a);
+            setbenchSub(true);
         }
     };
+    const handleExitBenchSub = () => {setnow(-1); setbenchSub(false)};
+    const handleViewStats = () => {setbenchSub(false); setStats(bench[now]); setnow(-1);}
+    const handleSubIn = () => {setbenchSub(false);}
     const handleChangePlayer = (a, b) => () => {
         if (now !== -1) {
             if (a === 0) {
@@ -147,6 +154,16 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                     window.alert("You cannot assign " + bench[now].position + " to " + "FWD");
                 }
             }
+        } else {
+            if (a === 0) {
+                setStats(gk);
+            } else if (a === 1) {
+                setStats(defender[b]);
+            } else if (a === 2) {
+                setStats(midfield[b]);
+            } else {
+                setStats(forward[b]);
+            }
         }
         setnow(-1);
     }
@@ -188,6 +205,8 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
         .catch(err => console.log(err));
         window.alert("Successfully Saved");
     }
+    const [stats, setStats] = useState(null);
+    const exitStats = () => setStats(null);
     return (
         <div class ="container2">
             <div>
@@ -198,7 +217,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                     <div class="line">
                         <div class="trans"></div>
                         <label class="playerTeam">
-                            <img src={require("../assets/Jersey/"+ clubCode[gk.team] +" GK Jersey.png")} onClick={handleChangePlayer(0,0)}/>
+                            <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ gk.team_code + "_1-220.webp"} style = {now !== -1 && bench[now].position ==="GKP" ? {backgroundColor:"rgb(0, 255, 255, .4)"} : {}} onClick={handleChangePlayer(0,0)}/>
                             {gk.name}
                         </label>
                         <div class="trans"></div>
@@ -208,7 +227,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         <div class="trans"></div>
                         {   defender.map((player, i) => {
                             return  <label class="playerTeam">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(1,i)}/>
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} style = {now !== -1 && bench[now].position ==="DEF" ? {backgroundColor:"rgb(0, 255, 255, .4)"} : {}} onClick={handleChangePlayer(1,i)}/>
                                         {player.name}
                                     </label>   
                         })          
@@ -220,7 +239,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         <div class="trans"></div>
                         {   midfield.map((player, i) => {
                             return  <label class="playerTeam">
-                                        <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(2,i)}/>
+                                        <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} style = {now !== -1 && bench[now].position ==="MID" ? {backgroundColor:"rgb(0, 255, 255, .4)"} : {}} onClick={handleChangePlayer(2,i)}/>
                                         {player.name}
                                     </label>   
                         })          
@@ -232,7 +251,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         <div class="trans"></div>
                         {   forward.map((player, i) => {
                         return  <label class="playerTeam">
-                                    <img src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleChangePlayer(3,i)}/>
+                                    <img src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code+ "-220.webp"} style = {now !== -1 && bench[now].position ==="FWD" ? {backgroundColor:"rgb(0, 255, 255, .4)"} : {}} onClick={handleChangePlayer(3,i)}/>
                                     {player.name}
                                 </label>
                         })          
@@ -244,17 +263,13 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                         <h5>Bench</h5>
                         <div class="line2">
                             {   bench.map((player, i) => {
-                                return player.position === "GKP"
-                                    ?   (<label class="playerTeam">
+                                const check = player.position === "GKP" ? "_1" : ""
+                                return (<label class="playerTeam">
                                             {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" GK Jersey.png")} onClick={handleSub(i)}/>
+                                            <img class={now === i ? "clicked" : ""} src={"https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_"+ player.team_code + check + "-220.webp"} onClick={handleSub(i)}/>
                                             {player.name}
                                         </label>)
-                                    :   (<label class="playerTeam">
-                                            {player.position}
-                                            <img class={now === i ? "clicked" : ""} src={require("../assets/Jersey/"+ clubCode[player.team] +" Jersey.png")} onClick={handleSub(i)}/>
-                                            {player.name}
-                                        </label>)
+                                    
                             })          
                             }
 
@@ -295,6 +310,14 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                 <div class="spacing4"></div>
                 <button class="button3" onClick={handleSave}>Save</button>
             </div>
+            {
+                stats !== null 
+                    ? <Statistic player={stats} exitStats={exitStats}/>
+                    : benchSub
+                    ? <ChangeBench exitBench={handleExitBenchSub} viewStats={handleViewStats} switchPlayer={handleSubIn}/>
+                    : <></>
+            }
+
         </div>
     );
 }

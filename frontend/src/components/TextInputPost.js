@@ -56,7 +56,7 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
         }
         axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/post", {
             content: postComponent.text,
-            image: postComponent.image.length === 0 ? "" : postComponent.image[0]
+            image: postComponent.image.length === 0 ? undefined : postComponent.image[0]
         })
         .then(res => {
             setpost([postComponent, ...post]);

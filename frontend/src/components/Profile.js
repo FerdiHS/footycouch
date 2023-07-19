@@ -78,11 +78,10 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result}).then(x => {
-            setProfilePicture(reader.result)
-            setisLoading(false);
-            };
-        }
+            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
+
+            setProfilePicture(reader.result);
+        };
         reader.readAsDataURL(file);
     }
     const bpUpload = e => {
@@ -94,7 +93,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => setisLoading(false));
+          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);

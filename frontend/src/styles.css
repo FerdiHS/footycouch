@@ -480,6 +480,7 @@ select:focus + .focus {
 .container6 {
   min-height: 100vh;
   background-color: #ecebeb;
+  display: flex;
 }
 .profile {
   height:650px;
@@ -804,7 +805,7 @@ label.playername > img {
   width: 711px;
   display: block;
   margin-top: 20px;
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
 }
 #upload-photo {
@@ -839,7 +840,9 @@ label.playername > img {
   min-width: 100%;
   min-height: 100%;
   position:relative;
+  cursor:pointer;
 }
+
 .inputText {
   margin-left:10px;
   margin-right:20px;
@@ -1284,6 +1287,7 @@ label.playername > img {
   text-align: center;
   cursor: pointer;
   left: 280px;
+  top: 35px;
   position: relative;
 }
 .Followed > h4 {
@@ -1298,6 +1302,7 @@ label.playername > img {
 .Follow {
   display: flex;
   font-size: 14px;
+  top: 35px;
   background-color: rgb(37, 182, 255);
   width: 100px;
   height: 35px;
@@ -1522,4 +1527,65 @@ label.playername > img {
 }
 .changeBenchMenu > button:hover {
   filter: brightness(90%);
+}
+.besidePostHome {
+  width: 311px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: 15px;
+}
+.homeLeaderboard {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  text-align: left;
+  padding-left: 15px;
+  padding-top: 0.1px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.homeLeaderboard > h3 {
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  margin-right: 15px;
+}
+.homeLeaderboard > table, th, td, tr{
+  border: 1px solid rgb(0, 132, 255);
+}
+.homeLeaderboard > table {
+  margin-top: 10px;
+}
+.homeLeaderboard > h4 {
+  margin-bottom: 0%;
+  margin-top: 0%;
+}
+.textLeaderboard {
+  cursor: pointer;
+}
+.textLeaderboard:hover{
+  text-decoration: underline;
+}
+.searchUser {
+  width: 220px;
+  margin-left: 15px;
+  display: inline-block;
+}
+.suggestedUser {
+  display: block;
+  position: relative;
+  left:71px;
+  height: 126px;
+  overflow-y: auto;
+}
+.suggestedUser > option {
+  border-bottom: 1px solid black;
+  border-left:1px solid black;
+  border-right: 1px solid black;
+  width: 220px;
+  background-color: white;
+  cursor: pointer;
+}
+.suggestedUser > option:hover {
+  background-color: #a7dfff;
 }

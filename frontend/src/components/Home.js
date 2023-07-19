@@ -8,7 +8,7 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
     const now_costRank = [];
     const performanceRank = [];
     const mostPickedRank = [];
-    passPlayer.map(x => {
+    const player = passPlayer.map(x => {
         now_costRank[x.now_cost_rank - 1] = x;
         performanceRank[x.points_per_game_rank - 1] = x;
         mostPickedRank[x.selected_rank - 1] = x;

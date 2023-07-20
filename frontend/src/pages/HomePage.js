@@ -10,6 +10,8 @@ export default function HomePage({setToken}) {
     var id = data.id;
     var Posts = data.Posts;
     var ProfilePicture = data.ProfilePicture;
+    var allPlayer = data.allPlayer;
+    var allUser = data.allUser;
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
@@ -25,8 +27,24 @@ export default function HomePage({setToken}) {
                     return post;
                 })
             );
-            Posts = updatedPosts.reverse();
-            setdata({id, Posts, ProfilePicture});
+            Posts = updatedPosts;
+            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
+            const allUser = (await axios.get("https://footycouch-production.up.railway.app/users")).data.data;
+            const updatedPlayer = await Promise.all(
+                allPlayer.map(async p => {
+                    p.name = p.web_name;
+                    p.teamId = p.team;
+                    const teamResp = teams.filter(team => team.id === p.teamId)[0];
+                    p.team = teamResp.short_name;
+                    p.teamName = teamResp.name;
+                    p.teamCode = teamResp.code;
+                    p.position = "FWD";
+                    return p;
+                })
+            );
+        
+            setdata({id, Posts, ProfilePicture, allPlayer, allUser});
         } catch (err) {
             console.log(err);
         }
@@ -38,7 +56,7 @@ export default function HomePage({setToken}) {
         return (
                 <div class = "App">
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <Home passPosts={Posts} passProfilePicture={ProfilePicture} passId = {id}/>
+                    <Home passPosts={Posts} passProfilePicture={ProfilePicture} passId = {id} passPlayer={allPlayer} passUser={allUser}/>
                 </div>
             );
     }

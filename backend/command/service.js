@@ -291,6 +291,49 @@ module.exports = {
         );
     },
 
+    getTeamFromGameWeek: (gameweek, callBack) => {
+        pool.query(
+            'SELECT * FROM teams WHERE gameweek=?;',
+            [gameweek],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
+    },
+
+    getTeamFromUser: (user, callBack) => {
+        pool.query(
+            'SELECT * FROM teams WHERE user=?;',
+            [user],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
+    },
+
+    updateTeamPoint: (id, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points, def_5_points, 
+            mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, callBack) => {
+        pool.query(
+            'UPDATE teams SET total_points=?, gk_1_points=?, gk_2_points=?, def_1_points=?, def_2_points=?, def_3_points=?, def_4_points=?, def_5_points=?, ' + 
+            'mid_1_points=?, mid_2_points=?, mid_3_points=?, mid_4_points=?, mid_5_points=?, fow_1_points=?, fow_2_points=?, fow_3_points=? ' +
+            'WHERE id=?;',
+            [total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points, def_5_points, 
+            mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        )
+    },
+
     changeCertainPlayer: (id, balance, points, position, player, callBack) => {
         pool.query(
             "UPDATE users SET balance=?, points=?, " + position + "=? WHERE id=?;",

@@ -37,6 +37,8 @@ const {
     deleteReply,
     editPost,
     getPostById,
+    getTeamByGameweek,
+    getTeamByUser,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -58,6 +60,8 @@ router.post("/teams/add/id/:id", addTeamById); // Add user's team when the user 
 router.post("/teams/add/:username", addTeamByUsername); // Add user's team when the user has not created any team, require "balance", "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
 router.post("/teams/set/id/:id", setTeamById); // Set user's team (change current team to a new one without any transfer), require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
 router.post("/teams/set/:username", setTeamByUsername); // Set user's team (change current team to a new one without any transfer), require "formation", "gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", and "fow_3"
+router.get("/teams/gameweek/:gameweek", getTeamByGameweek); // Get all users' team history from a certain past gameweek
+router.get("/teams/users/:id", getTeamByUser); // Get users' team history from all past gameweeks
 router.get("/players", getPlayers); // Get all the players
 router.get("/players/id/:id", getPlayersById); // Get player by id
 router.get("/players/goalkeeper", getGoalkeepers); // Get all goalkeepers

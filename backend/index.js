@@ -29,8 +29,3 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
 uploadTeam();
-
-// Checking time zone
-const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-console.log('Current backend timezone:', currentTimezone);

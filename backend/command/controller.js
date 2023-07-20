@@ -29,6 +29,8 @@ const {
     removeReply,
     updatePost,
     getPostById,
+    getTeamFromGameWeek,
+    getTeamFromUser,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -519,6 +521,32 @@ module.exports = {
                 data: results
             });
         });
+    },
+
+    getTeamByGameweek: (req, res) => {
+        const {gameweek} = req.params;
+        return getTeamFromGameWeek(gameweek, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        })
+    },
+
+    getTeamByUser: (req, res) => {
+        const {id} = req.params;
+        return getTeamFromUser(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        })
     },
 
     updateUserProfileById: (req, res) => {

@@ -30,6 +30,20 @@ module.exports = {
         );
     },
 
+    getAllUserCurrentTeams: callBack => {
+        pool.query(
+            "SELECT id, username, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3 " + 
+            "FROM users;",
+            [],
+            (error, results, fields) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     getUserByName: (username, callBack) => {
         pool.query(
             "SELECT * FROM users WHERE username = ?;",
@@ -254,6 +268,20 @@ module.exports = {
         pool.query(
             "INSERT INTO transfers(user, position, player_in, player_out) values (?, ?, ?, ?);",
             [id, position, player_in, player_out],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    createTeam: (user, gameweek, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, callBack) => {
+        pool.query(
+            'INSERT INTO teams(user, gameweek, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3) ' +
+            'values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [user, gameweek, formation, gk_1, gk_2, def_1, def_2, def_3, def_4, def_5, mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3],
             (error, results) => {
                 if(error) {
                     return callBack(error);

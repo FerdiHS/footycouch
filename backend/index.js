@@ -6,6 +6,7 @@ const userRouter = require("./command/router");
 const path = require("path");
 const bodyParser = require('body-parser');
 const exp = require("constants");
+const { uploadTeam } = require("./command/scheduler");
 
 const app = express()
 
@@ -23,7 +24,13 @@ app.use(bodyParser.urlencoded({extended: true }));
 app.use(bodyParser.json());
 app.use('', userRouter);
 
-
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
+
+uploadTeam();
+
+// Checking time zone
+const currentTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+console.log('Current backend timezone:', currentTimezone);

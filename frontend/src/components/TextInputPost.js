@@ -4,6 +4,7 @@ import close from "../assets/close.png";
 import Post from "./Post";
 import Loading from "./Loading";
 export default function TextInputPost({profilePicture, username, id, posts}) {
+    const [morePost, setmorePost] = useState(10);
     const [isLoading, setisLoading] = useState(false);
     const [newPost, setnewPost] = useState(false);
     function autosize(){
@@ -13,14 +14,14 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
           el.style.cssText = 'height:' + el.scrollHeight + 'px';
         },0);
     }
-    const [textarea, settextarea] = useState(document.querySelector('textarea'));
-    const [post, setpost] = useState(posts);
+    const [textarea, settextarea] = useState(document.querySelector('.inputText'));
+    const [post, setpost] = useState(posts.slice(0, morePost));
     const [text, setText] = useState("");
     const [postImage, setpostImage] = useState([]);
     const PostText = e => {
         setText(e.target.value);
         if(textarea == null) {
-            settextarea(document.querySelector('textarea'));
+            settextarea(document.querySelector('.inputText'));
             return;
         }
         textarea.addEventListener('keydown', autosize);   
@@ -103,8 +104,6 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
                 <div class="imgContainer">
                     <label class="imgUpload" htmlFor="uploadImages">Images</label>
                     <input type="file" id="uploadImages" onChange={handleInputImages}/>  
-                    <div class="borderbutton" />
-                    <div class="schedulePost" htmlFor="matchSchedule">Events</div> 
                 </div>
             </div>
             {
@@ -113,11 +112,18 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
                         console.log()
                         return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={true} setnewPost={() => setnewPost(false)}/>)
                     }
-                    return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={newPost} setnewPost={() => {}}/>)
+                    return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={newPost} setnewPost={() => {}} id ={id}/>)
+                    
                 })
+            }
+            {   morePost < posts.length
+                    ? <button class="loadMore" onClick = {() => {setmorePost(morePost + 5); setpost(posts.slice(0, morePost))}}>Load More Post</button>
+                    : <></>
             }
         </>
     );
 }
+
+             
 
              

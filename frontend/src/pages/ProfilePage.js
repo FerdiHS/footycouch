@@ -122,7 +122,6 @@ export default function ProfilePage({setToken}) {
                 postsResp.map(post => {
                     post.like = [];
                     post.text = post.content;
-                    post.time = "";
                     post.image = post.image;
                     return post;
                 })

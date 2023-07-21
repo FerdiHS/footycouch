@@ -13,13 +13,13 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
         performanceRank[x.points_per_game_rank - 1] = x;
         mostPickedRank[x.selected_rank - 1] = x;
         return x;
-    })
+    });
+    const [posts, setPosts] = useState(passPosts)
     const [searchUsername, setsearchUsername] = useState("");
     const [stats, setstats] = useState(null);
     const handleSearchUsername = (e) => {
         setsearchUsername(e.target.value)
     }
-
     return (
         <div class="container6">
             {
@@ -103,7 +103,7 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
                 </div>
             </div>
             <div class="post2">
-                <TextInputPost username={useToken().token} posts={passPosts} profilePicture={passProfilePicture} id = {passId}/>
+                <TextInputPost username={useToken().token} posts={posts} profilePicture={passProfilePicture} id = {passId}/>
             </div>
         </div>);
 }

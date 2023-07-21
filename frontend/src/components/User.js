@@ -9,6 +9,7 @@ import useToken from "./Token";
 
 export default function User({passData}) {
     const navigate = useNavigate();
+    const[morePost, setmorePost] = useState(10);
     const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
     const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = passData.username;
@@ -20,7 +21,7 @@ export default function User({passData}) {
     const highestPoints = 0;
     const [rank, setrank] = useState(1);
     const highestRank = 1;
-    const [posts, setPosts] = useState(passData.Posts);
+    const [posts, setPosts] = useState(passData.Posts.slice(0, morePost));
     const [player, setplayer] = useState(passData.players);
     const users = JSON.parse(localStorage.getItem('id'));
     const [followed, setfollowed] = useState(followers.filter(x => x.follower_id === users).length > 0);
@@ -180,9 +181,13 @@ export default function User({passData}) {
                     {
                         posts.length > 0 
                         ? posts.map((post, index) => {
-                            return (<Post username={username} profilePicture={profilePicture} postComponent={post}/>)
+                            return (<Post username={username} profilePicture={profilePicture} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
                         })
                         : <h2>{username} hasn't made any posts yet</h2>
+                    }
+                    {   morePost < passData.Posts.length
+                    ? <button class="loadMore" onClick = {() => {setmorePost(morePost + 5); setPosts(passData.Posts.slice(0, morePost))}}>Load More Post</button>
+                    : <></>
                     }
                 </div>
             </div>

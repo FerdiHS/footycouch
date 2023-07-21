@@ -81,7 +81,7 @@ router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, 
 router.put("/reply/:id", editReply); // Edit reply, require "content"
 router.delete("/reply/:id", deleteReply); // Remove reply
 router.post("/users/:id/like/:liked", like); // Add new like to post or reply
-router.delete("users/:id/like/:liked", unlike); // Remove like to post or reply
+router.delete("/users/:id/like/:liked", unlike); // Remove like to post or reply
 router.get("/like/:liked", getLikes); // Get likes of a post or reply
 
 module.exports = router;

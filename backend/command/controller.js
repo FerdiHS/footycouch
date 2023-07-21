@@ -31,6 +31,7 @@ const {
     getPostById,
     getTeamFromGameWeek,
     getTeamFromUser,
+    checkLiked,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -772,15 +773,28 @@ module.exports = {
 
     like: (req, res) => {
         const {id, liked} = req.params;
-        return createLike(id, true, liked, (err, results) => {
+        return checkLiked(id, true, liked, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({
                     message: "Database connection error"
                 });
             }
-            return res.status(200).json({
-                message: "Like created successfully"
+            if(results.length > 0) {
+                return res.status(409).json({
+                    message: "Like already exists"
+                })
+            }
+            return createLike(id, true, liked, (err, results) => {
+                if(err) {
+                    console.log(err);
+                    return res.status(403).json({
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    message: "Like created successfully"
+                });
             });
         });
     },

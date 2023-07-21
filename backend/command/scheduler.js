@@ -80,7 +80,6 @@ module.exports = {
             }
             getTeamFromGameWeek(gameweek, (err, results) => {
                 if(err) console.log(err)
-                console.log(results);
                 let players = [];
                 fplapi.then(response => {players = response.data.elements});
                 results.forEach(team => {
@@ -137,8 +136,8 @@ module.exports = {
                             def_5_points, mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, (err, result) => {
                                 if(err) console.log(err);
                     });
-                    console.log("Points on gameweek " + gameweek + " updated");
                 });
+                console.log("Points on gameweek " + gameweek + " updated");
             });
         });
     }

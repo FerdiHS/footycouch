@@ -479,7 +479,7 @@ module.exports = {
 
     getLike: (liked, type, callBack) => {
         pool.query(
-            'SELECT * FROM likes WHERE type = ? AND liked = ?',
+            'SELECT * FROM likes WHERE type = ? AND liked = ?;',
             [type, liked],
             (error, results) => {
                 if(error) {
@@ -487,6 +487,19 @@ module.exports = {
                 }
                 return callBack(null, results);
             }
-        )
+        );
+    },
+
+    checkLiked: (user, liked, type, callBack) => {
+        pool.query(
+            'SELECT * FROM likes WHERE user = ? AND liked = liked AND type = ?;',
+            [user, liked, type],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
 };

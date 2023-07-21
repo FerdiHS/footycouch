@@ -100,7 +100,7 @@ export default function Profile({passData}) {
     }
     const [stats, setstats] = useState(null);
     const [isLoading, setisLoading] = useState(false);
-
+    
     return (
     <div class="container4">
         {

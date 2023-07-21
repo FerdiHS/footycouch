@@ -760,9 +760,8 @@ module.exports = {
     },
 
     getReplies: (req, res) => {
-        const replying_to = req.params.replying_to;
-        const {type} = req.body;
-        return getReply(type, replying_to, (err, results) => {
+        const {replying_to} = req.params;
+        return getReply(true, replying_to, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({

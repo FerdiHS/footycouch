@@ -81,7 +81,7 @@ router.put("/post/:id", editPost); // Edit post, require "content"
 router.get("/post/:id", getPostById); // Get certain post by its id
 router.get("/post/following/:id", getAllFollowingsPosts); // Get all posts posted by all users followed by a certain user
 router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (user id), "type" (true for replying post, false for replying reply), and "content"
-router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, require "type" (true for replying post, false for replying reply)
+router.get("/reply/:replying_to", getReplies); // Get replies of post or reply
 router.put("/reply/:id", editReply); // Edit reply, require "content"
 router.delete("/reply/:id", deleteReply); // Remove reply
 router.post("/users/:id/like/:liked", like); // Add new like to post or reply

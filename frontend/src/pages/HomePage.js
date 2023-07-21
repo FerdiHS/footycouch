@@ -17,7 +17,7 @@ export default function HomePage({setToken}) {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             id = users.id;
             ProfilePicture = users.profile_picture;
-            const postsResp = (await axios.get("https://footycouch-production.up.railway.app//users/id/" + id + "/post")).data.results;
+            const postsResp = (await axios.get("https://footycouch-production.up.railway.app/post/following/" + id)).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {
                     post.like = [];
@@ -27,7 +27,7 @@ export default function HomePage({setToken}) {
                     return post;
                 })
             );
-            Posts = updatedPosts;
+            Posts = updatedPosts.reverse();
             const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
             const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
             const allUser = (await axios.get("https://footycouch-production.up.railway.app/users")).data.data;
@@ -43,7 +43,6 @@ export default function HomePage({setToken}) {
                     return p;
                 })
             );
-        
             setdata({id, Posts, ProfilePicture, allPlayer, allUser});
         } catch (err) {
             console.log(err);

@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const { getAllUserCurrentTeams, createTeam, getTeamFromGameWeek, updateTeamPoint } = require('./service');
+const { getAllUserCurrentTeams, createTeam, getTeamFromGameWeek, updateTeamPoint, updateUserPointsById, getUserById } = require('./service');
 const { fplapi } = require('../config/fplapi');
 const gameWeekDeadline = [
     '30 17 11 8 *',
@@ -134,7 +134,14 @@ module.exports = {
                     if(fow >= 3) total_points += fow_3_points - team.fow_3_points;
                     updateTeamPoint(team.id, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points,
                             def_5_points, mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, (err, result) => {
-                                if(err) console.log(err);
+                        if(err) console.log(err);
+                    });
+                    getUserById(team.id, (err, result) => {
+                        if(err) console.log(err);
+                        updateUserPointsById(team.id, result.points + total_points - team.total_points, (error, results) => {
+                            if(err) console.log(err);
+                            console.log("User " + team.id + " points have been updated to " + (result.points + total_points - team.total_points));
+                        });
                     });
                 });
                 console.log("Points on gameweek " + gameweek + " updated");

@@ -39,6 +39,8 @@ const {
     getPostById,
     getTeamByGameweek,
     getTeamByUser,
+    getUserById,
+    getAllFollowingsPosts,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -46,7 +48,8 @@ const router = require("express").Router();
 router.post("/signup", signup); // Signup for new user, require "username", "password", and "confirmPassword"
 router.post("/login", login); // For user to login, require "username" and "password", returning the user data
 router.get("/users", getUsers); // Get all users' data
-router.get("/users/:username", getUserByName); // Get a certain user with given username, require "username"
+router.get("/users/:username", getUserByName); // Get a certain user with given username
+router.get("/users/id/:id", getUserById); // Get a certain user with given id
 router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image"
 router.get("/users/:username/image", getImageUsers); // Get the user's profile picture
 router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image"
@@ -76,6 +79,7 @@ router.post("/users/id/:id/post", addPost); // Add new post, require "content" a
 router.get("/users/id/:id/post", getUserPost); // Get user's post
 router.put("/post/:id", editPost); // Edit post, require "content"
 router.get("/post/:id", getPostById); // Get certain post by its id
+router.get("/post/following/:id", getAllFollowingsPosts); // Get all posts posted by all users followed by a certain user
 router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (user id), "type" (true for replying post, false for replying reply), and "content"
 router.get("/reply/:replying_to", getReplies); // Get replies of post or reply, require "type" (true for replying post, false for replying reply)
 router.put("/reply/:id", editReply); // Edit reply, require "content"

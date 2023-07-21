@@ -135,6 +135,19 @@ module.exports = {
         );
     },
 
+    updateUserPointsById: (id, points, callBack) => {
+        pool.query(
+            'UPDATE users set points = ? WHERE id = ?;',
+            [points, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     checkFollow: (follower, followed, callBack) => {
         pool.query(
             'SELECT * FROM follows WHERE follower_id=? AND followed_id=?;',
@@ -386,6 +399,19 @@ module.exports = {
         );
     },
 
+    getAllFollowingsPosts: (id, callBack) => {
+        pool.query(
+            'SELECT p.id, p.user, p.content, p.image, p.created_at, p.updated_at FROM posts p JOIN follows f ON p.user = f.followed_id WHERE f.follower_id = ? OR p.user = ?;',
+            [id, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     getPostById: (id, callBack) => {
         pool.query(
             'SELECT * FROM posts WHERE id = ?;',
@@ -492,7 +518,7 @@ module.exports = {
 
     checkLiked: (user, liked, type, callBack) => {
         pool.query(
-            'SELECT * FROM likes WHERE user = ? AND liked = liked AND type = ?;',
+            'SELECT * FROM likes WHERE user = ? AND liked = ? AND type = ?;',
             [user, liked, type],
             (error, results) => {
                 if(error) {

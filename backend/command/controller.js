@@ -32,6 +32,8 @@ const {
     getTeamFromGameWeek,
     getTeamFromUser,
     checkLiked,
+    getUserById,
+    getAllFollowingsPosts,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -84,10 +86,10 @@ module.exports = {
     getUserByName: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
-        getUserByName(username, (err, results) => {
+        return getUserByName(username, (err, results) => {
             if(err) {
                 console.log(err);
-                return;
+                return res.status();
             }
             if(!results) {
                 return res.status(403).json({
@@ -98,6 +100,24 @@ module.exports = {
                 data: results
             });
         });
+    },
+
+    getUserById: (req, res) => {
+        const {id} = req.params;
+        return getUserById(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            if(!results) {
+                return res.status(403).json({
+                    message: "Not found"
+                });
+            }
+            return res.status(200).json({results});
+        })
     },
 
     login: (req, res) => {
@@ -416,7 +436,7 @@ module.exports = {
                 console.log(err);
                 return res.status(403).json({
                     message: "Database connection error"
-                    });
+                });
             }
             return res.status(200).json({
                 data: results
@@ -700,6 +720,19 @@ module.exports = {
     getPostById: (req, res) => {
         const {id} = req.params;
         return getPostById(id, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        });
+    },
+
+    getAllFollowingsPosts: (req, res) => {
+        const {id} = req.params;
+        return getAllFollowingsPosts(id, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(403).json({

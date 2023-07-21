@@ -986,7 +986,7 @@ label.playername > img {
   position:relative;
   top:-31px;
   left: 60px;
-  width:100%;
+  width: max-content;
   font-size: small;
   font-weight: bold;
 }
@@ -1346,11 +1346,11 @@ label.playername > img {
   left: 0px;
   top: 0px;
   background-color: rgba(0,0,0,.6);
-  z-index: 10;
+  z-index: 5090;
   overflow: hidden;
   text-align: left;
   font-family: arial;
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .playerStats {
@@ -1588,4 +1588,162 @@ label.playername > img {
 }
 .suggestedUser > option:hover {
   background-color: #a7dfff;
+}
+.post3 {
+  width: 811px;
+  height: 850px;
+  position: relative;
+  top: 10vh;
+  margin: auto;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 100% 570px;
+  border-radius: 5px;
+  font-size: large;
+  overflow-y: auto;
+}
+.profilePicture3 {
+  position: relative;
+  top: 10px;
+  margin-left:10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow:hidden;
+  background-color:white;
+  border: 4px solid white;
+}
+.profilePicture3 > img {
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  margin-top: 0;
+  position:relative;
+  min-width: 100%;
+  min-height: 100%;
+  position:relative;
+  cursor:pointer;
+}
+.unamePost2 {
+  position:relative;
+  top:-41px;
+  left: 80px;
+  width:max-content;
+  font-size: medium;
+  font-weight: bold;
+}
+.unamePost2:hover {
+  text-decoration: underline 1.5px solid black;
+  cursor:pointer;
+}
+.comment {
+  object-fit: contain;
+  width:46px;
+  height:40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  top:-10px;
+  cursor: pointer;
+  left:40px;
+  background-image: url("./assets/Comment.png");
+}
+.comment:hover {
+  opacity: 50%;
+}
+.post3 > h5 {
+  margin-left: 15px;
+}
+.post3 > img {
+  width: 100%;
+  height: auto;
+}
+.replies {
+  border-top: 1px solid rgb(222, 222, 222);
+  border-bottom:1px solid rgb(222, 222, 222);
+  padding-bottom:50px;
+}
+.inputText2 {
+  margin-left:10px;
+  margin-right:20px;
+  background-color: #d1d1d1;
+  border-radius: 20px;
+  position: relative;
+  top:-34px;
+  width:600px;
+  padding:10px;
+  padding-right: 50px;
+  left:50px;
+  border-color: transparent;
+  font-size: 15px;
+  outline: none;
+  display: block;
+  resize: none;
+  overflow: hidden;
+  height:auto;
+  font-family:Arial;
+  height:auto;
+  margin-bottom: -50px;
+}
+.comments {
+  margin-left:10px;
+  margin-right:20px;
+  background-color: #d1d1d1;
+  border-radius: 5px;
+  position: relative;
+  padding:5px;
+  padding-right: 10px;
+  width: max-content;
+  border-color: transparent;
+  font-size: 15px;
+  outline: none;
+  display: block;
+  overflow: hidden;
+  height:min-content;
+  font-family:Arial;
+  height:auto;
+  max-width: 700px;
+  left:60px;
+  top:-20px;
+  margin-bottom: -40px;
+}
+.profilePicture4 {
+  position: relative;
+  margin-left:15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow:hidden;
+  background-color:white;
+  border: 4px solid white;
+}
+.profilePicture4 > img {
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  margin-top: 0;
+  position:relative;
+  min-width: 100%;
+  min-height: 100%;
+  cursor:pointer;
+}
+.unameComment {
+  position: relative;
+  left: 70px;
+  top:24px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.unameComment:hover {
+  text-decoration: underline;
+}
+.loadMore {
+  width:100%;
+  position: relative;
+  background-color: #00a2ff;
+  height:50px;
+  cursor:pointer;
+}
+.loadMore:hover {
+  filter: brightness(120%);
 }

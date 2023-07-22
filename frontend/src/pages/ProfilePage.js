@@ -12,6 +12,7 @@ export default function ProfilePage({setToken}) {
     var id = data.id;
     var players = data.players
     var formation = data.formation;
+    var favteams = data.favteams;
     var bio = data.bio;
     var points = data.points;
     var Followings = data.Followings;
@@ -24,6 +25,7 @@ export default function ProfilePage({setToken}) {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
             id = users.id;
+            favteams = users.fav_team;
             bio = users.bio;
             formation = users.formation;
             points = users.points;
@@ -127,7 +129,7 @@ export default function ProfilePage({setToken}) {
                 })
             );
             Posts = updatedPosts.reverse();
-            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, favteams:favteams})
         } catch (err) {
             console.log(err);
         }

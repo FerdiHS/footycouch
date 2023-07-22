@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import UserFollow from "./UserFollow";
 export default function Follow({FollowComponent, exitFollow, type, id}) {
     const [isLoading, setisLoading] = useState(false);
+    const [followings, setfollowings] = useState(null);
     const loadFollowings = async () => {
         axios.get("https://footycouch-production.up.railway.app/users/following/" + id).then(following => setfollowings(following.data.data)).catch(err => console.log(err))
     }

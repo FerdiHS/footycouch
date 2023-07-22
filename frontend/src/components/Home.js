@@ -53,14 +53,14 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
                         <tr>
                             <th style={{textAlign: "center"}}>#</th>
                             <th style={{width: 220, paddingLeft: 5}}>Player</th>
-                            <th style={{textAlign: "center"}}>€</th>
+                            <th style={{textAlign: "center"}}>ppg</th>
                         </tr>
                         {
                             performanceRank.slice(0,10).map((player, index) => {
                                 return (<tr style = {index % 2 === 0 ? {backgroundColor: "rgb(233, 233, 233)"} : {}}>
                                             <td style={{textAlign: "center"}}>{index + 1}</td>
                                             <td style={{width: 220, paddingLeft: 5}}><strong class="textLeaderboard" onClick={() => setstats(player)}>{player.first_name + " " + player.second_name}</strong></td>
-                                            <td style={{width: 40, textAlign: "center"}}>{player.now_cost}</td>
+                                            <td style={{width: 40, textAlign: "center"}}>{player.points_per_game}</td>
                                         </tr>)
                             })
                         }
@@ -88,14 +88,14 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
                         <tr>
                             <th style={{textAlign: "center"}}>#</th>
                             <th style={{width: 220, paddingLeft: 5}}>Player</th>
-                            <th style={{textAlign: "center"}}>€</th>
+                            <th style={{textAlign: "center"}}>%</th>
                         </tr>
                         {
                             mostPickedRank.slice(0,10).map((player, index) => {
                                 return (<tr style = {index % 2 === 0 ? {backgroundColor: "rgb(233, 233, 233)"} : {}}>
                                             <td style={{textAlign: "center"}}>{index + 1}</td>
                                             <td style={{width: 220, paddingLeft: 5}}><strong class="textLeaderboard" onClick={() => setstats(player)}>{player.first_name + " " + player.second_name}</strong></td>
-                                            <td style={{width: 40, textAlign: "center"}}>{player.now_cost}</td>
+                                            <td style={{width: 40, textAlign: "center"}}>{player.selected_by_percent}</td>
                                         </tr>)
                             })
                         }

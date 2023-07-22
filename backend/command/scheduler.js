@@ -69,7 +69,7 @@ module.exports = {
     },
 
     updatePoints: () => {
-        cron.schedule('10 15 * * *', () => {
+        cron.schedule('0 0 * * *', () => {
             const currentDate = new Date();
             let gameweek = 0;
             for(let i = 0; i < 38; i++) {
@@ -82,6 +82,7 @@ module.exports = {
                 if(err) console.log(err)
                 let players = [];
                 fplapi().then(response => {players = response.data.elements});
+                // players = fplapi().elements;
                 results.forEach(team => {
                     const gk = 1;
                     const def = parseInt(team.formation.charAt(0));

@@ -4,13 +4,11 @@ import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 import axios from "axios";
 import PostPopUp from "./PostPopUp";
-export default function Post({postComponent, setnewPost, newPost, id}) {
+export default function Post({postComponent, pp,setnewPost, newPost, id}) {
     const [data, setdata] = useState({});
     const like = data.like;
     const username = data.username;
     const profilePicture = data.profile_picture;
-    const [liked, setLiked] = useState([]);
-    const uid = useToken().token;
     const createdTime = new Date(postComponent.created_at);
     const addZero = x => x < 10 ? '0' + x : x;
     var date = addZero(createdTime.getDate())+' '+ createdTime.toLocaleString('en-US', { month: 'long' })+' '+createdTime.getFullYear();
@@ -34,7 +32,7 @@ export default function Post({postComponent, setnewPost, newPost, id}) {
         return -1;
     }
     
-    const handleLike = () => {
+    const handleLike = async () => {
         const check = isLiked();
         if (check !== -1) {
             axios.delete("https://footycouch-production.up.railway.app/users/" + id + "/like/" + postComponent.id).then(x => setdata({like: [...data.like.slice(0, check), ...data.like.slice(check + 1)], comment: data.comment, username: data.username, profile_picture: data.profile_picture})).catch(err => console.log(err));
@@ -45,7 +43,8 @@ export default function Post({postComponent, setnewPost, newPost, id}) {
     const loadLike = () => {
         axios.get("https://footycouch-production.up.railway.app/users/id/" + postComponent.user).then(user => {
             (axios.get("https://footycouch-production.up.railway.app/like/" + postComponent.id)).then((like) => {
-                axios.get("https://footycouch-production.up.railway.app/reply/" + postComponent.id, {type: true}).then(comment => {
+                axios.get("https://footycouch-production.up.railway.app/reply/" + postComponent.id).then(comment => {
+                    console.log(comment);
                     setdata({like:like.data.results, comment: comment.data.results, username: user.data.results.username, profile_picture:user.data.results.profile_picture});
                     setnewPost();
                 })
@@ -64,8 +63,8 @@ export default function Post({postComponent, setnewPost, newPost, id}) {
     } else if (newPost) {
         loadLike();
     }
-    const handleComment = (content) => {
-        axios.post("https://footycouch-production.up.railway.app/reply/" + postComponent.id, {id: id, type: true, content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}).then(
+    const handleComment = async (content) => {
+        axios.post("https://footycouch-production.up.railway.app/reply/" + postComponent.id, {id: id, type: "true", content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}).then(
             x => {
                 setdata({username: data.username, profile_picture: data.profile_picture,like: data.like, comment: [...data.comment,{user: id, content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}]})
             }
@@ -75,7 +74,7 @@ export default function Post({postComponent, setnewPost, newPost, id}) {
         <>
         {
             viewPost
-                ? <PostPopUp username={username} profilePicture={profilePicture} postComponent={postComponent} id={id} exit={() => setviewPost(false) } handleLike={handleLike} like={like} comments={comment} handleComment={handleComment}/>
+                ? <PostPopUp username={username} profilePicture={profilePicture} pp = {pp} postComponent={postComponent} id={id} exit={() => setviewPost(false) } handleLike={handleLike} like={like} comments={comment} handleComment={handleComment}/>
                 : <></>
         }
         <div class="posts">

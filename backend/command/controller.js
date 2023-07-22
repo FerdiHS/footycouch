@@ -464,7 +464,7 @@ module.exports = {
     addTeamByUsername: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const username = req.params.username;
-        const balance = req.params.balance;
+        const balance = req.body.balance;
         const formation = req.body.formation;
         const gk_1 = req.body.gk_1;
         const gk_2 = req.body.gk_2;

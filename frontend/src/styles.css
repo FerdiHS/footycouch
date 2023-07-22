@@ -725,7 +725,7 @@ input[type="file"] {
   text-align: center;
 }
 .myteam {
-  top: -263.3px;
+  top: -133.3px;
   left:305px;
   position: relative;
   height:200px;
@@ -1805,4 +1805,19 @@ td[class="teams"] {
 }
 .changeTeamSave:hover {
   filter: brightness(95%);
+}
+.followCon {
+  width: 511px;
+  max-height: 550px;
+  position: relative;
+  top: 20vh;
+  margin: auto;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 100% 570px;
+  border-radius: 5px;
+  font-size: large;
+  align-items: center;
+  padding-top:10px;
+  padding-bottom: 20px;
 }

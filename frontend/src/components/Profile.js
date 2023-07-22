@@ -7,6 +7,7 @@ import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
 import Statistic from "./Statistic";
 import Loading from "./Loading";
+import Follow from "./Follow";
 
 export default function Profile({passData}) {
     const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
@@ -101,6 +102,7 @@ export default function Profile({passData}) {
     }
     const [stats, setstats] = useState(null);
     const [isLoading, setisLoading] = useState(false);
+    const [pressFollow, setpressFollow] = useState(null);
     return (
     <div class="container4">
         {
@@ -112,6 +114,11 @@ export default function Profile({passData}) {
             stats === null
                 ? <></>
                 : <Statistic player={stats} exitStats={() => setstats(null)} style = {{left: 250}}/> 
+        }
+        {
+            pressFollow === null
+                ? <></>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id} followings={followings}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
@@ -139,12 +146,12 @@ export default function Profile({passData}) {
                     <h4>Posts</h4>
                 </div>
                 <div class="followers">
-                    <h3>{followers.length}</h3>
-                    <h4>Followers</h4>
+                    <h3 onClick={() => setpressFollow(followers)}>{followers.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
                 </div>
                 <div class="followers">
-                    <h3>{followings.length}</h3>
-                    <h4>Following</h4>
+                    <h3 onClick={() => setpressFollow(followings)}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followings)}>Following</h4>
                 </div>
                 <div class="wrapback">
                     <label htmlFor="upload-backgroundPicture" class = "editbackground"><h4>Edit Cover Photo</h4></label>
@@ -159,12 +166,8 @@ export default function Profile({passData}) {
                         <h2>Statistic</h2>
                         <h3>Current Points</h3>
                         <h4>{points}</h4>
-                        <h3>Highest Points</h3>
-                        <h4>{highestPoints}</h4>
                         <h3>Current Rank</h3>
                         <h4>#{rank}</h4>
-                        <h3>Highest Rank</h3>
-                        <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
                             <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"}></img>

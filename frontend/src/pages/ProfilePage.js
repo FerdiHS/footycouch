@@ -93,7 +93,6 @@ export default function ProfilePage({setToken}) {
                     id: users.fow_3
                 },
             ]);
-            const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
             const shortTeamById = []
             shortTeamById[0] = "";
             const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;

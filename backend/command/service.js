@@ -148,6 +148,19 @@ module.exports = {
         );
     },
 
+    updateUserFavTeamById: (id, fav_team, callBack) => {
+        pool.query(
+            'UPDATE users set fav_team = ? WHERE id = ?;',
+            [fav_team, id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     checkFollow: (follower, followed, callBack) => {
         pool.query(
             'SELECT * FROM follows WHERE follower_id=? AND followed_id=?;',

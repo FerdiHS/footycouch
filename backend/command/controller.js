@@ -34,6 +34,7 @@ const {
     checkLiked,
     getUserById,
     getAllFollowingsPosts,
+    updateUserFavTeamById,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -224,6 +225,22 @@ module.exports = {
                 })
             }
         );
+    },
+
+    setUserFavTeam: (req, res) => {
+        const {id} = req.params;
+        const {fav_team} = req.body;
+        return updateUserFavTeamById(id, fav_team, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(403).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                message: "Favourite team updated successfully"
+            });
+        })
     },
 
     follow: (req, res) => {

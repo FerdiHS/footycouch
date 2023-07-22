@@ -41,6 +41,7 @@ const {
     getTeamByUser,
     getUserById,
     getAllFollowingsPosts,
+    setUserFavTeam,
 } = require("./controller");
 
 const router = require("express").Router();
@@ -53,6 +54,7 @@ router.get("/users/id/:id", getUserById); // Get a certain user with given id
 router.post("/users/:username/image", uploadImageUsers); // Upload the user's profile picture, require "image"
 router.get("/users/:username/image", getImageUsers); // Get the user's profile picture
 router.post("/users/:username/background", uploadBackgroundImageUsers); // Upload the user's background picture, require "image"
+router.post("/users/id/:id/favteam", setUserFavTeam); // Set the user's favourite team, require fav_team (int)
 router.post("/users/:follower/follow/:followed", follow); // Make a user follow another user
 router.delete("/users/:follower/follow/:followed", unfollow); // Make a user unfollow another user
 router.get("/users/following/:id", getUserFollowing); // Get the user's following list

@@ -74,9 +74,6 @@ export default function User({passData}) {
     const [stats, setstats] = useState(null);
     const [followingsUser, setfollowingsUser] = useState(null);
     
-    if(followingsUser === null) {
-        loadFollowings();
-    }
     return (
         
     <div class="container4">

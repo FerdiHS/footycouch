@@ -8,15 +8,20 @@ import Loading from "../components/Loading.js";
 export default function TeamManagementPage({setToken}) {
     const navigate = useNavigate();
     const [data, setdata] = useState({});
+    var id = data.id;
     var players = data.players
     var formation = data.formation;
     var points = data.points;
+    var favteams = data.favteams;
+    var teams = data.teams;
     const username = useToken().token;
     const loadUser = async () => {
         try {
             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            id = users.id;
             formation = users.formation;
             points = users.points;
+            favteams = users.fav_team
             players = ([
                 {
                     position: "GKP",
@@ -85,6 +90,7 @@ export default function TeamManagementPage({setToken}) {
             teamResp.forEach(x => {
                 shortTeamById[x.id] = x;
             });
+            teams = teamResp;
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
@@ -99,7 +105,7 @@ export default function TeamManagementPage({setToken}) {
                 })
             );
             players = updatedPlayers;
-            setdata({players: players, points: points, formation: formation});
+            setdata({players: players, points: points, formation: formation, favteams: favteams, teams: teams, id: id});
         } catch (err) {
             console.log(err);
         }
@@ -108,10 +114,11 @@ export default function TeamManagementPage({setToken}) {
         loadUser();
         return <><HeaderWebAfterLog setToken={setToken}/><Loading /></>;
     } else {
+        console.log(id);
         return (
                 <div>
                     <HeaderWebAfterLog setToken={setToken}/>
-                    <TeamManagement passPlayer = {players} passFormation = {formation} passPoint = {points}/>
+                    <TeamManagement passId = {id} passPlayer = {players} passFormation = {formation} passPoint = {points} passfavteams={favteams} passTeams={teams}/>
                 </div>
             );
     }

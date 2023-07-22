@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../assets/field.png";
-import logo from "../assets/MUN Logo.png";
+import logo from "../assets/Avatar2.png";
 import Post from "./Post";
 import Statistic from "./Statistic";
+import Follow from "./Follow";
 import useToken from "./Token";
 
 export default function User({passData}) {
     const navigate = useNavigate();
+    const favteams = passData.favteams;
     const[morePost, setmorePost] = useState(10);
-    const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
+    const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? logo : passData.backgroundPicture);
     const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = passData.username;
     const id = passData.id;
@@ -25,6 +26,7 @@ export default function User({passData}) {
     const [player, setplayer] = useState(passData.players);
     const users = JSON.parse(localStorage.getItem('id'));
     const [followed, setfollowed] = useState(followers.filter(x => x.follower_id === users).length > 0);
+    const [pressFollow, setpressFollow] = useState(null);
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
@@ -70,6 +72,14 @@ export default function User({passData}) {
         setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
     }
     const [stats, setstats] = useState(null);
+    const [followingsUser, setfollowingsUser] = useState(null);
+    const [pp, setpp] = useState(undefined);
+    const loadpp = async () => {
+        axios.get("https://footycouch-production.up.railway.app/users/id/" + users).then(x => {setpp(x.data.results.profile_picture)});
+    } 
+    if(pp === undefined) {
+        loadpp();
+    }
     return (
         
     <div class="container4">
@@ -77,6 +87,11 @@ export default function User({passData}) {
             stats === null
                 ? <></>
                 : <Statistic player={stats} exitStats={() => setstats(null)} style = {{left: 250}}/> 
+        }
+        {
+            pressFollow === null
+                ? <></>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
@@ -91,23 +106,23 @@ export default function User({passData}) {
                 </div>
                 <div class="name2">
                     <h1>{username}</h1>
-                    <p>{bio}</p>
+                    <p style={bio === "" ?{marginBottom: -20} : {}}>{bio}</p>
                     {followed
                         ? <button class = "Followed" onClick = {unfollow}><h4>Unfollow</h4></button>
                         : <button class = "Follow" onClick = {follow}><h4>Follow</h4></button>
                     }
                 </div>
                 <div class="followers2">
-                    <h3>{posts.length}</h3>
+                    <h3>{passData.Posts.length}</h3>
                     <h4>Posts</h4>
                 </div>
                 <div class="followers2">
-                    <h3>{followers.length}</h3>
-                    <h4>Followers</h4>
+                    <h3 onClick={() => setpressFollow(followers)}>{followers.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
                 </div>
                 <div class="followers2">
-                    <h3>{followings.length}</h3>
-                    <h4>Following</h4>
+                    <h3 onClick={() => setpressFollow(followers)}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)}>Following</h4>
                 </div>
             </div>
         </div>
@@ -118,15 +133,11 @@ export default function User({passData}) {
                         <h2>Statistic</h2>
                         <h3>Current Points</h3>
                         <h4>{points}</h4>
-                        <h3>Highest Points</h3>
-                        <h4>{highestPoints}</h4>
                         <h3>Current Rank</h3>
                         <h4>#{rank}</h4>
-                        <h3>Highest Rank</h3>
-                        <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo}></img>
+                            <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"}></img>
                         </div>
                     </div>
                     <div class="lineup">
@@ -181,7 +192,7 @@ export default function User({passData}) {
                     {
                         posts.length > 0 
                         ? posts.map((post, index) => {
-                            return (<Post username={username} profilePicture={profilePicture} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
+                            return (<Post username={username} pp={pp} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
                         })
                         : <h2>{username} hasn't made any posts yet</h2>
                     }

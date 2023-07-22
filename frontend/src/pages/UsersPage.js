@@ -20,6 +20,7 @@ export default function UsersPage({setToken}) {
     var backgroundPicture = data.backgroundPicture;
     var Posts = data.Posts;
     var userNotFound = data.userNotFound;
+    var favteams = data.favteams;
     const username = window.location.pathname.slice(6);
     if (username === useToken().token) {
         navigate("/profile");
@@ -31,6 +32,7 @@ export default function UsersPage({setToken}) {
             bio = users.bio;
             formation = users.formation;
             points = users.points;
+            favteams = users.fav_team
             ProfilePicture = users.profile_picture;
             backgroundPicture = users.background_picture;
             players = ([
@@ -129,7 +131,7 @@ export default function UsersPage({setToken}) {
                 })
             );
             Posts = updatedPosts.reverse();
-            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, username: username})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, username: username, favteams: favteams})
         } catch (err) {
             console.log(err);
         }

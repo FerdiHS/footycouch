@@ -1,11 +1,14 @@
 import { useState } from "react";
-import logo from "../assets/MUN Logo.png";
+import logo from "../assets/Avatar2.png"
 import { useNavigate } from "react-router-dom";
 import useToken from "./Token";
 import axios from "axios";
 import Statistic from "./Statistic";
 import ChangeBench from "./ChangeBench";
-export default function TeamManagement({passPlayer, passFormation, passPoint}) {
+import ChangeTeam from "./ChangeTeam";
+export default function TeamManagement({passPlayer, passFormation, passPoint, passfavteams, passId, passTeams}) {
+    const [changeteam, setchangeteam] = useState(false);
+    const [favteams, setfavteams] = useState(passfavteams);
     const navigate = useNavigate();
     const [formation, setformation] = useState(passFormation);
     const username = useToken().token;
@@ -302,8 +305,8 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                 <div class="spacing4"></div>
                 <div class="point2">
                     Your Team
-                    <img src={logo} alt=""/>
-                    <p>Change Team</p>
+                    <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"} alt=""/>
+                    <p onClick={() => setchangeteam(true)}>Change Team</p>
                 </div>
                 <div class="spacing4"></div>
                 <button class="button3" onClick={() => navigate("/transfer")}>Transfer</button>
@@ -317,7 +320,11 @@ export default function TeamManagement({passPlayer, passFormation, passPoint}) {
                     ? <ChangeBench exitBench={handleExitBenchSub} viewStats={handleViewStats} switchPlayer={handleSubIn}/>
                     : <></>
             }
-
+            {
+                changeteam
+                    ? <ChangeTeam setFavTeam={(team) => setfavteams(team)} exitChangeTeam={() => setchangeteam(false)} id={passId} teams={passTeams} favteams = {favteams}/>
+                    : <></>
+            }
         </div>
     );
 }

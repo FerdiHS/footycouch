@@ -4,6 +4,7 @@ import axios from "axios";
 import logo from "../assets/Avatar2.png";
 import Post from "./Post";
 import Statistic from "./Statistic";
+import Follow from "./Follow";
 import useToken from "./Token";
 
 export default function User({passData}) {
@@ -25,6 +26,7 @@ export default function User({passData}) {
     const [player, setplayer] = useState(passData.players);
     const users = JSON.parse(localStorage.getItem('id'));
     const [followed, setfollowed] = useState(followers.filter(x => x.follower_id === users).length > 0);
+    const [pressFollow, setpressFollow] = useState(null);
     const clubCode = {
         "": "No",
         "ARS": "Arsenal",
@@ -70,6 +72,14 @@ export default function User({passData}) {
         setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
     }
     const [stats, setstats] = useState(null);
+    const [followingsUser, setfollowingsUser] = useState(null);
+    
+    const loadFollowings = async () => {
+        axios.get("https://footycouch-production.up.railway.app/users/following/" + users).then(following => setfollowingsUser(following.data.data)).catch(err => console.log(err))
+    }
+    if(followingsUser === null) {
+        loadFollowings();
+    }
     return (
         
     <div class="container4">
@@ -77,6 +87,11 @@ export default function User({passData}) {
             stats === null
                 ? <></>
                 : <Statistic player={stats} exitStats={() => setstats(null)} style = {{left: 250}}/> 
+        }
+        {
+            pressFollow === null
+                ? <></>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id} followings={followings}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
@@ -102,12 +117,12 @@ export default function User({passData}) {
                     <h4>Posts</h4>
                 </div>
                 <div class="followers2">
-                    <h3>{followers.length}</h3>
-                    <h4>Followers</h4>
+                    <h3 onClick={() => setpressFollow(followers)}>{followers.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
                 </div>
                 <div class="followers2">
-                    <h3>{followings.length}</h3>
-                    <h4>Following</h4>
+                    <h3 onClick={() => setpressFollow(followers)}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)}>Following</h4>
                 </div>
             </div>
         </div>
@@ -118,12 +133,8 @@ export default function User({passData}) {
                         <h2>Statistic</h2>
                         <h3>Current Points</h3>
                         <h4>{points}</h4>
-                        <h3>Highest Points</h3>
-                        <h4>{highestPoints}</h4>
                         <h3>Current Rank</h3>
                         <h4>#{rank}</h4>
-                        <h3>Highest Rank</h3>
-                        <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
                             <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"}></img>

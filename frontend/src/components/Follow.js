@@ -2,9 +2,15 @@ import { useState } from "react"
 import axios from "axios";
 import Loading from "./Loading";
 import UserFollow from "./UserFollow";
-export default function Follow({FollowComponent, exitFollow, type, id, followings}) {
+export default function Follow({FollowComponent, exitFollow, type, id}) {
     const [isLoading, setisLoading] = useState(false);
-
+    const [followings, setfollowings] = useState(null);
+    const loadFollowings = async () => {
+        axios.get("https://footycouch-production.up.railway.app/users/following/" + id).then(following => setfollowings(following.data.data)).catch(err => console.log(err))
+    }
+    if (followings === null) {
+        return <Loading />
+    }
     return (
     <div class="statistic">
         <div class="followCon">

@@ -118,7 +118,7 @@ export default function Profile({passData}) {
         {
             pressFollow === null
                 ? <></>
-                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id} followings={followings}/>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />

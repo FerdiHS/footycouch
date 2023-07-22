@@ -186,7 +186,7 @@ export default function User({passData}) {
                     {
                         posts.length > 0 
                         ? posts.map((post, index) => {
-                            return (<Post username={username} profilePicture={profilePicture} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
+                            return (<Post username={username} profilePicture={profilePicture} postComponent={post} newPost={false} setnewPost={() => {}} id={users}/>)
                         })
                         : <h2>{username} hasn't made any posts yet</h2>
                     }

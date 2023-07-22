@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import axios from "axios";
 import Loading from "./Loading";
 import Comment from "./Comment";
-export default function PostPopUp({username, profilePicture, postComponent, id, exit, handleLike, like, comments, handleComment}) {
+export default function PostPopUp({username, profilePicture, pp, postComponent, id, exit, handleLike, like, comments, handleComment}) {
     const [text, setText] = useState("");
     const [textarea, settextarea] = useState(document.querySelector('.inputText2'));
     function autosize(){
@@ -61,7 +61,7 @@ export default function PostPopUp({username, profilePicture, postComponent, id, 
                 <div class="time">{dateTime}</div>
                 <div class="replies">
                     <div class="profilePicture2"> 
-                        <img src={profilePicture} />
+                        <img src={pp} />
                     </div>
                     <textarea class="inputText2" value={text} rows="1" onChange={PostText} type="text" placeholder={"Add a Comment...."}></textarea>
                     <button class="enter" style={{left:690, top:-15}} onClick={() => handleComment(text)}></button>

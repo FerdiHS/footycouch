@@ -110,7 +110,7 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
                 (post).map((postComp, index) => {
                     if(index === post.length - 1 && newPost) {
                         console.log()
-                        return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={true} setnewPost={() => setnewPost(false)}/>)
+                        return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={true} setnewPost={() => setnewPost(false)}  id ={id}/>)
                     }
                     return (<Post username={username} profilePicture={profilePicture} postComponent={postComp} newPost={newPost} setnewPost={() => {}} id ={id}/>)
                     

@@ -74,9 +74,6 @@ export default function User({passData}) {
     const [stats, setstats] = useState(null);
     const [followingsUser, setfollowingsUser] = useState(null);
     
-    const loadFollowings = async () => {
-        axios.get("https://footycouch-production.up.railway.app/users/following/" + users).then(following => setfollowingsUser(following.data.data)).catch(err => console.log(err))
-    }
     if(followingsUser === null) {
         loadFollowings();
     }
@@ -91,7 +88,7 @@ export default function User({passData}) {
         {
             pressFollow === null
                 ? <></>
-                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id} followings={followings}/>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />

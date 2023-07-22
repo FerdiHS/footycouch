@@ -97,7 +97,6 @@ export default function UsersPage({setToken}) {
                     id: users.fow_3
                 },
             ]);
-            const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
             const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
@@ -107,7 +106,7 @@ export default function UsersPage({setToken}) {
                         p.team_code = 0;
                         return p;
                     }
-                    const playerResp = allPlayer.filter(player => player.id === p.id)[0];
+                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
                     playerResp.name = playerResp.web_name;
                     playerResp.teamId = playerResp.team;
                     const teamResp = teams.filter(team => team.id === playerResp.teamId)[0];

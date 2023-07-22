@@ -73,7 +73,13 @@ export default function User({passData}) {
     }
     const [stats, setstats] = useState(null);
     const [followingsUser, setfollowingsUser] = useState(null);
-    
+    const [pp, setpp] = useState(undefined);
+    const loadpp = async () => {
+        axios.get("https://footycouch-production.up.railway.app/users/id/" + users).then(x => {setpp(x.data.results.profile_picture)});
+    } 
+    if(pp === undefined) {
+        loadpp();
+    }
     return (
         
     <div class="container4">
@@ -186,7 +192,7 @@ export default function User({passData}) {
                     {
                         posts.length > 0 
                         ? posts.map((post, index) => {
-                            return (<Post username={username} profilePicture={profilePicture} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
+                            return (<Post username={username} pp={pp} postComponent={post} newPost={false} setnewPost={() => {}} id={id}/>)
                         })
                         : <h2>{username} hasn't made any posts yet</h2>
                     }

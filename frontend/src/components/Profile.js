@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import test from "../assets/field.png";
-import logo from "../assets/MUN Logo.png";
+import logo from "../assets/Avatar2.png";
 import TextInputPost from "./TextInputPost";
 import useToken from "./Token";
 import Statistic from "./Statistic";
@@ -13,6 +13,7 @@ export default function Profile({passData}) {
     const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = useToken().token;
     const id = passData.id;
+    const favteams = passData.favteams;
     const [bio, setbio] = useState(passData.bio);
     const [followers, setfollowers] = useState(passData.Followers);
     const [followings, setfollowing] = useState(passData.Followings);
@@ -79,7 +80,6 @@ export default function Profile({passData}) {
         }
         reader.onloadend = () => {
             axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
-
             setProfilePicture(reader.result);
         };
         reader.readAsDataURL(file);
@@ -93,14 +93,14 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
+          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => {setisLoading(false);reader.readAsDataURL(file);}).catch(err => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
-        reader.readAsDataURL(file);
+        
+        
     }
     const [stats, setstats] = useState(null);
     const [isLoading, setisLoading] = useState(false);
-    
     return (
     <div class="container4">
         {
@@ -167,7 +167,7 @@ export default function Profile({passData}) {
                         <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo}></img>
+                            <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"}></img>
                         </div>
                     </div>
                     <div class="lineup">

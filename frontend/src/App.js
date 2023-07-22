@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import TransferPage from "./pages/TransferPage";
 import useToken from "./components/Token";
 import UsersPage from "./pages/UsersPage";
+import PastHistoryPage from "./pages/PastHistoryPage";
 export default function App() {
   const {token, setToken} = useToken();
   if(!token) {
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/team_management" element={<TeamManagementPage setToken={setToken}/>} />
           <Route path="/profile" element={<ProfilePage setToken={setToken}/>} />
           <Route path="/transfer" element={<TransferPage setToken={setToken}/>} />
+          <Route path="/pastHistory" element={<PastHistoryPage setToken={setToken}/>}/>
           <Route path="/user/*" element ={<UsersPage setToken={setToken}/>} />
           <Route path="/*" element={<Navigate to="/home"/>}/>
         </Routes>

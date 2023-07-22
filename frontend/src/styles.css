@@ -1747,3 +1747,62 @@ label.playername > img {
 .loadMore:hover {
   filter: brightness(120%);
 }
+.changeTeam {
+  width: 50%;
+  height: 700px;
+  position: relative;
+  top: 10vh;
+  margin: auto;
+  background-color: white;
+  background-image: linear-gradient(rgb(0,0,0,.0), rgb(0,0,0,.0), white, white), url(assets/blue\ background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 200px;
+}
+.teamscon{
+  margin-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 75%;
+  position: relative;
+  top:50px;
+}
+.teams {
+  border: 1.5px solid #1E90FF;
+  font-size: 15px;
+  text-align: center;
+}
+td[class="teams"] {
+  width:400px;
+  height:200px;
+  cursor: pointer;
+}
+.teams > img {
+  height:130px;
+  position: relative;
+  top:20px;
+  margin-bottom: 0;
+  cursor:pointer;
+}
+.teams > h5 {
+  margin:0;
+  position: relative;
+  text-align: center;
+  width:100%;
+}
+.changeTeamSave {
+  border-radius: 5px;
+  border: none;  
+  width: 10%;
+  height: 40px;
+  background-color: #00a2ff;
+  cursor:pointer;
+  color: white;
+  top:60px;
+  left: 45%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+.changeTeamSave:hover {
+  filter: brightness(95%);
+}

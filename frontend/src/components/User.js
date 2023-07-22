@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../assets/field.png";
-import logo from "../assets/MUN Logo.png";
+import logo from "../assets/Avatar2.png";
 import Post from "./Post";
 import Statistic from "./Statistic";
 import useToken from "./Token";
 
 export default function User({passData}) {
     const navigate = useNavigate();
+    const favteams = passData.favteams;
     const[morePost, setmorePost] = useState(10);
-    const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
+    const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? logo : passData.backgroundPicture);
     const [profilePicture, setProfilePicture] = useState(passData.ProfilePicture);
     const username = passData.username;
     const id = passData.id;
@@ -91,14 +91,14 @@ export default function User({passData}) {
                 </div>
                 <div class="name2">
                     <h1>{username}</h1>
-                    <p>{bio}</p>
+                    <p style={bio === "" ?{marginBottom: -20} : {}}>{bio}</p>
                     {followed
                         ? <button class = "Followed" onClick = {unfollow}><h4>Unfollow</h4></button>
                         : <button class = "Follow" onClick = {follow}><h4>Follow</h4></button>
                     }
                 </div>
                 <div class="followers2">
-                    <h3>{posts.length}</h3>
+                    <h3>{passData.Posts.length}</h3>
                     <h4>Posts</h4>
                 </div>
                 <div class="followers2">
@@ -126,7 +126,7 @@ export default function User({passData}) {
                         <h4>#{highestRank}</h4>
                         <div class="myteam">
                             <h3>{username}'s Team</h3>
-                            <img src={logo}></img>
+                            <img src={favteams === 0 ? logo : "https://resources.premierleague.com/premierleague/badges/t" + favteams + ".png"}></img>
                         </div>
                     </div>
                     <div class="lineup">

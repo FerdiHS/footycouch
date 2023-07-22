@@ -35,6 +35,7 @@ const {
     getUserById,
     getAllFollowingsPosts,
     updateUserFavTeamById,
+    updateRanking,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
@@ -148,7 +149,7 @@ module.exports = {
             }
         });
     },
-
+    
     uploadImageUsers: (req, res) => {
         const username = req.params.username;
         const image = req.body.image;
@@ -240,7 +241,7 @@ module.exports = {
             return res.status(200).json({
                 message: "Favourite team updated successfully"
             });
-        })
+        });
     },
 
     follow: (req, res) => {

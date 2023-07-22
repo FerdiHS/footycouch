@@ -41,7 +41,7 @@ const {
     getTeamByUser,
     getUserById,
     getAllFollowingsPosts,
-    setUserFavTeam,
+    setUserFavTeam
 } = require("./controller");
 
 const router = require("express").Router();

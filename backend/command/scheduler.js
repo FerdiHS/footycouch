@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const { getAllUserCurrentTeams, createTeam, getTeamFromGameWeek, updateTeamPoint, updateUserPointsById, getUserById } = require('./service');
+const { getAllUserCurrentTeams, createTeam, getTeamFromGameWeek, updateTeamPoint, updateUserPointsById, getUserById, getUsersSortedByPoints, updateRankingUser } = require('./service');
 const { fplapi } = require('../config/fplapi');
 const gameWeekDeadline = [
     '30 17 11 8 *',
@@ -81,71 +81,80 @@ module.exports = {
             getTeamFromGameWeek(gameweek, (err, results) => {
                 if(err) console.log(err)
                 let players = [];
-                fplapi().then(response => {players = response.data.elements});
-                // players = fplapi().elements;
-                results.forEach(team => {
-                    const gk = 1;
-                    const def = parseInt(team.formation.charAt(0));
-                    const mid = parseInt(team.formation.charAt(2));
-                    const fow = parseInt(team.formation.charAt(4));
-                    let total_points = team.total_points;
-                    // gk_1
-                    const gk_1_points = players.find(p => p.id === team.gk_1).event_points;
-                    total_points += gk_1_points - team.gk_1_points;
-                    // gk_2
-                    const gk_2_points = players.find(p => p.id === team.gk_2).event_points;
-                    // def_1
-                    const def_1_points = players.find(p => p.id === team.def_1).event_points;
-                    total_points += def_1_points - team.def_1_points;
-                    // def_2
-                    const def_2_points = players.find(p => p.id === team.def_2).event_points;
-                    total_points += def_2_points - team.def_2_points;
-                    // def_3
-                    const def_3_points = players.find(p => p.id === team.def_3).event_points;
-                    total_points += def_3_points - team.def_3_points;
-                    // def_4
-                    const def_4_points = players.find(p => p.id === team.def_4).event_points;
-                    if(def >= 4) total_points += def_4_points - team.def_4_points;
-                    // def_5
-                    const def_5_points = players.find(p => p.id === team.def_5).event_points;
-                    if(def >= 5) total_points += def_5_points - team.def_5_points;
-                    // mid_1
-                    const mid_1_points = players.find(p => p.id === team.mid_1).event_points;
-                    total_points += mid_1_points - team.mid_1_points;
-                    // mid_2
-                    const mid_2_points = players.find(p => p.id === team.mid_2).event_points;
-                    total_points += mid_2_points - team.mid_2_points;
-                    // mid_3
-                    const mid_3_points = players.find(p => p.id === team.mid_3).event_points;
-                    total_points += mid_3_points - team.mid_3_points;
-                    // mid_4
-                    const mid_4_points = players.find(p => p.id === team.mid_4).event_points;
-                    if(mid >= 4) total_points += mid_4_points - team.mid_4_points;
-                    // mid_5
-                    const mid_5_points = players.find(p => p.id === team.mid_5).event_points;
-                    if(mid >= 5) total_points += mid_5_points - team.mid_5_points;
-                    // fow_1
-                    const fow_1_points = players.find(p => p.id === team.fow_1).event_points;
-                    total_points += fow_1_points - team.fow_1_points;
-                    // fow_2
-                    const fow_2_points = players.find(p => p.id === team.fow_2).event_points;
-                    if(fow >= 2) total_points += fow_2_points - team.fow_2_points;
-                    // fow_3
-                    const fow_3_points = players.find(p => p.id === team.fow_3).event_points;
-                    if(fow >= 3) total_points += fow_3_points - team.fow_3_points;
-                    updateTeamPoint(team.id, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points,
-                            def_5_points, mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, (err, result) => {
-                        if(err) console.log(err);
-                    });
-                    getUserById(team.id, (err, result) => {
-                        if(err) console.log(err);
-                        updateUserPointsById(team.id, result.points + total_points - team.total_points, (error, results) => {
+                fplapi().then(response => {
+                    players = response.data.elements;
+                    results.forEach(team => {
+                        const gk = 1;
+                        const def = parseInt(team.formation.charAt(0));
+                        const mid = parseInt(team.formation.charAt(2));
+                        const fow = parseInt(team.formation.charAt(4));
+                        let total_points = team.total_points;
+                        // gk_1
+                        const gk_1_points = players.find(p => p.id === team.gk_1).event_points;
+                        total_points += gk_1_points - team.gk_1_points;
+                        // gk_2
+                        const gk_2_points = players.find(p => p.id === team.gk_2).event_points;
+                        // def_1
+                        const def_1_points = players.find(p => p.id === team.def_1).event_points;
+                        total_points += def_1_points - team.def_1_points;
+                        // def_2
+                        const def_2_points = players.find(p => p.id === team.def_2).event_points;
+                        total_points += def_2_points - team.def_2_points;
+                        // def_3
+                        const def_3_points = players.find(p => p.id === team.def_3).event_points;
+                        total_points += def_3_points - team.def_3_points;
+                        // def_4
+                        const def_4_points = players.find(p => p.id === team.def_4).event_points;
+                        if(def >= 4) total_points += def_4_points - team.def_4_points;
+                        // def_5
+                        const def_5_points = players.find(p => p.id === team.def_5).event_points;
+                        if(def >= 5) total_points += def_5_points - team.def_5_points;
+                        // mid_1
+                        const mid_1_points = players.find(p => p.id === team.mid_1).event_points;
+                        total_points += mid_1_points - team.mid_1_points;
+                        // mid_2
+                        const mid_2_points = players.find(p => p.id === team.mid_2).event_points;
+                        total_points += mid_2_points - team.mid_2_points;
+                        // mid_3
+                        const mid_3_points = players.find(p => p.id === team.mid_3).event_points;
+                        total_points += mid_3_points - team.mid_3_points;
+                        // mid_4
+                        const mid_4_points = players.find(p => p.id === team.mid_4).event_points;
+                        if(mid >= 4) total_points += mid_4_points - team.mid_4_points;
+                        // mid_5
+                        const mid_5_points = players.find(p => p.id === team.mid_5).event_points;
+                        if(mid >= 5) total_points += mid_5_points - team.mid_5_points;
+                        // fow_1
+                        const fow_1_points = players.find(p => p.id === team.fow_1).event_points;
+                        total_points += fow_1_points - team.fow_1_points;
+                        // fow_2
+                        const fow_2_points = players.find(p => p.id === team.fow_2).event_points;
+                        if(fow >= 2) total_points += fow_2_points - team.fow_2_points;
+                        // fow_3
+                        const fow_3_points = players.find(p => p.id === team.fow_3).event_points;
+                        if(fow >= 3) total_points += fow_3_points - team.fow_3_points;
+                        updateTeamPoint(team.id, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points,
+                                def_5_points, mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, (err, result) => {
                             if(err) console.log(err);
-                            console.log("User " + team.id + " points have been updated to " + (result.points + total_points - team.total_points));
+                        });
+                        getUserById(team.id, (err, result) => {
+                            if(err) console.log(err);
+                            updateUserPointsById(team.id, result.points + total_points - team.total_points, (error, results) => {
+                                if(err) console.log(err);
+                                console.log("User " + team.id + " points have been updated to " + (result.points + total_points - team.total_points));
+                            });
+                        });
+                        getUsersSortedByPoints((err, results) => {
+                            if(err) return console.log(err);
+                            results.forEach((user, ranking) => {
+                                if(user.ranking !== ranking + 1) return updateRankingUser(user.id, ranking + 1, (err, results) => {
+                                    if(err) return console.log(err);
+                                });
+                            });
+                            console.log("All users' rank have been updated");
                         });
                     });
                 });
-                console.log("Points on gameweek " + gameweek + " updated");
             });
         });
     }

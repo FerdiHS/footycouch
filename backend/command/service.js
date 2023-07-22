@@ -70,6 +70,19 @@ module.exports = {
         );
     },
 
+    getUsersSortedByPoints: callBack => {
+        pool.query(
+            `SELECT id, username, points FROM users ORDER BY points DESC;`,
+            [],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
     updateUserProfileById: (id, bio, callBack) => {
         pool.query(
             "UPDATE users set bio=? WHERE id=?;",
@@ -100,6 +113,19 @@ module.exports = {
         pool.query(
             "UPDATE users set profile_picture=? WHERE username=?;",
             [url, username],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    updateRankingUser: (id, ranking, callBack) => {
+        pool.query(
+            `UPDATE users set ranking = ? WHERE id = ?;`,
+            [ranking, id],
             (error, results) => {
                 if(error) {
                     return callBack(error);

@@ -62,8 +62,16 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
             initialPLayerId[i] = passPlayers[i].id;
         }
         let playerId = [];
+        let maxCount = [];
+        for(let i = 0; i <= 20; i++) {
+            maxCount[i] = 0;
+        }
         for (let i = 0; i < 15; i++) {
             playerId[i] = player[i].id;
+            maxCount[player[i].teamId]++;
+            if(maxCount[player[i].teamId] > 3) {
+                return window.alert("You cannot have more than 3 players from the same club");
+            }
         }
         if(passPlayers[0].id !== null) {
             const positions = ["gk_1", "gk_2", "def_1", "def_2", "def_3", "def_4", "def_5", "mid_1", "mid_2", "mid_3", "mid_4", "mid_5", "fow_1", "fow_2", "fow_3"]

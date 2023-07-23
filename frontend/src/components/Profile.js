@@ -20,7 +20,7 @@ export default function Profile({passData}) {
     const [followings, setfollowing] = useState(passData.Followings);
     const [points, setPoints] = useState(passData.points);
     const highestPoints = 0;
-    const [rank, setrank] = useState(1);
+    const [rank, setrank] = useState(passData.ranking);
     const highestRank = 1;
     const [posts, setPosts] = useState(passData.Posts);
     const [player, setplayer] = useState(passData.players);

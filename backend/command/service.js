@@ -19,7 +19,7 @@ module.exports = {
     
     getUsers: callBack => {
         pool.query(
-            "SELECT username FROM users",
+            "SELECT username, points, ranking FROM users",
             [],
             (error, results, fields) => {
                 if(error) {

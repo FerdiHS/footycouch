@@ -62,7 +62,7 @@ module.exports = {
         createUser(body, (err, results) =>{
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -109,7 +109,7 @@ module.exports = {
         return getUserById(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -128,6 +128,10 @@ module.exports = {
         getUserByName(body.username, (err, results) => {
             if(err) {
                 console.log(err);
+                return res.status(503).json({
+                    success: -1,
+                    message: "Database connection error"
+                })
             }
             if(!results) {
                 return res.status(403).json({
@@ -162,14 +166,14 @@ module.exports = {
             (err, results) => {
                 if(err) {
                     console.log(err);
-                    return res.status(403).json({
+                    return res.status(503).json({
                         message: "Database connection error"
                     });
                 }
                 return updateUserProfilePictureByUsername(username, results.secure_url, (error, result) => {
                     if(error) {
                         console.log(error);
-                        return res.status(403).json({
+                        return res.status(503).json({
                             message: "Database connection error"
                         });
                     }
@@ -186,7 +190,7 @@ module.exports = {
         getUserProfilePictureByUsername(username, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -209,14 +213,14 @@ module.exports = {
             (err, results) => {
                 if(err) {
                     console.log(err);
-                    return res.status(403).json({
+                    return res.status(503).json({
                         message: "Database connection error"
                     });
                 }
                 return updateUserBackgroundPictureByUsername(username, results.secure_url, (error, result) => {
                     if(error) {
                         console.log(error);
-                        return res.status(403).json({
+                        return res.status(503).json({
                             message: "Database connection error"
                         });
                     }
@@ -234,7 +238,7 @@ module.exports = {
         return updateUserFavTeamById(id, fav_team, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -250,7 +254,7 @@ module.exports = {
         return checkFollow(follower, followed, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -262,7 +266,7 @@ module.exports = {
             return createFollow(follower, followed, (err, results) => {
                 if(err) {
                     console.log(err);
-                    return res.status(403).json({
+                    return res.status(503).json({
                         message: "Database connection error"
                     });
                 }
@@ -279,7 +283,7 @@ module.exports = {
         return removeFollow(follower, followed, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -296,7 +300,7 @@ module.exports = {
         checkFollow(follower, followed, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -312,7 +316,7 @@ module.exports = {
         getUserFollowing(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -328,7 +332,7 @@ module.exports = {
         getUserFollower(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -452,7 +456,7 @@ module.exports = {
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -486,7 +490,7 @@ module.exports = {
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                     });
             }
@@ -519,7 +523,7 @@ module.exports = {
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                     });
             }
@@ -552,7 +556,7 @@ module.exports = {
                 mid_1, mid_2, mid_3, mid_4, mid_5, fow_1, fow_2, fow_3, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -567,7 +571,7 @@ module.exports = {
         return getTeamFromGameWeek(gameweek, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -580,7 +584,7 @@ module.exports = {
         return getTeamFromUser(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -595,7 +599,7 @@ module.exports = {
         updateUserProfileById(id, bio, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -612,7 +616,7 @@ module.exports = {
         updateUserProfileByUsername(username, bio, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -632,7 +636,7 @@ module.exports = {
         createTransfer(id, position, player_in, player_out, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -640,7 +644,7 @@ module.exports = {
         changeCertainPlayer(id, balance, points, position, player_in, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -657,7 +661,7 @@ module.exports = {
         return createPost(id, content, null, (error, result) => {
             if(error) {
                 console.log(error);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -674,14 +678,14 @@ module.exports = {
         (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
             return createPost(id, content, results.secure_url, (error, result) => {
                 if(error) {
                     console.log(error);
-                    return res.status(403).json({
+                    return res.status(503).json({
                         message: "Database connection error"
                     });
                 }
@@ -695,7 +699,7 @@ module.exports = {
        createPost(id, content, image, (err, results) => {
         if(err) {
             console.log(err);
-            return res.status(403).json({
+            return res.status(503).json({
                 message: "Database connection error"
             });
         }
@@ -712,7 +716,7 @@ module.exports = {
         return updatePost(id, content, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -727,7 +731,7 @@ module.exports = {
         getUserPost(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -740,7 +744,7 @@ module.exports = {
         return getPostById(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -753,7 +757,7 @@ module.exports = {
         return getAllFollowingsPosts(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -767,7 +771,7 @@ module.exports = {
         return createReply(id, type, replying_to, content, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -782,7 +786,7 @@ module.exports = {
         return getReply(true, replying_to, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -796,7 +800,7 @@ module.exports = {
         return updateReply(id, content, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -811,7 +815,7 @@ module.exports = {
         return removeReply(id, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -826,7 +830,7 @@ module.exports = {
         return checkLiked(id, true, liked, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -838,7 +842,7 @@ module.exports = {
             return createLike(id, true, liked, (err, results) => {
                 if(err) {
                     console.log(err);
-                    return res.status(403).json({
+                    return res.status(503).json({
                         message: "Database connection error"
                     });
                 }
@@ -854,7 +858,7 @@ module.exports = {
         return removeLike(id, true, liked, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }
@@ -869,7 +873,7 @@ module.exports = {
         return getLike(liked, true, (err, results) => {
             if(err) {
                 console.log(err);
-                return res.status(403).json({
+                return res.status(503).json({
                     message: "Database connection error"
                 });
             }

@@ -440,8 +440,11 @@ module.exports = {
 
     getAllFollowingsPosts: (id, callBack) => {
         pool.query(
-            'SELECT p.id, p.user, p.content, p.image, p.created_at, p.updated_at FROM posts p JOIN follows f ON p.user = f.followed_id WHERE f.follower_id = ? OR p.user = ?;',
-            [id, id],
+            `SELECT p.id, p.user, p.content, p.image, p.created_at, p.updated_at 
+            FROM posts p 
+            LEFT JOIN follows f ON p.user = f.followed_id AND f.follower_id = ?
+            WHERE p.user = ? OR f.follower_id = ?;`,
+            [id, id, id],
             (error, results) => {
                 if(error) {
                     return callBack(error);

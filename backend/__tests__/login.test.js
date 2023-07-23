@@ -8,8 +8,18 @@ jest.mock('../command/service', () => ({
 }));
 
 describe('Login function', () => {
+  // Mock the console log after each test
+  beforeEach(() => {
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
+
+  // Restore console.log after each test
+  afterEach(() => {
+    console.log.mockRestore();
+  });
+
   // Test valid username and password
-  it('Login with valid username and password', async () => {
+  it('Successful when login with valid username and password', async () => {
     const req = {
       body: {
         username: 'valid_username',
@@ -39,7 +49,7 @@ describe('Login function', () => {
   });
 
   // Test invalid username
-  it('Login with invalid username', async () => {
+  it('Failed when login with invalid username', async () => {
     const req = {
       body: {
         username: 'invalid_username',
@@ -66,7 +76,7 @@ describe('Login function', () => {
   });
 
   // Test invalid password
-  it('Login with invalid password', async () => {
+  it('Failed when login with invalid password', async () => {
     const req = {
       body: {
         username: 'valid_username',
@@ -94,7 +104,7 @@ describe('Login function', () => {
   });
 
   // Test database error handling
-  it('Database error', async () => {
+  it('Failed when database error', async () => {
     const req = {
       body: {
         username: 'valid_username',

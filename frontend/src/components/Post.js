@@ -64,7 +64,7 @@ export default function Post({postComponent, pp,setnewPost, newPost, id}) {
         loadLike();
     }
     const handleComment = async (content, setText) => {
-        axios.post("https://footycouch-production.up.railway.app/reply/" + postComponent.id, {id: id, type: "true", content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}).then(
+        axios.post("https://footycouch-production.up.railway.app/reply/" + postComponent.id, {id: id, content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}).then(
             x => {
                 setdata({username: data.username, profile_picture: data.profile_picture,like: data.like, comment: [...data.comment,{user: id, content: content.replace(/(?:\r\n|\r|\n)/g, '\\n')}]});
                 setText("");

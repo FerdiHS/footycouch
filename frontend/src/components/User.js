@@ -63,13 +63,11 @@ export default function User({passData}) {
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     const follow = async () => {
         setfollowed(true);
-        await axios.post("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).catch(err => console.log(err));
-        setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
+        await axios.post("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).then(x => setfollowers([...followers, {followed_id: id, follower_id: users}])).catch(err => console.log(err));
     }
     const unfollow = async () => {
         setfollowed(false);
-        await axios.delete("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).catch(err => console.log(err));
-        setfollowers((await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data);
+        await axios.delete("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).then(x => setfollowers(followers.filter(x => x.follower_id != users))).catch(err => console.log(err));
     }
     const [stats, setstats] = useState(null);
     const [followingsUser, setfollowingsUser] = useState(null);
@@ -91,7 +89,7 @@ export default function User({passData}) {
         {
             pressFollow === null
                 ? <></>
-                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={id}/>
+                : <Follow FollowComponent={pressFollow} exitFollow={() => setpressFollow(null)} type={pressFollow === followers} id={users}/>
         }
             <div class="backgroundProfileBlur">
                 <img src={backgroundPicture} />
@@ -121,8 +119,8 @@ export default function User({passData}) {
                     <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
                 </div>
                 <div class="followers2">
-                    <h3 onClick={() => setpressFollow(followers)}>{followings.length}</h3>
-                    <h4 onClick={() => setpressFollow(followers)}>Following</h4>
+                    <h3 onClick={() => setpressFollow(followings)}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followings)}>Following</h4>
                 </div>
             </div>
         </div>

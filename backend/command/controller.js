@@ -51,23 +51,36 @@ module.exports = {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         if(body.password !== body.confirmPassword) {
             return res.status(403).json({
-                message: "Password and Confirm Passowrd is different"
+                message: 'Password and Confirm Password is different'
             });
         } 
         
-        // Hashing the password
-        const salt = genSaltSync(10);
-        body.password = hashSync(body.password, salt);
-
-        createUser(body, (err, results) =>{
+        getUserByName(body.username, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
                     message: "Database connection error"
                 });
             }
-            return res.status(200).json({
-                message: "Account created"
+            if(results.length > 0) {
+                return res.status(409).json({
+                    message: "Username already taken"
+                })
+            }
+            // Hashing the password
+            const salt = genSaltSync(10);
+            body.password = hashSync(body.password, salt);
+    
+            return createUser(body, (err, results) =>{
+                if(err) {
+                    console.log(err);
+                    return res.status(503).json({
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    message: "Account created"
+                });
             });
         });
     },

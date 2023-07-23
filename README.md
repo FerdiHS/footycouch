@@ -44,7 +44,7 @@ with something related to football.
 As football fans, we want to compete against each other in a fun and engaging way.
 As football fans and people in general, we want to have something to have fun with in the middle of our hectic activities.
 
-<h2>Proposed Core Feature</h2>
+<h2>Core Feature</h2>
 <ol>
   <li>Allow users to create an account and log in.</li>
   <li>Allow users to create log out.</li>
@@ -55,9 +55,7 @@ As football fans and people in general, we want to have something to have fun wi
   <li>Allow users to transfer their players.</li>
   <li>Allow users to view their transfer history.</li>
   <li>Allow users to view each other's transfer history.</li>
-  <li>Allow users to select a captain and vice-captain for the lineup.</li>
   <li>Allow users to view players' statistics.</li>
-  <li>Allow users to browse the match schedule.</li>
   <li>Allow users to view each other's lineups.</li>
   <li>Allow users to check their accumulated points.</li>
   <li>Allow users to view the standings based on accumulated points.</li>
@@ -68,38 +66,6 @@ As football fans and people in general, we want to have something to have fun wi
   <li>Allow users to view their post history.</li>
   <li>Allow users to like and comment on other posts.</li>
   <li>Allow users to view their own posts on the home page.</li>
-  <li>Allow users to view posts from the users they follow on the home page.</li>
-</ol>
-
-
-<h2> Finished Core Feature</h2>
-<ol>
-  <li>Allow users to create an account and log in.</li>
-  <li>Allow users to create log out.</li>
-  <li>Allow users to customize their profile picture and bio.</li>
-  <li>Allow users to view their own profile.</li>
-  <li>Allow users to select their players and create their teams.</li>
-  <li>Allow users to transfer their players.</li>
-  <li>Allow users to post football-related content.</li>
-  <li>Allow users to view their post history.</li>
-  <li>Allow users to view their own posts on the home page.</li>
-</ol>
-
-<h2> Unfinished Core Feature</h2>
-<ol>
-  <li>Allow users to view each other's profiles.</li>
-  <li>Allow users to view their transfer history.</li>
-  <li>Allow users to view each other's transfer history.</li>
-  <li>Allow users to select a captain and vice-captain for the lineup.</li>
-  <li>Allow users to view players' statistics.</li>
-  <li>Allow users to browse the match schedule.</li>
-  <li>Allow users to view each other's lineups.</li>
-  <li>Allow users to check their accumulated points.</li>
-  <li>Allow users to view the standings based on accumulated points.</li>
-  <li>Allow users to follow each other.</li>
-  <li>Allow users to view their followers and followings.</li>
-  <li>Allow users to view each other's followers and followings.</li>
-  <li>Allow users to like and comment on other posts.</li>
   <li>Allow users to view posts from the users they follow on the home page.</li>
 </ol>
 
@@ -109,3 +75,4 @@ As football fans and people in general, we want to have something to have fun wi
     Milestone 2 Report: <a
                            href="https://docs.google.com/document/d/1pZ8DVxMFURBEiVcORr52ldsAvSXySRoMr-c8ZxeJin4/edit?usp=sharing">Click Here</a>
 </h3>
+<h3>Milestone 3 Report: <a href="https://docs.google.com/document/d/1qvk80GIPMhbyUGbGw5zajhkAytJXP00Yw20r0sRukUA/edit?usp=sharing">Click Here</a></h3>

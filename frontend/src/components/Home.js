@@ -20,6 +20,11 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
     const handleSearchUsername = (e) => {
         setsearchUsername(e.target.value)
     }
+    const userRank = [];
+    passUser.map(x => {
+        userRank[x.ranking - 1] = x;
+        return x;
+    })
     return (
         <div class="container6">
             {
@@ -96,6 +101,25 @@ export default function Home({passProfilePicture, passPosts, passId, passPlayer,
                                             <td style={{textAlign: "center"}}>{index + 1}</td>
                                             <td style={{width: 220, paddingLeft: 5}}><strong class="textLeaderboard" onClick={() => setstats(player)}>{player.first_name + " " + player.second_name}</strong></td>
                                             <td style={{width: 40, textAlign: "center"}}>{player.selected_by_percent}</td>
+                                        </tr>)
+                            })
+                        }
+                    </table>
+                </div>
+                <div class="homeLeaderboard" style={{height: "auto"}}>
+                    <h3>Leaderboard</h3>
+                    <table>
+                        <tr>
+                            <th style={{textAlign: "center"}}>#</th>
+                            <th style={{width: 220, paddingLeft: 5}}>User</th>
+                            <th style={{textAlign: "center"}}>pts</th>
+                        </tr>
+                        {
+                            userRank.slice(0,10).map((user, index) => {
+                                return (<tr style = {index % 2 === 0 ? {backgroundColor: "rgb(233, 233, 233)"} : {}}>
+                                            <td style={{textAlign: "center"}}>{index + 1}</td>
+                                            <td style={{width: 220, paddingLeft: 5}}><strong class="textLeaderboard" onClick={() => navigate("/user/" + user.username)}>{user.username}</strong></td>
+                                            <td style={{width: 40, textAlign: "center"}}>{user.points}</td>
                                         </tr>)
                             })
                         }

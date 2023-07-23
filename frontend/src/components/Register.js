@@ -22,7 +22,6 @@ export default function Register({handlenowPage}) {
     const [errorConfirmpw, seterrorConfirmpw] = useState("");
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
-        setisLoading(true);
         event.preventDefault();
         if (username.length === 0) {
             seterrorusername("Username must be filled")
@@ -41,6 +40,7 @@ export default function Register({handlenowPage}) {
             seterrorConfirmpw("Password didn't match");
             seterrorPassword("");
         } else if (errorusername === "") {
+            setisLoading(true);
             seterrorConfirmpw("");
             seterrorPassword("");
             axios.post("https://footycouch-production.up.railway.app/signup", {username, password, confirmPassword})

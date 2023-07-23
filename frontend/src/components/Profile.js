@@ -97,8 +97,7 @@ export default function Profile({passData}) {
           axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => {setisLoading(false);reader.readAsDataURL(file);}).catch(err => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
-        
-        
+        reader.readAsDataURL(file);
     }
     const [stats, setstats] = useState(null);
     const [isLoading, setisLoading] = useState(false);

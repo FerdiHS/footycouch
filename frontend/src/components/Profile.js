@@ -20,7 +20,7 @@ export default function Profile({passData}) {
     const [followings, setfollowing] = useState(passData.Followings);
     const [points, setPoints] = useState(passData.points);
     const highestPoints = 0;
-    const [rank, setrank] = useState(1);
+    const [rank, setrank] = useState(passData.ranking);
     const highestRank = 1;
     const [posts, setPosts] = useState(passData.Posts);
     const [player, setplayer] = useState(passData.players);
@@ -97,8 +97,7 @@ export default function Profile({passData}) {
           axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => {setisLoading(false);reader.readAsDataURL(file);}).catch(err => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
-        
-        
+        reader.readAsDataURL(file);
     }
     const [stats, setstats] = useState(null);
     const [isLoading, setisLoading] = useState(false);

@@ -64,7 +64,7 @@ export default function PostPopUp({username, profilePicture, pp, postComponent, 
                         <img src={pp} />
                     </div>
                     <textarea class="inputText2" value={text} rows="1" onChange={PostText} type="text" placeholder={"Add a Comment...."}></textarea>
-                    <button class="enter" style={{left:690, top:-15}} onClick={() => handleComment(text)}></button>
+                    <button class="enter" style={{left:690, top:-15}} onClick={() => handleComment(text, setText)}></button>
                     <h4 style={{marginBottom: 0, marginLeft:15}}>{comments.length} Comments</h4>
                     {
                         comments.map(x => {

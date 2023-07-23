@@ -13,6 +13,7 @@ export default function ProfilePage({setToken}) {
     var players = data.players
     var formation = data.formation;
     var favteams = data.favteams;
+    var ranking = data.ranking;
     var bio = data.bio;
     var points = data.points;
     var Followings = data.Followings;
@@ -27,6 +28,7 @@ export default function ProfilePage({setToken}) {
             id = users.id;
             favteams = users.fav_team;
             bio = users.bio;
+            ranking = users.ranking;
             formation = users.formation;
             points = users.points;
             ProfilePicture = users.profile_picture;
@@ -128,7 +130,7 @@ export default function ProfilePage({setToken}) {
                 })
             );
             Posts = updatedPosts.reverse();
-            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, Posts: Posts, favteams:favteams})
+            setdata({id: id, players: players, formation: formation, bio: bio, points: points, Followings: Followings, Followers: Followers, ProfilePicture: ProfilePicture, backgroundPicture: backgroundPicture, ranking: ranking, Posts: Posts, favteams:favteams})
         } catch (err) {
             console.log(err);
         }

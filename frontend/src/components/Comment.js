@@ -21,7 +21,7 @@ export default function Comment({comment}) {
     }
     if (username === undefined) {
         loadUser();
-        return (<div style={{position: "relative", top:-30, left:"20%"}}><ReactLoading type="spin" color="#0000FF"
+        return (<div style={{position: "relative", top: 30, left:"10%"}}><ReactLoading type="spin" color="#0000FF"
         height={30} width={15} /></div>)
     } else {
         return (

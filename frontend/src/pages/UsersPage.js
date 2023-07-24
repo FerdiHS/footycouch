@@ -39,63 +39,63 @@ export default function UsersPage({setToken}) {
             backgroundPicture = users.background_picture;
             players = ([
                 {
-                    position: "gk_1",
+                    position: "GKP",
                     id: users.gk_1,
                 },
                 {
-                    position: "gk_2",
+                    position: "GKP",
                     id: users.gk_2
                 },
                 {
-                    position: "def_1",
+                    position: "DEF",
                     id: users.def_1
                 },
                 {
-                    position: "def_2",
+                    position: "DEF",
                     id: users.def_2
                 },
                 {
-                    position: "def_3",
+                    position: "DEF",
                     id: users.def_3
                 },
                 {
-                    position: "def_4",
+                    position: "DEF",
                     id: users.def_4
                 },
                 {
-                    position: "def_5",
+                    position: "DEF",
                     id: users.def_5
                 },
                 {
-                    position: "mid_1",
+                    position: "MID",
                     id: users.mid_1
                 },
                 {
-                    position: "mid_2",
+                    position: "MID",
                     id: users.mid_2
                 },
                 {
-                    position: "mid_3",
+                    position: "MID",
                     id: users.mid_3
                 },
                 {
-                    position: "mid_4",
+                    position: "MID",
                     id: users.mid_4
                 },
                 {
-                    position: "mid_5",
+                    position: "MID",
                     id: users.mid_5
                 },
                 {
-                    position: "fow_1",
+                    position: "FWD",
                     id: users.fow_1
                 },
                 {
-                    position: "fow_2",
+                    position: "FWD",
                     id: users.fow_2
                 },
                 {
-                    position: "fow_3",
+                    position: "FWD",
                     id: users.fow_3
                 },
             ]);
@@ -114,6 +114,7 @@ export default function UsersPage({setToken}) {
                     const teamResp = teams.filter(team => team.id === playerResp.teamId)[0];
                     playerResp.team = teamResp.short_name;
                     playerResp.teamName = teamResp.name;
+                    playerResp.position = p.position;
                     return playerResp;
                 })
             );
@@ -127,7 +128,6 @@ export default function UsersPage({setToken}) {
                     post.text = post.content;
                     post.time = "";
                     post.image = post.image;
-                    console.log(post);
                     return post;
                 })
             );

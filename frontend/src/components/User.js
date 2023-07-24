@@ -104,7 +104,7 @@ export default function User({passData}) {
                 </div>
                 <div class="name2">
                     <h1>{username}</h1>
-                    <p style={bio === "" ?{}: {marginBottom: -20}}>{bio}</p>
+                    <p style={bio === "" || bio === null ? {marginBottom:20} : {marginBottom: -20}}>{bio}</p>
                     {followed
                         ? <button class = "Followed" onClick = {unfollow}><h4>Unfollow</h4></button>
                         : <button class = "Follow" onClick = {follow}><h4>Follow</h4></button>
@@ -115,12 +115,12 @@ export default function User({passData}) {
                     <h4>Posts</h4>
                 </div>
                 <div class="followers2">
-                    <h3 onClick={() => setpressFollow(followers)}>{followers.length}</h3>
-                    <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
+                    <h3 onClick={() => setpressFollow(followers)} style={{cursor:"pointer", height: "fit-content"}}>{followers.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)} style={{cursor:"pointer", height: "fit-content"}}>Followers</h4>
                 </div>
                 <div class="followers2">
-                    <h3 onClick={() => setpressFollow(followings)}>{followings.length}</h3>
-                    <h4 onClick={() => setpressFollow(followings)}>Following</h4>
+                    <h3 onClick={() => setpressFollow(followings)} style={{cursor:"pointer", height: "fit-content"}}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followings)} style={{cursor:"pointer", height: "fit-content"}}>Following</h4>
                 </div>
             </div>
         </div>

@@ -115,12 +115,12 @@ export default function User({passData}) {
                     <h4>Posts</h4>
                 </div>
                 <div class="followers2">
-                    <h3 onClick={() => setpressFollow(followers)}>{followers.length}</h3>
-                    <h4 onClick={() => setpressFollow(followers)}>Followers</h4>
+                    <h3 onClick={() => setpressFollow(followers)} style={{cursor:"pointer", height: "fit-content"}}>{followers.length}</h3>
+                    <h4 onClick={() => setpressFollow(followers)} style={{cursor:"pointer", height: "fit-content"}}>Followers</h4>
                 </div>
                 <div class="followers2">
-                    <h3 onClick={() => setpressFollow(followings)}>{followings.length}</h3>
-                    <h4 onClick={() => setpressFollow(followings)}>Following</h4>
+                    <h3 onClick={() => setpressFollow(followings)} style={{cursor:"pointer", height: "fit-content"}}>{followings.length}</h3>
+                    <h4 onClick={() => setpressFollow(followings)} style={{cursor:"pointer", height: "fit-content"}}>Following</h4>
                 </div>
             </div>
         </div>

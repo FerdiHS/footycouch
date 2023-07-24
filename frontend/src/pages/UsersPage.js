@@ -128,7 +128,6 @@ export default function UsersPage({setToken}) {
                     post.text = post.content;
                     post.time = "";
                     post.image = post.image;
-                    console.log(post);
                     return post;
                 })
             );

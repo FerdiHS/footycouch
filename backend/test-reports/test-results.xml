@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="26" failures="0" errors="0" time="3.369">
+  <testsuite name="addPost function" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="1.749" tests="3">
+    <testcase classname="addPost function Successful when post without an image" name="addPost function Successful when post without an image" time="0.025">
+    </testcase>
+    <testcase classname="addPost function Successful when post with an image" name="addPost function Successful when post with an image" time="0.003">
+    </testcase>
+    <testcase classname="addPost function Failed when database error for createPost" name="addPost function Failed when database error for createPost" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="fpl-related functions" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="2.092" tests="6">
+    <testcase classname="fpl-related functions Successful when getting all players" name="fpl-related functions Successful when getting all players" time="0.01">
+    </testcase>
+    <testcase classname="fpl-related functions Successful when getting player by valid id" name="fpl-related functions Successful when getting player by valid id" time="0.001">
+    </testcase>
+    <testcase classname="fpl-related functions Failed getting player with invalid id" name="fpl-related functions Failed getting player with invalid id" time="0.001">
+    </testcase>
+    <testcase classname="fpl-related functions Successful when getting all teams" name="fpl-related functions Successful when getting all teams" time="0.001">
+    </testcase>
+    <testcase classname="fpl-related functions Successful when getting a team with valid id" name="fpl-related functions Successful when getting a team with valid id" time="0.001">
+    </testcase>
+    <testcase classname="fpl-related functions Failed when getting a team with invalid id" name="fpl-related functions Failed when getting a team with invalid id" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Follow function" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="2.309" tests="4">
+    <testcase classname="Follow function Successful when creating follow of a non-existing follow" name="Follow function Successful when creating follow of a non-existing follow" time="0.01">
+    </testcase>
+    <testcase classname="Follow function Failed when creating follow of an existing follow" name="Follow function Failed when creating follow of an existing follow" time="0.001">
+    </testcase>
+    <testcase classname="Follow function Failed when database error for checkFollow" name="Follow function Failed when database error for checkFollow" time="0.001">
+    </testcase>
+    <testcase classname="Follow function Failed when database error for createFollow" name="Follow function Failed when database error for createFollow" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Like function" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="2.291" tests="4">
+    <testcase classname="Like function Successful when creating a new like" name="Like function Successful when creating a new like" time="0.013">
+    </testcase>
+    <testcase classname="Like function Failed when creating existing like" name="Like function Failed when creating existing like" time="0.001">
+    </testcase>
+    <testcase classname="Like function Failed when database error for checkLiked" name="Like function Failed when database error for checkLiked" time="0.001">
+    </testcase>
+    <testcase classname="Like function Failed when database error for createLike" name="Like function Failed when database error for createLike" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login function" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="2.414" tests="4">
+    <testcase classname="Login function Successful when login with valid username and password" name="Login function Successful when login with valid username and password" time="0.119">
+    </testcase>
+    <testcase classname="Login function Failed when login with invalid username" name="Login function Failed when login with invalid username" time="0.001">
+    </testcase>
+    <testcase classname="Login function Failed when login with invalid password" name="Login function Failed when login with invalid password" time="0.001">
+    </testcase>
+    <testcase classname="Login function Failed when database error" name="Login function Failed when database error" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Signup function" errors="0" failures="0" skipped="0" timestamp="2023-07-24T22:30:57" time="2.697" tests="5">
+    <testcase classname="Signup function Successful when creating account with matching passwords and a non-existing username" name="Signup function Successful when creating account with matching passwords and a non-existing username" time="0.066">
+    </testcase>
+    <testcase classname="Signup function Failed when creating account with non-matching passwords" name="Signup function Failed when creating account with non-matching passwords" time="0.001">
+    </testcase>
+    <testcase classname="Signup function Failed when creating account with an existing username" name="Signup function Failed when creating account with an existing username" time="0.002">
+    </testcase>
+    <testcase classname="Signup function Failed when database error for getUserByName" name="Signup function Failed when database error for getUserByName" time="0.001">
+    </testcase>
+    <testcase classname="Signup function Failed when database error for createUser" name="Signup function Failed when database error for createUser" time="0.056">
+    </testcase>
+  </testsuite>
+</testsuites>

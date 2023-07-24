@@ -26,7 +26,7 @@ jest.mock('../config/fplapi', () => {
 
 describe('fpl-related functions', () => {
     // Get all players
-    it('Successfully get all players', async () => {
+    it('Successful when getting all players', async () => {
         const req = {};
         const res = {
             status: jest.fn().mockReturnThis(),
@@ -46,7 +46,7 @@ describe('fpl-related functions', () => {
     });
 
     // Get a player with valid id
-    it('Successfully get player by valid id', async () => {
+    it('Successful when getting player by valid id', async () => {
         const req = {
           params: {
             id: 1,

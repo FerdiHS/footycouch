@@ -34,7 +34,7 @@ describe('Signup function', () => {
 
         // Mock the getUserByName function to return no existing user
         getUserByName.mockImplementation((username, callback) => {
-            callback(null, []);
+            callback(null, undefined);
         });
 
         // Mock the createUser function to return a success result
@@ -142,7 +142,7 @@ describe('Signup function', () => {
 
         // Mock the getUserByName function to return no existing user
         getUserByName.mockImplementation((username, callback) => {
-            callback(null, []);
+            callback(null, undefined);
         });
 
         // Mock the createUser function to return a database error

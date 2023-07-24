@@ -62,7 +62,7 @@ module.exports = {
                     message: "Database connection error"
                 });
             }
-            if(results.length > 0) {
+            if(results !== undefined) {
                 return res.status(409).json({
                     message: "Username already taken"
                 })

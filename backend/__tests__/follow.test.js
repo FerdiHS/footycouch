@@ -19,7 +19,7 @@ describe('Follow function', () => {
     });
 
     // Test successful follow
-    it('Sucessful when creating follow of a non-existing follow', async () => {
+    it('Successful when creating follow of a non-existing follow', async () => {
         const req = {
         params: {
             follower: 1,

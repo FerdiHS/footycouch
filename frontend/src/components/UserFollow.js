@@ -21,7 +21,7 @@ export default function UserFollow({Follow, type, id, followings}) {
     const navigate = useNavigate();
     if (username === undefined) {
         loadUser();
-        return (<div style={{position: "relative", left:"20%"}}><ReactLoading type="spin" color="#0000FF"
+        return (<div style={{position: "relative", left:"5%", top: 25}}><ReactLoading type="spin" color="#0000FF"
         height={60} width={30} /></div>)
     } else {
         return (

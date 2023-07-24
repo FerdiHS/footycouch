@@ -91,7 +91,7 @@ export default function ProfilePage({setToken}) {
                     id: users.fow_2
                 },
                 {
-                    position: "FWd",
+                    position: "FWD",
                     id: users.fow_3
                 },
             ]);

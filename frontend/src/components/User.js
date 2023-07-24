@@ -104,7 +104,7 @@ export default function User({passData}) {
                 </div>
                 <div class="name2">
                     <h1>{username}</h1>
-                    <p style={bio === "" ?{}: {marginBottom: -20}}>{bio}</p>
+                    <p style={bio === "" || bio === null ? {marginBottom:20} : {marginBottom: -20}}>{bio}</p>
                     {followed
                         ? <button class = "Followed" onClick = {unfollow}><h4>Unfollow</h4></button>
                         : <button class = "Follow" onClick = {follow}><h4>Follow</h4></button>

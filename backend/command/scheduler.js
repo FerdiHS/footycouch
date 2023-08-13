@@ -73,7 +73,9 @@ module.exports = {
             const currentDate = new Date();
             let gameweek = 0;
             for(let i = 0; i < 38; i++) {
-                if(currentDate <= new Date(gameWeekDeadline[i])) {
+                const [minute, hour, dayOfMonth, month] = gameWeekDeadline[i].split(' ');
+                const year = currentDate.getFullYear();
+                if(currentDate <= new Date(year, parseInt(month) - 1, parseInt(dayOfMonth), parseInt(hour), parseInt(minute))) {
                     gameweek = i;
                     break;
                 }

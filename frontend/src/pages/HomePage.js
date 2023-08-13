@@ -39,7 +39,13 @@ export default function HomePage({setToken}) {
                     p.team = teamResp.short_name;
                     p.teamName = teamResp.name;
                     p.teamCode = teamResp.code;
-                    p.position = "FWD";
+                    p.position = p.element_type === 1
+                                    ? "GKP"
+                                    : p.element_type === 2
+                                    ? "DEF"
+                                    : p.element_type === 3
+                                    ? "MID"
+                                    : "FWD";
                     return p;
                 })
             );

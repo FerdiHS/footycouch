@@ -177,11 +177,8 @@ export default function PastHistory({passPlayer, passGameweek}) {
                     <div class="spacing"></div>
                     <div class="select">
                         <select onChange={handleWeekChange}>
-                            (<option value={week}>{week}</option>)
                             {   allweeks.map((gameweek, i) => {
-                                    return week === gameweek
-                                         ? <></>
-                                         : (<option value={gameweek}>{gameweek}</option>)
+                                    return (<option value={gameweek}>{gameweek}</option>)
                                 })
                             }
                         </select>

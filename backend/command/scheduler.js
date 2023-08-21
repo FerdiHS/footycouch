@@ -135,15 +135,15 @@ module.exports = {
                         // fow_3
                         const fow_3_points = players.find(p => p.id === team.fow_3).event_points;
                         if(fow >= 3) total_points += fow_3_points - team.fow_3_points;
-                        updateTeamPoint(team.id, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points,
+                        updateTeamPoint(team.user, total_points, gk_1_points, gk_2_points, def_1_points, def_2_points, def_3_points, def_4_points,
                                 def_5_points, mid_1_points, mid_2_points, mid_3_points, mid_4_points, mid_5_points, fow_1_points, fow_2_points, fow_3_points, (err, result) => {
                             if(err) console.log(err);
                         });
-                        getUserById(team.id, (err, result) => {
-                            if(err) console.log(err);
-                            updateUserPointsById(team.id, result.points + total_points - team.total_points, (error, results) => {
+                        getUserById(team.user, (err, result) => {
+                            if(err) return console.log(err);
+                            updateUserPointsById(team.user, result.points + total_points - team.total_points, (error, results) => {
                                 if(err) console.log(err);
-                                console.log("User " + team.id + " points have been updated to " + (result.points + total_points - team.total_points));
+                                console.log("User " + team.user + " points have been updated to " + (result.points + total_points - team.total_points));
                             });
                         });
                         getUsersSortedByPoints((err, results) => {

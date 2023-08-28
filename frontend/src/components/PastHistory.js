@@ -37,7 +37,6 @@ export default function PastHistory({passPlayer, passGameweek}) {
         "WOL": "Wolves"
     }
     const [allweeks, setallweeks] = useState(passGameweek.map((history, index) => index + 1));
-    const [points, setpoints] = useState(passGameweek[week - 1].total_points);
     const [player, setplayer] = useState([
         passPlayer.filter(x => x.id === passGameweek[week - 1].gk_1).map(x => {x.point = passGameweek[week - 1].gk_1_points; return x;})[0],
         passPlayer.filter(x => x.id === passGameweek[week - 1].gk_2).map(x => {x.point = passGameweek[week - 1].gk_2_points; return x;})[0],
@@ -187,7 +186,7 @@ export default function PastHistory({passPlayer, passGameweek}) {
                 </div>
                 <div class="spacing4"></div>
                 <div class= "point">
-                    <h1>{points}</h1>
+                    <h1>{passGameweek[week - 1].total_points}</h1>
                     <>Points</>
                 </div>
                 <div class="spacing4"></div>

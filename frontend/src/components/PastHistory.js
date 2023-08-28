@@ -6,7 +6,7 @@ import axios from "axios";
 import Statistic from "./Statistic";
 import ChangeBench from "./ChangeBench";
 export default function PastHistory({passPlayer, passGameweek}) {
-    const [week, setweek] = useState(passGameweek.length);
+    const [week, setweek] = useState(1);
     const navigate = useNavigate();
     const [formation, setformation] = useState(passGameweek[week - 1].formation);
     const username = useToken().token;
@@ -36,7 +36,7 @@ export default function PastHistory({passPlayer, passGameweek}) {
         "WHU": "West Ham",
         "WOL": "Wolves"
     }
-    const [allweeks, setallweeks] = useState(passGameweek.map((history, index) => index + 1));
+    const [allweeks, setallweeks] = useState(passGameweek.map((history, index) => history.gameweek));
     const [player, setplayer] = useState([
         passPlayer.filter(x => x.id === passGameweek[week - 1].gk_1).map(x => {x.point = passGameweek[week - 1].gk_1_points; return x;})[0],
         passPlayer.filter(x => x.id === passGameweek[week - 1].gk_2).map(x => {x.point = passGameweek[week - 1].gk_2_points; return x;})[0],
@@ -192,7 +192,6 @@ export default function PastHistory({passPlayer, passGameweek}) {
                 <div class="spacing4"></div>
                 <h2>Players</h2>
                 <div class = "transferPlayerCon" style={{height: 550}}>
-                    
                     <table class="transferPlayer">
                         <tr class="transferPlayer">
                             <th class="transferPlayer" style={{width: 220}}>Player</th>

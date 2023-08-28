@@ -8,7 +8,7 @@ import ChangeBench from "./ChangeBench";
 export default function PastHistory({passPlayer, passGameweek}) {
     const [week, setweek] = useState(1);
     const navigate = useNavigate();
-    const [formation, setformation] = useState(passGameweek[week - 1].formation);
+    const [formation, setformation] = useState(passGameweek[week].formation);
     const username = useToken().token;
     const clubCode = {
         "": "No",
@@ -38,21 +38,21 @@ export default function PastHistory({passPlayer, passGameweek}) {
     }
     const [allweeks, setallweeks] = useState(passGameweek.map((history, index) => history.gameweek));
     const [player, setplayer] = useState([
-        passPlayer.filter(x => x.id === passGameweek[week - 1].gk_1).map(x => {x.point = passGameweek[week - 1].gk_1_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].gk_2).map(x => {x.point = passGameweek[week - 1].gk_2_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].def_1).map(x => {x.point = passGameweek[week - 1].def_1_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].def_2).map(x => {x.point = passGameweek[week - 1].def_2_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].def_3).map(x => {x.point = passGameweek[week - 1].def_3_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].def_4).map(x => {x.point = passGameweek[week - 1].def_4_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].def_5).map(x => {x.point = passGameweek[week - 1].def_5_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].mid_1).map(x => {x.point = passGameweek[week - 1].mid_1_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].mid_2).map(x => {x.point = passGameweek[week - 1].mid_2_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].mid_3).map(x => {x.point = passGameweek[week - 1].mid_3_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].mid_4).map(x => {x.point = passGameweek[week - 1].mid_4_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].mid_5).map(x => {x.point = passGameweek[week - 1].mid_5_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].fow_1).map(x => {x.point = passGameweek[week - 1].fow_1_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].fow_2).map(x => {x.point = passGameweek[week - 1].fow_2_points; return x;})[0],
-        passPlayer.filter(x => x.id === passGameweek[week - 1].fow_3).map(x => {x.point = passGameweek[week - 1].fow_3_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].gk_1).map(x => {x.point = passGameweek[week ].gk_1_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].gk_2).map(x => {x.point = passGameweek[week ].gk_2_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].def_1).map(x => {x.point = passGameweek[week ].def_1_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].def_2).map(x => {x.point = passGameweek[week ].def_2_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].def_3).map(x => {x.point = passGameweek[week ].def_3_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].def_4).map(x => {x.point = passGameweek[week ].def_4_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].def_5).map(x => {x.point = passGameweek[week ].def_5_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].mid_1).map(x => {x.point = passGameweek[week ].mid_1_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].mid_2).map(x => {x.point = passGameweek[week ].mid_2_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].mid_3).map(x => {x.point = passGameweek[week ].mid_3_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].mid_4).map(x => {x.point = passGameweek[week ].mid_4_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].mid_5).map(x => {x.point = passGameweek[week ].mid_5_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].fow_1).map(x => {x.point = passGameweek[week ].fow_1_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].fow_2).map(x => {x.point = passGameweek[week ].fow_2_points; return x;})[0],
+        passPlayer.filter(x => x.id === passGameweek[week ].fow_3).map(x => {x.point = passGameweek[week ].fow_3_points; return x;})[0],
     ]);
     const [gk, setgk] = useState(player[0]);
     const [defender, setdefender] = useState([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
@@ -66,24 +66,24 @@ export default function PastHistory({passPlayer, passGameweek}) {
         const value = event.target.value;
         if (value !== week) {
             setweek(value);
-            const formation = passGameweek[week - 1].formation;
+            const formation = passGameweek[week ].formation;
             setformation(formation);
             setplayer([
-                passPlayer.filter(x => x.id === passGameweek[week - 1].gk_1).map(x => {x.point = passGameweek[week - 1].gk_1_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].gk_2).map(x => {x.point = passGameweek[week - 1].gk_2_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].def_1).map(x => {x.point = passGameweek[week - 1].def_1_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].def_2).map(x => {x.point = passGameweek[week - 1].def_2_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].def_3).map(x => {x.point = passGameweek[week - 1].def_3_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].def_4).map(x => {x.point = passGameweek[week - 1].def_4_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].def_5).map(x => {x.point = passGameweek[week - 1].def_5_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].mid_1).map(x => {x.point = passGameweek[week - 1].mid_1_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].mid_2).map(x => {x.point = passGameweek[week - 1].mid_2_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].mid_3).map(x => {x.point = passGameweek[week - 1].mid_3_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].mid_4).map(x => {x.point = passGameweek[week - 1].mid_4_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].mid_5).map(x => {x.point = passGameweek[week - 1].mid_5_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].fow_1).map(x => {x.point = passGameweek[week - 1].fow_1_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].fow_2).map(x => {x.point = passGameweek[week - 1].fow_2_points; return x;})[0],
-                passPlayer.filter(x => x.id === passGameweek[week - 1].fow_3).map(x => {x.point = passGameweek[week - 1].fow_3_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].gk_1).map(x => {x.point = passGameweek[week ].gk_1_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].gk_2).map(x => {x.point = passGameweek[week ].gk_2_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].def_1).map(x => {x.point = passGameweek[week ].def_1_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].def_2).map(x => {x.point = passGameweek[week ].def_2_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].def_3).map(x => {x.point = passGameweek[week ].def_3_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].def_4).map(x => {x.point = passGameweek[week ].def_4_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].def_5).map(x => {x.point = passGameweek[week ].def_5_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].mid_1).map(x => {x.point = passGameweek[week ].mid_1_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].mid_2).map(x => {x.point = passGameweek[week ].mid_2_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].mid_3).map(x => {x.point = passGameweek[week ].mid_3_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].mid_4).map(x => {x.point = passGameweek[week ].mid_4_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].mid_5).map(x => {x.point = passGameweek[week ].mid_5_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].fow_1).map(x => {x.point = passGameweek[week ].fow_1_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].fow_2).map(x => {x.point = passGameweek[week ].fow_2_points; return x;})[0],
+                passPlayer.filter(x => x.id === passGameweek[week ].fow_3).map(x => {x.point = passGameweek[week ].fow_3_points; return x;})[0],
             ])
             setgk(player[0]);
             setdefender([...player.slice(2,2 + parseInt(formation.charAt(0)))]);
@@ -186,7 +186,7 @@ export default function PastHistory({passPlayer, passGameweek}) {
                 </div>
                 <div class="spacing4"></div>
                 <div class= "point">
-                    <h1>{passGameweek[week - 1].total_points}</h1>
+                    <h1>{passGameweek[week ].total_points}</h1>
                     <>Points</>
                 </div>
                 <div class="spacing4"></div>

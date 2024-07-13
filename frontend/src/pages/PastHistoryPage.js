@@ -5,6 +5,7 @@ import axios from "axios";
 import useToken from "../components/Token";
 import Loading from "../components/Loading.js";
 import PastHistory from "../components/PastHistory.js";
+import { API_URI } from "../constants";
 export default function TeamManagementPage({setToken}) {
     const navigate = useNavigate();
     const [data, setdata] = useState({});
@@ -13,16 +14,16 @@ export default function TeamManagementPage({setToken}) {
     const username = useToken().token;
     const loadUser = async () => {
         try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
-            const gameweeks = (await axios.get("https://footycouch-production.up.railway.app/teams/users/" + users.id)).data.results
+            const users = (await axios.get(API_URI + "/users/" + username)).data.data;
+            const gameweeks = (await axios.get(API_URI + "/teams/users/" + users.id)).data.results
             const shortTeamById = []
             gameweek = gameweeks;
             shortTeamById[0] = "";
-            const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            const teamResp = (await axios.get(API_URI + "/teams")).data.teams;
             teamResp.forEach(x => {
                 shortTeamById[x.id] = x;
             });
-            const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
+            const allPlayer = (await axios.get(API_URI + "/players")).data.players;
             const updatedPlayers = await Promise.all(
                 allPlayer.map(async p => {
                     p.name = p.web_name;

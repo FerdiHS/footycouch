@@ -5,6 +5,8 @@ import useToken from "./Token";
 import axios from "axios";
 import Statistic from "./Statistic";
 import ChangeBench from "./ChangeBench";
+import { API_URI } from "../constants";
+
 export default function PastHistory({passPlayer, passGameweek}) {
     const [week, setweek] = useState(1);
     const navigate = useNavigate();
@@ -97,7 +99,6 @@ export default function PastHistory({passPlayer, passGameweek}) {
 
     const [stats, setStats] = useState(null);
     const exitStats = () => setStats(null);
-    console.log("HIHII");
     return (
         <div class ="container2">
             <div>

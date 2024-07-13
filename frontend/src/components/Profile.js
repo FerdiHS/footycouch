@@ -8,6 +8,8 @@ import useToken from "./Token";
 import Statistic from "./Statistic";
 import Loading from "./Loading";
 import Follow from "./Follow";
+import { API_URI } from "../constants";
+
 
 export default function Profile({passData}) {
     const [backgroundPicture, setBackgroundPicture] = useState(passData.backgroundPicture === undefined ? test : passData.backgroundPicture);
@@ -67,7 +69,7 @@ export default function Profile({passData}) {
         setisLoading(true);
         setbio(bioInput);
         setchangeBio(false);
-        axios.post("https://footycouch-production.up.railway.app/users/update/" + username, {bio: bioInput}).then(x => {setbio(bioInput);
+        axios.post(API_URI + "/users/update/" + username, {bio: bioInput}).then(x => {setbio(bioInput);
         setchangeBio(false);setisLoading(false)})
         .catch(err => console.log(err));
     }
@@ -80,7 +82,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-            axios.post("https://footycouch-production.up.railway.app/users/" + username + "/image", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
+            axios.post(API_URI + "/users/" + username + "/image", {image: reader.result}).then(x => setisLoading(false)).catch(err => setisLoading(false));
             setProfilePicture(reader.result);
         };
         reader.readAsDataURL(file);
@@ -94,7 +96,7 @@ export default function Profile({passData}) {
             return;
         }
         reader.onloadend = () => {
-          axios.post("https://footycouch-production.up.railway.app/users/" + username + "/background", {image: reader.result}).then(x => {setisLoading(false);reader.readAsDataURL(file);}).catch(err => setisLoading(false));
+          axios.post(API_URI + "/users/" + username + "/background", {image: reader.result}).then(x => {setisLoading(false);reader.readAsDataURL(file);}).catch(err => setisLoading(false));
           setBackgroundPicture(reader.result);
         }
         reader.readAsDataURL(file);

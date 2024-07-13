@@ -28,20 +28,23 @@ const {
     addPost,
     getUserPost,
     uploadBackgroundImageUsers,
-    addReply,
-    getReplies,
+    addComment,
+    getComments,
     like,
     unlike,
     getLikes,
-    editReply,
-    deleteReply,
+    editComment,
+    deleteComment,
     editPost,
     getPostById,
     getTeamByGameweek,
     getTeamByUser,
     getUserById,
     getAllFollowingsPosts,
-    setUserFavTeam
+    getAllPublicPosts,
+    setUserFavTeam,
+    checkUserLikesPost,
+    increasePostShares
 } = require("./controller");
 
 const router = require("express").Router();
@@ -81,13 +84,17 @@ router.post("/users/id/:id/post", addPost); // Add new post, require "content" a
 router.get("/users/id/:id/post", getUserPost); // Get user's post
 router.put("/post/:id", editPost); // Edit post, require "content"
 router.get("/post/:id", getPostById); // Get certain post by its id
-router.get("/post/following/:id", getAllFollowingsPosts); // Get all posts posted by all users followed by a certain user
-router.post("/reply/:replying_to", addReply); // Add new reply, require "id" (user id), "type" (true for replying post, false for replying reply), and "content"
-router.get("/reply/:replying_to", getReplies); // Get replies of post or reply
-router.put("/reply/:id", editReply); // Edit reply, require "content"
-router.delete("/reply/:id", deleteReply); // Remove reply
-router.post("/users/:id/like/:liked", like); // Add new like to post or reply
-router.delete("/users/:id/like/:liked", unlike); // Remove like to post or reply
-router.get("/like/:liked", getLikes); // Get likes of a post or reply
+router.get("/post/following/:id/page/:page", getAllFollowingsPosts); // Get all posts posted by all users followed by a certain user
+router.get("/post/public/:page", getAllPublicPosts) // Get posts with the specific range of rows.
+router.post("/comment/:post", addComment); // Add new comment, require "id" (user id) and "content"
+router.get("/comment/:post", getComments); // Get replies of post or comment
+router.patch("/comment/:id", editComment); // Edit comment, require "content"
+router.delete("/cpmment/:id", deleteComment); // Remove comment
+router.get("/like/:post/user/:id", checkUserLikesPost);
+router.post("/users/:id/like/:post", like); // Add new like to post
+router.delete("/users/:id/like/:post", unlike); // Remove like to post
+router.get("/like/:post", getLikes); // Get likes of a post
+router.patch('/posts/:post/shares', increasePostShares); // Increase Post Shares count
+
 
 module.exports = router;

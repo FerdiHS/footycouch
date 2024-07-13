@@ -3,10 +3,11 @@ const pool = require("../config/database");
 module.exports = {
     createUser: (data, callBack) => {
         pool.query(
-            "INSERT INTO users(username, password) values(?,?);",
+            "INSERT INTO users(username, password, email) values(?,?,?);",
             [
                 data.username,
                 data.password,
+                data.email
             ],
             (error, results) => {
                 if(error) {
@@ -61,6 +62,19 @@ module.exports = {
         pool.query(
             "SELECT * FROM users WHERE id = ?;",
             [id],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results[0]);
+            }
+        );
+    },
+
+    getUserByNameorEmail: (username, email, callBack) => {
+        pool.query(
+            "SELECT * FROM users WHERE username = ? OR email = ?;",
+            [username, email],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -438,13 +452,26 @@ module.exports = {
         );
     },
 
-    getAllFollowingsPosts: (id, callBack) => {
+
+    getAllFollowingsPosts: (id, start, callBack) => {
         pool.query(
-            `SELECT p.id, p.user, p.content, p.image, p.created_at, p.updated_at 
-            FROM posts p 
+            `SELECT * FROM posts p 
             LEFT JOIN follows f ON p.user = f.followed_id AND f.follower_id = ?
-            WHERE p.user = ? OR f.follower_id = ?;`,
-            [id, id, id],
+            WHERE p.user = ? OR f.follower_id = ? ORDER BY created_at DESC LIMIT ?, 10;`,
+            [id, id, id, start],
+            (error, results) => {
+                if(error) {
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    getAllPublicPosts: (start, callBack) => {
+        pool.query(
+            `SELECT * FROM posts p ORDER BY created_at DESC LIMIT ?, 10;`,
+            [start],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -467,10 +494,10 @@ module.exports = {
         );
     },
 
-    createReply: (id, type, replying_to, content, callBack) => {
+    createComment: (id, post, content, callBack) => {
         pool.query(
-            "INSERT INTO replies(user, type, replying_to, content) values(?,?,?,?);",
-            [id, type, replying_to, content],
+            "INSERT INTO comments(user, post, content) values(?,?,?);",
+            [id, post, content],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -480,10 +507,10 @@ module.exports = {
         );
     },
 
-    getReply: (type, replying_to, callBack) => {
+    getComment: (post, callBack) => {
         pool.query(
-            'SELECT * FROM replies WHERE type = ? AND replying_to = ?',
-            [type, replying_to],
+            'SELECT * FROM comments WHERE post = ?',
+            [post],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -493,9 +520,9 @@ module.exports = {
         );
     },
 
-    updateReply: (id, content, callBack) => {
+    updateComment: (id, content, callBack) => {
         pool.query(
-            'UPDATE replies set content = ? WHERE id = ?;',
+            'UPDATE comments set content = ? WHERE id = ?;',
             [content, id],
             (error, results) => {
                 if(error) {
@@ -506,9 +533,9 @@ module.exports = {
         )
     },
 
-    removeReply: (id, callBack) => {
+    removeComment: (id, callBack) => {
         pool.query(
-            'DELETE FROM replies WHERE id=?;',
+            'DELETE FROM comments WHERE id=?;',
             [id],
             (error, results) => {
                 if(error) {
@@ -519,10 +546,10 @@ module.exports = {
         );
     },
 
-    createLike: (id, type, liked, callBack) => {
+    createLike: (id, post, callBack) => {
         pool.query(
-            "INSERT INTO likes(user, type, liked) values(?,?,?);",
-            [id, type, liked],
+            "INSERT INTO likes(user, post) values(?,?);",
+            [id, post],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -532,10 +559,10 @@ module.exports = {
         );
     },
 
-    removeLike: (id, type, liked, callBack) => {
+    removeLike: (id, post, callBack) => {
         pool.query(
-            "DELETE FROM likes WHERE user=? AND type=? AND liked=?;",
-            [id, type, liked],
+            "DELETE FROM likes WHERE user=? AND post=?;",
+            [id, post],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -545,10 +572,10 @@ module.exports = {
         );
     },
 
-    getLike: (liked, type, callBack) => {
+    getLike: (post, callBack) => {
         pool.query(
-            'SELECT * FROM likes WHERE type = ? AND liked = ?;',
-            [type, liked],
+            'SELECT * FROM likes WHERE post=?;',
+            [post],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -558,10 +585,10 @@ module.exports = {
         );
     },
 
-    checkLiked: (user, liked, type, callBack) => {
+    checkLiked: (id, post, callBack) => {
         pool.query(
-            'SELECT * FROM likes WHERE user = ? AND liked = ? AND type = ?;',
-            [user, liked, type],
+            'SELECT * FROM likes WHERE user = ? AND post = ?;',
+            [id, post],
             (error, results) => {
                 if(error) {
                     return callBack(error);
@@ -569,5 +596,37 @@ module.exports = {
                 return callBack(null, results);
             }
         );
-    }
+    },
+    
+    checkUserLikesPost: (user, post, callback) => {
+        pool.query(
+            `SELECT EXISTS (
+                SELECT 1
+                FROM likes
+                WHERE user = ? AND post = ?
+            ) AS user_likes_post;`,
+            [user, post],
+            (error, results) => {
+                if (error) {
+                    return callback(error);
+                }
+                const userLikesPost = results[0].user_likes_post === 1;
+                return callback(null, userLikesPost);
+            }
+        );
+    },    
+    increaseSharesCount: (post, callback) => {
+        pool.query(
+            `UPDATE posts
+            SET shares_count = shares_count + 1
+            WHERE id = ?`,
+            [post],
+            (error, results) => {
+                if (error) {
+                    return callback(error);
+                }
+                return callback(null, results.affectedRows);
+            }
+        );
+    },
 };

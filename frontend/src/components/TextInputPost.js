@@ -3,6 +3,7 @@ import axios from "axios";
 import close from "../assets/close.png";
 import Post from "./Post";
 import Loading from "./Loading";
+import { API_URI } from "../constants";
 export default function TextInputPost({profilePicture, username, id, posts}) {
     const [morePost, setmorePost] = useState(10);
     const [isLoading, setisLoading] = useState(false);
@@ -55,7 +56,7 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
             like: [],
             created_at: today.toISOString()
         }
-        axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/post", {
+        axios.post(API_URI + "/users/id/" + id + "/post", {
             content: postComponent.content,
             image: postComponent.image.length === 0 ? undefined : postComponent.image[0]
         })
@@ -64,7 +65,7 @@ export default function TextInputPost({profilePicture, username, id, posts}) {
             setpostImage([]);
             settextarea(document.querySelector('textarea'));
             textarea.addEventListener('keydown', autosize); 
-            const postsResp = (axios.get("https://footycouch-production.up.railway.app/users/id/" + id + "/post")).then(
+            const postsResp = (axios.get(API_URI + "/users/id/" + id + "/post")).then(
             postdata => {
                 console.log(postdata.data.results)
                 const latestPost = postdata.data.results[postdata.data.results.length - 1];

@@ -1,0 +1,56 @@
+.leaderboard {
+    width: 280px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #b7e1ff; /* Light blue background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.leaderboard h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.2em; /* Smaller font size */
+    color: #1565c0; /* Darker blue color */
+}
+
+.leaderboard-header,
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.leaderboard-header {
+    background-color: #42a5f5;
+    font-weight: bold;
+}
+
+.leaderboard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.leaderboard-item:nth-child(odd) {
+    background-color: #90caf9; /* Light blue background for odd items */
+}
+
+.leaderboard-item .rank,
+.leaderboard-header .rank-header {
+    font-weight: bold;
+    width: 30px; /* Fixed width for the rank column */
+    text-align: right; /* Align text to the right */
+    margin-right: 10px; /* Space between rank and name */
+}
+
+.leaderboard-item .name,
+.leaderboard-header .name-header {
+    flex: 1;
+}
+
+.leaderboard-item .score,
+.leaderboard-header .score-header {
+    font-weight: bold;
+    color: #1565c0; /* Darker blue color */
+}

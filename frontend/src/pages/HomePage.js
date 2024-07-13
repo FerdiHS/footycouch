@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import useToken from "../components/Token.js";
 import Loading from "../components/Loading.js";
+import { API_URI } from "../constants.js";
 export default function HomePage({setToken}) {
     const [data, setdata] = useState({});
     const username = useToken().token;
@@ -14,10 +15,10 @@ export default function HomePage({setToken}) {
     var allUser = data.allUser;
     const loadUser = async () => {
         try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            const users = (await axios.get(API_URI + "/users/" + username)).data.data;
             id = users.id;
             ProfilePicture = users.profile_picture;
-            const postsResp = (await axios.get("https://footycouch-production.up.railway.app/post/following/" + id)).data.results;
+            const postsResp = (await axios.get(API_URI + "/post/following/" + id)).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {
                     post.like = [];
@@ -28,9 +29,9 @@ export default function HomePage({setToken}) {
                 })
             );
             Posts = updatedPosts.reverse();
-            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
-            const allPlayer = (await axios.get("https://footycouch-production.up.railway.app/players")).data.players;
-            const allUser = (await axios.get("https://footycouch-production.up.railway.app/users")).data.data;
+            const teams = (await axios.get(API_URI + "/teams")).data.teams;
+            const allPlayer = (await axios.get(API_URI + "/players")).data.players;
+            const allUser = (await axios.get(API_URI + "/users")).data.data;
             const updatedPlayer = await Promise.all(
                 allPlayer.map(async p => {
                     p.name = p.web_name;

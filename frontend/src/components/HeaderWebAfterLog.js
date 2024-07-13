@@ -6,6 +6,7 @@ import Statistic from "./Statistic";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useToken from "./Token";
+import { API_URI } from "../constants";
 export default function HeaderWebAfterLog({setToken}) {
     const navigate = useNavigate();
     const [profilePicture, setProfilePicture] = useState(null);
@@ -18,7 +19,7 @@ export default function HeaderWebAfterLog({setToken}) {
     const username = useToken().token;
     const loadPP = async () => {
         if(profilePicture === null) {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            const users = (await axios.get(API_URI + "/users/" + username)).data.data;
             console.log(users);
             setProfilePicture(users.profile_picture);
         }

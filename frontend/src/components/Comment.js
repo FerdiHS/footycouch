@@ -2,13 +2,14 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { API_URI } from "../constants";
 
 export default function Comment({comment}) {
     const [user, setuser] = useState({});
     const username = user.username;
     const profilePicture = user.profile_picture;
     const loadUser = () => {
-        axios.get("https://footycouch-production.up.railway.app/users/id/" + comment.user).then(x => {setuser(x.data.results)})
+        axios.get(API_URI + "/users/id/" + comment.user).then(x => {setuser(x.data.results)})
     }
     const navigate = useNavigate();
     const Enter = str => {

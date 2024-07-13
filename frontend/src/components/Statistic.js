@@ -2,22 +2,23 @@ import { useState } from "react";
 import useToken from "./Token";
 import axios from "axios";
 import Loading from "./Loading";
+import { API_URI } from "../constants";
 
 export default function Statistic({player, exitStats}) {
     const playerPosition = {FWD: "Forward", MID: "Midfielder", DEF: "Defender", GKP: "Goalkeeper"};
     const [playerTypeLength, setplayerTypeLength] = useState(undefined);
     if (playerTypeLength === undefined) {
         if (player.position === "FWD") {
-            const forwardPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/foward")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
+            const forwardPlayer = ( axios.get(API_URI + "/players/foward")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
             return <Loading/>;
         } else if (player.position === "MID") {
-            const midfieldPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/midfielder")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
+            const midfieldPlayer = ( axios.get(API_URI + "/players/midfielder")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
             return <Loading />;
         } else if (player.position === "DEF") {
-            const defenderPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/defender")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
+            const defenderPlayer = ( axios.get(API_URI + "/players/defender")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
             return <Loading />;
         } else {
-            const goalkeeperPlayer = ( axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
+            const goalkeeperPlayer = ( axios.get(API_URI + "/players/goalkeeper")).then(x => {setplayerTypeLength(x.data.length)}).catch(err => console.log(err));
             return <Loading />;
         }
     }

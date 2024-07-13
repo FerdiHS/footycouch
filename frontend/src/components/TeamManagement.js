@@ -6,6 +6,7 @@ import axios from "axios";
 import Statistic from "./Statistic";
 import ChangeBench from "./ChangeBench";
 import ChangeTeam from "./ChangeTeam";
+import { API_URI } from "../constants";
 export default function TeamManagement({passPlayer, passFormation, passPoint, passfavteams, passId, passTeams}) {
     const [changeteam, setchangeteam] = useState(false);
     const [favteams, setfavteams] = useState(passfavteams);
@@ -45,7 +46,6 @@ export default function TeamManagement({passPlayer, passFormation, passPoint, pa
         "3-5-2",
         "3-4-3",
         "5-4-1",
-        "5-3-3"
     ]);
     const [now, setnow] = useState(-1);
     const [points, setpoints] = useState(passPoint);
@@ -189,7 +189,7 @@ export default function TeamManagement({passPlayer, passFormation, passPoint, pa
         for (let i = 0; i < 15; i++) {
             playerId[i] = player[i].id;
         }
-        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {formation,
+        axios.post(API_URI + "/teams/add/" + username, {formation,
         "gk_1":playerId[0], 
         "gk_2":playerId[1],
         "def_1":playerId[2],

@@ -1,0 +1,10 @@
+.post-page-container {
+    background-color: aliceblue;
+}
+.post-container {
+    width: calc(50vw + 30px);
+    max-width: 630px; /* Adjust this value to control the maximum width of the post */
+    margin: 0 auto;
+    background-color:rgb(255, 255, 255);
+    font-family: 'Segoe UI Historic', 'Segoe UI', Helvetica, Arial, sans-serif;
+}

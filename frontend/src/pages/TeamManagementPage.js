@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useToken from "../components/Token";
 import Loading from "../components/Loading.js";
+import { API_URI } from "../constants";
 export default function TeamManagementPage({setToken}) {
     const navigate = useNavigate();
     const [data, setdata] = useState({});
@@ -17,7 +18,7 @@ export default function TeamManagementPage({setToken}) {
     const username = useToken().token;
     const loadUser = async () => {
         try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+            const users = (await axios.get(API_URI + "/users/" + username)).data.data;
             id = users.id;
             formation = users.formation;
             points = users.points;
@@ -86,7 +87,7 @@ export default function TeamManagementPage({setToken}) {
             ]);
             const shortTeamById = []
             shortTeamById[0] = "";
-            const teamResp = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            const teamResp = (await axios.get(API_URI + "/teams")).data.teams;
             teamResp.forEach(x => {
                 shortTeamById[x.id] = x;
             });
@@ -96,7 +97,7 @@ export default function TeamManagementPage({setToken}) {
                     if (p.id === null) {
                         navigate("/transfer");
                     }
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
+                    const playerResp = (await axios.get(API_URI + "/players/id/" + p.id)).data;
                     playerResp.name = playerResp.web_name;
                     playerResp.teamName = shortTeamById[playerResp.team].name;
                     playerResp.team = shortTeamById[playerResp.team].short_name;

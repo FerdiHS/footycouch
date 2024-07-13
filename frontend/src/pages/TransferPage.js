@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import useToken from "../components/Token";
 import Loading from "../components/Loading.js";
+import { API_URI } from "../constants";
 export default function TransferPage({setToken}) {
     const [data, setData] = useState({});
     var players = data.players;
@@ -11,7 +12,7 @@ export default function TransferPage({setToken}) {
     const username = useToken().token;
      const loadUser = async () => {
          try {
-             const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username)).data.data;
+             const users = (await axios.get(API_URI + "/users/" + username)).data.data;
              const id = users.id;
              const points = users.points;
              const balance = users.balance;
@@ -77,7 +78,7 @@ export default function TransferPage({setToken}) {
                      id: users.fow_3
                  },
              ]);
-            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            const teams = (await axios.get(API_URI + "/teams")).data.teams;
             var updatedPlayers = await Promise.all(
                  players.map(async p => {
                      if (p.id === null) {
@@ -92,7 +93,7 @@ export default function TransferPage({setToken}) {
                      return p;
                  })
              );
-             const forwardTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/foward")).data;
+             const forwardTransfer = (await axios.get(API_URI + "/players/foward")).data;
              const updatedForwardTransfer = await Promise.all(
                  forwardTransfer.map(async p => {
                      p.name = p.web_name;
@@ -111,7 +112,7 @@ export default function TransferPage({setToken}) {
                      return p;
                  })
              );
-             const midfieldTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/midfielder")).data;
+             const midfieldTransfer = (await axios.get(API_URI + "/players/midfielder")).data;
              const updatedMidfieldTransfer = await Promise.all(
                  midfieldTransfer.map(async p => {
                      p.name = p.web_name;
@@ -131,7 +132,7 @@ export default function TransferPage({setToken}) {
                      return p;
                  })
              );
-             const defenderTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/defender")).data;
+             const defenderTransfer = (await axios.get(API_URI + "/players/defender")).data;
              const updatedDefenderTransfer = await Promise.all(
                  defenderTransfer.map(async p => {
                      p.name = p.web_name;
@@ -151,7 +152,7 @@ export default function TransferPage({setToken}) {
                      return p;
                  })
              );
-             const goalkeeperTransfer = (await axios.get("https://footycouch-production.up.railway.app/players/goalkeeper")).data;
+             const goalkeeperTransfer = (await axios.get(API_URI + "/players/goalkeeper")).data;
              const updatedGoalkeeperTransfer = await Promise.all(
                  goalkeeperTransfer.map(async p => {
                      p.name = p.web_name;

@@ -1,13 +1,14 @@
 import { useState } from "react"
 import axios from "axios";
 import Loading from "./Loading";
+import { API_URI } from "../constants";
 export default function ChangeTeam({setFavTeam, exitChangeTeam, id, teams, favteams}) {
     const [currfav, setcurrfav] = useState(favteams);
     const [isLoading, setisLoading] = useState(false);
     const handleSave = () => {
         if(currfav !== favteams) {
             setisLoading(true)
-            axios.post("https://footycouch-production.up.railway.app/users/id/" + id +"/favteam", {fav_team: currfav}). then(
+            axios.post(API_URI + "/users/id/" + id +"/favteam", {fav_team: currfav}). then(
                 x => {setFavTeam(currfav); setisLoading(false);exitChangeTeam(); }
             ).catch(err => {console.log(err); setisLoading(false)});
         } else {

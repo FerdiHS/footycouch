@@ -20,27 +20,32 @@ const {
     updateUserProfilePictureByUsername,
     getUserProfilePictureByUsername,
     updateUserBackgroundPictureByUsername,
-    createReply,
+    createComment,
     createLike,
     removeLike,
-    getReply,
+    getComment,
     getLike,
-    updateReply,
-    removeReply,
+    updateComment,
+    removeComment,
     updatePost,
     getPostById,
     getTeamFromGameWeek,
     getTeamFromUser,
     checkLiked,
+    checkUserLikesPost,
     getUserById,
     getAllFollowingsPosts,
+    getAllPublicPosts,
     updateUserFavTeamById,
     updateRanking,
+    getUserByNameorEmail,
+    increaseSharesCount,
 } = require("./service.js");
 const {fplapi} = require("../config/fplapi.js");
 const {cloudinary} = require("../config/cloudinary.js");
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 require("dotenv").config();
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
@@ -49,13 +54,8 @@ module.exports = {
     signup: (req, res) => {
         const body = req.body;
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
-        if(body.password !== body.confirmPassword) {
-            return res.status(403).json({
-                message: 'Password and Confirm Password is different'
-            });
-        } 
         
-        getUserByName(body.username, (err, results) => {
+        getUserByNameorEmail(body.username, body.email, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -63,14 +63,17 @@ module.exports = {
                 });
             }
             if(results !== undefined) {
-                return res.status(409).json({
-                    message: "Username already taken"
-                })
+                console.log(results)
+                if (results.username === body.username) {
+                    return res.status(409).json({
+                        message: "Username already taken"
+                    })
+                } else {
+                    return res.status(409).json({
+                        message: "Email already registered"
+                    })
+                }
             }
-            // Hashing the password
-            const salt = genSaltSync(10);
-            body.password = hashSync(body.password, salt);
-    
             return createUser(body, (err, results) =>{
                 if(err) {
                     console.log(err);
@@ -138,7 +141,7 @@ module.exports = {
     login: (req, res) => {
         // res.setHeader('Access-Control-Allow-Origin', 'https://footycouch.vercel.app');
         const body = req.body;
-        getUserByName(body.username, (err, results) => {
+        getUserByNameorEmail(body.username, body.username, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -152,7 +155,10 @@ module.exports = {
                     message: "Invalid username"
                 });
             }
-            if(compareSync(body.password, results.password)) {
+
+            const hashedValue = crypto.createHash('sha256').update(body.password + results.salt).digest('hex');;
+
+            if(hashedValue === results.password) {
                 return res.status(200).json({
                     success: 1,
                     message: "Login successfully",
@@ -670,7 +676,7 @@ module.exports = {
     addPost: (req, res) => {
        const id = req.params.id;
        const {content, image} = req.body;
-       if(image === undefined) {
+       if(image === null) {
         return createPost(id, content, null, (error, result) => {
             if(error) {
                 console.log(error);
@@ -766,8 +772,8 @@ module.exports = {
     },
 
     getAllFollowingsPosts: (req, res) => {
-        const {id} = req.params;
-        return getAllFollowingsPosts(id, (err, results) => {
+        const {id, page} = req.params;
+        return getAllFollowingsPosts(id, (page - 1) * 10, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -778,10 +784,23 @@ module.exports = {
         });
     },
 
-    addReply: (req, res) => {
-        const replying_to = req.params.replying_to;
-        const {id, type, content} = req.body;
-        return createReply(id, type, replying_to, content, (err, results) => {
+    getAllPublicPosts: (req, res) => {
+        const {page} = req.params;
+        return getAllPublicPosts((page - 1) * 10, (err, results) => {
+            if(err) {
+                console.log(err);
+                return res.status(503).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({results});
+        });
+    },
+
+    addComment: (req, res) => {
+        const post = req.params.post;
+        const {id, content} = req.body;
+        return createComment(id, post, content, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -789,14 +808,14 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                message: "Reply created successfully"
+                message: "Comment created successfully"
             });
         });
     },
 
-    getReplies: (req, res) => {
-        const {replying_to} = req.params;
-        return getReply(true, replying_to, (err, results) => {
+    getComments: (req, res) => {
+        const {post} = req.params;
+        return getComment(post, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -807,10 +826,10 @@ module.exports = {
         });
     },
 
-    editReply: (req, res) => {
+    editComment: (req, res) => {
         const {id} = req.params;
         const {content} = req.body;
-        return updateReply(id, content, (err, results) => {
+        return updateComment(id, content, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -818,14 +837,14 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                message: "Reply edited successfully"
+                message: "Comment edited successfully"
             });
         });
     },
 
-    deleteReply: (req, res) => {
+    deleteComment: (req, res) => {
         const {id} = req.params;
-        return removeReply(id, (err, results) => {
+        return removeComment(id, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -833,14 +852,14 @@ module.exports = {
                 });
             }
             return res.status(200).json({
-                message: "Reply deleted successfully"
+                message: "Comment deleted successfully"
             });
         });
     },
 
     like: (req, res) => {
-        const {id, liked} = req.params;
-        return checkLiked(id, true, liked, (err, results) => {
+        const {id, post} = req.params;
+        return checkLiked(id, post, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -852,7 +871,7 @@ module.exports = {
                     message: "Like already exists"
                 })
             }
-            return createLike(id, true, liked, (err, results) => {
+            return createLike(id, post, (err, results) => {
                 if(err) {
                     console.log(err);
                     return res.status(503).json({
@@ -867,8 +886,8 @@ module.exports = {
     },
 
     unlike: (req, res) => {
-        const {id, liked} = req.params;
-        return removeLike(id, true, liked, (err, results) => {
+        const {id, post} = req.params;
+        return removeLike(id, post, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -882,8 +901,8 @@ module.exports = {
     },
 
     getLikes: (req, res) => {
-        const {liked} = req.params;
-        return getLike(liked, true, (err, results) => {
+        const {post} = req.params;
+        return getLike(post, (err, results) => {
             if(err) {
                 console.log(err);
                 return res.status(503).json({
@@ -893,4 +912,38 @@ module.exports = {
             return res.status(200).json({results});
         });
     },
+
+    checkUserLikesPost: (req, res) => {
+        const {id, post} = req.params;
+        return checkUserLikesPost(id, post, (err, userLikesPost) => {
+            if (err) {
+                console.log(err);
+                return res.status(503).json({
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({ userLikesPost });
+        });
+    },
+
+    increasePostShares: (req, res) => {
+        const { post } = req.params;
+        
+        return increaseSharesCount(post, (err, affectedRows) => {
+            if (err) {
+                console.log(err);
+                return res.status(503).json({
+                    message: "Database connection error"
+                });
+            }
+            if (affectedRows === 0) {
+                return res.status(404).json({
+                    message: "Post not found"
+                });
+            }
+            return res.status(200).json({
+                message: "Shares count increased successfully"
+            });
+        });
+    }
 }

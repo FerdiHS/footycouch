@@ -4,6 +4,7 @@ import { isValidUsername } from "./Verification";
 import { isValidPassword } from "./Verification";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import { API_URI } from "../constants";
 /*
 const initialState = {
     username: "",
@@ -43,7 +44,7 @@ export default function Register({handlenowPage}) {
             setisLoading(true);
             seterrorConfirmpw("");
             seterrorPassword("");
-            axios.post("https://footycouch-production.up.railway.app/signup", {username, password, confirmPassword})
+            axios.post(API_URI + "/signup", {username, password, confirmPassword})
             // axios.post("https://footycouch-backend.vercel.app/signup", {username, password, confirmPassword})
             // axios.post("http://localhost:5000/signup", {username, password, confirmPassword})
             .then(res => {setisLoading(false); window.alert("Signup Successful!")})

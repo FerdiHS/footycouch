@@ -6,6 +6,7 @@ import Post from "./Post";
 import Statistic from "./Statistic";
 import Follow from "./Follow";
 import useToken from "./Token";
+import { API_URI } from "../constants";
 
 export default function User({passData}) {
     const navigate = useNavigate();
@@ -63,17 +64,17 @@ export default function User({passData}) {
                                     ...player.slice(12 + parseInt(formation.charAt(4)), 17)]);
     const follow = async () => {
         setfollowed(true);
-        await axios.post("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).then(x => setfollowers([...followers, {followed_id: id, follower_id: users}])).catch(err => console.log(err));
+        await axios.post(API_URI + "//users/" + users + "/follow/" + id).then(x => setfollowers([...followers, {followed_id: id, follower_id: users}])).catch(err => console.log(err));
     }
     const unfollow = async () => {
         setfollowed(false);
-        await axios.delete("https://footycouch-production.up.railway.app//users/" + users + "/follow/" + id).then(x => setfollowers(followers.filter(x => x.follower_id != users))).catch(err => console.log(err));
+        await axios.delete(API_URI + "//users/" + users + "/follow/" + id).then(x => setfollowers(followers.filter(x => x.follower_id != users))).catch(err => console.log(err));
     }
     const [stats, setstats] = useState(null);
     const [followingsUser, setfollowingsUser] = useState(null);
     const [pp, setpp] = useState(undefined);
     const loadpp = async () => {
-        axios.get("https://footycouch-production.up.railway.app/users/id/" + users).then(x => {setpp(x.data.results.profile_picture)});
+        axios.get(API_URI + "/users/id/" + users).then(x => {setpp(x.data.results.profile_picture)});
     } 
     if(pp === undefined) {
         loadpp();

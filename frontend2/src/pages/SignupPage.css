@@ -1,0 +1,133 @@
+.container {
+    width:max-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    text-align: left;
+    display: flex;
+    font-family: 'Segoe UI Historic', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+  
+.signup-box {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image {
+    margin-right: 10px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.signup-box label {
+    display: block;
+    color: grey;
+    font-size: 10px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    text-align: left;
+    margin: 0px;
+}
+
+.logo {
+    background-color: #1e90ff;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    display:flex;
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.form input {
+    width: calc(100% - 20px);
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+  
+.form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+  
+.form button:hover {
+    opacity: 90%;
+}
+  
+.form p {
+    color:#ff2727;
+    font-size: 10px;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.separator {
+    margin-bottom: 10px;
+}
+  
+.btn-gmail {
+    width: 100%;
+    padding: 10px;
+    background-color: #d14836;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.btn-gmail:hover {
+    opacity: 90%;
+}
+  
+a {
+    color: #003569;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #262626;
+}
+  
+.signup-link a {
+    color: #003569;
+    text-decoration: none;
+}
+  
+.signup-link a:hover {
+    text-decoration: underline;
+}

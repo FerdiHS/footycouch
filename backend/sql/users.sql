@@ -1,0 +1,20 @@
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    bio TEXT,
+    profile_picture VARCHAR(255),
+    balance INT DEFAULT 0,
+    points INT DEFAULT 0,
+    formation VARCHAR(256),
+    ranking INT DEFAULT 0,
+    fav_team INT DEFAULT 0,
+    background_picture VARCHAR(255),
+    email VARCHAR(255),
+    salt VARCHAR(255),
+    PRIMARY KEY (id),
+    UNIQUE KEY (username),
+    UNIQUE KEY (email)
+);

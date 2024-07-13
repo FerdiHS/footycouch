@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { API_URI } from "../constants";
 
 export default function UserFollow({Follow, type, id, followings}) {
     const [user, setuser] = useState({});
@@ -10,13 +11,13 @@ export default function UserFollow({Follow, type, id, followings}) {
     const Fid = type ? Follow.follower_id : Follow.followed_id;
     const [followed, setfollowed] = useState(followings.filter(x => x.followed_id === Fid).length > 0);
     const follow = async () => {
-        await axios.post("https://footycouch-production.up.railway.app//users/" + id + "/follow/" + Fid).then(x => setfollowed(true)).catch(err => console.log(err));
+        await axios.post(API_URI + "//users/" + id + "/follow/" + Fid).then(x => setfollowed(true)).catch(err => console.log(err));
     }
     const unfollow = async () => {
-        await axios.delete("https://footycouch-production.up.railway.app//users/" + id + "/follow/" + Fid).then(x => setfollowed(false)).catch(err => console.log(err));
+        await axios.delete(API_URI + "//users/" + id + "/follow/" + Fid).then(x => setfollowed(false)).catch(err => console.log(err));
     }
     const loadUser = async () => {
-        axios.get("https://footycouch-production.up.railway.app/users/id/" + Fid).then(x => {setuser(x.data.results)})
+        axios.get(API_URI + "/users/id/" + Fid).then(x => {setuser(x.data.results)})
     }
     const navigate = useNavigate();
     if (username === undefined) {

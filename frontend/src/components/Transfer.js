@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 import axios from "axios";
 import useToken from "./Token";
 import Statistic from "./Statistic";
+import { API_URI } from "../constants";
 export default function Transfer({id, passPoints, passTransfer, passPlayers, passMoney, passTeams}) {
     const username = useToken().token;
     const teams = passTeams;
@@ -83,12 +84,12 @@ export default function Transfer({id, passPoints, passTransfer, passPlayers, pas
                 const player_in = transfer_in[i];
                 const index_in = playerId.indexOf(player_in);
                 // setmoney(money + passPlayers[index_out].now_cost - player[index_in].now_cost);
-                axios.post("https://footycouch-production.up.railway.app/users/id/" + id + "/transfer", {balance: money, points, position, player_in, player_out})
+                axios.post(API_URI + "/users/id/" + id + "/transfer", {balance: money, points, position, player_in, player_out})
                 .catch(err => console.log(err));
             });
         }
         let formation = "4-4-2";
-        axios.post("https://footycouch-production.up.railway.app/teams/add/" + username, {balance: money, formation,
+        axios.post(API_URI + "/teams/add/" + username, {balance: money, formation,
         "gk_1":playerId[0], 
         "gk_2":playerId[1],
         "def_1":playerId[2],

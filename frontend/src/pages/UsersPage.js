@@ -6,6 +6,7 @@ import axios from "axios";
 import useToken from "../components/Token";
 import User from "../components/User.js";
 import Loading from "../components/Loading.js";
+import { API_URI } from "../constants";
 export default function UsersPage({setToken}) {
     const navigate = useNavigate();
     const [data, setdata] = useState({});
@@ -28,7 +29,7 @@ export default function UsersPage({setToken}) {
     }
     const loadUser = async () => {
         try {
-            const users = (await axios.get("https://footycouch-production.up.railway.app/users/" + username).catch(err => setdata({userNotFound: true}))).data.data;
+            const users = (await axios.get(API_URI + "/users/" + username).catch(err => setdata({userNotFound: true}))).data.data;
             id = users.id;
             bio = users.bio;
             formation = users.formation;
@@ -99,7 +100,7 @@ export default function UsersPage({setToken}) {
                     id: users.fow_3
                 },
             ]);
-            const teams = (await axios.get("https://footycouch-production.up.railway.app/teams")).data.teams;
+            const teams = (await axios.get(API_URI + "/teams")).data.teams;
             const updatedPlayers = await Promise.all(
                 players.map(async p => {
                     if (p.id === null) {
@@ -108,7 +109,7 @@ export default function UsersPage({setToken}) {
                         p.team_code = 0;
                         return p;
                     }
-                    const playerResp = (await axios.get("https://footycouch-production.up.railway.app/players/id/" + p.id)).data;
+                    const playerResp = (await axios.get(API_URI + "/players/id/" + p.id)).data;
                     playerResp.name = playerResp.web_name;
                     playerResp.teamId = playerResp.team;
                     const teamResp = teams.filter(team => team.id === playerResp.teamId)[0];
@@ -119,9 +120,9 @@ export default function UsersPage({setToken}) {
                 })
             );
             players = updatedPlayers;
-            Followings = (await axios.get("https://footycouch-production.up.railway.app/users/following/" + id)).data.data;
-            Followers = (await axios.get("https://footycouch-production.up.railway.app/users/follower/" + id)).data.data;
-            const postsResp = (await axios.get("https://footycouch-production.up.railway.app/users/id/" + id + "/post")).data.results;
+            Followings = (await axios.get(API_URI + "/users/following/" + id)).data.data;
+            Followers = (await axios.get(API_URI + "/users/follower/" + id)).data.data;
+            const postsResp = (await axios.get(API_URI + "/users/id/" + id + "/post")).data.results;
             const updatedPosts = await Promise.all(
                 postsResp.map(post => {
                     post.like = [];

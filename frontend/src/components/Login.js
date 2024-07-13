@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.js";
 import axios from "axios";
+import { API_URI } from "../constants.js";
+
 /*
 const initialState = {
     username: "",
@@ -36,7 +38,7 @@ export default function Login({setToken}) {
             // const smth = window.alert("Incorrect Username or Password");
         }
         */
-        axios.post("https://footycouch-production.up.railway.app/login", {username, password})
+        axios.post(API_URI + "/login", {username, password})
         // axios.post("http://localhost:5000/login", {username, password})
         .then(res => {
             seterror(false);
